@@ -16,7 +16,7 @@ const Proposal = sequelize.define('Proposal', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    is_accepted: {
+    isAccepted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
@@ -25,5 +25,7 @@ const Proposal = sequelize.define('Proposal', {
 );
 
 // Proposal.belongsTo(Freelancer)
+// Proposal.belongsTo(Jop)
+
 
 export default Proposal;
