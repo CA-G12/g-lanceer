@@ -4,7 +4,15 @@
   "description": "A platform that combine clients with professional freelancers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd client && npm run start",
+    "init": "cd client && npm i && cd ../server && npm i",
+    "install": "npm run init",
+    "dev": "cd server && npm run dev",
+    "start": "node ./dist",
+    "prepare": "is-ci || npx husky install",
+    "test": "echo tests running",
+    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint"
+
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/CA-G12/g-lanceer/issues"
   },
-  "homepage": "https://github.com/CA-G12/g-lanceer#readme"
+  "homepage": "https://github.com/CA-G12/g-lanceer#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "husky": "^8.0.1"
+  }
 }

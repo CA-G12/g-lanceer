@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts"
-  },
+    "dev": "nodemon index.ts",
+    "build:tsc": "tsc",
+    "lint":"eslint --ext .ts ./",
+    "fix:lint": "npm run lint --fix"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
