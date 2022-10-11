@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    margin: 0px 7rem;
+}
+
+@media screen and (min-width: 1800px) {
+    .container {
+        max-width: 1200px;
+        margin: 0px auto;
+    }
+}

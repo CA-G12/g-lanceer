@@ -1,7 +1,7 @@
-import React from "react";
+import './App.css'
 
 function App() {
-  return <div className="App">hello Glancer</div>;
+  return <div className="container">hello Glancer</div>;
 }
 
 export default App;
