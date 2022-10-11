@@ -4,7 +4,15 @@
   "description": "A platform that combine clients with professional freelancers",
   "main": "index.js",
   "scripts": {
-    "test": "echo tests running"
+    "client": "cd client && npm run start",
+    "init": "cd client && npm i && cd ../server && npm i",
+    "install": "npm run init",
+    "dev": "cd server && npm run dev",
+    "start": "node ./dist",
+    "prepare": "is-ci || npx husky install",
+    "test": "echo tests running",
+    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint"
+
   },
   "repository": {
     "type": "git",
