@@ -1,7 +1,7 @@
 import { DataTypes, Sequelize } from "sequelize";
 import sequelize from "../db/config/connection";
 
-const User = sequelize.define("users",{
+const User = sequelize.define("User",{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -9,7 +9,8 @@ const User = sequelize.define("users",{
     },
     email:{
         type: DataTypes.STRING,
-        unique: true
+        unique: true,
+        allowNull:false
     },
     name: {
         type: DataTypes.STRING,
