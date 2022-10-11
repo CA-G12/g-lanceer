@@ -1,13 +1,14 @@
 import sequelize from "../db/config/connection";
 import { DataTypes } from "sequelize";
+import { Proposal } from ".";
 
-const Job = sequelize.define("Job",{
-    id:{
+const Job = sequelize.define("Job", {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement:true
+        autoIncrement: true
     },
-    title:{
+    title: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -33,5 +34,7 @@ const Job = sequelize.define("Job",{
     }
 
 })
+
+Job.hasMany(Proposal)
 
 export default Job;

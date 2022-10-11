@@ -1,16 +1,17 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 import sequelize from "../db/config/connection";
+import { Freelancer } from "./index";
 
-const User = sequelize.define("User",{
-    id:{
+const User = sequelize.define("User", {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement:true
+        autoIncrement: true
     },
-    email:{
+    email: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull:false
+        allowNull: false
     },
     name: {
         type: DataTypes.STRING,
@@ -21,9 +22,9 @@ const User = sequelize.define("User",{
         allowNull: false
     },
     role: {
-        type: DataTypes.ENUM("freelancer","client"),
+        type: DataTypes.ENUM("freelancer", "client"),
         allowNull: false
     }
 })
-
+User.hasOne(Freelancer)
 export default User;
