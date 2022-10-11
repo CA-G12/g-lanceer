@@ -1,7 +1,7 @@
 import sequelize from "../db/config/connection";
 import DataTypes from "sequelize";
 
-const proposals = sequelize.define('proposals', {
+const Proposal = sequelize.define('Proposal', {
 
     id: {
         type: DataTypes.INTEGER,
@@ -24,6 +24,6 @@ const proposals = sequelize.define('proposals', {
 }
 );
 
-// proposals.belongsTo(freelancers)
+// Proposal.belongsTo(Freelancer)
 
-export default proposals;
+export default Proposal;
