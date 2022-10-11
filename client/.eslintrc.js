@@ -1,4 +1,4 @@
-{
+module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
@@ -8,13 +8,20 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:react/jsx-runtime",
+        'airbnb',
+        'airbnb-typescript',
         "plugin:react/jsx-runtime"
+
     ],
     "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "project": './tsconfig.json',
+        "tsconfigRootDir": __dirname
+
     },
     "plugins": [
         "react",
@@ -22,7 +29,7 @@
     ],
     "rules": {
         "linebreak-style": 0,
-	    "max-len": ["error", { "code": 80 }]
-	
+        "max-len": ["error", { "code": 80 }]
+
     }
 }
