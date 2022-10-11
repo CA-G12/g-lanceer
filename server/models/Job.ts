@@ -24,12 +24,12 @@ const Job = sequelize.define("Job",{
         allowNull: false
     },
     time: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
-    is_occupied: {
+    isOccupied: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        defaultValue: false
     }
 
 })
