@@ -19,5 +19,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "linebreak-style":0,
+        "consistent-return":"off"
     }
 }
