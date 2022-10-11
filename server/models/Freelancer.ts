@@ -1,15 +1,14 @@
 import sequelize from '../db/config/connection'
-// import Proposal from './Proposal'
-// import User from './User'
+
 import { DataTypes } from 'sequelize';
-const Freelancer = sequelize.define('freelancers', {
+const Freelancer = sequelize.define('Freelancer', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
     image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     title: {
@@ -27,8 +26,5 @@ const Freelancer = sequelize.define('freelancers', {
         type: DataTypes.TEXT,
     }
 })
-
-// Freelancer.hasMany(Proposal)
-// Freelancer.belongsTo(User)
 
 export default Freelancer;
