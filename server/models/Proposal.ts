@@ -1,7 +1,7 @@
 import DataTypes from 'sequelize';
 import sequelize from '../db/config/connection';
 
-const Proposal = sequelize.define('Proposal', {
+const Proposal = sequelize.define('proposal', {
 
   id: {
     type: DataTypes.INTEGER,
@@ -9,7 +9,7 @@ const Proposal = sequelize.define('Proposal', {
     autoIncrement: true,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   attachments: {
