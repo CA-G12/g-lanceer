@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import { join } from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 
@@ -23,5 +24,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/v1', router);
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(join(__dirname, '..', 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
+  });
+}
 
 export default app;
