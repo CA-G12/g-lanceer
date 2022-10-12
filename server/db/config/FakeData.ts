@@ -45,7 +45,7 @@ const users = [
 
 const freelancers = [
   {
-    UserId: 1,
+    userId: 1,
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'translator',
@@ -55,7 +55,7 @@ const freelancers = [
     portfolio: 'https://github.com/',
   },
   {
-    UserId: 3,
+    userId: 3,
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior full-stack web developer',
@@ -64,7 +64,7 @@ const freelancers = [
     portfolio: 'https://github.com/',
   },
   {
-    UserId: 5,
+    userId: 5,
     title: 'Graphic Designer',
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
@@ -74,7 +74,7 @@ const freelancers = [
     portfolio: 'https://www.behance.net/tajkiaislam',
   },
   {
-    UserId: 6,
+    userId: 6,
     title: 'Graphic Designer',
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
@@ -85,7 +85,7 @@ const freelancers = [
       'https://www.behance.net/martbiemans/subscription?tracking_source=for_you&promoid=KCJMVKGL&mv=other',
   },
   {
-    UserId: 7,
+    userId: 7,
     title: 'Talented Digital Marketer | Advertising Specialist',
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
@@ -208,7 +208,7 @@ const proposals = [
       'Hello I have reviewed your job description and completely understand your requirement for I need a cartoon/animation artist. I can start working on your project immediately.I have expertise in area of After Effects, Graphic Design, Photoshop, Animation and Logo Design',
     attachements: 'https://www.freelancer.com/u/MetaDesignIndia',
     isAccepted: false,
-    freelancerId: 6,
+    freelancerId: 5,
     jobId: 7,
   },
   {
@@ -264,7 +264,7 @@ const proposals = [
       "Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.",
     attachements: 'Trica.co',
     isAccepted: false,
-    freelancerId: 6,
+    freelancerId: 5,
     jobId: 4,
   },
   {
@@ -273,7 +273,7 @@ const proposals = [
       'Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion',
     attachements: 'https://candyville.ca/',
     isAccepted: false,
-    freelancerId: 7,
+    freelancerId: 4,
     jobId: 5,
   },
 ];

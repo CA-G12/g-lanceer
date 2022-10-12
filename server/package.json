@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "build:tsc": "tsc",
     "lint": "eslint --ext .ts ./",
-    "fix:lint": "npm run lint --fix"
+    "fix:lint": "npm run lint --fix",
+    "db:seed": "cross-env NODE_ENV=development ts-node db/config/build.ts"
   },
   "keywords": [],
   "author": "",

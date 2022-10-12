@@ -11,7 +11,9 @@
     "start": "node ./dist",
     "prepare": "is-ci || npx husky install",
     "test": "echo tests running",
-    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint"
+    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
+    "db:seed": "cd server && npm run db:seed"
+
 
   },
   "repository": {
