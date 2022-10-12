@@ -59,7 +59,7 @@ const freelancers = [
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior full-stack web developer',
-    major: 'Programming & Tech',
+    major: 'Web Development',
     brief: '',
     portfolio: 'https://github.com/',
   },
@@ -105,7 +105,7 @@ const jobs = [
     category: 'Programming & Tech',
     budget: '$3000 – 5000 USD',
     time: '3 months',
-    isOccupied: false,
+    isOccupied: true,
     userId: 2,
   },
   {
@@ -247,7 +247,7 @@ const proposals = [
     attachements: 'https://caseace.in/',
     isAccepted: false,
     freelancerId: 3,
-    jobId: 3,
+    jobId: 1,
   },
   {
     // UI Development for mobile app (React)
@@ -264,7 +264,7 @@ const proposals = [
       "Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.",
     attachements: 'Trica.co',
     isAccepted: false,
-    freelancerId: 5,
+    freelancerId: 6,
     jobId: 4,
   },
   {
@@ -272,7 +272,7 @@ const proposals = [
     description:
       'Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion',
     attachements: 'https://candyville.ca/',
-    isAccepted: false,
+    isAccepted: true,
     freelancerId: 4,
     jobId: 5,
   },

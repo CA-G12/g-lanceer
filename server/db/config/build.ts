@@ -6,8 +6,6 @@ import {
   User, Proposal, Job, Freelancer,
 } from '../../models/index';
 
-// const dbConnect = () => sequelize.sync();
-
 const insertDB = async () => {
   await sequelize.sync({ force: true });
   await User.bulkCreate(users);
@@ -16,4 +14,3 @@ const insertDB = async () => {
   await Proposal.bulkCreate(proposals);
 };
 insertDB();
-// export default dbConnect;
