@@ -1,4 +1,4 @@
-{
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
@@ -6,21 +6,25 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "airbnb-base",
+        "airbnb-typescript/base"
     ],
     "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": ["./tsconfig.json"],
+        "tsconfigRootDir": __dirname
     },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
-        "linebreak-style":0,
-        "consistent-return":"off"
+        "linebreak-style": 0,
+        "consistent-return": "off"
     },
     "ignorePatterns": ["__test__/*", "dist/*"]
 }

@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import './App.css'
+import './App.css';
 
 function App() {
-  return <div className="container">
-    <nav>navbar</nav>
-    <Outlet />
-    <footer>footer</footer>
-  </div>;
+  return (
+    <div className="container">
+      <nav>navbar</nav>
+      <Outlet />
+      <footer>footer</footer>
+    </div>
+  );
 }
 
 export default App;
