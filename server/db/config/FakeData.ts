@@ -41,6 +41,12 @@ const users = [
     password: '$2a$12$w5PjAmhjKIR/PHSrVe384eTkxbR6cWUkK4y6sMbufm/r.SS21nn.S', // rawan123456  rounds:12
     role: 'freelancer',
   },
+  {
+    email: 'karam@gmail.com',
+    name: 'karam',
+    password: '$2a$12$w5PjAmhjKIR/PHSrVe384eTkxbR6cWUkK4y6sMbufm/r.SS21nn.S', // rawan123456  rounds:12
+    role: 'freelancer',
+  },
 ];
 
 const freelancers = [
@@ -90,10 +96,18 @@ const freelancers = [
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Digital Marketing',
-    brief:
-      'https://www.behance.net/rawan-b977c00?tracking_source=search_users%7Crawan',
+    brief: '',
     portfolio:
       'https://www.behance.net/rawan-b977c00?tracking_source=search_users%7CrawanBehance',
+  },
+  {
+    userId: 8,
+    image:
+      'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
+    title: 'senior Mobile developer',
+    major: 'Mobile Development',
+    brief: '',
+    portfolio: 'https://github.com/',
   },
 ];
 
@@ -227,7 +241,7 @@ const proposals = [
     attachements:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
-    freelancerId: 3,
+    freelancerId: 2,
     jobId: 2,
   },
   {
@@ -237,7 +251,7 @@ const proposals = [
     attachements:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
-    freelancerId: 3,
+    freelancerId: 6,
     jobId: 3,
   },
   {
@@ -246,7 +260,7 @@ const proposals = [
       'I am Full Stack Developer. I went through your requirements and would like to discuss further regarding more specific details and requirements. I would like to inform you that me along with my team have around 5+ years of experience in Full Stack Developement and complete IT solution including Website, Ecommerce Platforms, ELearning Platforms, Single page application and Automation. We strictly follow the software development standard and and our work is client centric. We respect deadline and our work include back-end, front-end , customization website security and SEO.',
     attachements: 'https://caseace.in/',
     isAccepted: false,
-    freelancerId: 3,
+    freelancerId: 2,
     jobId: 1,
   },
   {
@@ -255,7 +269,7 @@ const proposals = [
       "Hello, hope you're well. I have reviewed your project description and I can design an eye-catching and user-friendly interface for your app using React.js as per your requirements. The final cost and timeline will be given after the complete analysis of requirements with you.",
     attachements: 'https://www.freelancer.com/u/junkyfunky',
     isAccepted: false,
-    freelancerId: 5,
+    freelancerId: 3,
     jobId: 4,
   },
   {
@@ -264,7 +278,7 @@ const proposals = [
       "Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.",
     attachements: 'Trica.co',
     isAccepted: false,
-    freelancerId: 6,
+    freelancerId: 4,
     jobId: 4,
   },
   {
@@ -273,7 +287,7 @@ const proposals = [
       'Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion',
     attachements: 'https://candyville.ca/',
     isAccepted: true,
-    freelancerId: 4,
+    freelancerId: 5,
     jobId: 5,
   },
 ];
