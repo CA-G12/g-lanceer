@@ -23,7 +23,4 @@ const Proposal = sequelize.define('Proposal', {
 
 });
 
-// Proposal.belongsTo(Freelancer)
-// Proposal.belongsTo(Jop)
-
 export default Proposal;
