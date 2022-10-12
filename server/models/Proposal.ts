@@ -20,7 +20,16 @@ const Proposal = sequelize.define('Proposal', {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+<<<<<<< HEAD
 
 });
 
+=======
+
+});
+
+// Proposal.belongsTo(Freelancer)
+// Proposal.belongsTo(Jop)
+
+>>>>>>> cc7f69c (feat: fix the server)
 export default Proposal;
