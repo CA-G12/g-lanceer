@@ -20,10 +20,6 @@ switch (NODE_ENV) {
     throw new Error('NODE_ENV is not set');
 }
 
-<<<<<<< HEAD
-=======
-console.log(url);
->>>>>>> 765c3f5 (feat: add handle home page)
 if (!url) throw new Error('NODE_ENV is not set');
 const sequelize = new Sequelize(url);
 

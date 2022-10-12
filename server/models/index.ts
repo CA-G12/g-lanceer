@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import User from './User';
 import Proposal from './Proposal';
 import Job from './Job';
@@ -16,9 +15,3 @@ Job.belongsTo(User);
 export {
   User, Proposal, Job, Freelancer,
 };
-=======
-import User from './user';
-import Proposal from './Proposal';
-
-export { User, Proposal };
->>>>>>> cc7f69c (feat: fix the server)

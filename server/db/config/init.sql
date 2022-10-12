@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> cc7f69c (feat: fix the server)
 CREATE DATABASE glancer;
-BEGIN;
 
 BEGIN;
 
