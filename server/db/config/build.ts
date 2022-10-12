@@ -1,6 +1,5 @@
-import sequelize from "./connection";
-
+import sequelize from './connection';
 
 const dbConnect = () => sequelize.sync();
 
-export { dbConnect }
+export default dbConnect;
