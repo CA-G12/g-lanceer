@@ -1,6 +1,6 @@
 function Landing() {
   return (
-    <div>Landing</div>
+    <h1>landing</h1>
   );
 }
 
