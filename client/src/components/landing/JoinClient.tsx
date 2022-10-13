@@ -2,6 +2,7 @@ import { Button, Grid } from '@mui/material';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import freelancerImg from '../../assets/freelancer.jpg';
 
 function JoinClient() {
@@ -97,19 +98,22 @@ function JoinClient() {
               Looking for a talent
               to hire?
             </h2>
-            <Button
-              className="join-client-button"
-              variant="contained"
-              style={{
-                backgroundColor: '#1C3879',
-                color: '#fff',
-                padding: '.6rem 2.4rem',
-                marginTop: '30px',
-                fontSize: '20px',
-              }}
-            >
-              SEE TALENTS
-            </Button>
+            <Link to="/client/userId">
+              <Button
+                className="join-client-button"
+                variant="contained"
+                style={{
+                  backgroundColor: '#1C3879',
+                  color: '#fff',
+                  padding: '.6rem 2.4rem',
+                  marginTop: '30px',
+                  fontSize: '20px',
+                }}
+              >
+                POST JOB
+              </Button>
+
+            </Link>
           </div>
         </Grid>
       </Grid>

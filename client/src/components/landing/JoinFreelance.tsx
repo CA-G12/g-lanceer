@@ -2,6 +2,7 @@ import { Button, Grid } from '@mui/material';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import ClientImg from '../../assets/client.png';
 
 function JoinFreelance() {
@@ -114,19 +115,22 @@ function JoinFreelance() {
               Are You looking for
               a job?
             </h2>
-            <Button
-              className="join-freelance-button"
-              variant="contained"
-              style={{
-                backgroundColor: '#fff',
-                color: '#1C3879',
-                padding: '.6rem 2.4rem',
-                marginTop: '30px',
-                fontSize: '20px',
-              }}
-            >
-              Apply Now
-            </Button>
+            <Link to="/jobs-search">
+              <Button
+                className="join-freelance-button"
+                variant="contained"
+                style={{
+                  backgroundColor: '#fff',
+                  color: '#1C3879',
+                  padding: '.6rem 2.4rem',
+                  marginTop: '30px',
+                  fontSize: '20px',
+                }}
+              >
+                Apply Now
+              </Button>
+
+            </Link>
           </div>
         </Grid>
       </Grid>

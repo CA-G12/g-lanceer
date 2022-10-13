@@ -1,6 +1,9 @@
 #header{
 padding-top: 100px;
 }
+a{
+  text-decoration: none;
+}
 .header-content{
   text-align: left;
   height: 400px;

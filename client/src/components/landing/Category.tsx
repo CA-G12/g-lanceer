@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 interface CategoryProps {
   imgUrl: string,
   title: string,
@@ -9,15 +11,18 @@ function Category({
 }: CategoryProps) {
   return (
     <div className="category">
-      <div className="category-img">
-        <img
-          src={imgUrl}
-          alt={alt}
-        />
-      </div>
-      <div className="category-title">
-        {title}
-      </div>
+      <Link to="/jobs-search" state={{ category: title }}>
+        <div className="category-img">
+          <img
+            src={imgUrl}
+            alt={alt}
+          />
+        </div>
+        <div className="category-title">
+          {title}
+        </div>
+
+      </Link>
       <div className="category-desc">
         {desc}
       </div>
