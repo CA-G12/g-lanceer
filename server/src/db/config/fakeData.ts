@@ -117,7 +117,7 @@ const jobs = [
     description:
       'We are searching for a Back End Developer to join and support our growing team to develop a mobile application. The developer must be either available for full-time or can deliver the completed tasks on time.',
     category: 'Programming & Tech',
-    budget: '$3000 – 5000 USD',
+    budget: 3000,
     time: '3 months',
     isOccupied: true,
     userId: 2,
@@ -127,7 +127,7 @@ const jobs = [
     description:
       'Creating a bespoke online booking system with React and Netlify',
     category: 'Programming & Tech',
-    budget: '$1500 – 2500 USD',
+    budget: 1500,
     time: '2 months',
     userId: 2,
     isOccupied: false,
@@ -137,7 +137,7 @@ const jobs = [
     description:
       'I want a app which you can share video, screen and audio then other side users need to join and view the stream. Bare minimum just need functionality for streaming and viewing and multiple streams independently',
     category: 'Programming & Tech',
-    budget: '$1500 – 3000 USD',
+    budget: 1500,
     time: '5 months',
     isOccupied: false,
     userId: 2,
@@ -147,7 +147,7 @@ const jobs = [
     description:
       'Need UI to be developed for mobile application. UI design (HTML) is ready for the same UI is to be developed in core React & not web view.Please connect for design document.',
     category: 'Graphics & Design',
-    budget: '$500 – 700 USD',
+    budget: 500,
     time: '1 month',
     isOccupied: false,
     userId: 4,
@@ -167,7 +167,7 @@ const jobs = [
     description:
       'I am working on an honors thesis discussing the influence of the American Revolution on Thaddius Kosciusko\'s political and military ideas. As I do not know Polish, I need a translated version of this document for my research. Is about 60 pages. First page is attached for reference. The document is "Can the Poles Win Independence"',
     category: 'Writing & Translation',
-    budget: '$600 - 700 USD',
+    budget: 600,
     time: '1 month',
     isOccupied: false,
     userId: 2,
@@ -177,7 +177,7 @@ const jobs = [
     description:
       "Hello,I'm working on a feature documentary about a late Mexican painter, sculptor and muralist. The film tells the story of his birth registry in a sequence of drawings done by the artist himself. I like to animate these pencil drawings. There are about 15 original drawings that were scanned. The total duration of the sequence is about 65 sec. I envision some sort of paper cutout style, but I'm open to collaborative work. Thanks'",
     category: 'Video & Animation',
-    budget: '$750 – 1500 USD',
+    budget: 750,
     time: '2 months',
     isOccupied: false,
     userId: 4,
@@ -187,7 +187,7 @@ const jobs = [
     description:
       'We are looking for a Business Project Manager or Consultant with business planning experience to help build up a startup Website Development and Marketing Company.',
     category: 'Business',
-    budget: '$900- 1400 USD',
+    budget: 900,
     time: '3-6 months',
     isOccupied: false,
     userId: 2,
@@ -199,7 +199,7 @@ const jobs = [
     description:
       'I have voice recordings I can’t hear clearly sone words are clear I need someone boost up the voices remove static background noice so voices can clearly be herd',
     category: 'Music & Audio',
-    budget: '$900 - 1500 USD',
+    budget: 900,
     time: '2 months',
     isOccupied: false,
     userId: 4,
