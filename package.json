@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "cd client && npm run start",
-    "init": " cd server && npm i && cd ../client && npm i &&",
+    "init": " cd server && npm i && cd ../client && npm i",
     "install": "npm run init",
     "dev": "cd server && npm run dev",
     "start": "node ./dist",
