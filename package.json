@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "cd client && npm run start",
-    "init": "cd client && npm i && cd ../server && npm i",
+    "init": " cd server && npm i && cd ../client && npm i &&",
     "install": "npm run init",
     "dev": "cd server && npm run dev",
     "start": "node ./dist",
@@ -13,8 +13,6 @@
     "test": "echo tests running",
     "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
     "db:seed": "cd server && npm run db:seed"
-
-
   },
   "repository": {
     "type": "git",
