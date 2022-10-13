@@ -10,14 +10,13 @@ function Hero() {
       gsap.fromTo(
         '.hero .hero-container h3',
         {
-          y: -200,
+          y: -400,
           scale: 0.5,
         },
         {
           y: 0,
           scale: 1,
-          delay: 0.5,
-          ease: 'slow',
+          ease: 'power2',
           duration: 0.8,
           scrollTrigger: {
             trigger: heroRef.current,
@@ -29,12 +28,12 @@ function Hero() {
       gsap.fromTo(
         '.hero .hero-container p',
         {
-          y: 200,
+          y: 400,
         },
         {
           y: 0,
-          ease: 'slow',
-          delay: 1,
+          ease: 'power2',
+          delay: 0.5,
           duration: 0.8,
           scrollTrigger: {
             trigger: heroRef.current,

@@ -78,7 +78,7 @@ function JoinClient() {
         justifyContent="space-evenly"
         alignItems="center"
       >
-        <Grid xs={8} sm={6} md={4}>
+        <Grid xs={8} sm={6} md={4} item>
           <img
             className="freelancerImg"
             src={freelancerImg}
@@ -86,7 +86,7 @@ function JoinClient() {
             alt=""
           />
         </Grid>
-        <Grid xs={8} sm={8} md={4}>
+        <Grid xs={8} sm={8} md={4} item>
           <div
             className="join-client-content"
             style={{ textAlign: 'center' }}

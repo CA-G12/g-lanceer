@@ -58,10 +58,10 @@ function Header() {
         justifyContent="space-evenly"
         alignItems="center"
       >
-        <Grid xs={8} sm={6} md={5}>
+        <Grid xs={8} sm={6} md={5} item>
           <img className="header-img" src={heroImg} width="100%" alt="" />
         </Grid>
-        <Grid xs={8} sm={8} md={4}>
+        <Grid xs={8} sm={8} md={4} item>
           <div className="header-content">
             <h2
               className="header-content-heading"
