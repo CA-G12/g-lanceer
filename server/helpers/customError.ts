@@ -18,4 +18,4 @@ const serverErrs = {
   FORBIDDEN: (msg: string) => new CustomError(StatusCodes.FORBIDDEN, msg),
 };
 
-export default { CustomError, serverErrs };
+export { CustomError, serverErrs };
