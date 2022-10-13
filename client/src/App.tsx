@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="container">
+    <div>
       <nav>navbar</nav>
       <Outlet />
       <footer>footer</footer>
