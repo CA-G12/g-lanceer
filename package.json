@@ -11,7 +11,8 @@
     "start": "node ./dist",
     "prepare": "is-ci || npx husky install",
     "test": "echo tests running",
-    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint"
+    "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
+    "db:seed": "cd server && npm run db:seed"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,5 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "husky": "^8.0.1"
-  },
-  "dependencies": {
-    "morgan": "^1.10.0"
   }
 }
