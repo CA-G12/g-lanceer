@@ -16,7 +16,7 @@ function Header() {
         {
           scale: 1,
           duration: 1.5,
-          ease: 'bounce',
+          ease: 'power3',
         },
       );
       gsap.fromTo(

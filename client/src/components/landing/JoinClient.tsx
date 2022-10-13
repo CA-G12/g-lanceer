@@ -20,7 +20,7 @@ function JoinClient() {
           scale: 1,
           duration: 1,
           ease: 'power1',
-          delay: 1,
+          delay: 0.5,
           scrollTrigger: {
             trigger: ref.current,
             start: 'top center',
@@ -56,7 +56,7 @@ function JoinClient() {
           scale: 1,
           y: 0,
           duration: 0.6,
-          delay: 1.7,
+          delay: 1,
           ease: 'slow',
           scrollTrigger: {
             trigger: ref.current,
