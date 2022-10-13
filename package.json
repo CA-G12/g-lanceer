@@ -13,6 +13,8 @@
     "test": "echo tests running",
     "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
     "db:seed": "cd server && npm run db:seed"
+
+
   },
   "repository": {
     "type": "git",
