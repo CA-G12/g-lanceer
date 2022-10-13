@@ -11,7 +11,11 @@ jobs:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: node:16
+    strategy:
+      matrix:
+        node: [ 16 ]
+
+    name: Node ${{ matrix.node }} sample    
 
     # Service containers to run with `container-job`
     services:
@@ -40,6 +44,8 @@ jobs:
 
       - name: Use Node.js
         uses: actions/setup-node@v3
+        with: 
+          node-version: ${{ matrix.node }}
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
