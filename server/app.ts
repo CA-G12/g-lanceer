@@ -7,6 +7,7 @@ import { join } from 'path';
 import morgan from 'morgan';
 
 import router from './routes';
+import { clientError, serverError } from './middlewares/index';
 
 dotenv.config();
 const app = express();
@@ -30,5 +31,8 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
+
+app.use(clientError);
+app.use(serverError);
 
 export default app;
