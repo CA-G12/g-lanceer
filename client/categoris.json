@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Graphics & Design",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Digital Marketing",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Writing & Translation",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Video & Animation",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Music & Audio",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Web Development",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Business",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    },
+    {
+        "name": "Mobile Development",
+        "url": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab."
+    }
+
+]
