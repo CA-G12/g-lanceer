@@ -20,7 +20,7 @@ const Job = sequelize.define('job', {
     allowNull: false,
   },
   budget: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   time: {
