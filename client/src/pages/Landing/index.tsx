@@ -1,6 +1,18 @@
+import {
+  Hero, JoinClient, JoinFreelance, PopularCategories,
+} from '../../components';
+import Header from '../../components/landing/Header';
+import './style.css';
+
 function Landing() {
   return (
-    <h1>landing</h1>
+    <>
+      <Header />
+      <Hero />
+      <PopularCategories />
+      <JoinFreelance />
+      <JoinClient />
+    </>
   );
 }
 
