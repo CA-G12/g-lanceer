@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
 
-const Job = sequelize.define('Job', {
+const Job = sequelize.define('job', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -20,7 +20,7 @@ const Job = sequelize.define('Job', {
     allowNull: false,
   },
   budget: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   time: {

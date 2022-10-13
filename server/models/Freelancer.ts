@@ -1,11 +1,11 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
 
-const Freelancer = sequelize.define('Freelancer', {
+const Freelancer = sequelize.define('freelancer', {
   id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
   },
   image: {
     type: DataTypes.TEXT,

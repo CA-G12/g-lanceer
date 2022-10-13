@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "build:tsc": "tsc",
     "lint": "eslint --ext .ts ./",
-    "fix:lint": "npm run lint --fix"
+    "fix:lint": "npm run lint --fix",
+    "db:seed": "cross-env NODE_ENV=development ts-node db/config/build.ts"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +28,10 @@
     "sequelize": "^6.25.0"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.2",
+    "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.14",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^18.8.3",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
@@ -36,6 +40,7 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "jest": "^29.1.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.0",
     "ts-node": "^10.9.1",
