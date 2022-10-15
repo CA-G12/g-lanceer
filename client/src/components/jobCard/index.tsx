@@ -1,17 +1,23 @@
 import {
   Button,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-import './jobCard.css';
+import { Link, useNavigate } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import './style.css';
 
 function JobCard() {
+  const navigate = useNavigate();
   return (
     <div className="content">
       <div className="job-card">
         <Link to="/job/jobid">
-          <h2 className="h2">
+          <Typography
+            variant="h5"
+            gutterBottom
+            color="primary"
+          >
             Graphic Design
-          </h2>
+          </Typography>
           <p className="description">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
             nisi molestiae praesentium eum repellat expedita sit reicien quas
@@ -29,22 +35,21 @@ function JobCard() {
               <span>$50</span>
             </div>
           </div>
-          <Link to="/job/jobid">
-            <Button
-              className="apply-job-btn"
-              style={{
-                backgroundColor: '#1C3879',
-                color: '#fff',
-                fontSize: '12px',
-                borderRadius: '20px',
-                width: '100%',
-                paddingLeft: '15px',
-                paddingRight: '15px',
-              }}
-            >
-              Apply Now
-            </Button>
-          </Link>
+          <Button
+            className="apply-job-btn"
+            color="secondary"
+            style={{
+              backgroundColor: '#1C3879',
+              fontSize: '12px',
+              borderRadius: '20px',
+              width: '13%',
+              paddingLeft: '15px',
+              paddingRight: '15px',
+            }}
+            onClick={() => navigate('/job/jobid')}
+          >
+            Apply Now
+          </Button>
         </div>
       </div>
     </div>
