@@ -1,21 +1,23 @@
-import { JobCard } from '../../components';
+import { Tabs } from '../../components';
 
-interface Job {
-  title: string,
-  description: string,
-  budget: number
-}
+// interface Job {
+//   title: string,
+//   description: string,
+//   budget: number
+// }
 
-const job: Job = {
-  title: 'Graphic Design',
-  description: 'Lorem lorem lorem lorem lorem lorem lorem lorem',
-  budget: 20,
-};
+// const job: Job = {
+//   title: 'Graphic Design',
+//   description: 'Lorem lorem lorem lorem lorem lorem lorem lorem',
+//   budget: 20,
+// };
 
 function JobsSearch() {
   return (
     <div>
-      <JobCard job={job} />
+      {/* <JobCard job={job} /> */}
+      <Tabs />
+
     </div>
   );
 }
