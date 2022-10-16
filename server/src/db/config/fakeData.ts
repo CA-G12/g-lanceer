@@ -157,7 +157,7 @@ const jobs = [
     description:
       'Our company has started manufacturing a new range of spray dried food ingredients. We need someone to improve market visibility of these products and attract new customers on different platforms.',
     category: 'Digital Marketing',
-    budget: '$900 - 1300 USD',
+    budget: '900',
     time: '6 months',
     isOccupied: false,
     userId: 4,
