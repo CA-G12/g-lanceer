@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { JobCard, Filter } from '../../components';
+import { Tabs, JobCard, Filter } from '../../components';
 
 interface Job {
   title: string,
@@ -12,6 +12,17 @@ const job: Job = {
   description: 'Lorem lorem lorem lorem lorem lorem lorem lorem',
   budget: 20,
 };
+
+interface TabListInt {
+  label: string;
+  child: JSX.Element;
+}
+
+const tablist: Array<TabListInt> = [{
+  label: 'Most Popular',
+  child: <JobCard job={job} />,
+},
+{ label: 'Best Match', child: <h1>hhhhhhhh</h1> }];
 
 function JobsSearch() {
   const [price, setPrice] = useState<number>(0);
@@ -33,6 +44,7 @@ function JobsSearch() {
         priceChange={priceChange}
         price={price}
       />
+      <Tabs tablist={tablist} />
     </div>
   );
 }

@@ -17,6 +17,7 @@ interface Props {
 function Filter({
   category, changeCategory, priceChange, price,
 }: Props) {
+  console.log(category);
   const location = useLocation();
   return (
     <Container className="content">
@@ -32,7 +33,7 @@ function Filter({
           <label id="demo-radio-buttons-group-label" className="label catelabel">Categories</label>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={location.state.category || category}
+            defaultValue={location.state?.category || category}
             name="radio-buttons-group"
             className="categories"
             onChange={changeCategory}
