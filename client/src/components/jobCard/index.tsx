@@ -2,7 +2,6 @@ import {
   Button, Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-// import Typography from '@mui/material/Typography';
 import './style.css';
 
 interface Job {
@@ -25,7 +24,6 @@ function JobCard({ job }: JobProps) {
           <Typography
             variant="h5"
             gutterBottom
-            color="primary"
           >
             {title}
           </Typography>
@@ -48,13 +46,11 @@ function JobCard({ job }: JobProps) {
             </div>
           </div>
           <Button
-            className="apply-job-btn"
             color="secondary"
             style={{
               backgroundColor: '#1C3879',
               fontSize: '12px',
               borderRadius: '20px',
-              width: '13%',
               paddingLeft: '15px',
               paddingRight: '15px',
             }}
