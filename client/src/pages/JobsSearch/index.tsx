@@ -1,11 +1,21 @@
-// import { useLocation } from 'react-router-dom';
+import { JobCard } from '../../components';
+
+interface Job {
+  title: string,
+  description: string,
+  budget: number
+}
+
+const job: Job = {
+  title: 'Graphic Design',
+  description: 'Lorem lorem lorem lorem lorem lorem lorem lorem',
+  budget: 20,
+};
 
 function JobsSearch() {
-  // const location = useLocation();
-  // const { category } = location.state;
   return (
     <div>
-      JobsSearch:
+      <JobCard job={job} />
     </div>
   );
 }
