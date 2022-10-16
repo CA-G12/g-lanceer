@@ -6,8 +6,7 @@ const clientError = (req: Request, res: Response) => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const serverError: ErrorRequestHandler = (err, req, res, next) => {
-  if (err.status) res.status(err.status).json({ message: err.message });
-  else res.status(500).json({ message: 'Server Error' });
+  res.status(500).json({ message: 'Server Error' });
 };
 
 export { clientError, serverError };
