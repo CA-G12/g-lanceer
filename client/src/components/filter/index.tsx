@@ -1,13 +1,9 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable arrow-body-style */
-/* eslint-disable array-callback-return */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable max-len */
 import {
-  Container, Radio, RadioGroup, FormControlLabel, FormControl, Select, Input,
+  Container, Radio, RadioGroup, FormControlLabel, FormControl, Input,
 } from '@mui/material';
-import React from 'react';
+import { useLocation } from 'react-router-dom';
 import data from '../../categoris';
 import './style.css';
 
@@ -21,6 +17,7 @@ interface Props {
 function Filter({
   category, changeCategory, priceChange, price,
 }: Props) {
+  const location = useLocation();
   return (
     <Container className="content">
       <div className="sideBar">
@@ -35,21 +32,19 @@ function Filter({
           <label id="demo-radio-buttons-group-label" className="label catelabel">Categories</label>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={category}
+            defaultValue={location.state.category || category}
             name="radio-buttons-group"
             className="categories"
             onChange={changeCategory}
           >
-            {data.map((ele, i) => {
-              return (
-                <FormControlLabel
-                  key={i + 5}
-                  label={ele.name}
-                  value={ele.name}
-                  control={<Radio />}
-                />
-              );
-            })}
+            {data.map((ele) => (
+              <FormControlLabel
+                key={ele.name}
+                label={ele.name}
+                value={ele.name}
+                control={<Radio />}
+              />
+            ))}
           </RadioGroup>
         </FormControl>
       </div>
