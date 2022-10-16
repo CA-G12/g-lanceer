@@ -4,23 +4,18 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import JobCard from '../jobCard';
 import './style.css';
 
-interface Job {
-  title: string,
-  description: string,
-  budget: number
+interface TabListInt {
+  label: string;
+  child: JSX.Element;
+}
+interface Props {
+  tablist: Array<TabListInt>
 }
 
-const job: Job = {
-  title: 'Graphic Design',
-  description: 'Lorem lorem lorem lorem lorem lorem lorem lorem',
-  budget: 20,
-};
-
-function Tabs() {
-  const [value, setValue] = React.useState('1');
+function Tabs({ tablist }: Props) {
+  const [value, setValue] = React.useState(tablist[0].label);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -31,16 +26,16 @@ function Tabs() {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: '#eee' }}>
             <TabList onChange={handleChange}>
-              <Tab label="Most Popular" value="1" />
-              <Tab label="Best Match" value="2" />
+              {tablist.map(({ label }) => (
+                <Tab label={label} value={label} key={label} />
+              ))}
             </TabList>
           </Box>
-          <TabPanel value="1">
-            <div>
-              <JobCard job={job} />
-            </div>
-          </TabPanel>
-          <TabPanel value="2" />
+          {tablist.map(({ label, child }) => (
+            <TabPanel value={label} key={label}>
+              {child}
+            </TabPanel>
+          ))}
         </TabContext>
       </Box>
     </div>
