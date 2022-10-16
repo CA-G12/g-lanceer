@@ -1,11 +1,22 @@
 import {
-  Button,
+  Button, Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import './style.css';
 
-function JobCard() {
+interface Job {
+  title: string,
+  description: string,
+  budget: number
+}
+
+interface JobProps {
+  job: Job
+}
+
+function JobCard({ job }: JobProps) {
+  const { title, description, budget } = job;
   const navigate = useNavigate();
   return (
     <div className="content">
@@ -16,12 +27,10 @@ function JobCard() {
             gutterBottom
             color="primary"
           >
-            Graphic Design
+            {title}
           </Typography>
           <p className="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
-            nisi molestiae praesentium eum repellat expedita sit reicien quas
-            perferendis beatae nam ipsum in neque cumque corporis id commod
+            {description}
           </p>
         </Link>
         <div className="second-section">
@@ -32,7 +41,10 @@ function JobCard() {
             </div>
             <div className="budget">
               budget:
-              <span>$50</span>
+              <span>
+                $
+                {budget}
+              </span>
             </div>
           </div>
           <Button
