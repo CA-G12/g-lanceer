@@ -24,6 +24,7 @@ function JobCard({ job }: JobProps) {
           <Typography
             variant="h5"
             gutterBottom
+            color="primary"
           >
             {title}
           </Typography>

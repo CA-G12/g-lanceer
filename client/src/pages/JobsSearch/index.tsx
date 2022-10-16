@@ -1,4 +1,4 @@
-import { JobCard } from '../../components';
+import { Tabs, JobCard } from '../../components';
 
 interface Job {
   title: string,
@@ -12,10 +12,21 @@ const job: Job = {
   budget: 20,
 };
 
+interface TabListInt {
+  label: string;
+  child: JSX.Element;
+}
+
+const tablist: Array<TabListInt> = [{
+  label: 'Most Popular',
+  child: <JobCard job={job} />,
+},
+{ label: 'Best Match', child: <h1>hhhhhhhh</h1> }];
+
 function JobsSearch() {
   return (
     <div>
-      <JobCard job={job} />
+      <Tabs tablist={tablist} />
     </div>
   );
 }
