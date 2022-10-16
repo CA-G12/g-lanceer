@@ -46,15 +46,14 @@ function JobCard({ job }: JobProps) {
             </div>
           </div>
           <Button
-            color="secondary"
             style={{
-              backgroundColor: '#1C3879',
               fontSize: '12px',
               borderRadius: '20px',
               paddingLeft: '15px',
               paddingRight: '15px',
             }}
             onClick={() => navigate('/job/jobid')}
+            variant="contained"
           >
             Apply Now
           </Button>
