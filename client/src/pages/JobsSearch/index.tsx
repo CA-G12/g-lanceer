@@ -33,8 +33,6 @@ function JobsSearch() {
   const priceChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setPrice(Number(e.target.value));
   };
-  // console.log(category);
-  // console.log(price);
   return (
     <div>
       <JobCard job={job} />

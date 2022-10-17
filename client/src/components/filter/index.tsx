@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable max-len */
 import {
   Container, Radio, RadioGroup, FormControlLabel, FormControl, Input,
@@ -11,32 +10,33 @@ interface Props {
   category: string,
   changeCategory: (cate: any) => void,
   priceChange: (data: any) => void,
-  price : number
+  price: number
 }
 
 function Filter({
   category, changeCategory, priceChange, price,
 }: Props) {
-  console.log(category);
   const location = useLocation();
   return (
     <Container className="content">
       <div className="sideBar">
         <FormControl>
-          <label className="label">Price</label>
+          <label htmlFor="price" className="label">Price</label>
           <Input
             name="price"
             type="number"
             onChange={priceChange}
             value={price}
+            id="price"
           />
-          <label id="demo-radio-buttons-group-label" className="label catelabel">Categories</label>
+          <label id="demo-radio-buttons-group-label" htmlFor="category" className="label catelabel">Categories</label>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue={location.state?.category || category}
             name="radio-buttons-group"
             className="categories"
             onChange={changeCategory}
+            id="category"
           >
             {data.map((ele) => (
               <FormControlLabel
