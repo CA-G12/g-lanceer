@@ -13,8 +13,6 @@ const ExpressWrapper = (fn: ControllerFunction): RequestHandler => async (req, r
     } else if (error.status) {
       res.status(error.status).json({ message: error.message });
     } else {
-      console.log(error);
-
       res.status(500).json({ message: 'Server Error' });
     }
   }
