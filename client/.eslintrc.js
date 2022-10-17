@@ -29,7 +29,17 @@ module.exports = {
     ],
     "rules": {
         "linebreak-style": 0,
-        "max-len": ["error", { "code": 80 }]
+        "max-len": ["error", { "code": 120 }],
+        "jsx-a11y/label-has-associated-control": [ "error", {
+        "required": {
+          "some": [ "nesting", "id"  ]
+        }
+      }],
+      "jsx-a11y/label-has-for": [ "error", {
+        "required": {
+          "some": [ "nesting", "id"  ]
+        }
+      }]
 
     }
 }
