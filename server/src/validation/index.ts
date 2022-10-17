@@ -14,4 +14,8 @@ const queryValidation = yup.object().shape({
   page: yup.number(),
 });
 
-export default queryValidation;
+const queryJobValidation = yup.object().shape({
+  id: yup.number(),
+});
+
+export { queryValidation, queryJobValidation };
