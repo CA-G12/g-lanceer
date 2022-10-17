@@ -13,9 +13,9 @@ jobs:
     # Docker Hub image that `container-job` executes in
     strategy:
       matrix:
-        node: [ 16 ]
+        node: [16]
 
-    name: Node ${{ matrix.node }} sample    
+    name: Node ${{ matrix.node }} sample
 
     # Service containers to run with `container-job`
     services:
@@ -44,7 +44,7 @@ jobs:
 
       - name: Use Node.js
         uses: actions/setup-node@v3
-        with: 
+        with:
           node-version: ${{ matrix.node }}
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -58,4 +58,4 @@ jobs:
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          TEST_DATABASE_URL: postgres://team:123456@localhost:5432/test
+          TEST_DATABASE_URL: postgres://team:123456@postgres:5432/test

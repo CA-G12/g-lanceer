@@ -1,12 +1,8 @@
-import express, { Request, Response } from 'express';
-import getJob from '../controllers/getJob';
-import ExpressWrapper from '../ExpressWrapper';
+import express from 'express';
+import jobsRouter from './jobs';
 
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response) => {
-  res.send('Hello Word');
-});
-router.get('/job/:id', ExpressWrapper(getJob));
+router.use('/jobs', jobsRouter);
 
 export default router;
