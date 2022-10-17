@@ -22,14 +22,12 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:latest
+        image: postgres
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: pass
           POSTGRES_USER: team
           POSTGRES_DB: glancer
-          DB_HOST: postgres
-          POSTGRES_PORT: 5432
 
         # Set health checks to wait until postgres has started
         options: >-
