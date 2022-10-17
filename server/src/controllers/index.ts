@@ -1,3 +1,4 @@
 import searchJobs from './searchJobs';
+import getJob from './getJob';
 
-export default searchJobs;
+export { searchJobs, getJob };

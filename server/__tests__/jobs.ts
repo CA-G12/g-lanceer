@@ -28,4 +28,10 @@ describe('Job API', () => {
       .expect(200);
     expect(response.body.data.id).toBe(2);
   });
+  test('Jobs - GET - /api/v1/jobs/2333 ', async () => {
+    const response = await request(app)
+      .get('/api/v1/jobs/2333')
+      .expect(200);
+    expect(response.body.data).toEqual(null);
+  });
 });

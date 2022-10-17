@@ -6,7 +6,15 @@ const getJob = async (req:Request) => {
   const { id } = req.params;
   await queryJobValidation.validate(req.params);
   const job = await Job.findByPk(id, {
-    include: User,
+    include: {
+      model: User,
+      attributes: [
+        'id',
+        'email',
+        'name',
+        'role',
+      ],
+    },
   });
   if (!job) return { status: 200, msg: 'job not found' };
   return { status: 200, data: job };

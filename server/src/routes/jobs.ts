@@ -1,6 +1,5 @@
 import express from 'express';
-import searchJobs from '../controllers';
-import getJob from '../controllers/getJob';
+import { searchJobs, getJob } from '../controllers';
 import ExpressWrapper from '../ExpressWrapper';
 
 const jobsRouter = express.Router();
