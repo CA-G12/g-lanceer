@@ -1,7 +1,8 @@
 import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
 import {
-  Formik, Form, Field, FormikProps,
+  FormikProps,
+  useFormik,
 } from 'formik';
 import * as Yup from 'yup';
 import SendIcon from '@mui/icons-material/Send';
@@ -12,7 +13,7 @@ interface Proposal {
   proposalText: string
   proposalAttachment: string
 }
-const ProposalSchema = Yup.object().shape({
+const ProposalSchema = Yup.object({
   proposalText: Yup.string()
     .min(15, 'Too Short!')
     .required('Proposal must not be Empty'),
@@ -23,82 +24,71 @@ const ProposalSchema = Yup.object().shape({
     .url('Attachment should be a valid URL'),
 });
 function ProposalForm() {
-  return (
-    <Formik
-      initialValues={{
-        proposalText: '',
-        proposalAttachment: '',
-      }}
-      validationSchema={ProposalSchema}
-      onSubmit={(values: Proposal, actions) => {
-        console.log(values);
-        setTimeout(() => {
-          actions.setSubmitting(false);
-        }, 3000);
-      }}
-    >
-      {(props: FormikProps<Proposal>) => {
-        const {
-          values,
-          errors,
-          handleBlur,
-          handleChange,
-          isSubmitting,
-        } = props;
-        return (
-          <Form>
-            <div className="proposal-form">
-              <div className="proposal-text">
-                <h2 className="proposal-form-heading">Proposal</h2>
-                <Field name="proposalText">
-                  {({ field }: any) => (
-                    <TextEditor
-                      error={!!errors.proposalText}
-                      value={field.value}
-                      setValue={field.onChange(field.name)}
-                    />
-                  )}
-                </Field>
-                <small style={{ color: '#d32f2f' }}>{errors.proposalText || ' '}</small>
-              </div>
-              <div className="proposal-attachment">
-                <h2 className="proposal-form-heading">Attachments</h2>
-                <TextField
-                  fullWidth
-                  name="proposalAttachment"
-                  id="proposalAttachment"
-                  label="Enter Your Attachments link"
-                  onChange={handleChange}
-                  variant="outlined"
-                  onBlur={handleBlur}
-                  value={values.proposalAttachment}
-                  helperText={
-                    errors.proposalAttachment
-                      ? errors.proposalAttachment
-                      : 'optional'
-                  }
-                  error={
-                    !!(errors.proposalAttachment)
-                  }
-                />
-              </div>
-              <LoadingButton
-                type="submit"
-                endIcon={<SendIcon />}
-                loading={isSubmitting}
-                loadingPosition="end"
-                variant="contained"
-                className={isSubmitting ? 'submitProposal loading' : 'submitProposal '}
-              >
-                {isSubmitting ? 'Sending' : 'Apply'}
-              </LoadingButton>
-            </div>
-          </Form>
-        );
-      }}
+  const formik: FormikProps<Proposal> = useFormik<Proposal>({
+    initialValues: {
+      proposalText: '',
+      proposalAttachment: '',
+    },
+    validationSchema: ProposalSchema,
+    onSubmit: (values: Proposal) => {
+      console.log(values);
+      setTimeout(() => {
+        formik.setSubmitting(false);
+        formik.resetForm();
+      }, 3000);
+    },
+  });
 
-    </Formik>
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <div className="proposal-form">
+        <div className="proposal-text">
+          <h2 className="proposal-form-heading">Proposal</h2>
+          <TextEditor
+            error={!!(formik.errors.proposalText && formik.touched.proposalText)}
+            value={formik.values.proposalText}
+            setValue={(e) => formik.setFieldValue('proposalText', e)}
+          />
+          {!!(formik.errors.proposalText
+            && formik.touched.proposalText)
+            && <small style={{ color: '#d32f2f' }}>{formik.errors.proposalText}</small>}
+        </div>
+        <div className="proposal-attachment">
+          <h2 className="proposal-form-heading">Attachments</h2>
+          <TextField
+            fullWidth
+            name="proposalAttachment"
+            id="proposalAttachment"
+            label="Enter Your Attachments link"
+            onChange={formik.handleChange}
+            variant="outlined"
+            onBlur={formik.handleBlur}
+            value={formik.values.proposalAttachment}
+            helperText={
+              formik.errors.proposalAttachment
+                ? formik.errors.proposalAttachment
+                : 'optional'
+            }
+            error={
+              !!(formik.errors.proposalAttachment)
+            }
+          />
+        </div>
+        <LoadingButton
+          type="submit"
+          endIcon={<SendIcon />}
+          loading={formik.isSubmitting}
+          loadingPosition="end"
+          variant="contained"
+          className={formik.isSubmitting ? 'submitProposal loading' : 'submitProposal '}
+        >
+          {formik.isSubmitting ? 'Sending' : 'Apply'}
+        </LoadingButton>
+      </div>
+    </form>
   );
 }
+
+// </Formik >
 
 export default ProposalForm;
