@@ -13,4 +13,8 @@ const insertDB = async () => {
   await Freelancer.bulkCreate(freelancers);
   await Proposal.bulkCreate(proposals);
 };
-insertDB();
+if (process.env.SEED) {
+  insertDB();
+}
+
+export default insertDB;

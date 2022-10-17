@@ -1,9 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import jobsRouter from './jobs';
 
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response) => {
-  res.send('Hello Word');
-});
+router.use('/jobs', jobsRouter);
 
 export default router;

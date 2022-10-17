@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env NODE_ENV=test jest",
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "build:tsc": "tsc",
     "lint": "eslint --ext .ts ./",
     "fix:lint": "npm run lint --fix",
-    "db:seed": "cross-env NODE_ENV=development ts-node db/config/build.ts"
+    "db:seed": "cross-env SEED=true NODE_ENV=development ts-node src/db/config/build.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,8 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.25.0"
+    "sequelize": "^6.25.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/compression": "^1.7.2",
@@ -34,6 +35,7 @@
     "@types/jest": "^29.1.2",
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.8.3",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
