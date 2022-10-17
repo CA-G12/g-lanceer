@@ -1,6 +1,5 @@
   .job-card{
-  width: 75%;
-  margin: 2.5rem 0px;
+  margin: 2rem 0px;
   position: relative;
 }
 .job-card::after{
@@ -33,5 +32,5 @@
   margin-bottom: 10px;
 }
 .content{
-  padding: 0px 6rem;
+  padding: 0px 2rem;
 }
