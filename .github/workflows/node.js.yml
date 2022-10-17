@@ -12,9 +12,8 @@ jobs:
     # Containers must run in Linux based operating systems
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
+    # Docker Hub image that `container-job` executes in
+    container: node:latest
 
     # Service containers to run with `container-job`
     services:
