@@ -1,8 +1,10 @@
-import { Button, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { TextField } from '@mui/material';
 import {
   Formik, Form, Field, FormikProps,
 } from 'formik';
 import * as Yup from 'yup';
+import SendIcon from '@mui/icons-material/Send';
 import TextEditor from '../TextEditor';
 import './style.css';
 
@@ -30,7 +32,9 @@ function ProposalForm() {
       validationSchema={ProposalSchema}
       onSubmit={(values: Proposal, actions) => {
         console.log(values);
-        actions.setSubmitting(false);
+        setTimeout(() => {
+          actions.setSubmitting(false);
+        }, 3000);
       }}
     >
       {(props: FormikProps<Proposal>) => {
@@ -78,15 +82,16 @@ function ProposalForm() {
                   }
                 />
               </div>
-              <Button
+              <LoadingButton
                 type="submit"
+                endIcon={<SendIcon />}
+                loading={isSubmitting}
+                loadingPosition="end"
                 variant="contained"
-                color="secondary"
-                className="submitProposal"
-                disabled={isSubmitting}
+                className={isSubmitting ? 'submitProposal loading' : 'submitProposal '}
               >
-                Apply
-              </Button>
+                {isSubmitting ? 'Sending' : 'Apply'}
+              </LoadingButton>
             </div>
           </Form>
         );

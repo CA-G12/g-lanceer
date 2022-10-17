@@ -24,3 +24,6 @@
   color: #fff !important;
   margin-left: auto !important;
 }
+.submitProposal.loading{
+  background-color: #ccc !important;
+}
