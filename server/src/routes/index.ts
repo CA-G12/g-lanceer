@@ -1,12 +1,8 @@
-import express, { Request, Response } from 'express';
-import searchJobs from '../controllers';
+import express from 'express';
+import jobsRouter from './jobs';
 
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response) => {
-  res.send('Hello Word');
-});
-
-router.get('/jobs-search', searchJobs);
+router.use('/jobs', jobsRouter);
 
 export default router;
