@@ -35,7 +35,6 @@ function JobsSearch() {
   };
   return (
     <div>
-      <JobCard job={job} />
       <Filter
         category={category}
         changeCategory={changeCategory}
