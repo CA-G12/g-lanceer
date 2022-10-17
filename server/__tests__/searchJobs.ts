@@ -3,8 +3,8 @@ import app from '../src/app';
 import insertDB from '../src/db/config/build';
 import sequelize from '../src/db/config/connection';
 
-beforeAll(async () => insertDB());
-afterAll(async () => sequelize.close());
+beforeAll(() => insertDB());
+afterAll(() => sequelize.close());
 
 describe('Jobs API', () => {
   test('Jobs - GET - /api/v1/jobs ', async () => {
