@@ -1,0 +1,45 @@
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.details ,.about{
+  display: flex;
+  flex-direction: column;
+  border:0.3px solid #424B5A;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.details{
+  width: 60%;
+}
+.top{
+  background-color: #eee;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  border-bottom:0.3px solid #424B5A
+}
+.top h2{
+  padding: 27px;
+  color:#1C3879;
+}
+.content{
+  padding: 0px 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.content p{
+  margin-top: 20px;
+
+}
+
+.about{
+  width: 35%;
+}
+.link-btn{
+  text-align: end;
+  margin-bottom: 10px;
+}
