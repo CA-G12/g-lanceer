@@ -6,6 +6,6 @@ import ExpressWrapper from '../ExpressWrapper';
 const jobsRouter = express.Router();
 
 jobsRouter.get('/', ExpressWrapper(searchJobs));
-jobsRouter.get('/job/:id', ExpressWrapper(getJob));
+jobsRouter.get('/:id', ExpressWrapper(getJob));
 
 export default jobsRouter;
