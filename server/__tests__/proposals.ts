@@ -1,12 +1,7 @@
 import request from 'supertest';
 import app from '../src/app';
-import insertDB from '../src/db/config/build';
-import sequelize from '../src/db/config/connection';
 
-beforeAll(() => insertDB());
-afterAll(() => sequelize.close());
-
-describe('POST /proposals - /api/v1/proposals Testing all Proposal inputs values', () => {
+const proposalsTests = () => {
   test('respond with json containing validation error /description is empty/ with status of 400', async () => {
     const response = await request(app)
       .post('/api/v1/proposals')
@@ -36,7 +31,6 @@ describe('POST /proposals - /api/v1/proposals Testing all Proposal inputs values
       .expect(400);
     expect(response.body.message[0]).toBe('jobId is a required field');
   });
-
   test('respond with json containing validation error /jopID is string/ with status of 400', async () => {
     const response = await request(app)
       .post('/api/v1/proposals')
@@ -75,4 +69,5 @@ describe('POST /proposals - /api/v1/proposals Testing all Proposal inputs values
     expect(response.body.data.isAccepted).toBeFalsy();
     expect(response.body.data.attachments).toBe('https://placeholder.com/');
   });
-});
+};
+export default proposalsTests;
