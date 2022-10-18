@@ -5,7 +5,7 @@
 .details ,.about{
   display: flex;
   flex-direction: column;
-  border:0.3px solid #424B5A;
+  border:0.3px solid #ccc;
   border-radius: 7px;
   overflow: hidden;
   height: 320px;
@@ -18,7 +18,7 @@
   height: 55px;
   display: flex;
   align-items: center;
-  border-bottom:0.3px solid #424B5A
+  border-bottom:0.3px solid #ccc
 }
 .top h2{
   padding: 27px;
@@ -48,5 +48,11 @@
 }
 .link-btn{
   text-align: end;
-  margin-bottom: 10px;
+  margin-top: 40px;
+}
+
+.button{
+  padding: .6rem 3rem !important;
+  background-color: #1C3879 !important;
+  color: #fff !important;
 }

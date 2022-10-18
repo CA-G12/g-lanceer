@@ -1,4 +1,5 @@
 import JobDetails from '../../components/jobDetails';
+import ProposalForm from '../../components/ProposalForm';
 
 interface JobAbout {
   category: string,
@@ -14,7 +15,10 @@ const job: JobAbout = {
 
 function Job() {
   return (
-    <JobDetails job={job} />
+    <div className="container">
+      <JobDetails job={job} />
+      <ProposalForm />
+    </div>
   );
 }
 

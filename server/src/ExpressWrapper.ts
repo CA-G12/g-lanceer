@@ -8,6 +8,7 @@ const ExpressWrapper = (fn: ControllerFunction): RequestHandler => async (req, r
     const { status, data = null, msg = null } = await fn(req, res, next);
     res.status(status).json({ msg, data });
   } catch (error: any) { // change the type of error when installing yup
+    console.log(error);
     if (error.name === 'ValidationError') {
       res.status(400).json({ message: error.errors });
     } else if (error.status) {

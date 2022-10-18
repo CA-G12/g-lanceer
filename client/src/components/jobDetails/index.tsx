@@ -12,7 +12,7 @@ interface Props {
 
 function JobDetails({ job }: Props) {
   return (
-    <div className="wrapper container">
+    <div className="wrapper ">
       <div className="details">
         <div className="top">
           <h2>Job Details</h2>
@@ -44,16 +44,8 @@ function JobDetails({ job }: Props) {
           </div>
           <div className="link-btn">
             <Button
-              className="join-freelance-button"
+              className="button"
               variant="contained"
-              style={{
-                backgroundColor: '#1C3879',
-                color: '#fff',
-                padding: '.5rem 2rem',
-                marginTop: '30px',
-                fontSize: '20px',
-                width: '202px',
-              }}
             >
               Apply Now
             </Button>
