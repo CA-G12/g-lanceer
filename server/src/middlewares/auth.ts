@@ -6,7 +6,7 @@ import {
 import dotenv from 'dotenv';
 import { serverErrs } from '../helpers';
 
-const mid: RequestHandler = (req, res, next) => {
+const passportAuthenticate: RequestHandler = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, jwt_payload) => {
     if (jwt_payload) {
       req.user = jwt_payload;
@@ -48,4 +48,4 @@ const passportAuth = (passportParameter: any) => {
     }),
   );
 };
-export { checkUserAuth, mid, passportAuth };
+export { checkUserAuth, passportAuthenticate, passportAuth };
