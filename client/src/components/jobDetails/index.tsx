@@ -2,8 +2,10 @@ import { Button } from '@mui/material';
 import './style.css';
 
 interface Job {
+  title: string
   category: string,
   duration: string,
+  description: string,
   budget: number
 }
 interface Props {
@@ -15,16 +17,10 @@ function JobDetails({ job }: Props) {
     <div className="wrapper ">
       <div className="details">
         <div className="top">
-          <h2>Job Details</h2>
+          <h2>{job.title}</h2>
         </div>
         <div className="content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Necessitatibus quam, quasi
-            consequuntur ut perferendis tempora mollitia
-            assumenda nostrum accusamus maiores facere delectus
-            nobis nisi magni? Consequatur corporis saepe dolorum modi.
-          </p>
+          <p>{job.description}</p>
           <div className="jobs-details">
             <p>
               category:
