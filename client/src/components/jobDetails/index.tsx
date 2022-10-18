@@ -1,10 +1,18 @@
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
-import './index.css';
+import './style.css';
 
-function jobDetails() {
+interface Job {
+  category: string,
+  duration: string,
+  budget: number
+}
+interface Props {
+  job:Job
+}
+
+function JobDetails({ job }: Props) {
   return (
-    <div className="wrapper">
+    <div className="wrapper container">
       <div className="details">
         <div className="top">
           <h2>Job Details</h2>
@@ -17,7 +25,24 @@ function jobDetails() {
             assumenda nostrum accusamus maiores facere delectus
             nobis nisi magni? Consequatur corporis saepe dolorum modi.
           </p>
-          <Link to="/" className="link-btn">
+          <div className="jobs-details">
+            <p>
+              category:
+              <span>{job.category}</span>
+            </p>
+            <p>
+              duration:
+              <span>{job.duration}</span>
+            </p>
+            <p>
+              budget:
+              <span>
+                $
+                {job.budget}
+              </span>
+            </p>
+          </div>
+          <div className="link-btn">
             <Button
               className="join-freelance-button"
               variant="contained"
@@ -27,12 +52,13 @@ function jobDetails() {
                 padding: '.5rem 2rem',
                 marginTop: '30px',
                 fontSize: '20px',
+                width: '202px',
               }}
             >
               Apply Now
             </Button>
 
-          </Link>
+          </div>
         </div>
       </div>
       <div className="about">
@@ -43,9 +69,7 @@ function jobDetails() {
           <p>
             Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Necessitatibus quam, quasi
-            consequuntur ut perferendis tempora mollitia
-            assumenda nostrum accusamus maiores facere delectus
-            nobis nisi magni? Consequatur corporis saepe dolorum modi.
+            consequuntur ut perferendis tempora mollitia.
           </p>
         </div>
       </div>
@@ -53,4 +77,4 @@ function jobDetails() {
   );
 }
 
-export default jobDetails;
+export default JobDetails;

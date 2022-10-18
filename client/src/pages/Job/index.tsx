@@ -1,12 +1,20 @@
-import { useParams } from 'react-router-dom';
+import JobDetails from '../../components/jobDetails';
+
+interface JobAbout {
+  category: string,
+  duration: string,
+  budget: number
+}
+
+const job: JobAbout = {
+  category: 'Design',
+  duration: '2day',
+  budget: 20,
+};
 
 function Job() {
-  const { id } = useParams();
   return (
-    <h1>
-      job
-      {id}
-    </h1>
+    <JobDetails job={job} />
   );
 }
 
