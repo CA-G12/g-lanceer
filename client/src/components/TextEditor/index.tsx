@@ -5,15 +5,21 @@ import './style.css';
 interface Props {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>
+  error: boolean
 }
-function TextEditor({ value, setValue }: Props) {
+function TextEditor({ error, value, setValue }: Props) {
   return (
     <div className="text-editor-container">
       <ReactQuill
-        className="text-editor"
+        className={error ? 'text-editor error' : 'text-editor'}
         theme="snow"
         value={value}
-        onChange={setValue}
+        style={{ borderColor: 'red !' }}
+        onChange={(e) => {
+          if (e === '<p><br></p>') {
+            setValue('');
+          } else { setValue(e); }
+        }}
       />
     </div>
   );
