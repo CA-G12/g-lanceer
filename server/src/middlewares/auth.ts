@@ -1,10 +1,12 @@
 import { Strategy as JwtStrategy, StrategyOptions } from 'passport-jwt';
 import passport from 'passport';
-import { Request } from 'express';
+import {
+  NextFunction, Request, RequestHandler, Response,
+} from 'express';
 import dotenv from 'dotenv';
 import { serverErrs } from '../helpers';
 
-const mid = (req:any, res: any, next: any) => {
+const mid: RequestHandler = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, jwt_payload) => {
     if (jwt_payload) {
       req.user = jwt_payload;
@@ -14,7 +16,7 @@ const mid = (req:any, res: any, next: any) => {
   })(req, res);
 };
 
-const checkUserAuth = (role: string) => (req: any, res: any, next: any) => {
+const checkUserAuth = (role: string) => (req: any, res: Response, next: NextFunction) => {
   const isUSerAuth = role === req.user.role;
   if (isUSerAuth) {
     next();
