@@ -7,11 +7,11 @@ import './style.css';
 import data from '../../categoris';
 
 const jobSchema = yup.object({
-  jobTitle: yup.string().min(15, 'Too Short!').required('Job Title Required'),
+  title: yup.string().min(15, 'Too Short!').required('Job Title Required'),
   budget: yup.number().min(5).required('Budget Required'),
   time: yup.string().min(5, 'Too Short!').required('Time Required'),
   category: yup.string().required('category required'),
-  jobDescription: yup.string().min(20, 'Too Short!').required('Job Description Title Required'),
+  description: yup.string().min(20, 'Too Short!').required('Job Description Title Required'),
 });
 
 interface JobProps {
