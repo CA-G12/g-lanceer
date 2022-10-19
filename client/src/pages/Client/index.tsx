@@ -1,12 +1,16 @@
 import { useParams } from 'react-router-dom';
+import { JobForm } from '../../components';
 
 function Client() {
   const { id } = useParams();
   return (
-    <h1>
-      client
-      {id}
-    </h1>
+    <div>
+      <h1>
+        client
+        {id}
+      </h1>
+      <JobForm />
+    </div>
   );
 }
 

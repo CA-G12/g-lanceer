@@ -1,12 +1,9 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { TextField } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import Button from '@mui/material/Button';
+import {
+  TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import './style.css';
 import data from '../../categoris';
 
@@ -30,13 +27,15 @@ function JobForm() {
     validationSchema: jobSchema,
     onSubmit: (values) => {
       console.log(values, 'valuessss');
+      formik.resetForm();
     },
   });
-  console.log(formik.errors);
   return (
-    <div>
+    <div className="job-popup">
       <form onSubmit={formik.handleSubmit} className="job-from">
+        <CloseIcon className="close-icon" />
         <TextField
+          className="text-filed"
           error={formik.touched.jobTitle && Boolean(formik.errors.jobTitle)}
           helperText={formik.errors.jobTitle ? formik.errors.jobTitle : ' '}
           label="Job Title"
@@ -46,8 +45,9 @@ function JobForm() {
           onChange={formik.handleChange}
         />
         <TextField
+          className="text-filed"
           error={formik.touched.budget && Boolean(formik.errors.budget)}
-          helperText={formik.touched.budget && formik.errors.budget}
+          helperText={formik.errors.budget ? formik.errors.budget : ' '}
           label="Budget"
           type="number"
           name="budget"
@@ -56,20 +56,21 @@ function JobForm() {
           onChange={formik.handleChange}
         />
         <TextField
+          className="text-filed"
           error={formik.touched.time && Boolean(formik.errors.time)}
-          helperText={formik.touched.time && formik.errors.time}
+          helperText={formik.errors.time ? formik.errors.time : ' '}
           label="Time"
           name="time"
           id="time"
           value={formik.values.time}
           onChange={formik.handleChange}
         />
-        <FormControl>
+        <FormControl style={{ color: '#D32F2F' }}>
           <InputLabel>Category</InputLabel>
           <Select
+            className="text-select"
             error={formik.touched.category && Boolean(formik.errors.category)}
             label="Category"
-            style={{ color: '#D32F2F' }}
             name="category"
             id="category"
             value={formik.values.category}
@@ -78,14 +79,15 @@ function JobForm() {
             {data.map((ele) => <MenuItem value={ele.name}>{ele.name}</MenuItem>)}
           </Select>
           <FormHelperText style={{ color: '#D32F2F' }}>
-            {formik.touched.category && formik.errors.category}
+            {formik.errors.category ? formik.errors.category : ' '}
           </FormHelperText>
         </FormControl>
         <TextField
+          className="text-area"
           error={formik.touched.jobDescription && Boolean(formik.errors.jobDescription)}
           name="jobDescription"
           id="jobDescription"
-          helperText={formik.touched.jobDescription && formik.errors.jobDescription}
+          helperText={formik.errors.jobDescription ? formik.errors.jobDescription : ' '}
           label="Job Description"
           multiline
           rows={4}
@@ -93,7 +95,13 @@ function JobForm() {
           value={formik.values.jobDescription}
           onChange={formik.handleChange}
         />
-        <Button variant="contained" type="submit" style={{ width: '30%', margin: '0 auto' }}>Submit</Button>
+        <Button
+          variant="contained"
+          type="submit"
+          style={{ width: '30%', margin: '0 auto', marginTop: '10px' }}
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );
