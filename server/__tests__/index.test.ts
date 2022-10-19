@@ -2,7 +2,7 @@ import { jobTest, jobsTest } from './jobs';
 import insertDB from '../src/db/config/build';
 import sequelize from '../src/db/config/connection';
 import proposalsTests from './proposals';
-import addJobTest from './addJon';
+import addJobTest from './addJob';
 
 beforeAll(() => insertDB());
 afterAll(() => sequelize.close());
