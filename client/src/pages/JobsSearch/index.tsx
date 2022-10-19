@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
-  CircularProgress, Pagination, Stack, Snackbar, Alert,
+  CircularProgress, Pagination, Stack, Snackbar, Alert, TextField,
 } from '@mui/material';
 import { Tabs, JobCard, Filter } from '../../components';
 import './style.css';
@@ -26,6 +27,7 @@ interface ParamsT {
 }
 
 function JobsSearch() {
+  const { state } = useLocation();
   // states
   const [error, setError] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,8 @@ function JobsSearch() {
   const [page, setPage] = useState<number>(1);
   const [jobs, setJobs] = useState<Job[]>([]); //
   const [budget, setPrice] = useState<number>(0);
-  const [category, setCategory] = useState<string>('');
-  const [title, setValue] = useState<string>('');
+  const [category, setCategory] = useState<string>(state?.category || '');
+  const [title, setTitle] = useState<string>('');
 
   const changeCategory: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setCategory(e.target.value);
@@ -43,7 +45,7 @@ function JobsSearch() {
     setPrice(Number(e.target.value));
   };
   const valueChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.target.value);
+    setTitle(e.target.value);
   };
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -57,11 +59,14 @@ function JobsSearch() {
 
     if (budget) {
       params.budget = budget;
-    } else if (category) {
+    }
+    if (category) {
       params.category = category;
-    } else if (title) {
+    }
+    if (title) {
       params.title = title;
-    } else if (page) {
+    }
+    if (page) {
       params.page = page;
     }
 
@@ -111,6 +116,16 @@ function JobsSearch() {
 
   return (
     <div className="container">
+      <div className="searrchInput">
+        <TextField
+          className="searchInputHomePage"
+          type="search"
+          placeholder="search for a job"
+          name="titleSearch"
+          onChange={valueChange}
+          variant="standard"
+        />
+      </div>
       <Filter
         category={category}
         changeCategory={changeCategory}
@@ -118,7 +133,7 @@ function JobsSearch() {
         iconChange={iconChange}
         price={budget}
       />
-      <Tabs tablist={tablist} valueChange={valueChange} />
+      <Tabs tablist={tablist} />
       <Stack spacing={2}>
         <Pagination
           count={Math.ceil(jobsCount / 5)}
