@@ -23,7 +23,7 @@ function Filter({
     <Container className="filterContent">
       <div className="sideBar">
         <FormControl>
-          <label htmlFor="price" className="label">Price</label>
+          <label htmlFor="price" className="label">Minimum budget</label>
           <Input
             name="price"
             type="search"
@@ -33,11 +33,12 @@ function Filter({
           />
           <label id="demo-radio-buttons-group-label" htmlFor="category" className="label catelabel">
             Categories
-            <CloseIcon onClick={iconChange} />
+            <CloseIcon onClick={iconChange} className="cancleIcon" />
           </label>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            value={location.state?.category || category}
+            value={category}
+            defaultValue={location.state?.category}
             name="radio-buttons-group"
             className="categories"
             onChange={changeCategory}

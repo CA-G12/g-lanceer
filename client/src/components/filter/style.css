@@ -34,3 +34,6 @@
   margin: 15px 0;
   font-family: 'Ubuntu';
 }
+.cancleIcon{
+  cursor:pointer;
+}

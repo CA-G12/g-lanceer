@@ -16,7 +16,7 @@ interface Job {
 }
 interface TabListInt {
   label: string;
-  child: Array<JSX.Element>;
+  child: JSX.Element | JSX.Element[];
 }
 interface ParamsT {
   budget?: number,
@@ -105,9 +105,9 @@ function JobsSearch() {
   // tablist props
   const tablist: Array<TabListInt> = [{
     label: 'Most Popular',
-    child: [tabChild],
+    child: tabChild,
   },
-  { label: 'Best Match', child: [<h1>hhhhhhhh</h1>] }];
+  { label: 'Best Match', child: <h1>hhhhhhhh</h1> }];
 
   return (
     <div className="container">

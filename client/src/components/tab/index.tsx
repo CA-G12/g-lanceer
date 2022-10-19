@@ -9,7 +9,7 @@ import './style.css';
 
 interface TabListInt {
   label: string;
-  child: JSX.Element[];
+  child: JSX.Element | JSX.Element[];
 }
 interface Props {
   tablist: Array<TabListInt>,
