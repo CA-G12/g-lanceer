@@ -7,15 +7,19 @@ import './style.css';
 interface Job {
   title: string,
   description: string,
-  budget: number
+  budget: number,
+  proposals: []
 }
 
 interface JobProps {
-  job: Job
+  job: Job,
+  id: number,
 }
 
-function JobCard({ job }: JobProps) {
-  const { title, description, budget } = job;
+function JobCard({ job, id }: JobProps) {
+  const {
+    title, description, budget, proposals,
+  } = job;
   const navigate = useNavigate();
   return (
     <div className="content">
@@ -36,7 +40,10 @@ function JobCard({ job }: JobProps) {
           <div className="budget-proposal-section">
             <div className="proposals">
               proposals:
-              <span>3</span>
+              <span>
+                {' '}
+                {proposals.length}
+              </span>
             </div>
             <div className="budget">
               budget:
@@ -53,7 +60,7 @@ function JobCard({ job }: JobProps) {
               paddingLeft: '15px',
               paddingRight: '15px',
             }}
-            onClick={() => navigate('/job/jobid')}
+            onClick={() => navigate(`/job/${id}`)}
             variant="contained"
           >
             Apply Now
@@ -61,6 +68,7 @@ function JobCard({ job }: JobProps) {
         </div>
       </div>
     </div>
+
   );
 }
 
