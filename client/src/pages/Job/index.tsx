@@ -1,5 +1,6 @@
 import JobDetails from '../../components/jobDetails';
 import ProposalForm from '../../components/ProposalForm';
+import JobForm from '../../components/addJobForm';
 
 interface JobAbout {
   title: string
@@ -25,6 +26,7 @@ function Job() {
     <div className="container">
       <JobDetails job={job} />
       <ProposalForm />
+      <JobForm />
     </div>
   );
 }

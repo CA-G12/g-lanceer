@@ -9,6 +9,7 @@ import JobCard from './jobCard';
 import Filter from './filter';
 import Tabs from './tab';
 import TextEditor from './TextEditor';
+import JobForm from './addJobForm';
 
 export {
   Category,
@@ -20,4 +21,5 @@ export {
   TextEditor,
   Filter,
   Tabs,
+  JobForm,
 };
