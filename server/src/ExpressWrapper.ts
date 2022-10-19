@@ -1,9 +1,10 @@
 import {
-  RequestHandler,
+  NextFunction, Response,
 } from 'express';
-import { ControllerFunction } from './interfaces';
+import { AuthRequest, ControllerFunction } from './interfaces';
 
-const ExpressWrapper = (fn: ControllerFunction): RequestHandler => async (req, res, next) => {
+const ExpressWrapper = (fn: ControllerFunction):
+any => async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const { status, data = null, msg = null } = await fn(req, res, next);
     res.status(status).json({ msg, data });

@@ -29,6 +29,7 @@ const passportAuth = (passportParameter: any) => {
   dotenv.config();
 
   const cookieExtractor = (req: Request) => {
+    // console.log('*****************', req.cookies.token);
     let token = null;
     if (req && req.cookies) {
       token = req.cookies.token;
@@ -36,14 +37,14 @@ const passportAuth = (passportParameter: any) => {
     return token;
   };
 
-  const options : StrategyOptions = {
+  const options: StrategyOptions = {
     secretOrKey: process.env.JWT_SECRET,
     jwtFromRequest: cookieExtractor,
   };
 
   passportParameter.use(
     'jwt',
-    new JwtStrategy(options, (payload: any, done:any) => {
+    new JwtStrategy(options, (payload: any, done: any) => {
       done(null, payload);
     }),
   );
