@@ -11,6 +11,15 @@ type ControllerReturn = {
 
 };
 type ControllerFunction =
-  (req: Request, res: Response, next: NextFunction) => Promise<ControllerReturn>;
-
-export { ControllerFunction, ControllerReturn };
+  (req: AuthRequest, res: Response, next: NextFunction) => Promise<ControllerReturn>;
+interface AuthUser {
+  userID: number,
+  role: string,
+  name: string
+}
+interface AuthRequest extends Request {
+  user?: AuthUser
+}
+export {
+  ControllerFunction, ControllerReturn, AuthUser, AuthRequest,
+};

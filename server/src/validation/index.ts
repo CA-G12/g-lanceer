@@ -17,5 +17,10 @@ const queryValidation = yup.object().shape({
 const queryJobValidation = yup.object().shape({
   id: yup.number(),
 });
+const postProposalValidation = yup.object().shape({
+  jobId: yup.number().required(),
+  description: yup.string().required().min(15),
+  attachments: yup.string().nullable().url(),
+});
 
-export { queryValidation, queryJobValidation };
+export { queryValidation, queryJobValidation, postProposalValidation };
