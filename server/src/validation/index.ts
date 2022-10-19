@@ -22,5 +22,14 @@ const postProposalValidation = yup.object().shape({
   description: yup.string().required().min(15),
   attachments: yup.string().nullable().url(),
 });
+const addJobValidation = yup.object().shape({
+  title: yup.string().required(),
+  budget: yup.number().required(),
+  time: yup.string().required(),
+  category: yup.string().required(),
+  description: yup.string().required(),
+});
 
-export { queryValidation, queryJobValidation, postProposalValidation };
+export {
+  queryValidation, queryJobValidation, postProposalValidation, addJobValidation,
+};
