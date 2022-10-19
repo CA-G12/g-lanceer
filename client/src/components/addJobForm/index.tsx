@@ -1,9 +1,8 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import {
-  TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button,
+  TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button, Modal,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import './style.css';
 import data from '../../categoris';
 
@@ -15,14 +14,19 @@ const jobSchema = yup.object({
   jobDescription: yup.string().min(20, 'Too Short!').required('Job Description Title Required'),
 });
 
-function JobForm() {
+interface JobProps {
+  handelClose: ()=> void,
+  showModel: boolean
+}
+
+function JobForm({ handelClose, showModel }: JobProps) {
   const formik = useFormik({
     initialValues: {
-      jobTitle: '',
+      title: '',
       budget: '',
       time: '',
       category: '',
-      jobDescription: '',
+      description: '',
     },
     validationSchema: jobSchema,
     onSubmit: (values) => {
@@ -31,17 +35,21 @@ function JobForm() {
     },
   });
   return (
-    <div className="job-popup">
+    <Modal
+      open={showModel}
+      onClose={handelClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
       <form onSubmit={formik.handleSubmit} className="job-from">
-        <CloseIcon className="close-icon" />
         <TextField
           className="text-filed"
-          error={formik.touched.jobTitle && Boolean(formik.errors.jobTitle)}
-          helperText={formik.errors.jobTitle ? formik.errors.jobTitle : ' '}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.errors.title ? formik.errors.title : ' '}
           label="Job Title"
-          name="jobTitle"
-          id="jobTitle"
-          value={formik.values.jobTitle}
+          name="title"
+          id="title"
+          value={formik.values.title}
           onChange={formik.handleChange}
         />
         <TextField
@@ -76,7 +84,7 @@ function JobForm() {
             value={formik.values.category}
             onChange={formik.handleChange}
           >
-            {data.map((ele) => <MenuItem value={ele.name}>{ele.name}</MenuItem>)}
+            {data.map((ele) => <MenuItem key={ele.name} value={ele.name}>{ele.name}</MenuItem>)}
           </Select>
           <FormHelperText style={{ color: '#D32F2F' }}>
             {formik.errors.category ? formik.errors.category : ' '}
@@ -84,15 +92,15 @@ function JobForm() {
         </FormControl>
         <TextField
           className="text-area"
-          error={formik.touched.jobDescription && Boolean(formik.errors.jobDescription)}
-          name="jobDescription"
-          id="jobDescription"
-          helperText={formik.errors.jobDescription ? formik.errors.jobDescription : ' '}
+          error={formik.touched.description && Boolean(formik.errors.description)}
+          name="description"
+          id="description"
+          helperText={formik.errors.description ? formik.errors.description : ' '}
           label="Job Description"
           multiline
           rows={4}
           maxRows={8}
-          value={formik.values.jobDescription}
+          value={formik.values.description}
           onChange={formik.handleChange}
         />
         <Button
@@ -103,7 +111,7 @@ function JobForm() {
           Submit
         </Button>
       </form>
-    </div>
+    </Modal>
   );
 }
 
