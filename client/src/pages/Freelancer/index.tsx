@@ -1,12 +1,24 @@
-import { useParams } from 'react-router-dom';
+import { FreelancerInfoCard } from '../../components';
 
 function Freelancer() {
-  const { id } = useParams();
+  const freelancer = {
+    name: 'Lottie Lynch',
+    major: 'Senior UI/UX designer',
+    image: null,
+    portfolio: 'portfolio',
+    brief: `Lottie is graduated
+            from Hardvard dolor sit amet,
+            consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut 
+            aliquip ex ea commodo consequat.`,
+  };
   return (
-    <h1>
-      freelancer
-      {id}
-    </h1>
+    <div>
+      <FreelancerInfoCard info={freelancer} />
+    </div>
   );
 }
 

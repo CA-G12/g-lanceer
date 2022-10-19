@@ -22,11 +22,13 @@ function FreelancerInfoCard({ info }: Props) {
         justifyContent="center"
         alignItems="center"
         rowSpacing={2}
-        columnSpacing={{ sm: 2, md: 2, lg: 0 }}
+        columnSpacing={{
+          sm: 2, md: 2, lg: 2, xl: 0,
+        }}
       >
         <Grid xs={10} sm={8} md={6} lg={4} item>
           <div className="freelancer-info-card-img">
-            <img src={info.image || avatar} alt="" />
+            <img src={info.image || avatar} alt="freelancer img" />
           </div>
         </Grid>
         <Grid xs={10} sm={8} md={6} lg={4} item>
