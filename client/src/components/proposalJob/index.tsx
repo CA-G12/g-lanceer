@@ -1,16 +1,16 @@
 import { Button } from '@mui/material';
 import './style.css';
 
-interface Client {
+interface Proposal {
   username: string
   description: string,
   attachements: string,
 }
 interface Props {
-  client:Client
+  proposal:Proposal
 }
 
-function ProposalJob({ client }: Props) {
+function ProposalJob({ proposal }: Props) {
   // when the user is a freelancer, the accept btn appears
   const btnShow = (value:string) => {
     if (value === 'freelancerUser') {
@@ -21,7 +21,7 @@ function ProposalJob({ client }: Props) {
   return (
     <div className="wrapper-proposal ">
       <div className="content-proposal">
-        <h3>{client.username}</h3>
+        <h3>{proposal.username}</h3>
         <div className="btn-proposal">
           <Button
             style={{
@@ -38,9 +38,9 @@ function ProposalJob({ client }: Props) {
           </Button>
         </div>
       </div>
-      <p>{client.description}</p>
+      <p>{proposal.description}</p>
       <div>
-        <a className="link-attach" href={client.attachements}>
+        <a className="link-attach" href={proposal.attachements}>
           See Attachements
         </a>
       </div>

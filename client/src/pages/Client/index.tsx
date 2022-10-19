@@ -1,19 +1,19 @@
 import ProposalJob from '../../components/proposalJob/index';
 
-interface ProposalClient {
+interface Proposal {
   username: string
   description: string,
   attachements: string,
 }
 
-const client: ProposalClient = {
+const proposal: Proposal = {
   username: 'Ahmed Safi',
   description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci quis soluta ipsa minima.',
   attachements: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
 };
 function Client() {
   return (
-    <ProposalJob client={client} />
+    <ProposalJob proposal={proposal} />
   );
 }
 
