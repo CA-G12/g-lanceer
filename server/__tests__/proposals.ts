@@ -1,6 +1,9 @@
 import request from 'supertest';
+import dotenv from 'dotenv';
 import app from '../src/app';
 
+const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
+dotenv.config();
 const proposalsTests = () => {
   test('respond with json containing Authentication error /No Token/ with status of 401', async () => {
     const response = await request(app)
@@ -14,7 +17,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({})
-      .set({ Cookie: ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsIm5hbWUiOiJPbWFyIiwicm9sZSI6ImNsaWVudCJ9.uGwsUepuBARM863765SzHnTJFRnWkvIYi2gsoVmyH9E'] })
+      .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(401);
     expect(response.body.message).toBe('unauthorized');
@@ -23,7 +26,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({})
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
     expect(response.body.message[0]).toBe('description is a required field');
@@ -33,7 +36,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({ description: 'gggggggggg' })
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
     expect(response.body.message[0]).toBe('description must be at least 15 characters');
@@ -43,7 +46,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({ description: 'lorem lorem lorem lorem' })
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
     expect(response.body.message[0]).toBe('jobId is a required field');
@@ -52,7 +55,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({ description: 'lorem lorem lorem lorem', jobId: 'ID' })
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
     // eslint-disable-next-line no-useless-escape
@@ -65,7 +68,7 @@ const proposalsTests = () => {
       .send({
         description: 'lorem lorem lorem lorem', jobId: 1, id: 10, attachments: 'ht://placeholder.com',
       })
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
     expect(response.body.message[0]).toBe('attachments must be a valid URL');
@@ -77,7 +80,7 @@ const proposalsTests = () => {
       .send({
         description: 'lorem lorem lorem lorem', jobId: 1, id: 10, attachments: 'https://placeholder.com/',
       })
-      .set({ Cookie: ['token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJmcmVlbGFuY2VyIn0.esSGgCf0qkXfAwf3NoOyZ8l2aX95fCZRPdW8-SnDi7c'] })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(201);
     expect(response.body.data.id).toBe(10);
