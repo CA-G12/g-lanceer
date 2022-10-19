@@ -19,9 +19,8 @@ const addProposal = async (req: AuthRequest) => {
     freelancerId,
     description,
     attachments,
-    isAccepted: false,
   });
-  return { status: 200, data: proposal };// false
+  return { status: 201, data: proposal };
 };
 
 export default addProposal;

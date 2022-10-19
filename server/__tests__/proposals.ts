@@ -54,7 +54,7 @@ const proposalsTests = () => {
     expect(response.body.message[0]).toBe('attachments must be a valid URL');
   });
 
-  test('respond with json containing the created proposal details with status of 200', async () => {
+  test('respond with json containing the created proposal details with status of 201', async () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({
@@ -62,8 +62,7 @@ const proposalsTests = () => {
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(200);
-    expect(response.body.data.id).toBe(10);
+      .expect(201);
     expect(response.body.data.jobId).toBe(1);
     expect(response.body.data.description.length).toBeGreaterThanOrEqual(15);
     expect(response.body.data.isAccepted).toBeFalsy();
