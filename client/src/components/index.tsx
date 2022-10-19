@@ -10,6 +10,7 @@ import Filter from './filter';
 import Tabs from './tab';
 import TextEditor from './TextEditor';
 import FreelancerInfoCard from './FreelancerInfoCard';
+import JobForm from './addJobForm';
 
 export {
   Category,
@@ -22,4 +23,5 @@ export {
   Filter,
   Tabs,
   FreelancerInfoCard,
+  JobForm,
 };
