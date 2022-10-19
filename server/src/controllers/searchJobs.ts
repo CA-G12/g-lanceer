@@ -1,6 +1,6 @@
 import Sequelize, { WhereOptions } from 'sequelize';
 import { Request } from 'express';
-import queryValidation from '../validation';
+import { queryValidation } from '../validation/index';
 
 import { Job, Proposal } from '../models';
 
