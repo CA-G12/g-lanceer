@@ -15,11 +15,12 @@ interface Client {
   role:string,
 }
 interface Props {
-  job:Job
-  client: Client
+  job:Job | [],
+  client: Client | [],
+  handleClick: ()=>void
 }
 
-function JobDetails({ job, client }: Props) {
+function JobDetails({ job, client, handleClick }: Props) {
   return (
     <div className="wrapper ">
       <div className="details">
@@ -49,6 +50,7 @@ function JobDetails({ job, client }: Props) {
             <Button
               className="button"
               variant="contained"
+              onClick={handleClick}
             >
               Apply Now
             </Button>

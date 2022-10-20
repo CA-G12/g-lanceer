@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import JobDetails from '../../components/jobDetails';
@@ -27,23 +28,26 @@ interface Client {
 }
 
 function Job() {
-  const [jobState, setJob] = useState<JobAbout>([]);
-  const [client, setClient] = useState<Client>([]);
+  const { id } = useParams();
+  const [jobState, setJob] = useState<JobAbout | []>([]);
+  const [client, setClient] = useState<Client | []>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const handleClick = () => {
+    window.scrollTo(0, 500);
+  };
 
   useEffect(() => {
     const getJobData = async () => {
       setLoading(true);
       setError(false);
       try {
-        const jobData = await axios.get('/api/v1/jobs/2');
+        const jobData = await axios.get(`/api/v1/jobs/${id}`);
         setLoading(false);
-        console.log(jobData.data.data);
         setJob(jobData.data.data);
         setClient(jobData.data.data.user);
       } catch (err) {
-        console.log('error from axios', err);
         setLoading(false);
         setError(true);
       }
@@ -68,7 +72,7 @@ function Job() {
 
   return (
     <div className="container">
-      <JobDetails job={jobState} client={client} />
+      <JobDetails job={jobState} client={client} handleClick={handleClick} />
       <ProposalForm />
     </div>
 
