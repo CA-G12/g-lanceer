@@ -3,3 +3,8 @@
   margin: 0 auto;
   margin-top: 9rem;
 }
+
+.error{
+  text-align: center;
+  color: #1C3879;
+}

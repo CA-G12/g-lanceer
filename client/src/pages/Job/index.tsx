@@ -43,7 +43,7 @@ function Job() {
       setLoading(true);
       setError(false);
       try {
-        const jobData = await axios.get(`/api/v1/jobs/${id}`);
+        const jobData = await axios.get(`/api/v1/job/${id}`);
         setLoading(false);
         setJob(jobData.data.data);
         setClient(jobData.data.data.user);
@@ -66,7 +66,7 @@ function Job() {
 
   if (error) {
     return (
-      <h1>Error Axios</h1>
+      <h2 className="error">Job Not Found</h2>
     );
   }
 
