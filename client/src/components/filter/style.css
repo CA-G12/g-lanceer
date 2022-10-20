@@ -1,12 +1,10 @@
-/* .container{
-  width: 250px;
-  min-Height: 400px;
-  position: relative;
-} */
 .sideBar{
-  position: absolute;
-  right: 150px;
-  top: 230px
+  position: fixed;
+  right: 90px;
+  top: 87px;
+  padding: 30px;
+  border: 2px solid #eee;
+  border-radius: 8px;
 }
 .label{
   font-family: 'Ubuntu';
@@ -21,10 +19,12 @@
   font-family: 'Ubuntu';
   font-style: normal;
   color: #737373;
-
 }
 .catelabel{
   margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .selectPrice{
    height: 37px;
@@ -33,4 +33,7 @@
 #demo-multiple-chip-label{
   margin: 15px 0;
   font-family: 'Ubuntu';
+}
+.cancleIcon{
+  cursor:pointer;
 }

@@ -2,6 +2,7 @@
 import {
   Container, Radio, RadioGroup, FormControlLabel, FormControl, Input,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useLocation } from 'react-router-dom';
 import data from '../../categoris';
 import './style.css';
@@ -10,29 +11,34 @@ interface Props {
   category: string,
   changeCategory: (cate: any) => void,
   priceChange: (data: any) => void,
+  iconChange: (checked: any) => void,
   price: number
 }
 
 function Filter({
-  category, changeCategory, priceChange, price,
+  category, changeCategory, priceChange, price, iconChange,
 }: Props) {
   const location = useLocation();
   return (
-    <Container className="content">
+    <Container className="filterContent">
       <div className="sideBar">
         <FormControl>
-          <label htmlFor="price" className="label">Price</label>
+          <label htmlFor="price" className="label">Minimum budget</label>
           <Input
             name="price"
-            type="number"
+            type="search"
             onChange={priceChange}
             value={price}
             id="price"
           />
-          <label id="demo-radio-buttons-group-label" htmlFor="category" className="label catelabel">Categories</label>
+          <label id="demo-radio-buttons-group-label" htmlFor="category" className="label catelabel">
+            Categories
+            <CloseIcon onClick={iconChange} className="cancleIcon" />
+          </label>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue={location.state?.category || category}
+            value={category}
+            defaultValue={location.state?.category}
             name="radio-buttons-group"
             className="categories"
             onChange={changeCategory}
