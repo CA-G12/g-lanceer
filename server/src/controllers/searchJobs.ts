@@ -4,7 +4,7 @@ import { queryValidation } from '../validation/index';
 
 import { Job, Proposal } from '../models';
 
-const JOBS_PER_PAGE = 8;
+const JOBS_PER_PAGE = 5;
 const searchJobs = async (req:Request) => {
   const {
     title, page = 1, budget, category,
@@ -29,6 +29,7 @@ const searchJobs = async (req:Request) => {
 
   const jobs = await Job.findAndCountAll({
     attributes: [
+      'id',
       'title',
       'description',
       'category',

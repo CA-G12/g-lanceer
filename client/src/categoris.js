@@ -36,7 +36,7 @@ const data = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
   },
   {
-    name: 'Web Development',
+    name: 'Programming & Tech',
     url: webDevImg,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
   },
