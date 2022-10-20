@@ -4,15 +4,22 @@ import './style.css';
 interface Job {
   title: string
   category: string,
-  duration: string,
+  time: string,
   description: string,
   budget: number
 }
+interface Client {
+  email:string,
+  id:number,
+  name:string,
+  role:string,
+}
 interface Props {
   job:Job
+  client: Client
 }
 
-function JobDetails({ job }: Props) {
+function JobDetails({ job, client }: Props) {
   return (
     <div className="wrapper ">
       <div className="details">
@@ -28,7 +35,7 @@ function JobDetails({ job }: Props) {
             </p>
             <p>
               duration:
-              <span>{job.duration}</span>
+              <span>{job.time}</span>
             </p>
             <p>
               budget:
@@ -55,6 +62,8 @@ function JobDetails({ job }: Props) {
         </div>
         <div className="content">
           <p>
+            <h3>{client.name}</h3>
+            <h3>{client.email}</h3>
             Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Necessitatibus quam, quasi
             consequuntur ut perferendis tempora mollitia.
