@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
+import { CategoryProps } from '../../interfaces';
 
-interface CategoryProps {
-  imgUrl: string,
-  title: string,
-  desc: string,
-  alt: string
-}
 function Category({
   imgUrl, title, desc, alt,
 }: CategoryProps) {

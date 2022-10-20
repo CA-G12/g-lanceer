@@ -2,16 +2,9 @@ import * as React from 'react';
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import './style.css';
+import { PropsTabList } from '../../interfaces';
 
-interface TabListInt {
-  label: string;
-  child: JSX.Element | JSX.Element[];
-}
-interface Props {
-  tablist: Array<TabListInt>,
-}
-
-function Tabs({ tablist }: Props) {
+function Tabs({ tablist }: PropsTabList) {
   const [value, setValue] = React.useState(tablist[0].label);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
