@@ -9,6 +9,9 @@ const addJob = async (req: any) => {
     category,
     description,
   } = req.body;
+  const userId = req.user?.userID;
+  console.log(req.user);
+
   await addJobValidation.validate({
     title,
     description,
@@ -22,6 +25,7 @@ const addJob = async (req: any) => {
     category,
     budget,
     time,
+    userId,
   });
   return { status: 201, data: job };
 };
