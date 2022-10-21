@@ -1,18 +1,8 @@
 import { Button } from '@mui/material';
+import { PropsJobDetails } from '../../interfaces';
 import './style.css';
 
-interface Job {
-  title: string
-  category: string,
-  duration: string,
-  description: string,
-  budget: number
-}
-interface Props {
-  job:Job
-}
-
-function JobDetails({ job }: Props) {
+function JobDetails({ job }: PropsJobDetails) {
   return (
     <div className="wrapper ">
       <div className="details">

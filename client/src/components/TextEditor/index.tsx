@@ -1,13 +1,9 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { PropsTextEditor } from '../../interfaces';
 import './style.css';
 
-interface Props {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>
-  error: boolean
-}
-function TextEditor({ error, value, setValue }: Props) {
+function TextEditor({ error, value, setValue }: PropsTextEditor) {
   return (
     <div className="text-editor-container">
       <ReactQuill

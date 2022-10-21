@@ -1,23 +1,11 @@
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import {
   TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button, Modal,
 } from '@mui/material';
 import './style.css';
 import data from '../../categoris';
-
-const jobSchema = yup.object({
-  title: yup.string().min(15, 'Too Short!').required('Job Title Required'),
-  budget: yup.number().min(5).required('Budget Required'),
-  time: yup.string().min(5, 'Too Short!').required('Time Required'),
-  category: yup.string().required('category required'),
-  description: yup.string().min(20, 'Too Short!').required('Job Description Title Required'),
-});
-
-interface JobProps {
-  handelClose: ()=> void,
-  showModel: boolean
-}
+import { JobProps } from '../../interfaces';
+import { jobSchema } from '../../validation';
 
 function JobForm({ handelClose, showModel }: JobProps) {
   const formik = useFormik({

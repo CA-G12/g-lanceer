@@ -1,16 +1,8 @@
 import { Button } from '@mui/material';
+import { PropsProposalCard } from '../../interfaces';
 import './style.css';
 
-interface Proposal {
-  username: string
-  description: string,
-  attachments: string,
-}
-interface Props {
-  proposal:Proposal
-}
-
-function ProposalJob({ proposal }: Props) {
+function ProposalJob({ proposal }: PropsProposalCard) {
   return (
     <div className="wrapper-proposal ">
       <div className="content-proposal">
