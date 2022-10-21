@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express';
 import passport from 'passport';
 import jobsRouter from './jobs';

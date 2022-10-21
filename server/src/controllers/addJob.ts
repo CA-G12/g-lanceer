@@ -1,7 +1,8 @@
+import { AuthRequest } from '../interfaces';
 import { Job } from '../models';
 import { addJobValidation } from '../validation';
 
-const addJob = async (req: any) => {
+const addJob = async (req: AuthRequest) => {
   const {
     title,
     budget,
@@ -10,7 +11,6 @@ const addJob = async (req: any) => {
     description,
   } = req.body;
   const userId = req.user?.userID;
-  console.log(req.user);
 
   await addJobValidation.validate({
     title,
