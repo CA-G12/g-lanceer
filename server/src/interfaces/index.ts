@@ -50,7 +50,7 @@ interface JobAttributes {
   isOccupied: boolean
   userId: number
 }
-type JobCreationAttributes = Optional<JobAttributes, 'id'>;
+type JobCreationAttributes = Optional<JobAttributes, 'id' | 'isOccupied'>;
 interface JobInstance
   extends Model<JobAttributes, JobCreationAttributes>,
   JobAttributes {
