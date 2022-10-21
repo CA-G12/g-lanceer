@@ -4,6 +4,77 @@ import {
   Response,
 } from 'express';
 
+import { Model, Optional } from 'sequelize';
+
+// User interFace
+interface UserAttributes {
+  id: number
+  email: string
+  name: string
+  password: string
+  role: string
+}
+type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+interface UserInstance
+  extends Model<UserAttributes, UserCreationAttributes>,
+  UserAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+// freelancer interFace
+interface FreelancerAttributes {
+  id: number
+  image: string
+  title: string
+  major: string
+  brief: string
+  portfolio: string
+  userId: number
+}
+type FreelancerCreationAttributes = Optional<FreelancerAttributes, 'id'>;
+interface FreelancerInstance
+  extends Model<FreelancerAttributes, FreelancerCreationAttributes>,
+  FreelancerAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+// Job interface
+interface JobAttributes {
+  id: number
+  title: string
+  description: string
+  category: string
+  budget: number
+  time: string
+  isOccupied: boolean
+  userId: number
+}
+type JobCreationAttributes = Optional<JobAttributes, 'id'>;
+interface JobInstance
+  extends Model<JobAttributes, JobCreationAttributes>,
+  JobAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+// Proposal interface
+interface ProposalAttributes {
+  id: number
+  description: string
+  attachments: string
+  isAccepted: boolean
+  freelancerId: number
+  jobId: number
+}
+type ProposalCreationAttributes = Optional<ProposalAttributes, 'id' | 'isAccepted'>;
+interface ProposalInstance
+  extends Model<ProposalAttributes, ProposalCreationAttributes>,
+  ProposalAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+// controller types
 type ControllerReturn = {
   status: number;
   data?: object;
@@ -11,15 +82,17 @@ type ControllerReturn = {
 
 };
 type ControllerFunction =
-  (req: AuthRequest, res: Response, next: NextFunction) => Promise<ControllerReturn>;
-interface AuthUser {
-  userID: number,
-  role: string,
-  name: string
-}
-interface AuthRequest extends Request {
-  user?: AuthUser
-}
+  (req: Request, res: Response, next: NextFunction) => Promise<ControllerReturn>;
+
 export {
-  ControllerFunction, ControllerReturn, AuthUser, AuthRequest,
+  ControllerFunction,
+  ControllerReturn,
+  FreelancerInstance,
+  FreelancerCreationAttributes,
+  JobInstance,
+  JobCreationAttributes,
+  ProposalInstance,
+  ProposalCreationAttributes,
+  UserInstance,
+  UserCreationAttributes,
 };

@@ -3,15 +3,16 @@ import { Request } from 'express';
 import { queryValidation } from '../validation/index';
 
 import { Job, Proposal } from '../models';
+import { JobInstance } from '../interfaces';
 
 const JOBS_PER_PAGE = 5;
-const searchJobs = async (req:Request) => {
+const searchJobs = async (req: Request) => {
   const {
     title, page = 1, budget, category,
   } = req.query;
 
   await queryValidation.validate(req.query);
-  const where:WhereOptions<any> | undefined = { isOccupied: false };
+  const where: WhereOptions | undefined = { isOccupied: false };
   if (title) {
     where.title = {
       [Sequelize.Op.iLike]: `%${title}%`,
@@ -27,7 +28,7 @@ const searchJobs = async (req:Request) => {
     where.category = category;
   }
 
-  const jobs = await Job.findAndCountAll({
+  const jobs: { count: number, rows: JobInstance[] } = await Job.findAndCountAll({
     attributes: [
       'id',
       'title',
@@ -37,12 +38,10 @@ const searchJobs = async (req:Request) => {
       'isOccupied',
     ],
     where,
-    include: [
-      {
-        model: Proposal,
-        attributes: { include: ['jobId'] },
-      },
-    ],
+    include:
+    {
+      model: Proposal,
+    },
     distinct: true,
     limit: JOBS_PER_PAGE,
     offset: (Number(page) - 1) * JOBS_PER_PAGE,

@@ -1,11 +1,14 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
+import { FreelancerInstance } from '../interfaces';
 
-const Freelancer = sequelize.define('freelancer', {
+const Freelancer = sequelize.define<FreelancerInstance>('freelancer', {
   id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+    unique: true,
   },
   image: {
     type: DataTypes.TEXT,
@@ -24,6 +27,10 @@ const Freelancer = sequelize.define('freelancer', {
   },
   portfolio: {
     type: DataTypes.TEXT,
+  },
+  userId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
   },
 });
 
