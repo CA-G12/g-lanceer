@@ -1,23 +1,22 @@
-import { Strategy as JwtStrategy, StrategyOptions } from 'passport-jwt';
-import passport from 'passport';
+import { Strategy as JwtStrategy, StrategyOptions, VerifiedCallback } from 'passport-jwt';
+import passport, { PassportStatic } from 'passport';
 import {
-  NextFunction, Request, RequestHandler, Response,
+  Request, RequestHandler,
 } from 'express';
-import dotenv from 'dotenv';
 import { serverErrs } from '../helpers';
 
 const passportAuthenticate: RequestHandler = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, jwt_payload) => {
     if (jwt_payload) {
-      req.user = jwt_payload;
+      res.locals.user = jwt_payload;
       return next();
     }
     next(serverErrs.UNAUTHORIZED('unauthorized'));
   })(req, res);
 };
 
-const checkUserAuth = (role: string) => (req: any, res: Response, next: NextFunction) => {
-  const isUSerAuth = role === req.user.role;
+const checkUserAuth = (role: string): RequestHandler => (req: Request, res, next) => {
+  const isUSerAuth = role === res.locals.user?.role;
   if (isUSerAuth) {
     next();
   } else {
@@ -25,11 +24,8 @@ const checkUserAuth = (role: string) => (req: any, res: Response, next: NextFunc
   }
 };
 
-const passportAuth = (passportParameter: any) => {
-  dotenv.config();
-
+const passportAuth = (passportParameter: PassportStatic) => {
   const cookieExtractor = (req: Request) => {
-    // console.log('*****************', req.cookies.token);
     let token = null;
     if (req && req.cookies) {
       token = req.cookies.token;
@@ -41,10 +37,9 @@ const passportAuth = (passportParameter: any) => {
     secretOrKey: process.env.JWT_SECRET,
     jwtFromRequest: cookieExtractor,
   };
-
   passportParameter.use(
     'jwt',
-    new JwtStrategy(options, (payload: any, done: any) => {
+    new JwtStrategy(options, (payload, done: VerifiedCallback) => {
       done(null, payload);
     }),
   );

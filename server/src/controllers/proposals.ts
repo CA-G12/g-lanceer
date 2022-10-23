@@ -1,20 +1,21 @@
-import { AuthRequest } from '../interfaces';
+import { Request, Response } from 'express';
+import { ProposalInstance } from '../interfaces';
 import { Proposal } from '../models';
 import { postProposalValidation } from '../validation';
 
-const addProposal = async (req: AuthRequest) => {
+const addProposal = async (req: Request, res: Response) => {
   const {
     jobId,
     description,
     attachments,
   } = req.body;
-  const freelancerId = req.user?.userID;
+  const freelancerId = res.locals.user.userID;
   await postProposalValidation.validate({
     jobId,
     description,
     attachments,
   });
-  const proposal = await Proposal.create({
+  const proposal: ProposalInstance = await Proposal.create({
     jobId,
     freelancerId,
     description,

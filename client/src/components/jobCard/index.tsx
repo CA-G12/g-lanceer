@@ -3,19 +3,12 @@ import {
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
+import { JobPropsCard } from '../../interfaces';
 
-interface Job {
-  title: string,
-  description: string,
-  budget: number
-}
-
-interface JobProps {
-  job: Job
-}
-
-function JobCard({ job }: JobProps) {
-  const { title, description, budget } = job;
+function JobCard({ job, id }: JobPropsCard) {
+  const {
+    title, description, budget, proposals,
+  } = job;
   const navigate = useNavigate();
   return (
     <div className="content">
@@ -36,7 +29,10 @@ function JobCard({ job }: JobProps) {
           <div className="budget-proposal-section">
             <div className="proposals">
               proposals:
-              <span>3</span>
+              <span>
+                {' '}
+                {proposals.length}
+              </span>
             </div>
             <div className="budget">
               budget:
@@ -53,7 +49,7 @@ function JobCard({ job }: JobProps) {
               paddingLeft: '15px',
               paddingRight: '15px',
             }}
-            onClick={() => navigate('/job/jobid')}
+            onClick={() => navigate(`/job/${id}`)}
             variant="contained"
           >
             Apply Now
@@ -61,6 +57,7 @@ function JobCard({ job }: JobProps) {
         </div>
       </div>
     </div>
+
   );
 }
 

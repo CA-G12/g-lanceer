@@ -1,11 +1,12 @@
 import { Request } from 'express';
+import { JobInstance } from '../interfaces';
 import { Job, User } from '../models';
 import { queryJobValidation } from '../validation';
 
-const getJob = async (req:Request) => {
+const getJob = async (req: Request) => {
   const { id } = req.params;
   await queryJobValidation.validate(req.params);
-  const job = await Job.findByPk(id, {
+  const job: JobInstance | null = await Job.findByPk(id, {
     include: {
       model: User,
       attributes: [

@@ -1,4 +1,11 @@
-const users = [
+import {
+  FreelancerCreationAttributes,
+  JobCreationAttributes,
+  ProposalCreationAttributes,
+  UserCreationAttributes,
+} from '../../interfaces';
+
+const users: UserCreationAttributes[] = [
   {
     email: 'ahmed@gmail.com',
     name: 'Ahmed',
@@ -49,7 +56,7 @@ const users = [
   },
 ];
 
-const freelancers = [
+const freelancers: FreelancerCreationAttributes[] = [
   {
     userId: 1,
     image:
@@ -111,7 +118,7 @@ const freelancers = [
   },
 ];
 
-const jobs = [
+const jobs: JobCreationAttributes[] = [
   {
     title: 'Back End Developer', // 1
     description:
@@ -157,7 +164,7 @@ const jobs = [
     description:
       'Our company has started manufacturing a new range of spray dried food ingredients. We need someone to improve market visibility of these products and attract new customers on different platforms.',
     category: 'Digital Marketing',
-    budget: '900',
+    budget: 900,
     time: '6 months',
     isOccupied: false,
     userId: 4,
@@ -206,7 +213,7 @@ const jobs = [
   },
 ];
 
-const proposals = [
+const proposals: ProposalCreationAttributes[] = [
   {
     // translate job
     description:
