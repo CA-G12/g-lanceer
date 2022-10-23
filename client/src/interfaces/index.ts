@@ -67,15 +67,6 @@ interface PropsTextEditor {
   setValue: React.Dispatch<React.SetStateAction<string>>
   error: boolean
 }
-
-// interface JobAbout {
-//   title: string
-//   category: string,
-//   time: string,
-//   description: string,
-//   budget: number,
-// }
-
 interface JobSearch {
   id: number,
   title: string,
