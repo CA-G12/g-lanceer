@@ -52,7 +52,7 @@ function Job() {
 
   if (error) {
     return (
-      <h2 className="error">Job Not Found</h2>
+      <h2 className="error-not-found">Job Not Found</h2>
     );
   }
 
