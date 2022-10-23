@@ -8,7 +8,7 @@ Freelancer.belongsTo(User);
 User.hasOne(Freelancer);
 Proposal.belongsTo(Freelancer);
 Proposal.belongsTo(Job);
-Job.hasMany(Proposal);
+Job.hasMany(Proposal, { onDelete: 'cascade', hooks: true });
 User.hasMany(Job);
 Job.belongsTo(User);
 
