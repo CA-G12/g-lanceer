@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import Sequelize, { WhereOptions } from 'sequelize';
+import { serverErrs } from '../helpers';
+import { JobInstance } from '../interfaces';
 import { Job, Proposal, User } from '../models';
 import { queryJobValidation, addJobValidation, queryValidation } from '../validation';
 
@@ -20,7 +22,7 @@ const getJob = async (req: Request) => {
   if (!job) return { status: 200, msg: 'job not found' };
   return { status: 200, data: job };
 };
-const addJob = async (req: Request, res:Response) => {
+const addJob = async (req: Request, res: Response) => {
   const {
     title,
     budget,
@@ -91,4 +93,27 @@ const searchJobs = async (req: Request) => {
   });
   return { status: 200, data: jobs };
 };
-export { addJob, getJob, searchJobs };
+const deleteJob = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { userID } = res.locals.user;
+  await queryJobValidation.validate(req.params);
+  const job: JobInstance | null = await Job.findByPk(id);
+  if (!job) {
+    throw serverErrs.BAD_REQUEST('job not found');
+  }
+  if (userID === job.userId) {
+    if (job.isOccupied) {
+      throw serverErrs.BAD_REQUEST('job is Occupied');
+    }
+    await job.destroy();
+    return { status: 200, msg: 'Job deleted' };
+  }
+
+  throw serverErrs.UNAUTHORIZED('you are not authorized');
+};
+export {
+  addJob,
+  getJob,
+  searchJobs,
+  deleteJob,
+};
