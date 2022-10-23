@@ -15,9 +15,10 @@ function Freelancer() {
             exercitation ullamco laboris nisi ut 
             aliquip ex ea commodo consequat.`,
   };
+
   return (
     <div>
-      <FreelancerInfoCard info={freelancer} />
+      <FreelancerInfoCard initialValues={freelancer} />
     </div>
   );
 }

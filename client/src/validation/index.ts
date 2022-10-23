@@ -18,5 +18,19 @@ const ProposalSchema = yup.object({
     .min(5, 'Attachments must be more than 5 characters long')
     .url('Attachment should be a valid URL'),
 });
+const userInfoSchema = yup.object({
+  name: yup.string()
+    .required('Name must not be Empty'),
+  major: yup.string()
+    .required('major must not be Empty'),
+  brief: yup.string()
+    .required('brief must not be Empty')
+    .min(10, 'brief must be more than 10 characters long'),
+  portfolio: yup.string()
+    .nullable()
+    .optional()
+    .min(5, 'portfolio must be more than 5 characters long')
+    .url('portfolio should be a valid URL'),
+});
 
-export { jobSchema, ProposalSchema };
+export { jobSchema, ProposalSchema, userInfoSchema };

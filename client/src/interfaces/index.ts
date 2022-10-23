@@ -1,5 +1,5 @@
 interface JobProps {
-  handelClose: ()=> void,
+  handelClose: () => void,
   showModel: boolean
 }
 
@@ -51,7 +51,7 @@ interface Proposal {
   attachments: string,
 }
 interface PropsProposalCard {
-  proposal:Proposal
+  proposal: Proposal
 }
 
 interface TabListInt {
@@ -91,9 +91,16 @@ interface ParamsT {
   category?: string,
   page?: number
 }
+interface FreelancerInfo {
+  name: string
+  image?: string | null
+  major: string
+  portfolio: string
+  brief: string
+}
 
 export type {
   JobProps, FilterProps, JobPropsCard, PropsJobDetails, CategoryProps,
   ProposalProps, PropsProposalCard, PropsTabList,
-  PropsTextEditor, Proposal, JobAbout, TabListInt, JobSearch, ParamsT,
+  PropsTextEditor, Proposal, JobAbout, TabListInt, JobSearch, ParamsT, FreelancerInfo,
 };

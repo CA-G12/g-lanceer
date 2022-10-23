@@ -1,6 +1,7 @@
 .freelancer-info-card{
   width: 100%;
   margin: 2rem 0;
+  position: relative;
 }
 .freelancer-info-card-img{
   height: 100%;
@@ -38,4 +39,11 @@ font-weight: 400;
   font-size: 16px;
 margin-top: 1rem;
 font-weight: 600;
+}
+#card-edit-btn{
+  position: absolute;
+  bottom: 20px;
+  right: 150px;
+  background-color: #1C3879;
+  color: #fff;
 }
