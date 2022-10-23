@@ -10,7 +10,7 @@ const router = express.Router();
 passportAuth(passport);
 router.use('/jobs', jobsRouter);
 router.use('/proposals', proposalsRouter);
-router.get('/user', getUserData);
+router.get('/user', passportAuthenticate, getUserData);
 router.use('/client', passportAuthenticate, checkUserAuth('client'), (req, res) => {
   res.send('client');
 });

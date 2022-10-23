@@ -21,6 +21,7 @@ function App() {
       try {
         const userObj = await axios.get('/api/v1/user');
         setUser(userObj.data);
+        console.log(userObj.data, 'userrrrrrrrr');
       } catch (err) {
         console.log(err, 'axios error');
       }
