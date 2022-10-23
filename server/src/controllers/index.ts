@@ -1,5 +1,13 @@
-import deleteJob from './deleteJob';
-import searchJobs from './searchJobs';
-import getJob from './getJob';
+import {
+  addJob,
+  searchJobs,
+  getJob,
+  deleteJob,
+} from './jobs';
 
-export { searchJobs, getJob, deleteJob };
+export {
+  searchJobs,
+  getJob,
+  deleteJob,
+  addJob,
+};

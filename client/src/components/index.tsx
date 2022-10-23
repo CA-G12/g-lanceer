@@ -11,6 +11,8 @@ import Tabs from './tab';
 import TextEditor from './TextEditor';
 import FreelancerInfoCard from './FreelancerInfoCard';
 import JobForm from './addJobForm';
+import ProposalForm from './ProposalForm';
+import JobDetails from './jobDetails';
 
 export {
   Category,
@@ -24,4 +26,6 @@ export {
   Tabs,
   FreelancerInfoCard,
   JobForm,
+  ProposalForm,
+  JobDetails,
 };

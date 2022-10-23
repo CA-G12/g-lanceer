@@ -1,54 +1,48 @@
 import { Button } from '@mui/material';
-import { PropsJobDetails } from '../../interfaces';
+import { PropsJobPage } from '../../interfaces';
 import './style.css';
 
-function JobDetails({ job }: PropsJobDetails) {
+function JobDetails({ job, client }: PropsJobPage) {
   return (
-    <div className="wrapper ">
-      <div className="details">
-        <div className="top">
-          <h2>{job.title}</h2>
-        </div>
-        <div className="content">
-          <p>{job.description}</p>
-          <div className="jobs-details">
-            <p>
-              category:
-              <span>{job.category}</span>
-            </p>
-            <p>
-              duration:
-              <span>{job.duration}</span>
-            </p>
-            <p>
-              budget:
-              <span>
-                $
-                {job.budget}
-              </span>
-            </p>
-          </div>
-          <div className="link-btn">
-            <Button
-              className="button"
-              variant="contained"
-            >
-              Apply Now
-            </Button>
-
-          </div>
-        </div>
+    <div className="details">
+      <div className="top">
+        <h2>{job.title}</h2>
+        <p>
+          Client:
+          <span>
+            {' '}
+            {client.name}
+          </span>
+        </p>
       </div>
-      <div className="about">
-        <div className="top">
-          <h2>About the client</h2>
-        </div>
-        <div className="content">
+      <div className="content">
+        <p>{job.description}</p>
+        <div className="jobs-details">
           <p>
-            Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Necessitatibus quam, quasi
-            consequuntur ut perferendis tempora mollitia.
+            category:
+            <span>{job.category}</span>
           </p>
+          <p>
+            duration:
+            <span>{job.time}</span>
+          </p>
+          <p>
+            budget:
+            <span>
+              $
+              {job.budget}
+            </span>
+          </p>
+        </div>
+        <div className="link-btn">
+          <Button
+            href="#submit"
+            className="button"
+            variant="contained"
+          >
+            Apply Now
+          </Button>
+
         </div>
       </div>
     </div>

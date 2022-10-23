@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express';
 import passport from 'passport';
 import jobsRouter from './jobs';
@@ -10,7 +9,6 @@ const router = express.Router();
 passportAuth(passport);
 router.use('/jobs', jobsRouter);
 router.use('/proposals', proposalsRouter);
-
 router.use('/client', passportAuthenticate, checkUserAuth('client'), (req, res) => {
   res.send('client');
 });
