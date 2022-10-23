@@ -1,7 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
+import { UserInstance } from '../interfaces';
 
-const User = sequelize.define('user', {
+const User = sequelize.define<UserInstance>('user', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

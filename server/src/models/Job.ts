@@ -1,7 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db/config/connection';
+import { JobInstance } from '../interfaces';
 
-const Job = sequelize.define('job', {
+const Job = sequelize.define<JobInstance>('job', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -30,6 +31,10 @@ const Job = sequelize.define('job', {
   isOccupied: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 
 });

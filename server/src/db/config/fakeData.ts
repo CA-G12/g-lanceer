@@ -1,4 +1,11 @@
-const users = [
+import {
+  FreelancerCreationAttributes,
+  JobCreationAttributes,
+  ProposalCreationAttributes,
+  UserCreationAttributes,
+} from '../../interfaces';
+
+const users: UserCreationAttributes[] = [
   {
     email: 'ahmed@gmail.com',
     name: 'Ahmed',
@@ -49,7 +56,7 @@ const users = [
   },
 ];
 
-const freelancers = [
+const freelancers: FreelancerCreationAttributes[] = [
   {
     userId: 1,
     image:
@@ -111,7 +118,7 @@ const freelancers = [
   },
 ];
 
-const jobs = [
+const jobs: JobCreationAttributes[] = [
   {
     title: 'Back End Developer', // 1
     description:
@@ -157,7 +164,7 @@ const jobs = [
     description:
       'Our company has started manufacturing a new range of spray dried food ingredients. We need someone to improve market visibility of these products and attract new customers on different platforms.',
     category: 'Digital Marketing',
-    budget: '900',
+    budget: 900,
     time: '6 months',
     isOccupied: false,
     userId: 4,
@@ -206,12 +213,12 @@ const jobs = [
   },
 ];
 
-const proposals = [
+const proposals: ProposalCreationAttributes[] = [
   {
     // translate job
     description:
       'Hi there,We would like to translate your text from Polish to English and provide you with high quality professional translation service.We have worked on several similar projects in past. We are the leading translation agency of this website with 9 years of experience.',
-    attachements: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
+    attachments: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
     freelancerId: 1,
     isAccepted: false,
     jobId: 6,
@@ -220,7 +227,7 @@ const proposals = [
     // animation job
     description:
       'Hello I have reviewed your job description and completely understand your requirement for I need a cartoon/animation artist. I can start working on your project immediately.I have expertise in area of After Effects, Graphic Design, Photoshop, Animation and Logo Design',
-    attachements: 'https://www.freelancer.com/u/MetaDesignIndia',
+    attachments: 'https://www.freelancer.com/u/MetaDesignIndia',
     isAccepted: false,
     freelancerId: 5,
     jobId: 7,
@@ -229,7 +236,7 @@ const proposals = [
     // back-end-deeveloper
     description:
       'I have gone through with your job details and understood it. I am ready to join you as a Back End Developer on immediate basis .I am a professional android mobile application developer with 5+ year of experience and happy to let you know that we have right skills and experience to complete your project on time and with quality.',
-    attachements: 'www.vita-wunderschoen.de',
+    attachments: 'www.vita-wunderschoen.de',
     isAccepted: false,
     freelancerId: 3,
     jobId: 1,
@@ -238,7 +245,7 @@ const proposals = [
     // full-stack job
     description:
       'Hi sir, Could you let me know more details about project full stack engineer.We are highly interested to work for you',
-    attachements:
+    attachments:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
     freelancerId: 2,
@@ -248,7 +255,7 @@ const proposals = [
     // full-stack job
     description:
       "Hi Hope you are well. Here is a senior web developer who have enough experience in booking system, real estate, e-coomerce. If you hire me, I can provide the best result. If you have any figma design, it will be easy to develop but if not, it's ok. I can provide also. Hope to discuss soon. Thanks.",
-    attachements:
+    attachments:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
     freelancerId: 6,
@@ -258,7 +265,7 @@ const proposals = [
     // Live streaming app using nodejs
     description:
       'I am Full Stack Developer. I went through your requirements and would like to discuss further regarding more specific details and requirements. I would like to inform you that me along with my team have around 5+ years of experience in Full Stack Developement and complete IT solution including Website, Ecommerce Platforms, ELearning Platforms, Single page application and Automation. We strictly follow the software development standard and and our work is client centric. We respect deadline and our work include back-end, front-end , customization website security and SEO.',
-    attachements: 'https://caseace.in/',
+    attachments: 'https://caseace.in/',
     isAccepted: false,
     freelancerId: 2,
     jobId: 1,
@@ -267,7 +274,7 @@ const proposals = [
     // UI Development for mobile app (React)
     description:
       "Hello, hope you're well. I have reviewed your project description and I can design an eye-catching and user-friendly interface for your app using React.js as per your requirements. The final cost and timeline will be given after the complete analysis of requirements with you.",
-    attachements: 'https://www.freelancer.com/u/junkyfunky',
+    attachments: 'https://www.freelancer.com/u/junkyfunky',
     isAccepted: false,
     freelancerId: 3,
     jobId: 4,
@@ -276,7 +283,7 @@ const proposals = [
     // UI Development for mobile app (React)
     description:
       "Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.",
-    attachements: 'Trica.co',
+    attachments: 'Trica.co',
     isAccepted: false,
     freelancerId: 4,
     jobId: 4,
@@ -285,7 +292,7 @@ const proposals = [
     // Digital Marketing/Marketing/Content Creator
     description:
       'Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion',
-    attachements: 'https://candyville.ca/',
+    attachments: 'https://candyville.ca/',
     isAccepted: true,
     freelancerId: 5,
     jobId: 5,
