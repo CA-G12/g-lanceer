@@ -6,6 +6,7 @@
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem 0;
+  margin-left: 4rem;
 }
 .proposal-form h2{
   color: #1C3879;

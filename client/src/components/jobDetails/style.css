@@ -8,15 +8,17 @@
   border:0.3px solid #ccc;
   border-radius: 7px;
   overflow: hidden;
-  height: 320px;
+  height: 300px;
 }
 .details{
-  width: 60%;
+  width: 90%;
+  margin: 0 auto;
 }
 .top{
   background-color: #eee;
   height: 55px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom:0.3px solid #ccc
 }
@@ -24,6 +26,15 @@
   padding: 27px;
   color:#1C3879;
   font-size: 20px;
+}
+.top p{
+  margin-right: 12px;
+  color:#1C3879;
+  font-weight: 700;
+}
+.top p span{
+  color: #272a2a;
+  font-weight:lighter;
 }
 .content{
   padding: 0px 2rem;
@@ -48,7 +59,7 @@
 }
 .link-btn{
   text-align: end;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .button{

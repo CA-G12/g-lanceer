@@ -24,10 +24,6 @@ function Job() {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleClick = () => {
-    window.scrollTo(0, 500);
-  };
-
   useEffect(() => {
     const getJobData = async () => {
       setLoading(true);
@@ -62,7 +58,7 @@ function Job() {
 
   return (
     <div className="container">
-      {jobState && <JobDetails job={jobState} client={client} handleClick={handleClick} /> }
+      <JobDetails job={jobState} client={client} />
       <ProposalForm />
     </div>
 

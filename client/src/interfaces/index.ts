@@ -68,13 +68,13 @@ interface PropsTextEditor {
   error: boolean
 }
 
-interface JobAbout {
-  title: string
-  category: string,
-  time: string,
-  description: string,
-  budget: number,
-}
+// interface JobAbout {
+//   title: string
+//   category: string,
+//   time: string,
+//   description: string,
+//   budget: number,
+// }
 
 interface JobSearch {
   id: number,
@@ -98,7 +98,7 @@ interface JobAboutPage {
   time: string,
   description: string,
   budget: number,
-  user: User
+  user?: User
 }
 interface User {
   id: number,
@@ -113,12 +113,12 @@ interface Client {
   role:string,
 }
 interface PropsJobPage {
-  job:JobAbout,
+  job:JobAboutPage,
   client: Client,
-  handleClick: ()=>void
 }
 export type {
   JobProps, FilterProps, JobPropsCard, PropsJobDetails, CategoryProps,
   ProposalProps, PropsProposalCard, PropsTabList,
-  PropsTextEditor, Proposal, JobAbout, TabListInt, JobSearch, ParamsT, JobAboutPage, Client, PropsJobPage,
+  PropsTextEditor, Proposal, TabListInt, JobSearch, ParamsT, JobAboutPage, Client, PropsJobPage,
+
 };
