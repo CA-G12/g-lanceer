@@ -1,9 +1,8 @@
-import { RequestHandler } from 'express';
+import { Request, Response } from 'express';
 
-const getUserData: RequestHandler = (req, res) => {
+const getUserData = async (req: Request, res: Response) => {
   const { user } = res.locals;
-
-  res.status(200).send(user);
+  return { status: 200, data: user };
 };
 
 export default getUserData;
