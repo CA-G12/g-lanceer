@@ -1,13 +1,6 @@
 import JobDetails from '../../components/jobDetails';
 import ProposalForm from '../../components/ProposalForm';
-
-interface JobAbout {
-  title: string
-  category: string,
-  duration: string,
-  description: string,
-  budget: number
-}
+import { JobAbout } from '../../interfaces';
 
 const job: JobAbout = {
   title: 'Graphic Designer',

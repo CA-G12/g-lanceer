@@ -6,25 +6,7 @@ import {
 import { Tabs, JobCard, Filter } from '../../components';
 import './style.css';
 import getJobs from '../../helpers';
-
-interface Job {
-  id: number,
-  title: string,
-  description: string,
-  budget: number,
-  proposals: [];
-  category: string,
-}
-interface TabListInt {
-  label: string;
-  child: JSX.Element | JSX.Element[];
-}
-interface ParamsT {
-  budget?: number,
-  title?: string,
-  category?: string,
-  page?: number
-}
+import { JobSearch, ParamsT, TabListInt } from '../../interfaces';
 
 function JobsSearch() {
   const { state } = useLocation();
@@ -33,7 +15,7 @@ function JobsSearch() {
   const [loading, setLoading] = useState(false);
   const [jobsCount, setJobsCount] = useState(0);
   const [page, setPage] = useState<number>(1);
-  const [jobs, setJobs] = useState<Job[]>([]); //
+  const [jobs, setJobs] = useState<JobSearch[]>([]); //
   const [budget, setPrice] = useState<number>(0);
   const [category, setCategory] = useState<string>(state?.category || '');
   const [title, setTitle] = useState<string>('');

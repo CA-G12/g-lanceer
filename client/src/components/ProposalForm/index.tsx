@@ -4,33 +4,20 @@ import {
   FormikProps,
   useFormik,
 } from 'formik';
-import * as Yup from 'yup';
 import SendIcon from '@mui/icons-material/Send';
 import TextEditor from '../TextEditor';
 import './style.css';
+import { ProposalProps } from '../../interfaces';
+import { ProposalSchema } from '../../validation';
 
-interface Proposal {
-  proposalText: string
-  proposalAttachment: string
-}
-const ProposalSchema = Yup.object({
-  proposalText: Yup.string()
-    .min(15, 'Too Short!')
-    .required('Proposal must not be Empty'),
-  proposalAttachment: Yup.string()
-    .nullable()
-    .optional()
-    .min(5, 'Attachments must be more than 5 characters long')
-    .url('Attachment should be a valid URL'),
-});
 function ProposalForm() {
-  const formik: FormikProps<Proposal> = useFormik<Proposal>({
+  const formik: FormikProps<ProposalProps> = useFormik<ProposalProps>({
     initialValues: {
       proposalText: '',
       proposalAttachment: '',
     },
     validationSchema: ProposalSchema,
-    onSubmit: (values: Proposal) => {
+    onSubmit: (values: ProposalProps) => {
       console.log(values);
       setTimeout(() => {
         formik.setSubmitting(false);
