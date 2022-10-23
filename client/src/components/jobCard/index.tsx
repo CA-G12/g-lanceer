@@ -13,7 +13,7 @@ function JobCard({ job, id }: JobPropsCard) {
   return (
     <div className="content">
       <div className="job-card">
-        <Link to="/job/jobid">
+        <Link to={`/job/${id}`}>
           <Typography
             variant="h5"
             gutterBottom

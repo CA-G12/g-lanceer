@@ -67,15 +67,6 @@ interface PropsTextEditor {
   setValue: React.Dispatch<React.SetStateAction<string>>
   error: boolean
 }
-
-interface JobAbout {
-  title: string
-  category: string,
-  duration: string,
-  description: string,
-  budget: number
-}
-
 interface JobSearch {
   id: number,
   title: string,
@@ -92,8 +83,33 @@ interface ParamsT {
   page?: number
 }
 
+interface JobAboutPage {
+  title: string
+  category: string,
+  time: string,
+  description: string,
+  budget: number,
+  user?: User
+}
+interface User {
+  id: number,
+  email: string,
+  name: string,
+  role: string
+}
+interface Client {
+  email:string,
+  id:number,
+  name:string,
+  role:string,
+}
+interface PropsJobPage {
+  job:JobAboutPage,
+  client: Client,
+}
 export type {
   JobProps, FilterProps, JobPropsCard, PropsJobDetails, CategoryProps,
   ProposalProps, PropsProposalCard, PropsTabList,
-  PropsTextEditor, Proposal, JobAbout, TabListInt, JobSearch, ParamsT,
+  PropsTextEditor, Proposal, TabListInt, JobSearch, ParamsT, JobAboutPage, Client, PropsJobPage,
+
 };

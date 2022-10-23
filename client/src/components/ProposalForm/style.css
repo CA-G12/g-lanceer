@@ -6,6 +6,7 @@
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem 0;
+  margin-left: 4rem;
 }
 .proposal-form h2{
   color: #1C3879;
@@ -27,3 +28,6 @@
 .submitProposal.loading{
   background-color: #ccc !important;
 }
+/* .proposal-text div div{
+  width: 113.5%;
+} */

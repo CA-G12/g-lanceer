@@ -10,6 +10,8 @@ import Filter from './filter';
 import Tabs from './tab';
 import TextEditor from './TextEditor';
 import JobForm from './addJobForm';
+import ProposalForm from './ProposalForm';
+import JobDetails from './jobDetails';
 
 export {
   Category,
@@ -22,4 +24,6 @@ export {
   Filter,
   Tabs,
   JobForm,
+  ProposalForm,
+  JobDetails,
 };
