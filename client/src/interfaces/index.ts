@@ -84,6 +84,7 @@ interface ParamsT {
 }
 interface FreelancerInfo {
   name: string
+  title: string
   image?: string | null
   major: string
   portfolio: string

@@ -23,9 +23,8 @@ const userInfoSchema = yup.object({
     .required('Name must not be Empty'),
   major: yup.string()
     .required('major must not be Empty'),
-  brief: yup.string()
-    .required('brief must not be Empty')
-    .min(10, 'brief must be more than 10 characters long'),
+  title: yup.string()
+    .required('title must not be Empty'),
   portfolio: yup.string()
     .nullable()
     .optional()

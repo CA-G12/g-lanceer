@@ -75,27 +75,50 @@ function FreelancerInfoCard({ initialValues }: Props) {
                     !!(formik.errors.name)
                   }
                 />
-                <TextField
-                  disabled={formik.isSubmitting}
-                  name="major"
-                  label="major"
-                  className="freelancer-content-input"
-                  id="standard-basic"
-                  variant="standard"
-                  fullWidth
-                  style={{ marginBottom: '15px' }}
-                  inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.major}
-                  helperText={
-                    !!formik.errors.major
-                    && formik.errors.major
-                  }
-                  error={
-                    !!(formik.errors.major)
-                  }
-                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+                  <TextField
+                    disabled={formik.isSubmitting}
+                    name="title"
+                    label="title"
+                    className="freelancer-content-input"
+                    id="standard-basic"
+                    variant="standard"
+                    fullWidth
+                    style={{ marginBottom: '15px' }}
+                    inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.title}
+                    helperText={
+                      !!formik.errors.title
+                      && formik.errors.title
+                    }
+                    error={
+                      !!(formik.errors.title)
+                    }
+                  />
+                  <TextField
+                    disabled={formik.isSubmitting}
+                    name="major"
+                    label="major"
+                    className="freelancer-content-input"
+                    id="standard-basic"
+                    variant="standard"
+                    fullWidth
+                    style={{ marginBottom: '15px' }}
+                    inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.major}
+                    helperText={
+                      !!formik.errors.major
+                      && formik.errors.major
+                    }
+                    error={
+                      !!(formik.errors.major)
+                    }
+                  />
+                </div>
                 <TextField
                   disabled={formik.isSubmitting}
                   name="portfolio"
@@ -166,7 +189,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
               </form>
             ) : (
 
-              <div>
+              <div className="info">
                 <Fab
                   color="secondary"
                   id="card-edit-btn"
@@ -177,7 +200,10 @@ function FreelancerInfoCard({ initialValues }: Props) {
                   <EditIcon />
                 </Fab>
                 <h3 className="freelancer-name">{formik.values.name}</h3>
-                <p className="freelancer-major">{formik.values.major}</p>
+                <p className="freelancer-major">
+                  <span className="freelancer-title">{formik.values.title}</span>
+                  {formik.values.major}
+                </p>
                 <p className="freelancer-portfolio"><a href={formik.values.portfolio}>Portfolio</a></p>
                 <p className="freelancer-brief">{formik.values.brief}</p>
               </div>
