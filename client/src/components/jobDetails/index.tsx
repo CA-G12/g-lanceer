@@ -1,26 +1,8 @@
 import { Button } from '@mui/material';
+import { PropsJobPage } from '../../interfaces';
 import './style.css';
 
-interface Job {
-  title: string
-  category: string,
-  time: string,
-  description: string,
-  budget: number
-}
-interface Client {
-  email:string,
-  id:number,
-  name:string,
-  role:string,
-}
-interface Props {
-  job:Job | [],
-  client: Client | [],
-  handleClick: ()=>void
-}
-
-function JobDetails({ job, client, handleClick }: Props) {
+function JobDetails({ job, client, handleClick }: PropsJobPage) {
   return (
     <div className="wrapper ">
       <div className="details">
@@ -63,9 +45,9 @@ function JobDetails({ job, client, handleClick }: Props) {
           <h2>About the client</h2>
         </div>
         <div className="content">
+          <h3>{client.name}</h3>
+          <h3>{client.email}</h3>
           <p>
-            <h3>{client.name}</h3>
-            <h3>{client.email}</h3>
             Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Necessitatibus quam, quasi
             consequuntur ut perferendis tempora mollitia.

@@ -6,18 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useLocation } from 'react-router-dom';
 import data from '../../categoris';
 import './style.css';
-
-interface Props {
-  category: string,
-  changeCategory: (cate: any) => void,
-  priceChange: (data: any) => void,
-  iconChange: (checked: any) => void,
-  price: number
-}
+import { FilterProps } from '../../interfaces';
 
 function Filter({
   category, changeCategory, priceChange, price, iconChange,
-}: Props) {
+}: FilterProps) {
   const location = useLocation();
   return (
     <Container className="filterContent">

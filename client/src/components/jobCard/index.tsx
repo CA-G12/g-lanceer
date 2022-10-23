@@ -3,20 +3,9 @@ import {
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
+import { JobPropsCard } from '../../interfaces';
 
-interface Job {
-  title: string,
-  description: string,
-  budget: number,
-  proposals: []
-}
-
-interface JobProps {
-  job: Job,
-  id: number,
-}
-
-function JobCard({ job, id }: JobProps) {
+function JobCard({ job, id }: JobPropsCard) {
   const {
     title, description, budget, proposals,
   } = job;
