@@ -1,5 +1,7 @@
 import express from 'express';
-import { searchJobs, getJob, addJob, deleteJob } from '../controllers';
+import {
+  searchJobs, getJob, addJob, deleteJob,
+} from '../controllers';
 import ExpressWrapper from '../ExpressWrapper';
 import { checkUserAuth, passportAuthenticate } from '../middlewares/auth';
 
