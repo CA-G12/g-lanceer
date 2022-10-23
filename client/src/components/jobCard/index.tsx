@@ -1,15 +1,44 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button, Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
-import { JobPropsCard } from '../../interfaces';
+import { JobPropsCard, Proposal } from '../../interfaces';
+import ProposalJob from '../proposalJob';
 
-function JobCard({ job, id }: JobPropsCard) {
+function JobCard({ job, id, userRole }: JobPropsCard) {
   const {
     title, description, budget, proposals,
   } = job;
   const navigate = useNavigate();
+  let proposalChild: React.ReactElement | null = null;
+  if (proposals) {
+    proposalChild = (
+      <>
+        {
+          proposals.map((ele: Proposal, i) => (
+            <div style={{ marginBottom: '1rem' }} key={i * 2}>
+              <ProposalJob
+                proposal={
+                  {
+                    username: 'freelancer name',
+                    description: ele.description,
+                    attachments: ele.attachments,
+                  }
+                }
+              />
+            </div>
+          ))
+        }
+      </>
+    );
+  }
   return (
     <div className="content">
       <div className="job-card">
@@ -21,39 +50,68 @@ function JobCard({ job, id }: JobPropsCard) {
           >
             {title}
           </Typography>
-          <p className="description">
+          <div className="description">
             {description}
-          </p>
+          </div>
         </Link>
         <div className="second-section">
-          <div className="budget-proposal-section">
-            <div className="proposals">
-              proposals:
-              <span>
-                {' '}
-                {proposals.length}
-              </span>
+          {userRole === 'client' ? (
+            <Accordion disabled={!proposals.length}>
+              <AccordionSummary>
+                <div className="budget-proposal-section budget-proposal-client ">
+                  <div className="proposals">
+                    proposals:
+                    <span>
+                      {' '}
+                      {proposals.length}
+                    </span>
+                  </div>
+                  <div className="budget">
+                    budget:
+                    <span>
+                      $
+                      {budget}
+                    </span>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                {
+                  proposalChild
+                }
+              </AccordionDetails>
+            </Accordion>
+          ) : (
+            <div className="budget-proposal-section">
+              <div className="proposals">
+                proposals:
+                <span>
+                  {' '}
+                  {proposals.length}
+                </span>
+              </div>
+              <div className="budget">
+                budget:
+                <span>
+                  $
+                  {budget}
+                </span>
+              </div>
+              <Button
+                style={{
+                  fontSize: '12px',
+                  borderRadius: '20px',
+                  paddingLeft: '15px',
+                  paddingRight: '15px',
+                }}
+                onClick={() => navigate(`/job/${id}`)}
+                variant="contained"
+              >
+                Apply Now
+              </Button>
             </div>
-            <div className="budget">
-              budget:
-              <span>
-                $
-                {budget}
-              </span>
-            </div>
-          </div>
-          <Button
-            style={{
-              fontSize: '12px',
-              borderRadius: '20px',
-              paddingLeft: '15px',
-              paddingRight: '15px',
-            }}
-            onClick={() => navigate(`/job/${id}`)}
-            variant="contained"
-          >
-            Apply Now
-          </Button>
+          )}
+
         </div>
       </div>
     </div>

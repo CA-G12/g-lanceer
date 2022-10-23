@@ -1,5 +1,5 @@
 interface JobProps {
-  handelClose: ()=> void,
+  handelClose: () => void,
   showModel: boolean
 }
 
@@ -21,6 +21,7 @@ interface Job {
 interface JobPropsCard {
   job: Job,
   id: number,
+  userRole: string
 }
 
 interface JobDetails {
@@ -51,7 +52,7 @@ interface Proposal {
   attachments: string,
 }
 interface PropsProposalCard {
-  proposal:Proposal
+  proposal: Proposal
 }
 
 interface TabListInt {

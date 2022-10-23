@@ -85,7 +85,7 @@ function JobsSearch() {
   } else {
     tabChild = (
       <>
-        {jobs.map((job) => (<JobCard job={job} key={job.title} id={job.id} />))}
+        {jobs.map((job) => (<JobCard userRole="user" job={job} key={job.title} id={job.id} />))}
       </>
     );
   }
