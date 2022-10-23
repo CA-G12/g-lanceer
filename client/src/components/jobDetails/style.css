@@ -7,7 +7,6 @@
   flex-direction: column;
   border:0.3px solid #ccc;
   border-radius: 7px;
-  height: 300px;
 }
 .details{
   width: 90%;
@@ -58,7 +57,7 @@
 }
 .link-btn{
   text-align: end;
-  margin-top: 25px;
+  margin: 25px 0px;
 }
 
 .button{
