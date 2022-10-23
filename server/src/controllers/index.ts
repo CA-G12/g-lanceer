@@ -1,5 +1,3 @@
-import searchJobs from './searchJobs';
-import getJob from './getJob';
-import addJob from './addJob';
+import { addJob, searchJobs, getJob } from './jobs';
 
 export { searchJobs, getJob, addJob };
