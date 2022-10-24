@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import { Job } from '../models';
+import {
+  Freelancer, Job, Proposal, User,
+} from '../models';
 
 const getClientData = async (req: Request, res: Response) => {
   const id = res.locals.user.userID;
@@ -7,9 +9,41 @@ const getClientData = async (req: Request, res: Response) => {
     where: {
       userId: id,
     },
+    include: [
+      {
+        model: Proposal,
+
+        include: [
+          {
+            model: Freelancer,
+            attributes: [
+              'id',
+              'userId',
+            ],
+            include: [
+              {
+                model: User,
+                attributes: [
+                  'name',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    distinct: true,
   });
-  const occupiedJobs = clientData.rows.filter((job) => job.isOccupied === true);
-  const unOccupiedJobs = clientData.rows.filter((job) => job.isOccupied === false);
+  const occupiedJobs = [];
+  const unOccupiedJobs = [];
+
+  for (let i = 0; i < clientData.rows.length; i += 1) {
+    if (clientData.rows[i].isOccupied) {
+      occupiedJobs.push(clientData.rows[i]);
+    } else {
+      unOccupiedJobs.push(clientData.rows[i]);
+    }
+  }
 
   return { status: 200, data: { count: clientData.count, occupiedJobs, unOccupiedJobs } };
 };
