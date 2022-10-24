@@ -107,9 +107,31 @@ interface PropsJobPage {
   job: JobAboutPage,
   client: Client,
 }
+type UserContex = {
+  user?: User | null,
+  setUser?: (user: User) => void,
+};
+interface Props {
+  children: React.ReactNode;
+}
 export type {
-  JobProps, FilterProps, JobPropsCard, PropsJobDetails, CategoryProps,
-  ProposalProps, PropsProposalCard, PropsTabList,
-  PropsTextEditor, Proposal, TabListInt, JobSearch, ParamsT, JobAboutPage, Client, PropsJobPage, User,
-
+  JobProps,
+  FilterProps,
+  JobPropsCard,
+  PropsJobDetails,
+  CategoryProps,
+  ProposalProps,
+  PropsProposalCard,
+  PropsTabList,
+  PropsTextEditor,
+  Proposal,
+  TabListInt,
+  JobSearch,
+  ParamsT,
+  JobAboutPage,
+  Client,
+  PropsJobPage,
+  User,
+  UserContex,
+  Props,
 };
