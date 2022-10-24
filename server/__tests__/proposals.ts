@@ -83,7 +83,6 @@ const proposalsTests = () => {
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(201);
-    expect(response.body.data.id).toBe(10);
     expect(response.body.data.jobId).toBe(1);
     expect(response.body.data.description.length).toBeGreaterThanOrEqual(15);
     expect(response.body.data.isAccepted).toBeFalsy();
