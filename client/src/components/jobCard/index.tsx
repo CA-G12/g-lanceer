@@ -1,6 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 import {
   Accordion,
   AccordionDetails,
@@ -22,8 +19,8 @@ function JobCard({ job, id, userRole }: JobPropsCard) {
     proposalChild = (
       <>
         {
-          proposals.map((ele: Proposal, i) => (
-            <div style={{ marginBottom: '1rem' }} key={i * 2}>
+          proposals.map((ele: Proposal) => (
+            <div style={{ marginBottom: '1rem' }} key={ele.username}>
               <ProposalJob
                 proposal={
                   {
