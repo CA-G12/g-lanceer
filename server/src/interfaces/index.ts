@@ -74,10 +74,21 @@ interface ProposalInstance
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+interface FreelancerWithProposalsAttr extends FreelancerAttributes {
+  proposals?: any
+}
+type FreelancerWithProposalsCreationAttributes = Optional<FreelancerWithProposalsAttr, 'id'>;
+interface FreelancerWithProposalsInstance
+  extends Model<FreelancerWithProposalsAttr, FreelancerWithProposalsCreationAttributes>,
+  FreelancerWithProposalsCreationAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 // controller types
 type ControllerReturn = {
   status: number;
-  data?: object;
+  data?: any;
   msg?: string;
 
 };
@@ -95,4 +106,6 @@ export {
   ProposalCreationAttributes,
   UserInstance,
   UserCreationAttributes,
+  FreelancerAttributes,
+  FreelancerWithProposalsInstance,
 };
