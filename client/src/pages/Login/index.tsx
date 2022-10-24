@@ -62,7 +62,6 @@ function Login() {
           <LoadingButton
             id="submit"
             type="submit"
-            // loading
             loadingPosition="start"
             loading={formik.isSubmitting}
             variant="outlined"
