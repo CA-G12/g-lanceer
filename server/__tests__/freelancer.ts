@@ -17,7 +17,7 @@ const freelancerTests = () => {
     const response = await request(app)
       .get('/api/v1/freelancer/20000')
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
-      .expect(404);
+      .expect(400);
     expect(response.body.msg).toBe('Freelancer Not Found');
   });
   test('respond with json containing the freelancer info ', async () => {

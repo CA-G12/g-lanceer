@@ -40,7 +40,7 @@ const getFreelancer = async (req: Request, res: Response) => {
     }
     return { status: 200, data: freelancerUser };
   }
-  return { status: 404, msg: 'Freelancer Not Found' };
+  return { status: 400, msg: 'Freelancer Not Found' };
 };
 
 export default getFreelancer;
