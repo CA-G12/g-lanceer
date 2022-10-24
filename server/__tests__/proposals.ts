@@ -78,7 +78,7 @@ const proposalsTests = () => {
     const response = await request(app)
       .post('/api/v1/proposals')
       .send({
-        description: 'lorem lorem lorem lorem', jobId: 1, id: 10, attachments: 'https://placeholder.com/',
+        description: 'lorem lorem lorem lorem', jobId: 1, attachments: 'https://placeholder.com/',
       })
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
