@@ -23,9 +23,9 @@ function App() {
       try {
         const userObj = await axios.get('/api/v1/user');
         setUser(userObj.data);
-        console.log(userObj.data, 'user');
+        // console.log(userObj.data, 'user');
       } catch (err) {
-        console.log(err, 'axios error');
+        // console.log(err, 'axios error');
       }
     };
     getUser();
