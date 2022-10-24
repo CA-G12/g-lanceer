@@ -1,3 +1,3 @@
-import UserContext from './UserContext';
+import UserContext from './User';
 
 export default UserContext;
