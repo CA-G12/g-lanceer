@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
-  CircularProgress, Pagination, Stack, Snackbar, Alert, TextField,
+  CircularProgress, Pagination, Stack, Snackbar, Alert, TextField, Button,
 } from '@mui/material';
 import { Tabs, JobCard, Filter } from '../../components';
 import './style.css';
@@ -10,6 +10,7 @@ import { JobSearch, ParamsT, TabListInt } from '../../interfaces';
 
 function JobsSearch() {
   const { state } = useLocation();
+  const navigate = useNavigate();
   // states
   const [error, setError] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -85,7 +86,40 @@ function JobsSearch() {
   } else {
     tabChild = (
       <>
-        {jobs.map((job) => (<JobCard userRole="user" job={job} key={job.title} id={job.id} />))}
+        {jobs.map((job) => (
+          <JobCard userRole="client" job={job} key={job.title} id={job.id}>
+
+            <div className="budget-proposal-section">
+              <div className="proposals">
+                proposals:
+                <span>
+                  {' '}
+                  {job.proposals.length}
+                </span>
+              </div>
+              <div className="budget">
+                budget:
+                <span>
+                  $
+                  {budget}
+                </span>
+              </div>
+              <Button
+                style={{
+                  fontSize: '12px',
+                  borderRadius: '20px',
+                  paddingLeft: '15px',
+                  paddingRight: '15px',
+                }}
+                onClick={() => navigate(`/job/${job.id}`)}
+                variant="contained"
+              >
+                Apply Now
+              </Button>
+            </div>
+
+          </JobCard>
+        ))}
       </>
     );
   }
