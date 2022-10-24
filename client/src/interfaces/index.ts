@@ -82,6 +82,14 @@ interface ParamsT {
   category?: string,
   page?: number
 }
+interface FreelancerInfo {
+  name: string
+  title: string
+  image?: string | null
+  major: string
+  portfolio: string
+  brief: string
+}
 
 interface JobAboutPage {
   title: string
@@ -134,4 +142,5 @@ export type {
   User,
   UserContex,
   Props,
+  FreelancerInfo,
 };
