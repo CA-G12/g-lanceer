@@ -9,7 +9,7 @@ const jobSchema = yup.object({
 });
 
 const loginSchema = yup.object({
-  email: yup.string().email().min(8, 'Too Short!').required('Email Required!'),
+  email: yup.string().email().required('Email Required!'),
   password: yup.string().min(8).required('Password Required!'),
 });
 
