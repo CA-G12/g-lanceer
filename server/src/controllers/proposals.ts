@@ -27,6 +27,7 @@ const addProposal = async (req: Request, res: Response) => {
 const deletePropsal = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { userID } = res.locals.user;
+
   const proposal: ProposalInstance | null = await Proposal.findByPk(id);
   if (!proposal) {
     throw serverErrs.BAD_REQUEST('proposal not found');
@@ -38,7 +39,7 @@ const deletePropsal = async (req: Request, res: Response) => {
     }
   }
   await proposal.destroy();
-  return { status: 201, msg: 'deleted successfult' };
+  return { status: 200, msg: 'deleted successfuly' };
 };
 
 export { addProposal, deletePropsal };
