@@ -36,7 +36,6 @@ function JobsSearch() {
   const iconChange: React.ChangeEventHandler<HTMLInputElement> = () => {
     setCategory('');
   };
-
   useEffect(() => {
     const params: ParamsT = {};
 
@@ -87,7 +86,7 @@ function JobsSearch() {
     tabChild = (
       <>
         {jobs.map((job) => (
-          <JobCard job={job} key={job.title} id={job.id}>
+          <JobCard job={job} key={job.title}>
 
             <div className="budget-proposal-section">
               <div className="proposals">

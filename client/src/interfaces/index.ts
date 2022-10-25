@@ -14,6 +14,7 @@ interface FilterProps {
 }
 
 interface Job {
+  id: number,
   title: string,
   description: string,
   budget: number,
@@ -22,7 +23,6 @@ interface Job {
 
 interface JobPropsCard {
   job: Job,
-  id: number,
   children: React.ReactElement
 }
 

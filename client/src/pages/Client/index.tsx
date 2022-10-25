@@ -39,6 +39,7 @@ const proposals = [
 const job = {
 
   // 9
+  id: 6,
   title:
     'I need someone clean up a voice recording from static noise and other background noises',
   description:
@@ -66,7 +67,7 @@ function Client() {
       <Button onClick={handleOpen}>Open modal</Button>
       <JobForm showModel={showModel} handelClose={handleClose} />
 
-      <JobCard job={job} id={5}>
+      <JobCard job={job}>
         <Accordion disabled={!proposals.length}>
           <AccordionSummary>
             <div className="budget-proposal-section budget-proposal-client ">
