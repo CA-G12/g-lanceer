@@ -32,11 +32,10 @@ const deletePropsal = async (req: Request, res: Response) => {
   if (!proposal) {
     throw serverErrs.BAD_REQUEST('proposal not found');
   } if (proposal.freelancerId !== userID) {
-    throw serverErrs.BAD_REQUEST('unauthorized');
-  } if (userID === proposal.freelancerId) {
-    if (proposal.isAccepted) {
-      throw serverErrs.BAD_REQUEST('unauthorized');
-    }
+    throw serverErrs.UNAUTHORIZED('unauthorized');
+  }
+  if (proposal.isAccepted) {
+    throw serverErrs.BAD_REQUEST('the job is already accepted');
   }
   await proposal.destroy();
   return { status: 200, msg: 'deleted successfuly' };
