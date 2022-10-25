@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ProposalInstance } from '../interfaces';
 import { Proposal } from '../models';
-import { postProposalValidation } from '../validation';
+import { editProposalValidation, postProposalValidation } from '../validation';
 import { serverErrs } from '../helpers';
 
 const addProposal = async (req: Request, res: Response) => {
@@ -41,4 +41,32 @@ const deletePropsal = async (req: Request, res: Response) => {
   return { status: 200, msg: 'deleted successfully' };
 };
 
-export { addProposal, deletePropsal };
+const editProposal = async (req: Request, res:Response) => {
+  const { id } = req.params;
+  const { userID } = res.locals.user;
+  const {
+    description,
+    attachments,
+  } = req.body;
+  await editProposalValidation.validate({
+    description,
+    attachments,
+  });
+  const proposal = await Proposal.findByPk(id);
+  if (proposal?.freelancerId !== userID) throw serverErrs.UNAUTHORIZED('unauthorized');
+  if (proposal?.isAccepted) throw serverErrs.BAD_REQUEST('you cant delete it, proposal already accepted');
+  const updatedProposal = await Proposal.update(
+    {
+      description,
+      attachments,
+    },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  console.log(updatedProposal);
+  return { status: 200, data: updatedProposal, msg: 'updated' };
+};
+export { addProposal, deletePropsal, editProposal };
