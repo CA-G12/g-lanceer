@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       { path: '/jobs-search', element: <JobsSearch /> },
       { path: 'job/:id', element: <Job /> },
       { path: 'freelancer/:id', element: <Freelancer /> },
-      { path: 'client/:id', element: <Client /> },
+      { path: '/profile', element: <Client /> },
     ],
   },
   { path: '*', element: <h1>page not found</h1> },
