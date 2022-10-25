@@ -2,6 +2,7 @@ import {
   createContext, useMemo, useState, useEffect,
 } from 'react';
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 import { User, UserContex, Props } from '../interfaces';
 
 export const UserContext = createContext<UserContex>({});
@@ -25,7 +26,14 @@ function UserMemo({ children }: Props) {
   const memo = useMemo(() => ({
     user, setUser,
   }), [user]);
-  if (loading) return <h1>loading</h1>;
+  if (loading) {
+    return (
+      <div className="spinner">
+        <CircularProgress color="inherit" />
+        {' '}
+      </div>
+    );
+  }
   return (
     <div>
       <UserContext.Provider value={memo}>
