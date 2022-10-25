@@ -53,3 +53,7 @@
     transform: translateY(0);
   }
 }
+.nav-page.active button{
+ border-bottom: 2px solid #132754;
+ border-radius: 0 !important;
+}

@@ -13,7 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 import UserContext from '../../context';
 import avatar from '../../assets/Avatar.png';
@@ -22,18 +22,18 @@ import './style.css';
 // initial nav settings
 const freelancerSettings = [
   { label: 'Profile', path: '/freelancer' },
-  { label: 'Jobs', path: '//jobs-search' },
+  { label: 'Jobs', path: '/jobs-search' },
   { label: 'Logout', path: '/' },
 ];
 const clientSettings = [
-  { label: 'Dashboard', path: '/Client' },
+  { label: 'Profile', path: '/profile' },
   { label: 'Logout', path: '/' },
 ];
 const noUserSettings = [
   { label: 'Login', path: '/login' },
   { label: 'signUp', path: '/signup' },
 ];
-const pages = ['Home', 'How It Works', 'Jobs', 'contact'];
+const pages = [{ label: 'Jobs', path: '/jobs-search' }];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -140,20 +140,22 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: '#1C3879',
-                  display: 'block',
-                  mr: '3rem',
-                  fontSize: '18px',
-                  fontWeight: 500,
-                }}
-              >
-                {page}
-              </Button>
+              <NavLink to={page.path} className="nav-page">
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: '#1C3879',
+                    display: 'block',
+                    mr: '3rem',
+                    fontSize: '18px',
+                    fontWeight: 500,
+                  }}
+                >
+                  {page.label}
+                </Button>
+              </NavLink>
             ))}
           </Box>
           {user ? (
