@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface JobProps {
   handelClose: () => void,
   showModel: boolean
@@ -15,12 +17,13 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: []
+  proposals: object
 }
 
 interface JobPropsCard {
   job: Job,
   id: number,
+  children: React.ReactElement
 }
 
 interface JobDetails {
