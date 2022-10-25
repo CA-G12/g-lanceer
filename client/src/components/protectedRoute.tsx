@@ -4,17 +4,14 @@ import { UserContext } from '../context/User';
 
 function ProtectedRoute({ children, isAuthClient }: any) {
   const { pathname } = useLocation(); // to redirect location
-  console.log(pathname);
-  const context = useContext(UserContext);
-  console.log(context);
+  const { user } = useContext(UserContext);
 
-  if (!context.user) {
-    console.log(context.user, 'userrrrr');
+  if (!user) {
     return <Navigate to="/login" replace state={{ currentLocation: pathname }} />;
   }
 
   if (isAuthClient) {
-    if (context.user?.role !== 'client') {
+    if (user?.role !== 'client') {
       return <Navigate to="/login" replace state={{ currentLocation: pathname }} />;
     }
   }
@@ -23,12 +20,9 @@ function ProtectedRoute({ children, isAuthClient }: any) {
 
 function LoginProtectedRoute({ children }: any) {
   const { pathname } = useLocation(); // to redirect location
-  console.log(pathname);
-  const context = useContext(UserContext);
-  console.log(context);
+  const { user } = useContext(UserContext);
 
-  if (context.user) {
-    console.log(context.user, 'userrrrr');
+  if (user) {
     return <Navigate to="/" replace state={{ currentLocation: pathname }} />;
   }
   return children;

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   </ProtectedRoute>,
       },
       {
-        path: 'client/:id',
+        path: '/profile',
         element:
   <ProtectedRoute isAuthClient>
     <Client />

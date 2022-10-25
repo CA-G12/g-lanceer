@@ -13,6 +13,7 @@ import FreelancerInfoCard from './FreelancerInfoCard';
 import JobForm from './addJobForm';
 import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
+import Navbar from './Navbar';
 
 export {
   Category,
@@ -28,4 +29,5 @@ export {
   JobForm,
   ProposalForm,
   JobDetails,
+  Navbar,
 };

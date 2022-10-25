@@ -1,19 +1,21 @@
 import {
-  Button, Typography,
+  Typography,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './style.css';
 import { JobPropsCard } from '../../interfaces';
 
-function JobCard({ job, id }: JobPropsCard) {
+function JobCard({
+  job, children,
+}: JobPropsCard) {
   const {
-    title, description, budget, proposals,
+    title, description,
   } = job;
-  const navigate = useNavigate();
+
   return (
     <div className="content">
       <div className="job-card">
-        <Link to={`/job/${id}`}>
+        <Link to={`/job/${job.id}`}>
           <Typography
             variant="h5"
             gutterBottom
@@ -21,39 +23,12 @@ function JobCard({ job, id }: JobPropsCard) {
           >
             {title}
           </Typography>
-          <p className="description">
+          <div className="description">
             {description}
-          </p>
+          </div>
         </Link>
         <div className="second-section">
-          <div className="budget-proposal-section">
-            <div className="proposals">
-              proposals:
-              <span>
-                {' '}
-                {proposals.length}
-              </span>
-            </div>
-            <div className="budget">
-              budget:
-              <span>
-                $
-                {budget}
-              </span>
-            </div>
-          </div>
-          <Button
-            style={{
-              fontSize: '12px',
-              borderRadius: '20px',
-              paddingLeft: '15px',
-              paddingRight: '15px',
-            }}
-            onClick={() => navigate(`/job/${id}`)}
-            variant="contained"
-          >
-            Apply Now
-          </Button>
+          {children}
         </div>
       </div>
     </div>

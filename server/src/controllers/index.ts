@@ -1,3 +1,4 @@
+import getFreelancer from './freelancer';
 import {
   addJob,
   searchJobs,
@@ -10,4 +11,5 @@ export {
   getJob,
   deleteJob,
   addJob,
+  getFreelancer,
 };
