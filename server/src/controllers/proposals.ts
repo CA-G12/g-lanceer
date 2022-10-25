@@ -66,7 +66,6 @@ const editProposal = async (req: Request, res:Response) => {
       },
     },
   );
-  console.log(updatedProposal);
   return { status: 200, data: updatedProposal, msg: 'updated' };
 };
 export { addProposal, deletePropsal, editProposal };
