@@ -166,7 +166,7 @@ const jobs: JobCreationAttributes[] = [
     category: 'Digital Marketing',
     budget: 900,
     time: '6 months',
-    isOccupied: false,
+    isOccupied: true,
     userId: 4,
   },
   {
@@ -239,7 +239,7 @@ const proposals: ProposalCreationAttributes[] = [
     attachments: 'www.vita-wunderschoen.de',
     isAccepted: false,
     freelancerId: 3,
-    jobId: 1,
+    jobId: 8,
   },
   {
     // full-stack job
@@ -266,7 +266,7 @@ const proposals: ProposalCreationAttributes[] = [
     description:
       'I am Full Stack Developer. I went through your requirements and would like to discuss further regarding more specific details and requirements. I would like to inform you that me along with my team have around 5+ years of experience in Full Stack Developement and complete IT solution including Website, Ecommerce Platforms, ELearning Platforms, Single page application and Automation. We strictly follow the software development standard and and our work is client centric. We respect deadline and our work include back-end, front-end , customization website security and SEO.',
     attachments: 'https://caseace.in/',
-    isAccepted: false,
+    isAccepted: true,
     freelancerId: 2,
     jobId: 1,
   },

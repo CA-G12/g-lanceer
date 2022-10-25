@@ -8,6 +8,11 @@ const jobSchema = yup.object({
   description: yup.string().min(20, 'Too Short!').required('Job Description Title Required'),
 });
 
+const loginSchema = yup.object({
+  email: yup.string().email().required('Email Required!'),
+  password: yup.string().min(8).required('Password Required!'),
+});
+
 const ProposalSchema = yup.object({
   proposalText: yup.string()
     .min(15, 'Too Short!')
@@ -32,4 +37,6 @@ const userInfoSchema = yup.object({
     .url('portfolio should be a valid URL'),
 });
 
-export { jobSchema, ProposalSchema, userInfoSchema };
+export {
+  jobSchema, ProposalSchema, userInfoSchema, loginSchema,
+};

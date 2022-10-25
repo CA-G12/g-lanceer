@@ -5,17 +5,15 @@ import proposalsRouter from './proposals';
 import { passportAuthenticate, checkUserAuth, passportAuth } from '../middlewares/auth';
 import getUserData from '../middlewares/getUserData';
 import ExpressWrapper from '../ExpressWrapper';
+import freelancerRouter from './freelancer';
+import clientRouter from './client';
 
 const router = express.Router();
 
 passportAuth(passport);
 router.use('/jobs', jobsRouter);
 router.use('/proposals', proposalsRouter);
+router.use('/freelancer', freelancerRouter);
 router.get('/user', passportAuthenticate, ExpressWrapper(getUserData));
-router.use('/client', passportAuthenticate, checkUserAuth('client'), (req, res) => {
-  res.send('client');
-});
-router.use('/freelancer', passportAuthenticate, checkUserAuth('freelancer'), (req, res) => {
-  res.send('freelancer');
-});
+router.use('/client', passportAuthenticate, checkUserAuth('client'), clientRouter);
 export default router;
