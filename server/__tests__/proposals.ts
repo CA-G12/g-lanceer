@@ -117,8 +117,8 @@ const proposalsTests = () => {
       .delete('/api/v1/proposals/1')
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
-      .expect(200);
-    expect(response.body.msg).toBe('deleted successfuly');
+      .expect(400);
+    expect(response.body.message).toBe('proposal not found');
   });
 };
 export default proposalsTests;
