@@ -17,13 +17,12 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: any
+  proposals: object
 }
 
 interface JobPropsCard {
   job: Job,
   id: number,
-  userRole: string,
   children: React.ReactElement
 }
 

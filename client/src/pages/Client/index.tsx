@@ -66,7 +66,7 @@ function Client() {
       <Button onClick={handleOpen}>Open modal</Button>
       <JobForm showModel={showModel} handelClose={handleClose} />
 
-      <JobCard userRole="client" job={job} id={5}>
+      <JobCard job={job} id={5}>
         <Accordion disabled={!proposals.length}>
           <AccordionSummary>
             <div className="budget-proposal-section budget-proposal-client ">
