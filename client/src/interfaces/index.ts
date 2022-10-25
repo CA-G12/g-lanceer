@@ -18,7 +18,8 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: object
+  proposals: object,
+  userId: number
 }
 
 interface JobPropsCard {
@@ -93,6 +94,7 @@ interface JobSearch {
   budget: number,
   proposals: [];
   category: string,
+  userId: number
 }
 
 interface ParamsT {
@@ -119,7 +121,7 @@ interface JobAboutPage {
   user?: User
 }
 interface User {
-  id: number,
+  userID: number,
   email: string,
   name: string,
   role: string

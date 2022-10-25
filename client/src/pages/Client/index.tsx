@@ -45,7 +45,7 @@ const job = {
   budget: 900,
   // time: '2 months',
   // isOccupied: false,
-  // userId: 4,
+  userId: 2,
   proposals,
 
 };

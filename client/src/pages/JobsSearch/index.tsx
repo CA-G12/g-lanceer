@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   CircularProgress, Pagination, Stack, Snackbar, Alert, TextField, Button,
@@ -7,6 +7,7 @@ import { Tabs, JobCard, Filter } from '../../components';
 import './style.css';
 import getJobs from '../../helpers';
 import { JobSearch, ParamsT, TabListInt } from '../../interfaces';
+import UserContext from '../../context';
 
 function JobsSearch() {
   const { state } = useLocation();
@@ -21,6 +22,7 @@ function JobsSearch() {
   const [category, setCategory] = useState<string>(state?.category || '');
   const [title, setTitle] = useState<string>('');
 
+  const { user } = useContext(UserContext);
   const changeCategory: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setCategory(e.target.value);
   };
@@ -64,12 +66,12 @@ function JobsSearch() {
       } catch (err) {
         setLoading(false);
         setError(true);
-        //
       }
     };
 
     getData();
   }, [budget, category, title, page]);
+  console.log(jobs);
 
   // tabchild for most popular tab
   let tabChild: React.ReactElement | null = null;
@@ -103,18 +105,37 @@ function JobsSearch() {
                   {budget}
                 </span>
               </div>
-              <Button
-                style={{
-                  fontSize: '12px',
-                  borderRadius: '20px',
-                  paddingLeft: '15px',
-                  paddingRight: '15px',
-                }}
-                onClick={() => navigate(`/job/${job.id}`)}
-                variant="contained"
-              >
-                Apply Now
-              </Button>
+              {(user?.role === 'client')
+                ? (
+                  <Button
+                    style={{
+                      fontSize: '12px',
+                      borderRadius: '20px',
+                      paddingLeft: '15px',
+                      paddingRight: '15px',
+                      display: 'none',
+                    }}
+                    onClick={() => navigate(`/job/${job.id}`)}
+                    variant="contained"
+                  >
+                    Apply Now
+                  </Button>
+                )
+                : (
+                  <Button
+                    style={{
+                      fontSize: '12px',
+                      borderRadius: '20px',
+                      paddingLeft: '15px',
+                      paddingRight: '15px',
+                    }}
+                    onClick={() => navigate(`/job/${job.id}`)}
+                    variant="contained"
+                  >
+                    Apply Now
+                  </Button>
+                )}
+
             </div>
 
           </JobCard>
@@ -128,7 +149,6 @@ function JobsSearch() {
     child: tabChild,
   },
   { label: 'Best Match', child: <h1>hhhhhhhh</h1> }];
-
   return (
     <div className="container">
       <div className="searrchInput">
