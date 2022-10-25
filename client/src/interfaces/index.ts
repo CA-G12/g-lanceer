@@ -49,9 +49,25 @@ interface ProposalProps {
 }
 
 interface Proposal {
-  username: string
+  id: number
   description: string,
   attachments: string,
+  isAccepted: boolean,
+  jobId: number,
+  freelancerId: number,
+  createdAt: string,
+  updatedAt: string,
+  job?: {
+    title: string
+  }
+  freelancer?: {
+    id: number,
+    userId: number,
+    user: {
+      name: string,
+    },
+  },
+
 }
 interface PropsProposalCard {
   proposal: Proposal

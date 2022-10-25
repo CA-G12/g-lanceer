@@ -1,10 +1,12 @@
 .wrapper-proposal{
+  margin-bottom: 1.5rem;
   width: 100%;
-  padding: 5px 15px;
-  background-color: #eee;
+  padding: 10px 15px;
+  background-color: rgba(244, 244, 244, 0.45);
   min-height: 115px;
   border:0.3px solid #ccc;
   border-radius: 6px;
+  position: relative;
   
 }
 .content-proposal{
@@ -16,7 +18,7 @@
 .content-proposal h3{
   font-size: 16px;
   color:#1C3879;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .wrapper-proposal p{
@@ -27,5 +29,26 @@
 }
 .link-attach{
   color: #1C3879;
-  font-size: 13px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.freelancer-prop-btns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+.freelancer-prop-btn{
+  cursor: pointer;
+}
+.prop-date{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #3f4444b6;
 }
