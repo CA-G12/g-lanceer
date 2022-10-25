@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+import { FreelancerWithProposalsInstance, ProposalInstance } from '../interfaces';
 import {
-  FreelancerWithProposalsInstance, ProposalInstance,
-} from '../interfaces';
-import { Freelancer, Proposal, User } from '../models';
+  Freelancer, Job, Proposal, User,
+} from '../models';
 import { updateFreelancerValidation } from '../validation';
 
 const getFreelancer = async (req: Request, res: Response) => {
@@ -20,6 +20,7 @@ const getFreelancer = async (req: Request, res: Response) => {
           model: Proposal,
           where: { isAccepted: userID === Number(paramsUserId) ? [false, true] : true },
           required: false,
+          include: [{ model: Job, attributes: ['title'] }],
         }],
       where: { userId: paramsUserId },
     },
