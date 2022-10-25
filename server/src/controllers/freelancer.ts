@@ -48,21 +48,19 @@ const getFreelancer = async (req: Request, res: Response) => {
 
 const updateFreelancerInfo = async (req: Request, res: Response) => {
   const { userID } = res.locals.user;
-  let updated = false;
   await updateFreelancerValidation.validate(req.body);
 
   if (req.body.name) {
     await User.update(
       { name: req.body.name },
-      { returning: true, where: { id: userID } },
+      { where: { id: userID } },
     );
-    updated = true;
   }
   const UpdatedFreelancer = await Freelancer.update(
     req.body,
     { where: { userId: userID } },
   );
-  return { status: 200, msg: UpdatedFreelancer[0] || updated ? 'Freelancer Updated successfully' : 'No updated records' };
+  return { status: 200, msg: UpdatedFreelancer[0] ? 'Freelancer Updated successfully' : 'No updated records' };
 };
 
 export { getFreelancer, updateFreelancerInfo };
