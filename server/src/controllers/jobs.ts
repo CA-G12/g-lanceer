@@ -74,6 +74,7 @@ const searchJobs = async (req: Request) => {
 
   const jobs = await Job.findAndCountAll({
     attributes: [
+      'id',
       'title',
       'description',
       'category',
