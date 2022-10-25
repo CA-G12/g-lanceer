@@ -111,7 +111,14 @@ const proposalsTests = () => {
       .expect(401);
     expect(response.body.message).toBe('unauthorized');
   });
-
+  test('delete proposal with token and userID', async () => {
+    const response = await request(app)
+      .delete('/api/v1/proposals/1')
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(response.body.msg).toBe('deleted successfuly');
+  });
   test('delete proposal with token ', async () => {
     const response = await request(app)
       .delete('/api/v1/proposals/1')
