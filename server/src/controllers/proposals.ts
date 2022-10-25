@@ -38,7 +38,7 @@ const deletePropsal = async (req: Request, res: Response) => {
     throw serverErrs.BAD_REQUEST('the job is already accepted');
   }
   await proposal.destroy();
-  return { status: 200, msg: 'deleted successfuly' };
+  return { status: 200, msg: 'deleted successfully' };
 };
 
 export { addProposal, deletePropsal };

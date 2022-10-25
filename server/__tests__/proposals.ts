@@ -1,6 +1,7 @@
 import request from 'supertest';
 import dotenv from 'dotenv';
 import app from '../src/app';
+import insertDB from '../src/db/config/build';
 
 const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
 dotenv.config();
@@ -88,6 +89,7 @@ const proposalsTests = () => {
     expect(response.body.data.isAccepted).toBeFalsy();
     expect(response.body.data.attachments).toBe('https://placeholder.com/');
   });
+  // delete poroposals
   test('delete proposal with out token', async () => {
     const response = await request(app)
       .delete('/api/v1/proposals/2')
@@ -97,7 +99,7 @@ const proposalsTests = () => {
   });
   test('delete proposal with token and not found proposals', async () => {
     const response = await request(app)
-      .delete('/api/v1/proposals/23')
+      .delete('/api/v1/proposals/234')
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(400);
@@ -111,13 +113,14 @@ const proposalsTests = () => {
       .expect(401);
     expect(response.body.message).toBe('unauthorized');
   });
-  test('delete proposal with token and userID', async () => {
+  test('delete proposal with token ', async () => {
+    await insertDB();
     const response = await request(app)
       .delete('/api/v1/proposals/1')
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(200);
-    expect(response.body.msg).toBe('deleted successfuly');
+    expect(response.body.msg).toBe('deleted successfully');
   });
   test('delete proposal with token ', async () => {
     const response = await request(app)
