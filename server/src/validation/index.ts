@@ -14,6 +14,10 @@ const postProposalValidation = yup.object().shape({
   description: yup.string().required().min(15),
   attachments: yup.string().nullable().url(),
 });
+const editProposalValidation = yup.object().shape({
+  description: yup.string().min(15),
+  attachments: yup.string().nullable().url(),
+});
 const addJobValidation = yup.object().shape({
   title: yup.string().required(),
   budget: yup.number().required(),
@@ -75,4 +79,5 @@ export {
   postProposalValidation,
   addJobValidation,
   updateFreelancerValidation,
+  editProposalValidation,
 };

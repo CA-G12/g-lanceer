@@ -5,7 +5,9 @@ import {
   getJob,
   deleteJob,
 } from './jobs';
-import { addProposal, deletePropsal, acceptProposal } from './proposals';
+import {
+  addProposal, deletePropsal, editProposal, acceptProposal,
+} from './proposals';
 
 export {
   searchJobs,
@@ -15,6 +17,7 @@ export {
   addProposal,
   deletePropsal,
   getFreelancer,
+  editProposal,
   updateFreelancerInfo,
   acceptProposal,
 };
