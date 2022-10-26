@@ -15,7 +15,7 @@ function JobCard({
   return (
     <div className="content">
       <div className="job-card">
-        <Link to={`/job/${job.id}`}>
+        <Link to={`/job/${job.id}`} className="link-description">
           <Typography
             variant="h5"
             gutterBottom

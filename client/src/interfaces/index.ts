@@ -75,7 +75,7 @@ interface PropsProposalCard {
 
 interface TabListInt {
   label: string;
-  child: JSX.Element | JSX.Element[];
+  child: JSX.Element | JSX.Element[] | null;
 }
 interface PropsTabList {
   tablist: Array<TabListInt>,
