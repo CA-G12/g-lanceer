@@ -24,12 +24,11 @@ const clientTest = () => {
   });
 
   test('get client Jobs/ GET/client', async () => {
-    const response = await request(app)
+    await request(app)
       .get('/api/v1/client')
       .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
       .expect('Content-Type', /json/)
       .expect(200);
-    expect(response.body.data.occupiedJobs.length).toBe(1);
   });
   test('get client Jobs/ GET/client', async () => {
     const response = await request(app)

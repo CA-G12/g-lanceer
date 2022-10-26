@@ -14,6 +14,10 @@ const postProposalValidation = yup.object().shape({
   description: yup.string().required().min(15),
   attachments: yup.string().nullable().url(),
 });
+const editProposalValidation = yup.object().shape({
+  description: yup.string().min(15),
+  attachments: yup.string().nullable().url(),
+});
 const addJobValidation = yup.object().shape({
   title: yup.string().required(),
   budget: yup.number().required(),
@@ -26,6 +30,59 @@ const loginValidation = yup.object().shape({
   email: yup.string().required().email(),
 });
 
+const updateFreelancerValidation = yup.object().shape({
+  id: yup.number().notRequired().test('id', 'Updating id is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  userId: yup.number().notRequired().test('userId', 'Updating userId is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  createdAt: yup.number().notRequired().test('createdAt', 'Updating createdAt is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  updatedAt: yup.number().notRequired().test('updatedAt', 'Updating updatedAt is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  proposals: yup.number().notRequired().test('proposals', 'Updating proposals is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  name: yup.string()
+    .optional()
+    .min(1, 'name must not be Empty'),
+  major: yup.string()
+    .optional()
+    .min(1, 'major must not be Empty'),
+  title: yup.string()
+    .optional()
+    .min(1, 'title must not be Empty'),
+  portfolio: yup.string()
+    .nullable()
+    .optional()
+    .min(5, 'portfolio must be more than 5 characters long')
+    .url('portfolio should be a valid URL'),
+});
+
 export {
-  queryValidation, queryJobValidation, postProposalValidation, addJobValidation, loginValidation,
+  queryValidation,
+  queryJobValidation,
+  postProposalValidation,
+  addJobValidation,
+  updateFreelancerValidation,
+  editProposalValidation,
+  loginValidation,
 };

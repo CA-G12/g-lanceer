@@ -1,11 +1,13 @@
-import getFreelancer from './freelancer';
+import { getFreelancer, updateFreelancerInfo } from './freelancer';
 import {
   addJob,
   searchJobs,
   getJob,
   deleteJob,
 } from './jobs';
-import { addProposal, deletePropsal } from './proposals';
+import {
+  addProposal, deletePropsal, editProposal, acceptProposal,
+} from './proposals';
 
 export {
   searchJobs,
@@ -15,4 +17,7 @@ export {
   addProposal,
   deletePropsal,
   getFreelancer,
+  editProposal,
+  updateFreelancerInfo,
+  acceptProposal,
 };
