@@ -9,31 +9,28 @@ import ProposalJob from '../../components/proposalJob/index';
 import { Proposal } from '../../interfaces';
 
 const proposal: Proposal = {
-  username: 'Ahmed Safi',
-  description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci quis soluta ipsa minima.',
+  id: 1,
+  description: 'Hi there,We would like to translate your text from Polish to English and provide you with high quality professional translation service.We have worked on several similar projects in past. We are the leading translation agency of this website with 9 years of experience.',
   attachments: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
+  isAccepted: true,
+  jobId: 6,
+  freelancerId: 1,
+  createdAt: '2022-10-25T07:51:50.064Z',
+  updatedAt: '2022-10-25T07:51:50.064Z',
+  job: {
+    title: 'Back End Developer',
+  },
+  freelancer: {
+    id: 1,
+    userId: 1,
+    user: {
+      name: 'Ahmed',
+    },
+  },
 };
 
 const proposals = [
-  {
-    // translate job
-    description:
-      'Hi there,We would like to translate your text from Polish to English and provide you with high quality professional translation service.We have worked on several similar projects in past. We are the leading translation agency of this website with 9 years of experience.',
-    attachments: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
-    freelancerId: 1,
-    isAccepted: false,
-    jobId: 6,
-  },
-  {
-    // animation job
-    description:
-      'Hello I have reviewed your job description and completely understand your requirement for I need a cartoon/animation artist. I can start working on your project immediately.I have expertise in area of After Effects, Graphic Design, Photoshop, Animation and Logo Design',
-    attachments: 'https://www.freelancer.com/u/MetaDesignIndia',
-    isAccepted: false,
-    freelancerId: 5,
-    jobId: 7,
-  },
-
+  proposal, proposal,
 ];
 
 const job = {
@@ -47,8 +44,8 @@ const job = {
   // category: 'Music & Audio',
   budget: 900,
   // time: '2 months',
-  // isOccupied: false,
-  // userId: 4,
+  isOccupied: false,
+  userId: 2,
   proposals,
 
 };

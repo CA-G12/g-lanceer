@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { FreelancerWithProposalsInstance, ProposalInstance } from '../interfaces';
-import { Freelancer, Proposal, User } from '../models';
+import {
+  Freelancer, Job, Proposal, User,
+} from '../models';
+import { updateFreelancerValidation } from '../validation';
 
 const getFreelancer = async (req: Request, res: Response) => {
   const paramsUserId = req.params.id;
@@ -17,6 +20,7 @@ const getFreelancer = async (req: Request, res: Response) => {
           model: Proposal,
           where: { isAccepted: userID === Number(paramsUserId) ? [false, true] : true },
           required: false,
+          include: [{ model: Job, attributes: ['title'] }],
         }],
       where: { userId: paramsUserId },
     },
@@ -43,4 +47,21 @@ const getFreelancer = async (req: Request, res: Response) => {
   return { status: 400, msg: 'Freelancer Not Found' };
 };
 
-export default getFreelancer;
+const updateFreelancerInfo = async (req: Request, res: Response) => {
+  const { userID } = res.locals.user;
+  await updateFreelancerValidation.validate(req.body);
+
+  if (req.body.name) {
+    await User.update(
+      { name: req.body.name },
+      { where: { id: userID } },
+    );
+  }
+  const UpdatedFreelancer = await Freelancer.update(
+    req.body,
+    { where: { userId: userID } },
+  );
+  return { status: 200, msg: UpdatedFreelancer[0] ? 'Freelancer Updated successfully' : 'No updated records' };
+};
+
+export { getFreelancer, updateFreelancerInfo };

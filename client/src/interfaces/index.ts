@@ -18,7 +18,10 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: object
+  proposals: object,
+  userId: number,
+  isOccupied: boolean,
+
 }
 
 interface JobPropsCard {
@@ -49,9 +52,25 @@ interface ProposalProps {
 }
 
 interface Proposal {
-  username: string
+  id: number
   description: string,
   attachments: string,
+  isAccepted: boolean,
+  jobId: number,
+  freelancerId: number,
+  createdAt: string,
+  updatedAt: string,
+  job?: {
+    title: string
+  }
+  freelancer?: {
+    id: number,
+    userId: number,
+    user: {
+      name: string,
+    },
+  },
+
 }
 interface PropsProposalCard {
   proposal: Proposal
@@ -77,6 +96,8 @@ interface JobSearch {
   budget: number,
   proposals: [];
   category: string,
+  userId: number,
+  isOccupied: boolean
 }
 
 interface ParamsT {
@@ -103,7 +124,7 @@ interface JobAboutPage {
   user?: User
 }
 interface User {
-  id: number,
+  userID: number,
   email: string,
   name: string,
   role: string
