@@ -4,10 +4,12 @@ import freelancerTests from './freelancer';
 import clientTest from './client';
 import jobsTest from './jobs';
 import proposalsTests from './proposals';
+import AuthTests from './auth';
 
 beforeAll(() => insertDB());
 afterAll(() => sequelize.close());
 
+describe('Auth APIs', AuthTests);
 describe('Jobs API', jobsTest);
 describe('freelancer API /api/v1/freelancer', freelancerTests);
 describe('proposals  API /api/v1/proposals', proposalsTests);
