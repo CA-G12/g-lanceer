@@ -23,6 +23,36 @@ const addJobValidation = yup.object().shape({
 });
 
 const updateFreelancerValidation = yup.object().shape({
+  id: yup.number().notRequired().test('id', 'Updating id is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  userId: yup.number().notRequired().test('userId', 'Updating userId is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  createdAt: yup.number().notRequired().test('createdAt', 'Updating createdAt is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  updatedAt: yup.number().notRequired().test('updatedAt', 'Updating updatedAt is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
+  proposals: yup.number().notRequired().test('proposals', 'Updating proposals is not allowed', (value) => {
+    if (value) {
+      return false;
+    }
+    return true;
+  }),
   name: yup.string()
     .optional()
     .min(1, 'name must not be Empty'),
