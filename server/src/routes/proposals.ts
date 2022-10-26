@@ -7,5 +7,5 @@ const proposalsRouter = express.Router();
 
 proposalsRouter.post('/', passportAuthenticate, checkUserAuth('freelancer'), ExpressWrapper(addProposal));
 proposalsRouter.delete('/:id', passportAuthenticate, checkUserAuth('freelancer'), ExpressWrapper(deletePropsal));
-proposalsRouter.patch('/', passportAuthenticate, checkUserAuth('client'), ExpressWrapper(acceptProposal));
+proposalsRouter.patch('/:id', passportAuthenticate, checkUserAuth('client'), ExpressWrapper(acceptProposal));
 export default proposalsRouter;

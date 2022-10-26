@@ -42,8 +42,7 @@ const deletePropsal = async (req: Request, res: Response) => {
   return { status: 200, msg: 'deleted successfully' };
 };
 const acceptProposal = async (req: Request, res: Response) => {
-  // const { id } = req.params; ask lina
-  const { id } = req.body;
+  const { id } = req.params;
   const { userID } = res.locals.user;
 
   const proposal = await Proposal.findByPk(id);
@@ -57,7 +56,7 @@ const acceptProposal = async (req: Request, res: Response) => {
     await Proposal.destroy({ where: { isAccepted: false, jobId }, transaction: t });
     await job?.update({ isOccupied: true }, { transaction: t });
   });
-  return { status: 200, msg: 'proposal Accepted' };
+  return { status: 200, msg: 'Proposal Accepted' };
 };
 
 export { addProposal, deletePropsal, acceptProposal };
