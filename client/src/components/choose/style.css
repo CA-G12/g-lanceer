@@ -1,0 +1,79 @@
+/* .freelancer-img , .client-img{
+  border-radius: 10px;
+  width: 40%;
+  margin: 4rem 0px 3rem 3rem;
+}
+.choose-container{
+  width: 90%;
+  margin: 0 auto;
+}
+.freelancer-div{
+  position: relative;
+}
+.freelancer-div span{
+  position: absolute;
+    bottom: 9rem;
+  left: 5.5rem;
+  color: white;
+  font-size: 23px;
+} */
+.choose-container{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 4rem 0px;
+}
+
+h2{
+  text-align: center;
+  color: #1C3879;
+  margin-top: 3rem;
+}
+
+.img-container{
+  display: flex;
+  gap: 1rem;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+/* .freelancer-img , .client-img{
+  border-radius: 10px;
+  width: 80%;
+   margin: 4rem 0px 3rem 3rem; 
+}
+
+/* .freelancer-div span{
+  position: absolute;
+  bottom: 9rem;
+  left: 5.5rem;
+  color: white;
+  font-size: 23px;
+}  */
+.freelancer-div{
+  background-image: url(../../assets/freelancer2.png);
+  width: 49%;
+  height: 285px;
+  border-radius: 10px;
+  position: relative;
+}
+.freelancer-div span{
+  font-size: 25px;
+    color: white;
+    position: absolute;
+    bottom: 8rem;
+    left: 5rem;
+}
+.client-div{
+  background-image: url(../../assets/client2.png);
+  width: 49%;
+  height: 285px;
+  border-radius: 10px;
+  position: relative;
+}
+.client-div span{
+  font-size: 25px;
+    color: white;
+    position: absolute;
+    bottom: 8rem;
+    left: 7rem;
+}

@@ -1,0 +1,13 @@
+.css-m5vj9m-MuiStepper-root {
+
+  width: 80%;
+  margin-left: 6rem;
+
+}
+.form-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+}

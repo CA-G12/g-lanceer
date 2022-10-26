@@ -1,0 +1,89 @@
+import { InputLabel, TextField, Button } from '@mui/material';
+import { useFormik } from 'formik';
+import { signUpSchema } from '../../validation';
+import './style.css';
+
+function Signup() {
+  const formik = useFormik({
+    initialValues: {
+      userName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: signUpSchema,
+    onSubmit: (values) => {
+      console.log(values, 'valuessss');
+      formik.resetForm();
+    },
+  });
+  return (
+    <div className="s-u-form">
+      <h3>Welcome to Sign Up</h3>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="form-username">
+          <InputLabel className="title-input">Username</InputLabel>
+          <TextField
+            className="input-login"
+            error={formik.touched.userName && Boolean(formik.errors.userName)}
+            helperText={formik.errors.userName ? formik.errors.userName : ' '}
+            name="userName"
+            id="userName"
+            value={formik.values.userName}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </div>
+        <div className="form-email">
+          <InputLabel className="title-input">Email</InputLabel>
+          <TextField
+            className="input-login"
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.errors.email ? formik.errors.email : ' '}
+            name="email"
+            id="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </div>
+        <div className="form-password">
+          <InputLabel className="title-input">Password</InputLabel>
+          <TextField
+            id="password"
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.errors.password ? formik.errors.password : ' '}
+            name="password"
+            type="password"
+            className="input-login"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </div>
+        <div className="form-password-confirm">
+          <InputLabel className="title-input">Confirm Password</InputLabel>
+          <TextField
+            id="confirmPassword"
+            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+            helperText={formik.errors.confirmPassword ? formik.errors.confirmPassword : ' '}
+            name="confirmPassword"
+            type="password"
+            className="input-login"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </div>
+        <Button
+          variant="contained"
+          type="submit"
+          style={{ width: '25%', margin: '0 auto', marginTop: '10px' }}
+        >
+          Submit
+        </Button>
+      </form>
+    </div>
+  );
+}
+export default Signup;
