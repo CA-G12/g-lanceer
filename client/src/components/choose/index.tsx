@@ -1,34 +1,30 @@
 import './style.css';
 import { Button } from '@mui/material';
 
-function Choose() {
+function Choose({ setUserRole, setActiveStep }: any) {
+  const handleClick = (role: string) => {
+    setUserRole(role);
+    setActiveStep((activeStep: number) => activeStep + 1);
+  };
   return (
     <>
       <h2>Join as a Client or Freelancer</h2>
       <div className="choose-container">
         <Button
           variant="contained"
-          type="submit"
-          style={{ width: '25%', marginTop: '10px' }}
+          onClick={() => handleClick('freelancer')}
+          style={{ width: '25%', height: '60px' }}
+
         >
           Freelancer
         </Button>
         <Button
           variant="contained"
-          type="submit"
-          style={{ width: '25%', marginTop: '10px' }}
+          onClick={() => handleClick('client')}
+          style={{ width: '25%', height: '60px' }}
         >
           Client
         </Button>
-        {/* <h2>Join as a Client or Freelancer</h2>
-      <div className="img-container">
-        <div className="freelancer-div">
-          <span> I am a Freelancer</span>
-        </div>
-        <div className="client-div">
-          <span> I am a Client</span>
-        </div>
-      </div> */}
       </div>
     </>
   );

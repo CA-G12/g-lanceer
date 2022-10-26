@@ -1,9 +1,20 @@
 import { InputLabel, TextField, Button } from '@mui/material';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { signUpSchema } from '../../validation';
+
 import './style.css';
 
-function Signup() {
+function Signup({ setActiveStep, userRole }: any) {
+  const navigate = useNavigate();
+
+  const checkUser = () => {
+    if (userRole === 'freelancer') {
+      setActiveStep((activeStep: number) => activeStep + 1);
+    } else {
+      navigate('/profile');
+    }
+  };
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -14,14 +25,16 @@ function Signup() {
     validationSchema: signUpSchema,
     onSubmit: (values) => {
       console.log(values, 'valuessss');
+      checkUser();
       formik.resetForm();
     },
   });
+
   return (
     <div className="s-u-form">
       <h3>Welcome to Sign Up</h3>
       <form onSubmit={formik.handleSubmit}>
-        <div className="form-username">
+        <div className="form-input">
           <InputLabel className="title-input">Username</InputLabel>
           <TextField
             className="input-login"
@@ -34,7 +47,7 @@ function Signup() {
             variant="outlined"
           />
         </div>
-        <div className="form-email">
+        <div className="form-input">
           <InputLabel className="title-input">Email</InputLabel>
           <TextField
             className="input-login"
@@ -47,7 +60,7 @@ function Signup() {
             variant="outlined"
           />
         </div>
-        <div className="form-password">
+        <div className="form-input">
           <InputLabel className="title-input">Password</InputLabel>
           <TextField
             id="password"
@@ -61,7 +74,7 @@ function Signup() {
             variant="outlined"
           />
         </div>
-        <div className="form-password-confirm">
+        <div className="form-input">
           <InputLabel className="title-input">Confirm Password</InputLabel>
           <TextField
             id="confirmPassword"

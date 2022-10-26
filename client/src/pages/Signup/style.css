@@ -1,13 +1,9 @@
-.css-m5vj9m-MuiStepper-root {
-
-  width: 80%;
-  margin-left: 6rem;
-
+.css-m5vj9m-MuiStepper-root{
+  width: 45%;
+  margin: 0 auto;
 }
-.form-container{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: aqua;
+
+.css-2royc9 {
+  width: 45%;
+  margin: 0 auto;
 }

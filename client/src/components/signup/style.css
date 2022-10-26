@@ -7,5 +7,14 @@ h3{
   margin-top: 2rem;
 }
 .s-u-form{
-  margin:  0 auto;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+form .form-input label{
+      width: 50%;
+      display: flr;
+      display: flex;
+      padding-left: 12rem;
 }
