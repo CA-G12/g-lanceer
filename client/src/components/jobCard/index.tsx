@@ -28,7 +28,7 @@ function JobCard({
               {title}
             </Typography>
           </Link>
-          {user?.userID === job.userId && <DeleteIcon />}
+          {user?.userID === job.userId && job.isOccupied === false && <DeleteIcon />}
         </div>
         <div className="description">
           {description}

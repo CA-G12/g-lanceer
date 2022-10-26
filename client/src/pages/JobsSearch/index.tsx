@@ -71,7 +71,6 @@ function JobsSearch() {
 
     getData();
   }, [budget, category, title, page]);
-  console.log(jobs);
 
   // tabchild for most popular tab
   let tabChild: React.ReactElement | null = null;
@@ -105,36 +104,20 @@ function JobsSearch() {
                   {budget}
                 </span>
               </div>
-              {(user?.role === 'client')
-                ? (
-                  <Button
-                    style={{
-                      fontSize: '12px',
-                      borderRadius: '20px',
-                      paddingLeft: '15px',
-                      paddingRight: '15px',
-                      display: 'none',
-                    }}
-                    onClick={() => navigate(`/job/${job.id}`)}
-                    variant="contained"
-                  >
-                    Apply Now
-                  </Button>
-                )
-                : (
-                  <Button
-                    style={{
-                      fontSize: '12px',
-                      borderRadius: '20px',
-                      paddingLeft: '15px',
-                      paddingRight: '15px',
-                    }}
-                    onClick={() => navigate(`/job/${job.id}`)}
-                    variant="contained"
-                  >
-                    Apply Now
-                  </Button>
-                )}
+              {user?.role !== 'client' && (
+                <Button
+                  style={{
+                    fontSize: '12px',
+                    borderRadius: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
+                  }}
+                  onClick={() => navigate(`/job/${job.id}`)}
+                  variant="contained"
+                >
+                  Apply Now
+                </Button>
+              )}
 
             </div>
 
@@ -143,6 +126,7 @@ function JobsSearch() {
       </>
     );
   }
+
   // tablist props
   const tablist: Array<TabListInt> = [{
     label: 'Most Popular',

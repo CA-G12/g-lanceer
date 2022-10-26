@@ -19,7 +19,9 @@ interface Job {
   description: string,
   budget: number,
   proposals: object,
-  userId: number
+  userId: number,
+  isOccupied: boolean,
+
 }
 
 interface JobPropsCard {
@@ -94,7 +96,8 @@ interface JobSearch {
   budget: number,
   proposals: [];
   category: string,
-  userId: number
+  userId: number,
+  isOccupied: boolean
 }
 
 interface ParamsT {
