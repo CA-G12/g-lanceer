@@ -53,6 +53,7 @@ const editProposal = async (req: Request, res:Response) => {
     attachments,
   });
   const proposal = await Proposal.findByPk(id);
+  if (!proposal) throw serverErrs.BAD_REQUEST('proposal not found');
   if (proposal?.freelancerId !== userID) throw serverErrs.UNAUTHORIZED('unauthorized');
   if (proposal?.isAccepted) throw serverErrs.BAD_REQUEST('you cant delete it, proposal already accepted');
   const updatedProposal = await Proposal.update(
