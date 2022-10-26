@@ -41,6 +41,7 @@ const AuthTests = () => {
       .expect('Content-Type', /json/)
       .expect(400);
     expect(response.body.msg).toBe('Wrong password');
+    expect(response.headers['set-cookie']).toBeUndefined();
   });
   test('respond with json containing error /wrong password/', async () => {
     const response = await request(app)
@@ -49,6 +50,14 @@ const AuthTests = () => {
       .expect('Content-Type', /json/)
       .expect(200);
     expect(response.body.msg).toBe('logged in successfully');
+  });
+  test('response header contains set-cookie header', async () => {
+    const response = await request(app)
+      .post('/api/v1/auth/login')
+      .send({ email: 'ahmed@gmail.com', password: '12345678' })
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(response.headers['set-cookie']).toBeTruthy();
   });
 };
 
