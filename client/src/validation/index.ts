@@ -53,6 +53,20 @@ const thirdStepValidation = yup.object({
   Major: yup
     .string()
     .required('Major is required'),
+  portfolio: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
+  description: yup
+    .string()
+    .optional()
+    .default(''),
+  image: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
 });
 
 export {
