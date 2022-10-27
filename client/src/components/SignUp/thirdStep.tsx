@@ -1,4 +1,3 @@
-import * as yup from 'yup';
 import {
   FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material';
@@ -8,15 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import data from '../../categoris';
 import './style.css';
 import TextEditor from '../TextEditor';
-
-const validationSchema = yup.object({
-  Title: yup
-    .string()
-    .required('Title is required'),
-  Major: yup
-    .string()
-    .required('Major is required'),
-});
+import { thirdStepValidation } from '../../validation';
 
 function ThirdStepSignUp() {
   const formik = useFormik({
@@ -27,7 +18,7 @@ function ThirdStepSignUp() {
       description: '',
       image: '',
     },
-    validationSchema,
+    validationSchema: thirdStepValidation,
     onSubmit: (values) => {
       console.log(values);
       formik.resetForm();
@@ -84,7 +75,8 @@ function ThirdStepSignUp() {
           <TextEditor
             error={false}
             value={formik.values.description}
-            setValue={(e) => formik.setFieldValue('Description', e)}
+            setValue={(e) => formik.setFieldValue('description', e)}
+
           />
         </div>
         <div className="secondPart">

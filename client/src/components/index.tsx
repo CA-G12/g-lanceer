@@ -14,7 +14,8 @@ import JobForm from './addJobForm';
 import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
-import ThirdStepSignUp from './SignUp/thirdStep';
+import FirstStep from './firstStepSignup';
+import { Signup, ThirdStepSignUp } from './SignUp';
 
 export {
   Category,
@@ -32,4 +33,6 @@ export {
   JobDetails,
   Navbar,
   ThirdStepSignUp,
+  FirstStep,
+  Signup,
 };

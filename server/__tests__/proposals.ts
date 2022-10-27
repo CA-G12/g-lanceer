@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import app from '../src/app';
 import insertDB from '../src/db/config/build';
 
-const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
 dotenv.config();
+const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
 const proposalsTests = () => {
   test('respond with json containing Authentication error /No Token/ with status of 401', async () => {
     const response = await request(app)
@@ -130,5 +130,89 @@ const proposalsTests = () => {
       .expect(400);
     expect(response.body.message).toBe('proposal not found');
   });
+
+  test('update proposal with token', async () => {
+    await insertDB();
+    const response = await request(app)
+      .put('/api/v1/proposals/1')
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .send({
+        description: 'update proposal for test test test test',
+        attachments: 'https://github.com/CA-G12/g-lancer/issues',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(response.body.msg).toBe('updated');
+  });
+  test('update proposal without token', async () => {
+    const response = await request(app)
+      .put('/api/v1/proposals/3')
+      .send({})
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  test('update proposal for different freelancer', async () => {
+    const response = await request(app)
+      .put('/api/v1/proposals/4')
+      .send({
+        description: 'update proposal for test test test test',
+        attachments: 'https://github.com/CA-G12/g-lancer/issues',
+      })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  // Accept Proposal tests
+  test('respond with json containing Authentication error /No Token/ with status of 401', async () => {
+    const response = await request(app)
+      .patch('/api/v1/proposals/3')
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  test('respond with json containing Authentication error /not Client token/ with status of 401', async () => {
+    const response = await request(app)
+      .patch('/api/v1/proposals/3')
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  test('respond with json containing Authentication error /the job is not for the logged client/ with status of 401', async () => {
+    const response = await request(app)
+      .patch('/api/v1/proposals/2')
+      .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  test('respond with json containing bad req error', async () => {
+    const response = await request(app)
+      .patch('/api/v1/proposals/5445')
+      .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(400);
+    expect(response.body.message).toBe('Proposal Not Found');
+  });
+  test('respond with success msg with status of 200', async () => {
+    const response = await request(app)
+      .patch('/api/v1/proposals/5')
+      .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(response.body.msg).toBe('Proposal Accepted');
+  });
+  test('the accepted proposals job isOccupied changes to true ', async () => {
+    const response = await request(app)
+      .get('/api/v1/jobs/3')
+      .set({ Cookie: [`token=${CLIENT_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(200);
+
+    expect(response.body.data.isOccupied).toBe(true);
+  });
 };
+
 export default proposalsTests;

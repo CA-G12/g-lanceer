@@ -44,8 +44,8 @@ const job = {
   // category: 'Music & Audio',
   budget: 900,
   // time: '2 months',
-  // isOccupied: false,
-  // userId: 4,
+  isOccupied: false,
+  userId: 2,
   proposals,
 
 };

@@ -80,6 +80,7 @@ const searchJobs = async (req: Request) => {
       'category',
       'budget',
       'isOccupied',
+      'userId',
     ],
     where,
     include: [

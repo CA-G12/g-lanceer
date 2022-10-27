@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
   handelClose: () => void,
@@ -18,7 +18,10 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: object
+  proposals: object,
+  userId: number,
+  isOccupied: boolean,
+
 }
 
 interface JobPropsCard {
@@ -93,6 +96,8 @@ interface JobSearch {
   budget: number,
   proposals: [];
   category: string,
+  userId: number,
+  isOccupied: boolean
 }
 
 interface ParamsT {
@@ -119,7 +124,7 @@ interface JobAboutPage {
   user?: User
 }
 interface User {
-  id: number,
+  userID: number,
   email: string,
   name: string,
   role: string
@@ -140,6 +145,15 @@ type UserContex = {
 };
 interface Props {
   children: React.ReactNode;
+}
+
+interface SignupProps {
+  setActiveStep: Dispatch<SetStateAction<number>>,
+  userRole: string
+}
+interface FirstStepProps {
+  setUserRole: (role: string)=> void,
+  setActiveStep: Dispatch<SetStateAction<number>>
 }
 export type {
   JobProps,
@@ -162,4 +176,6 @@ export type {
   UserContex,
   Props,
   FreelancerInfo,
+  SignupProps,
+  FirstStepProps,
 };

@@ -2,8 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ProtectedRoute, LoginProtectedRoute } from './components/protectedRoute';
 import {
-  Client, Freelancer, Job, JobsSearch, Landing, Login, Signup,
+  Client, Freelancer, Job, JobsSearch, Landing, Login,
 } from './pages';
+import SignupPage from './pages/Signup';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
         path: 'signup',
         element:
   <LoginProtectedRoute>
-    <Signup />
+    <SignupPage />
   </LoginProtectedRoute>,
       },
       { path: '/jobs-search', element: <JobsSearch /> },
