@@ -13,23 +13,32 @@ function SignupPage() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
+  const steps = [
+    {
+      label: 'freelancer or client',
+      component: (<Choose setUserRole={setUserRole} setActiveStep={setActiveStep} />),
+    },
+    {
+      label: 'Basic info',
+      component: (<Signup setActiveStep={setActiveStep} userRole={userRole} />),
+    },
+    {
+      label: 'major and experience',
+      component: (<h1>Step 3</h1>),
+    },
+  ];
 
   return (
     <Box>
       <Stepper activeStep={activeStep}>
-        <Step key="1">
-          <StepLabel />
-        </Step>
-        <Step key="2">
-          <StepLabel />
-        </Step>
-        <Step key="3">
-          <StepLabel />
-        </Step>
+        {steps.map(({ label }) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
       {/* {activeStep === 3 ? (
         <>
@@ -43,16 +52,7 @@ function SignupPage() {
       ) : ( */}
       <>
         <div className="steps">
-          {activeStep === 0 && <Choose setUserRole={setUserRole} setActiveStep={setActiveStep} /> }
-          {activeStep === 1 && <Signup setActiveStep={setActiveStep} userRole={userRole} /> }
-          {activeStep === 2 && (
-            <div>
-              <h1>step 3</h1>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button onClick={handleReset}>Reset</Button>
-              </Box>
-            </div>
-          ) }
+          {steps[activeStep].component}
         </div>
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
           <Button

@@ -1,11 +1,12 @@
 import { InputLabel, TextField, Button } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { SignupProps } from '../../interfaces';
 import { signUpSchema } from '../../validation';
 
 import './style.css';
 
-function Signup({ setActiveStep, userRole }: any) {
+function Signup({ setActiveStep, userRole }: SignupProps) {
   const navigate = useNavigate();
 
   const checkUser = () => {

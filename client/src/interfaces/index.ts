@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
   handelClose: () => void,
@@ -141,6 +141,12 @@ type UserContex = {
 interface Props {
   children: React.ReactNode;
 }
+
+interface SignupProps {
+  setActiveStep: Dispatch<SetStateAction<number>>,
+  userRole: string
+}
+
 export type {
   JobProps,
   FilterProps,
@@ -162,4 +168,5 @@ export type {
   UserContex,
   Props,
   FreelancerInfo,
+  SignupProps,
 };
