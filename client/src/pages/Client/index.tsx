@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  Button, Accordion, AccordionSummary, AccordionDetails, CircularProgress,
+  Button, Accordion, AccordionSummary, AccordionDetails, CircularProgress, Snackbar, Alert, Stack,
 } from '@mui/material';
 import axios from 'axios';
 import { JobCard, JobForm, Tabs } from '../../components';
@@ -14,6 +14,9 @@ function Client() {
   const [showModel, setShowModel] = useState(false);
   const handleOpen = () => setShowModel(true);
   const handleClose = () => setShowModel(false);
+  const [message, setMessage] = useState('');
+  const [accept, setAccept] = useState('');
+  const [openAlert, setOpenAlert] = useState(false);
   const [loading, setLoading] = useState(false);
   const [jobsUnoccupied, setJobsUnoccupied] = useState<JobSearch[]>([]);
   const [jobsOccupied, setJobsOccupied] = useState<JobSearch[]>([]);
@@ -35,6 +38,37 @@ function Client() {
 
     getData();
   }, []);
+
+  // fun delete item
+  const handleDelete = async (idItem: number) => {
+    try {
+      const dataItemDel = await axios.delete(`/api/v1/jobs/${idItem}`);
+      setMessage(dataItemDel.data.msg);
+      const filterJobsDelete = jobsUnoccupied.filter((job) => job.id !== idItem);
+      setJobsUnoccupied(filterJobsDelete);
+    } catch (err) {
+      setLoading(false);
+    }
+    setOpenAlert(true);
+  };
+
+  // fun Accipt proposal
+  const acceptPropsal = async (proposalID: number, jobID: number) => {
+    try {
+      const getProposalItem = await axios.patch(`/api/v1/proposals/${proposalID}`);
+
+      setAccept(getProposalItem.data.msg);
+      const jobAccepted = jobsUnoccupied.find((job) => job.id === jobID);
+      if (jobAccepted) {
+        const filterProposal = jobsUnoccupied.filter((job) => job.id !== jobID);
+        setJobsUnoccupied(filterProposal);
+        setJobsOccupied([...jobsOccupied, jobAccepted]);
+      }
+    } catch (err) {
+      setLoading(false);
+    }
+    setOpenAlert(true);
+  };
 
   // pending jobs for most jobs
   let pendingJobs: React.ReactElement | null = null;
@@ -59,7 +93,7 @@ function Client() {
       // component while rendering data on pending jobs
       <>
         {jobsUnoccupied.map((job) => (
-          <JobCard job={job} key={job.title}>
+          <JobCard job={job} deleteItem={handleDelete} key={job.title}>
             <Accordion disabled={false}>
               <AccordionSummary>
                 <div className="budget-proposal-section budget-proposal-client ">
@@ -79,7 +113,7 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} />)}
+                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptPropsal} />)}
 
               </AccordionDetails>
             </Accordion>
@@ -97,7 +131,7 @@ function Client() {
       // component while rendering data on accepted jobs
       <>
         {jobsOccupied.map((job) => (
-          <JobCard job={job} key={job.title}>
+          <JobCard job={job} deleteItem={handleDelete} key={job.title}>
             <Accordion disabled={false}>
               <AccordionSummary>
                 <div className="budget-proposal-section budget-proposal-client ">
@@ -117,8 +151,7 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} />)}
-
+                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptPropsal} />)}
               </AccordionDetails>
             </Accordion>
 
@@ -152,6 +185,30 @@ function Client() {
       </div>
       <JobForm showModel={showModel} handelClose={handleClose} />
       <Tabs tablist={tablist} />
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={openAlert}
+          onClose={() => setOpenAlert(false)}
+          autoHideDuration={6000}
+        >
+          <Alert severity="success">
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={openAlert}
+          onClose={() => setOpenAlert(false)}
+          autoHideDuration={6000}
+        >
+          <Alert severity="success">
+            {accept}
+          </Alert>
+        </Snackbar>
+      </Stack>
     </div>
   );
 }

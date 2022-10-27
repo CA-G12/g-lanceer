@@ -18,12 +18,16 @@ interface Job {
   title: string,
   description: string,
   budget: number,
-  proposals: object
+  proposals: object,
+  userId: number,
+  isOccupied: boolean,
+
 }
 
 interface JobPropsCard {
   job: Job,
-  children: React.ReactElement
+  children: React.ReactElement,
+  deleteItem?: (idItem: number) => void,
 }
 
 interface JobDetails {
@@ -71,6 +75,7 @@ interface Proposal {
 }
 interface PropsProposalCard {
   proposal: Proposal
+  acceptProposal: (idItem: number, jobId: number) => void,
 }
 
 interface TabListInt {
@@ -93,6 +98,8 @@ interface JobSearch {
   budget: number,
   proposals: [];
   category: string,
+  userId: number,
+  isOccupied: boolean
 }
 
 interface ParamsT {
@@ -119,7 +126,7 @@ interface JobAboutPage {
   user?: User
 }
 interface User {
-  id: number,
+  userID: number,
   email: string,
   name: string,
   role: string

@@ -15,7 +15,7 @@ function Job() {
     category: '',
     budget: 0,
     user: {
-      name: '', email: '', id: 0, role: '',
+      name: '', email: '', userID: 0, role: '',
     },
   });
   const [client, setClient] = useState<Client>({
