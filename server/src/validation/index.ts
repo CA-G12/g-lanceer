@@ -25,6 +25,10 @@ const addJobValidation = yup.object().shape({
   category: yup.string().required(),
   description: yup.string().required(),
 });
+const loginValidation = yup.object().shape({
+  password: yup.string().required().min(8),
+  email: yup.string().required().email(),
+});
 
 const updateFreelancerValidation = yup.object().shape({
   id: yup.number().notRequired().test('id', 'Updating id is not allowed', (value) => {
@@ -80,4 +84,5 @@ export {
   addJobValidation,
   updateFreelancerValidation,
   editProposalValidation,
+  loginValidation,
 };
