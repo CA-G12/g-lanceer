@@ -3,11 +3,18 @@ import {
   TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button, Modal,
 } from '@mui/material';
 import './style.css';
+import axios from 'axios';
 import data from '../../categoris';
 import { JobProps } from '../../interfaces';
 import { jobSchema } from '../../validation';
 
-function JobForm({ handelClose, showModel }: JobProps) {
+interface ProposalProps {
+  proposals: [],
+}
+
+function JobForm({
+  handelClose, showModel, jobsUnoccupied, setJobsUnoccupied,
+}: JobProps) {
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -17,9 +24,27 @@ function JobForm({ handelClose, showModel }: JobProps) {
       description: '',
     },
     validationSchema: jobSchema,
-    onSubmit: (values) => {
-      console.log(values, 'valuessss');
-      formik.resetForm();
+    onSubmit: async (values) => {
+      try {
+        const job = await axios.post(
+          'api/v1/jobs',
+          {
+            title: values.title,
+            budget: values.budget,
+            time: values.time,
+            category: values.category,
+            description: values.description,
+
+          },
+        );
+        const newJob = job.data.data;
+        const proposals: ProposalProps | [] = [];
+        newJob.proposals = proposals;
+        setJobsUnoccupied([...jobsUnoccupied, newJob]);
+        formik.resetForm();
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
   return (

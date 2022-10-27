@@ -2,7 +2,9 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
   handelClose: () => void,
-  showModel: boolean
+  showModel: boolean,
+  jobsUnoccupied: Job[],
+  setJobsUnoccupied: Dispatch<SetStateAction<JobSearch[]>>,
 }
 
 interface FilterProps {

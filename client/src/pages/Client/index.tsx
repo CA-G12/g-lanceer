@@ -17,6 +17,7 @@ function Client() {
   const [message, setMessage] = useState('');
   const [accept, setAccept] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
+  const [openAlertProposal, setOpenAlertproposal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [jobsUnoccupied, setJobsUnoccupied] = useState<JobSearch[]>([]);
   const [jobsOccupied, setJobsOccupied] = useState<JobSearch[]>([]);
@@ -67,7 +68,7 @@ function Client() {
     } catch (err) {
       setLoading(false);
     }
-    setOpenAlert(true);
+    setOpenAlertproposal(true);
   };
 
   // pending jobs for most jobs
@@ -183,7 +184,12 @@ function Client() {
 
         </Button>
       </div>
-      <JobForm showModel={showModel} handelClose={handleClose} />
+      <JobForm
+        showModel={showModel}
+        handelClose={handleClose}
+        setJobsUnoccupied={setJobsUnoccupied}
+        jobsUnoccupied={jobsUnoccupied}
+      />
       <Tabs tablist={tablist} />
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar
@@ -200,7 +206,7 @@ function Client() {
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          open={openAlert}
+          open={openAlertProposal}
           onClose={() => setOpenAlert(false)}
           autoHideDuration={6000}
         >
