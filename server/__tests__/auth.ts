@@ -32,7 +32,7 @@ const AuthTests = () => {
       .send({ email: '555ahmed@gmail.com', password: '123456788' })
       .expect('Content-Type', /json/)
       .expect(400);
-    expect(response.body.msg).toBe('User not found');
+    expect(response.body.message).toBe('Wrong Email Or Password');
   });
   test('respond with json containing error /wrong password/', async () => {
     const response = await request(app)
@@ -40,7 +40,7 @@ const AuthTests = () => {
       .send({ email: 'ahmed@gmail.com', password: '123456788' })
       .expect('Content-Type', /json/)
       .expect(400);
-    expect(response.body.msg).toBe('Wrong password');
+    expect(response.body.message).toBe('Wrong Email Or Password');
     expect(response.headers['set-cookie']).toBeUndefined();
   });
   test('respond with json containing error /wrong password/', async () => {
