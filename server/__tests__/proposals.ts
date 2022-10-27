@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import app from '../src/app';
 import insertDB from '../src/db/config/build';
 
-const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
 dotenv.config();
+const { FREELANCER_TOKEN, CLIENT_TOKEN } = process.env;
 const proposalsTests = () => {
   test('respond with json containing Authentication error /No Token/ with status of 401', async () => {
     const response = await request(app)
@@ -130,6 +130,40 @@ const proposalsTests = () => {
       .expect(400);
     expect(response.body.message).toBe('proposal not found');
   });
+
+  test('update proposal with token', async () => {
+    await insertDB();
+    const response = await request(app)
+      .put('/api/v1/proposals/1')
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .send({
+        description: 'update proposal for test test test test',
+        attachments: 'https://github.com/CA-G12/g-lancer/issues',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(response.body.msg).toBe('updated');
+  });
+  test('update proposal without token', async () => {
+    const response = await request(app)
+      .put('/api/v1/proposals/3')
+      .send({})
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
+  test('update proposal for different freelancer', async () => {
+    const response = await request(app)
+      .put('/api/v1/proposals/4')
+      .send({
+        description: 'update proposal for test test test test',
+        attachments: 'https://github.com/CA-G12/g-lancer/issues',
+      })
+      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
+      .expect('Content-Type', /json/)
+      .expect(401);
+    expect(response.body.message).toBe('unauthorized');
+  });
   // Accept Proposal tests
   test('respond with json containing Authentication error /No Token/ with status of 401', async () => {
     const response = await request(app)
@@ -180,4 +214,5 @@ const proposalsTests = () => {
     expect(response.body.data.isOccupied).toBe(true);
   });
 };
+
 export default proposalsTests;

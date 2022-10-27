@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { ProposalInstance } from '../interfaces';
-import { Job, Proposal } from '../models';
-import { postProposalValidation } from '../validation';
+import { Proposal, Job } from '../models';
+import { editProposalValidation, postProposalValidation } from '../validation';
+
 import { serverErrs } from '../helpers';
 import sequelize from '../db/config/connection';
 
@@ -44,7 +45,6 @@ const deletePropsal = async (req: Request, res: Response) => {
 const acceptProposal = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { userID } = res.locals.user;
-
   const proposal = await Proposal.findByPk(id);
   if (!proposal) throw serverErrs.BAD_REQUEST('Proposal Not Found');
   const { jobId } = proposal;
@@ -59,5 +59,35 @@ const acceptProposal = async (req: Request, res: Response) => {
   });
   return { status: 200, msg: 'Proposal Accepted' };
 };
+const editProposal = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { userID } = res.locals.user;
+  const {
+    description,
+    attachments,
+  } = req.body;
+  await editProposalValidation.validate({
+    description,
+    attachments,
+  });
+  const proposal = await Proposal.findByPk(id);
+  if (!proposal) throw serverErrs.BAD_REQUEST('proposal not found');
+  if (proposal?.freelancerId !== userID) throw serverErrs.UNAUTHORIZED('unauthorized');
+  if (proposal?.isAccepted) throw serverErrs.BAD_REQUEST('you cant delete it, proposal already accepted');
+  const updatedProposal = await Proposal.update(
+    {
+      description,
+      attachments,
+    },
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  return { status: 200, data: updatedProposal, msg: 'updated' };
+};
 
-export { addProposal, deletePropsal, acceptProposal };
+export {
+  addProposal, deletePropsal, acceptProposal, editProposal,
+};

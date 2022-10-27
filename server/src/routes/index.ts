@@ -7,6 +7,7 @@ import getUserData from '../middlewares/getUserData';
 import ExpressWrapper from '../ExpressWrapper';
 import freelancerRouter from './freelancer';
 import clientRouter from './client';
+import AuthRouter from './authentication';
 
 const router = express.Router();
 
@@ -16,4 +17,5 @@ router.use('/proposals', proposalsRouter);
 router.use('/freelancer', freelancerRouter);
 router.get('/user', passportAuthenticate, ExpressWrapper(getUserData));
 router.use('/client', passportAuthenticate, checkUserAuth('client'), clientRouter);
+router.use('/auth', AuthRouter);
 export default router;
