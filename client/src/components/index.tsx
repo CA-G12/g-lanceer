@@ -14,7 +14,7 @@ import JobForm from './addJobForm';
 import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
-import ThirdStepSignUp from './signUpThirdStage';
+import ThirdStepSignUp from './SignUp/thirdStep';
 
 export {
   Category,
