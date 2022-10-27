@@ -2,9 +2,8 @@ import { useState } from 'react';
 import {
   Box, Step, Stepper, StepLabel, Button,
 } from '@mui/material';
-import Choose from '../../components/choose';
-import Signup from '../../components/signup';
 import './style.css';
+import { FirstStep, Signup } from '../../components';
 
 function SignupPage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,7 +18,7 @@ function SignupPage() {
   const steps = [
     {
       label: 'freelancer or client',
-      component: (<Choose setUserRole={setUserRole} setActiveStep={setActiveStep} />),
+      component: (<FirstStep setUserRole={setUserRole} setActiveStep={setActiveStep} />),
     },
     {
       label: 'Basic info',

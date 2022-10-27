@@ -1,14 +1,16 @@
 import './style.css';
 import { Button } from '@mui/material';
+import { FirstStepProps } from '../../interfaces';
 
-function Choose({ setUserRole, setActiveStep }: any) {
+function FirstStep({ setUserRole, setActiveStep }: FirstStepProps) {
   const handleClick = (role: string) => {
     setUserRole(role);
     setActiveStep((activeStep: number) => activeStep + 1);
   };
+
   return (
     <>
-      <h2>Join as a Client or Freelancer</h2>
+      <h2 className="header-first-step">Join as a Client or Freelancer</h2>
       <div className="choose-container">
         <Button
           variant="contained"
@@ -30,4 +32,4 @@ function Choose({ setUserRole, setActiveStep }: any) {
   );
 }
 
-export default Choose;
+export default FirstStep;

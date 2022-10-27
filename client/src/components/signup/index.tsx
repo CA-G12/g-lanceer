@@ -33,8 +33,8 @@ function Signup({ setActiveStep, userRole }: SignupProps) {
 
   return (
     <div className="s-u-form">
-      <h3>Welcome to Sign Up</h3>
-      <form onSubmit={formik.handleSubmit}>
+      <h3 className="header-signup-1">Welcome to Sign Up</h3>
+      <form className="signup-form-1" onSubmit={formik.handleSubmit}>
         <div className="form-input">
           <InputLabel className="title-input">Username</InputLabel>
           <TextField

@@ -146,7 +146,10 @@ interface SignupProps {
   setActiveStep: Dispatch<SetStateAction<number>>,
   userRole: string
 }
-
+interface FirstStepProps {
+  setUserRole: (role: string)=> void,
+  setActiveStep: Dispatch<SetStateAction<number>>
+}
 export type {
   JobProps,
   FilterProps,
@@ -169,4 +172,5 @@ export type {
   Props,
   FreelancerInfo,
   SignupProps,
+  FirstStepProps,
 };
