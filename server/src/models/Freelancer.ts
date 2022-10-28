@@ -12,7 +12,6 @@ const Freelancer = sequelize.define<FreelancerInstance>('freelancer', {
   },
   image: {
     type: DataTypes.TEXT,
-    allowNull: false,
   },
   title: {
     type: DataTypes.STRING,
