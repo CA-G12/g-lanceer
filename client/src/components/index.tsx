@@ -15,7 +15,7 @@ import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
 import FirstStep from './firstStepSignup';
-import { Signup, ThirdStepSignUp } from './signup';
+import { Signup, FreelancerSignUp } from './signup';
 
 export {
   Category,
@@ -32,7 +32,7 @@ export {
   ProposalForm,
   JobDetails,
   Navbar,
-  ThirdStepSignUp,
+  FreelancerSignUp,
   FirstStep,
   Signup,
 };

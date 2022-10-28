@@ -45,3 +45,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.UploadImageHolder{
+  min-height: 65px;
+   display: flex;
+  flex-direction: column; 
+    width: 80%;
+}

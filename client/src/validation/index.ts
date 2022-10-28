@@ -47,10 +47,10 @@ const signUpSchema = yup.object({
     .required('The confirm password field is required'),
 });
 const thirdStepValidation = yup.object({
-  Title: yup
+  title: yup
     .string()
     .required('Title is required'),
-  Major: yup
+  major: yup
     .string()
     .required('Major is required'),
   portfolio: yup
@@ -58,7 +58,7 @@ const thirdStepValidation = yup.object({
     .optional()
     .nullable()
     .url(),
-  description: yup
+  brief: yup
     .string()
     .optional()
     .default(''),
