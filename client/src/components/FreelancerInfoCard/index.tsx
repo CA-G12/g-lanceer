@@ -1,8 +1,9 @@
 import './style.css';
 import {
   Fab, Grid, TextField,
+  AlertColor,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,12 +12,21 @@ import { FormikProps, useFormik } from 'formik';
 import avatar from '../../assets/Avatar.png';
 import { FreelancerInfo } from '../../interfaces';
 import { userInfoSchema } from '../../validation';
+import { updateFreelancerData } from '../../helpers';
+import UserContext from '../../context';
 
 interface Props {
   initialValues: FreelancerInfo
+  authorize: boolean
+  setAlerts: React.Dispatch<React.SetStateAction<{
+    open: boolean,
+    msg: string,
+    type: AlertColor
+  } | null>>
 }
-function FreelancerInfoCard({ initialValues }: Props) {
+function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
   const [editable, setEditable] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   function switchSections() {
     setEditable(!editable);
   }
@@ -24,12 +34,22 @@ function FreelancerInfoCard({ initialValues }: Props) {
   const formik: FormikProps<FreelancerInfo> = useFormik<FreelancerInfo>({
     initialValues,
     validationSchema: userInfoSchema,
-    onSubmit: (values: FreelancerInfo) => {
-      console.log(values);
-      setTimeout(() => {
+    onSubmit: async (values: FreelancerInfo) => {
+      setAlerts(null);
+      try {
+        await updateFreelancerData(values);
         formik.setSubmitting(false);
+        if (user && setUser) setUser({ ...user, name: values.name });
+        console.log(user);
+
         switchSections();
-      }, 3000);
+        setAlerts({ open: true, msg: ' Updated Successfully', type: 'success' });
+      } catch (err) {
+        setAlerts({ open: true, msg: 'Something went Wrong, Try Again later!', type: 'error' });
+        formik.setSubmitting(false);
+        formik.resetForm();
+        switchSections();
+      }
     },
   });
 
@@ -53,7 +73,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
         </Grid>
         <Grid xs={10} sm={8} md={6} lg={4} item>
           <div className="freelancer-info-card-content">
-            {editable ? (
+            {editable && authorize ? (
               <form onSubmit={formik.handleSubmit}>
                 <TextField
                   disabled={formik.isSubmitting}
@@ -176,7 +196,9 @@ function FreelancerInfoCard({ initialValues }: Props) {
                   type="button"
                   endIcon={<CloseIcon />}
                   onClick={() => {
-                    formik.resetForm();
+                    if (JSON.stringify(initialValues) !== JSON.stringify(formik.values)) {
+                      setAlerts({ open: true, msg: 'Updates havent been Saved ', type: 'info' });
+                    }
                     switchSections();
                   }}
                   variant="contained"
@@ -190,15 +212,17 @@ function FreelancerInfoCard({ initialValues }: Props) {
             ) : (
 
               <div className="info">
-                <Fab
-                  color="secondary"
-                  id="card-edit-btn"
-                  aria-label="edit"
-                  onClick={() => switchSections()}
-                  style={{ transform: 'scale(.9)' }}
-                >
-                  <EditIcon />
-                </Fab>
+                {authorize && (
+                  <Fab
+                    color="secondary"
+                    id="card-edit-btn"
+                    aria-label="edit"
+                    onClick={() => switchSections()}
+                    style={{ transform: 'scale(.9)' }}
+                  >
+                    <EditIcon />
+                  </Fab>
+                )}
                 <h3 className="freelancer-name">{formik.values.name}</h3>
                 <p className="freelancer-major">
                   <span className="freelancer-title">{formik.values.title}</span>

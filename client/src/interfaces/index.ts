@@ -1,3 +1,4 @@
+import { AlertColor } from '@mui/lab';
 import React from 'react';
 
 interface JobProps {
@@ -74,6 +75,13 @@ interface Proposal {
 }
 interface PropsProposalCard {
   proposal: Proposal
+  setProposals?: React.Dispatch<React.SetStateAction<Proposal[]>>
+  pendingProposal?: Proposal[] | null
+  setActionStatue?: React.Dispatch<React.SetStateAction<{
+    open: boolean,
+    msg: string,
+    type: AlertColor
+  } | null>>
 }
 
 interface TabListInt {
