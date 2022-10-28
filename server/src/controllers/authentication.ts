@@ -22,24 +22,25 @@ const login = async (req: Request, res: Response) => {
 };
 const freelancerSignUp = async (req: Request, res: Response) => {
   const {
-    Title, Major, portfolio, description, image, id,
+    title, major, portfolio, brief, image, userId,
   } = req.body;
-  const user: UserInstance | null = await User.findOne({ where: { id } });
-  if (!user) throw serverErrs.BAD_REQUEST('user id doen\'t exist');
-  const { name, role } = user;
-  const token = await generateToken({ userID: id, role, name });
-
   await freelancerValidate.validate(req.body);
+
+  const user: UserInstance | null = await User.findOne({ where: { id: userId } });
+  if (!user) throw serverErrs.BAD_REQUEST('Somthing went wrong');
+  const { name, role } = user;
 
   const freelancer = await Freelancer.create({
     image,
-    title: Title,
-    major: Major,
-    brief: description,
-    userId: id,
+    title,
+    major,
+    brief,
+    userId,
     portfolio,
   });
+  const token = await generateToken({ userID: freelancer.id, role, name });
+
   res.cookie('token', token);
-  return { status: 200, data: freelancer, msg: 'successful login' };
+  return { status: 201, data: freelancer, msg: 'successful login' };
 };
 export { login, freelancerSignUp };

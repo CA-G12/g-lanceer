@@ -77,10 +77,10 @@ const updateFreelancerValidation = yup.object().shape({
     .url('portfolio should be a valid URL'),
 });
 const freelancerValidate = yup.object().shape({
-  Title: yup
+  title: yup
     .string()
     .required('Title is required'),
-  Major: yup
+  major: yup
     .string()
     .required('Major is required'),
   portfolio: yup
@@ -88,7 +88,7 @@ const freelancerValidate = yup.object().shape({
     .optional()
     .nullable()
     .url(),
-  description: yup
+  brief: yup
     .string()
     .optional()
     .default(''),

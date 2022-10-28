@@ -64,15 +64,15 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Title: 'nbscdnn',
-        Major: 'smkmskcm',
+        title: 'nbscdnn',
+        major: 'smkmskcm',
         portfolio: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        description: 'enfjenjenv',
+        brief: 'enfjenjenv',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.body.data.image).toBe('https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1');
     expect(response.body.data.title).toBe('nbscdnn');
     expect(response.body.data.major).toBe('smkmskcm');
@@ -84,11 +84,11 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Major: 'smkmskcm',
+        major: 'smkmskcm',
         portfolio: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        description: 'enfjenjenv',
+        brief: 'enfjenjenv',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
       .expect(400);
@@ -98,11 +98,11 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Title: 'nbscdnn',
+        title: 'nbscdnn',
         portfolio: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        description: 'enfjenjenv',
+        brief: 'enfjenjenv',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
       .expect(400);
@@ -112,14 +112,14 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Title: 'nbscdnn',
-        Major: 'smkmskcm',
-        description: 'enfjenjenv',
+        title: 'nbscdnn',
+        major: 'smkmskcm',
+        brief: 'enfjenjenv',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.body.data.image).toBe('https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1');
     expect(response.body.data.title).toBe('nbscdnn');
     expect(response.body.data.major).toBe('smkmskcm');
@@ -131,13 +131,13 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Title: 'nbscdnn',
-        Major: 'smkmskcm',
+        title: 'nbscdnn',
+        major: 'smkmskcm',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.body.data.image).toBe('https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1');
     expect(response.body.data.title).toBe('nbscdnn');
     expect(response.body.data.major).toBe('smkmskcm');
@@ -149,13 +149,13 @@ const AuthTests = () => {
     const response = await request(app)
       .post('/api/v1/auth/freelancer')
       .send({
-        Title: 'nbscdnn',
-        Major: 'smkmskcm',
+        title: 'nbscdnn',
+        major: 'smkmskcm',
         image: 'https://www.figma.com/file/JscUnsrkjrziWvlS5jOGL5/Freelance?node-id=0%3A1',
-        id: 2,
+        userId: 2,
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.headers['set-cookie']).toBeTruthy();
   });
 };
