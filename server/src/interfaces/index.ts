@@ -74,6 +74,11 @@ interface ProposalInstance
   createdAt?: Date;
   updatedAt?: Date;
 }
+interface Payload {
+  userID: number,
+  role: string,
+  name: string
+}
 
 interface FreelancerWithProposalsAttr extends FreelancerAttributes {
   proposals?: any
@@ -108,4 +113,5 @@ export {
   UserCreationAttributes,
   FreelancerAttributes,
   FreelancerWithProposalsInstance,
+  Payload,
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FreelancerInfo } from '../interfaces';
+import { FreelancerInfo, ProposalProps } from '../interfaces';
 
 const getJobs = async (url: string, config: any) => {
   const data = await axios.get(url, config);
@@ -16,6 +16,18 @@ const updateFreelancerData = async (data: FreelancerInfo) => {
 const destroyProposal = async (id: number) => {
   await axios.delete(`/api/v1/proposals/${id}`);
 };
+const addOrUpdateProposal = async (
+  type: 'apply' | 'update',
+  values: ProposalProps,
+  jobId: number,
+  proposalId: number | undefined,
+) => {
+  if (type === 'apply') {
+    await axios.post('/api/v1/proposals', { ...values, jobId });
+  } else {
+    await axios.put(`/api/v1/proposals/${proposalId}`, values);
+  }
+};
 export {
-  getJobs, getFreelancerData, updateFreelancerData, destroyProposal,
+  getJobs, getFreelancerData, updateFreelancerData, destroyProposal, addOrUpdateProposal,
 };

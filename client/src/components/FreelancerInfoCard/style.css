@@ -48,6 +48,9 @@ font-weight: 600;
   background-color: #1C3879;
   color: #fff;
 }
+#card-edit-btn:disabled{
+  background-color: #ccc !important;
+}
 .freelancer-title{
   margin-right: 10px;
 }

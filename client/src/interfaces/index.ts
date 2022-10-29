@@ -1,5 +1,5 @@
 import { AlertColor } from '@mui/lab';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
   handelClose: () => void,
@@ -48,8 +48,9 @@ interface CategoryProps {
   alt: string
 }
 interface ProposalProps {
-  proposalText: string
-  proposalAttachment: string
+  description: string
+  attachments: string
+  id?: number
 }
 
 interface Proposal {
@@ -73,17 +74,14 @@ interface Proposal {
   },
 
 }
+interface FreelancerActionsAlerts {
+  msg: string,
+  type: AlertColor
+}
 interface PropsProposalCard {
   proposal: Proposal
-  setProposals?: React.Dispatch<React.SetStateAction<Proposal[]>>
-  pendingProposal?: Proposal[] | null
-  setActionStatue?: React.Dispatch<React.SetStateAction<{
-    open: boolean,
-    msg: string,
-    type: AlertColor
-  } | null>>
+  handleProposalsChanges?: (proposal: ProposalProps, type: 'delete' | 'update') => void
 }
-
 interface TabListInt {
   label: string;
   child: JSX.Element | JSX.Element[];
@@ -92,6 +90,11 @@ interface PropsTabList {
   tablist: Array<TabListInt>,
 }
 
+interface ProposalFormProps {
+  initialValue?: ProposalProps
+  type: 'apply' | 'update'
+  handleUpdate?: (proposal: ProposalProps) => void
+}
 interface PropsTextEditor {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>
@@ -154,6 +157,15 @@ type UserContex = {
 interface Props {
   children: React.ReactNode;
 }
+
+interface SignupProps {
+  setActiveStep: Dispatch<SetStateAction<number>>,
+  userRole: string
+}
+interface FirstStepProps {
+  setUserRole: (role: string) => void,
+  setActiveStep: Dispatch<SetStateAction<number>>
+}
 export type {
   JobProps,
   FilterProps,
@@ -175,4 +187,8 @@ export type {
   UserContex,
   Props,
   FreelancerInfo,
+  SignupProps,
+  FirstStepProps,
+  FreelancerActionsAlerts,
+  ProposalFormProps,
 };

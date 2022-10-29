@@ -1,7 +1,6 @@
 import './style.css';
 import {
   Fab, Grid, TextField,
-  AlertColor,
 } from '@mui/material';
 import { useState, useContext } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
 import { FormikProps, useFormik } from 'formik';
 import avatar from '../../assets/Avatar.png';
-import { FreelancerInfo } from '../../interfaces';
+import { FreelancerActionsAlerts, FreelancerInfo } from '../../interfaces';
 import { userInfoSchema } from '../../validation';
 import { updateFreelancerData } from '../../helpers';
 import UserContext from '../../context';
@@ -18,15 +17,13 @@ import UserContext from '../../context';
 interface Props {
   initialValues: FreelancerInfo
   authorize: boolean
-  setAlerts: React.Dispatch<React.SetStateAction<{
-    open: boolean,
-    msg: string,
-    type: AlertColor
-  } | null>>
+  setAlerts: React.Dispatch<React.SetStateAction<FreelancerActionsAlerts | null>>
 }
 function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
   const [editable, setEditable] = useState(false);
+  const [updatedValues, setUpdatedValues] = useState(initialValues);
   const { user, setUser } = useContext(UserContext);
+
   function switchSections() {
     setEditable(!editable);
   }
@@ -40,14 +37,13 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
         await updateFreelancerData(values);
         formik.setSubmitting(false);
         if (user && setUser) setUser({ ...user, name: values.name });
-        console.log(user);
-
+        setUpdatedValues(values);
         switchSections();
-        setAlerts({ open: true, msg: ' Updated Successfully', type: 'success' });
+        setAlerts({ msg: ' Updated Successfully', type: 'success' });
       } catch (err) {
-        setAlerts({ open: true, msg: 'Something went Wrong, Try Again later!', type: 'error' });
+        setAlerts({ msg: 'Something went Wrong, Try Again later!', type: 'error' });
         formik.setSubmitting(false);
-        formik.resetForm();
+        formik.setValues(updatedValues);
         switchSections();
       }
     },
@@ -167,7 +163,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   className="freelancer-content-input"
                   placeholder="MultiLine with rows: 2 and rowsMax: 4"
                   multiline
-                  maxRows={8}
+                  rows={8}
                   fullWidth
                   inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
                   onChange={formik.handleChange}
@@ -188,6 +184,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   loadingPosition="end"
                   variant="contained"
                   id="card-edit-btn"
+                  disabled={JSON.stringify(formik.values) === JSON.stringify(updatedValues) || !formik.isValid}
                   style={{ backgroundColor: '#7B1FA2' }}
                 >
                   {formik.isSubmitting ? 'Saving' : 'Save'}
@@ -196,9 +193,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   type="button"
                   endIcon={<CloseIcon />}
                   onClick={() => {
-                    if (JSON.stringify(initialValues) !== JSON.stringify(formik.values)) {
-                      setAlerts({ open: true, msg: 'Updates havent been Saved ', type: 'info' });
-                    }
+                    formik.setValues(updatedValues);
                     switchSections();
                   }}
                   variant="contained"

@@ -59,7 +59,7 @@ function Job() {
   return (
     <div className="container">
       <JobDetails job={jobState} client={client} />
-      <ProposalForm />
+      <ProposalForm type="apply" />
     </div>
 
   );

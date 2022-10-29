@@ -14,10 +14,10 @@ const loginSchema = yup.object({
 });
 
 const ProposalSchema = yup.object({
-  proposalText: yup.string()
+  description: yup.string()
     .min(15, 'Too Short!')
     .required('Proposal must not be Empty'),
-  proposalAttachment: yup.string()
+  attachments: yup.string()
     .nullable()
     .optional()
     .min(5, 'Attachments must be more than 5 characters long')
@@ -37,6 +37,16 @@ const userInfoSchema = yup.object({
     .url('portfolio should be a valid URL'),
 });
 
+const signUpSchema = yup.object({
+  userName: yup.string().min(10).required('username must be required'),
+  email: yup.string().email().required('email is required'),
+  password: yup.string().min(8, 'password must be more than 8 characters').required('password is required'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password')], 'The field must match')
+    .required('The confirm password field is required'),
+});
+
 export {
-  jobSchema, ProposalSchema, userInfoSchema, loginSchema,
+  jobSchema, ProposalSchema, userInfoSchema, loginSchema, signUpSchema,
 };

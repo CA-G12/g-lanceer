@@ -8,6 +8,7 @@ import {
 import {
   addProposal, deletePropsal, editProposal, acceptProposal,
 } from './proposals';
+import login from './authentication';
 
 export {
   searchJobs,
@@ -20,4 +21,5 @@ export {
   editProposal,
   updateFreelancerInfo,
   acceptProposal,
+  login,
 };
