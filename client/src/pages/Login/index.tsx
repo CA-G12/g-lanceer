@@ -1,29 +1,40 @@
+import { useContext, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
-import { InputLabel } from '@mui/material';
+import { Alert, InputLabel, Snackbar } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 import { loginSchema } from '../../validation';
 import formImg from '../../assets/4957136 1.png';
 import './style.css';
+import { login } from '../../helpers';
+import UserContext from '../../context';
 
 function Login() {
+  const { setUser } = useContext(UserContext);
+  const [error, setError] = useState<boolean>(false);
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: loginSchema,
-    onSubmit: (values) => {
-      console.log(values, 'valuessss');
-      setTimeout(() => {
+    onSubmit: async (values) => {
+      setError(false);
+      try {
+        const res = await login(values);
         formik.resetForm();
+        if (setUser) setUser(res.data.data);
+      } catch (err) {
+        setError(true);
+      } finally {
         formik.setSubmitting(false);
-      }, 3000);
+      }
     },
   });
   return (
-    <div className="login container">
+    <div className="login">
       <div className="form-img">
         <img src={formImg} alt="login img" />
       </div>
@@ -39,7 +50,6 @@ function Login() {
             id="email"
             value={formik.values.email}
             onChange={formik.handleChange}
-            placeholder="Enter your Email here"
             variant="outlined"
           />
         </div>
@@ -54,7 +64,6 @@ function Login() {
             className="input-login"
             value={formik.values.password}
             onChange={formik.handleChange}
-            placeholder="Enter your Password here"
             variant="outlined"
           />
         </div>
@@ -76,7 +85,16 @@ function Login() {
         </div>
 
       </form>
-
+      <Snackbar
+        open={error}
+        autoHideDuration={6000}
+        onClose={() => setError(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          Wrong Email or Password !
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

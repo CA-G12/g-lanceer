@@ -1,3 +1,1 @@
-import getJobs from './fetchFunction';
-
-export default getJobs;
+export * from './fetchFunction';
