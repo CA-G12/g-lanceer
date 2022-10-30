@@ -1,10 +1,12 @@
-import { InputLabel, TextField, Button } from '@mui/material';
+import {
+  InputLabel, TextField, Button,
+} from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SignupProps } from '../../interfaces';
 import { signUpSchema } from '../../validation';
-
 import './style.css';
+import FreelancerSignUp from './freelancerStep';
 
 function Signup({ setActiveStep, userRole }: SignupProps) {
   const navigate = useNavigate();
@@ -100,4 +102,5 @@ function Signup({ setActiveStep, userRole }: SignupProps) {
     </div>
   );
 }
-export default Signup;
+
+export { Signup, FreelancerSignUp };
