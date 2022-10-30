@@ -13,33 +13,35 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 import UserContext from '../../context';
 import avatar from '../../assets/Avatar.png';
 import './style.css';
 
 // initial nav settings
-const freelancerSettings = [
-  { label: 'Profile', path: '/freelancer' },
-  { label: 'Jobs', path: '/jobs-search' },
-  { label: 'Logout', path: '/' },
-];
-const clientSettings = [
-  { label: 'Profile', path: '/profile' },
-  { label: 'Logout', path: '/' },
-];
-const noUserSettings = [
-  { label: 'Login', path: '/login' },
-  { label: 'signUp', path: '/signup' },
-];
-const pages = [{ label: 'Jobs', path: '/jobs-search' }];
 
 function Navbar() {
+  const pages = [{ label: 'Jobs', path: '/jobs-search' }];
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
   const { user } = useContext(UserContext);
+  const { pathname } = useLocation();
+  console.log(pathname);
+  const freelancerSettings = [
+    { label: 'Profile', path: `/freelancer/${user?.userID}` },
+    { label: 'Jobs', path: '/jobs-search' },
+    { label: 'Logout', path: '/' },
+  ];
+  const clientSettings = [
+    { label: 'Profile', path: '/profile' },
+    { label: 'Logout', path: '/' },
+  ];
+  const noUserSettings = [
+    { label: 'Login', path: '/login' },
+    { label: 'signUp', path: '/signup' },
+  ];
   let currentSettings = noUserSettings;
   if (user) {
     if (user.role === 'client') {
@@ -140,9 +142,8 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <NavLink to={page.path} className="nav-page">
+              <NavLink to={page.path} key={page.label} className="nav-page">
                 <Button
-                  key={page.label}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
@@ -200,25 +201,30 @@ function Navbar() {
           )
             : (
               <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-                <Link to="/login">
-                  <Button
-                    className="auth-btns"
-                    variant="contained"
-                  >
-                    Login
+                {pathname !== '/login'
+                  && (
+                    <Link to="/login">
+                      <Button
+                        className="auth-btns"
+                        variant="contained"
+                      >
+                        Login
 
-                  </Button>
+                      </Button>
 
-                </Link>
-                <Link to="/signup">
-                  <Button
-                    className="auth-btns"
-                    variant="contained"
-                  >
-                    SignUp
+                    </Link>
+                  )}
+                {pathname !== '/signup' && (
+                  <Link to="/signup">
+                    <Button
+                      className="auth-btns"
+                      variant="contained"
+                    >
+                      SignUp
 
-                  </Button>
-                </Link>
+                    </Button>
+                  </Link>
+                )}
               </Box>
             )}
         </Toolbar>
