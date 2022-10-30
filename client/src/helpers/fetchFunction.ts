@@ -16,18 +16,18 @@ const updateFreelancerData = async (data: FreelancerInfo) => {
 const destroyProposal = async (id: number) => {
   await axios.delete(`/api/v1/proposals/${id}`);
 };
-const addOrUpdateProposal = async (
-  type: 'apply' | 'update',
+const addProposal = async (
   values: ProposalProps,
-  jobId: number,
-  proposalId: number | undefined,
+  jobId: string | undefined,
 ) => {
-  if (type === 'apply') {
-    await axios.post('/api/v1/proposals', { ...values, jobId });
-  } else {
-    await axios.put(`/api/v1/proposals/${proposalId}`, values);
-  }
+  await axios.post('/api/v1/proposals', { ...values, jobId });
+};
+const updateProposal = async (
+  values: ProposalProps,
+  proposalId: number,
+) => {
+  await axios.put(`/api/v1/proposals/${proposalId}`, values);
 };
 export {
-  getJobs, getFreelancerData, updateFreelancerData, destroyProposal, addOrUpdateProposal,
+  getJobs, getFreelancerData, updateFreelancerData, destroyProposal, updateProposal, addProposal,
 };

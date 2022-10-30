@@ -35,15 +35,14 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
       setAlerts(null);
       try {
         await updateFreelancerData(values);
-        formik.setSubmitting(false);
         if (user && setUser) setUser({ ...user, name: values.name });
         setUpdatedValues(values);
-        switchSections();
         setAlerts({ msg: ' Updated Successfully', type: 'success' });
       } catch (err) {
         setAlerts({ msg: 'Something went Wrong, Try Again later!', type: 'error' });
-        formik.setSubmitting(false);
         formik.setValues(updatedValues);
+      } finally {
+        formik.setSubmitting(false);
         switchSections();
       }
     },

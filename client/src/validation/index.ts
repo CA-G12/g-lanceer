@@ -46,7 +46,29 @@ const signUpSchema = yup.object({
     .oneOf([yup.ref('password')], 'The field must match')
     .required('The confirm password field is required'),
 });
+const thirdStepValidation = yup.object({
+  title: yup
+    .string()
+    .required('Title is required'),
+  major: yup
+    .string()
+    .required('Major is required'),
+  portfolio: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
+  brief: yup
+    .string()
+    .optional()
+    .default(''),
+  image: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
+});
 
 export {
-  jobSchema, ProposalSchema, userInfoSchema, loginSchema, signUpSchema,
+  jobSchema, ProposalSchema, userInfoSchema, loginSchema, signUpSchema, thirdStepValidation,
 };

@@ -15,12 +15,12 @@ import ProposalForm from '../ProposalForm';
 
 function ProposalJob({
   proposal,
-  handleProposalsChanges,
+  onUpdate,
+  onDelete,
 }: PropsProposalCard) {
   const { user } = useContext(UserContext);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
   const [confirmDeleteModal, setConfirmDeleteModal] = useState<boolean>(false);
-
   return (
     <>
       <div className="wrapper-proposal ">
@@ -92,14 +92,9 @@ function ProposalJob({
           >
             <div id="edit-form-model">
               <ProposalForm
-                type="update"
-                handleUpdate={(updatedProposal: ProposalProps) => {
-                  if (handleProposalsChanges) {
-                    // change the pendingProposals state
-                    handleProposalsChanges(updatedProposal, 'update');
-                    // close the form modal
-                    setUpdateModal(false);
-                  }
+                onSubmit={(values: ProposalProps) => {
+                  if (onUpdate) onUpdate(values);
+                  setUpdateModal(false);
                 }}
                 initialValue={{
                   description: proposal.description,
@@ -127,7 +122,7 @@ function ProposalJob({
               <Button
                 aria-label="delete"
                 color="warning"
-                onClick={() => { if (handleProposalsChanges) handleProposalsChanges(proposal, 'delete'); }}
+                onClick={onDelete}
               >
                 Delete
               </Button>

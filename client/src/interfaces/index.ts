@@ -80,7 +80,8 @@ interface FreelancerActionsAlerts {
 }
 interface PropsProposalCard {
   proposal: Proposal
-  handleProposalsChanges?: (proposal: ProposalProps, type: 'delete' | 'update') => void
+  onUpdate?: (values: ProposalProps) => Promise<void>
+  onDelete?: () => Promise<void>
 }
 interface TabListInt {
   label: string;
@@ -92,8 +93,7 @@ interface PropsTabList {
 
 interface ProposalFormProps {
   initialValue?: ProposalProps
-  type: 'apply' | 'update'
-  handleUpdate?: (proposal: ProposalProps) => void
+  onSubmit: any
 }
 interface PropsTextEditor {
   value: string;

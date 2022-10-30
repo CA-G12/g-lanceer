@@ -16,7 +16,8 @@ import JobDetails from './jobDetails';
 import Navbar from './Navbar';
 import NotFound from './notFound';
 import FirstStep from './firstStepSignup';
-import Signup from './signup';
+import ProposalJob from './proposalJob';
+import { Signup, FreelancerSignUp } from './signup';
 
 export {
   Category,
@@ -34,6 +35,8 @@ export {
   JobDetails,
   Navbar,
   NotFound,
+  FreelancerSignUp,
   FirstStep,
   Signup,
+  ProposalJob,
 };

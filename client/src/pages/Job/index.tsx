@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress, Snackbar } from '@mui/material';
 import './style.css';
-import { Client, JobAboutPage } from '../../interfaces';
+import { Client, JobAboutPage, ProposalProps } from '../../interfaces';
 import { JobDetails, ProposalForm } from '../../components';
+import { addProposal } from '../../helpers';
 
 function Job() {
   const { id } = useParams();
@@ -23,7 +24,18 @@ function Job() {
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [apiResponse, setApiResponse] = useState(false);
+  const [apiError, setApiError] = useState(false);
+  const onSubmit = async (values: ProposalProps) => {
+    setApiError(false);
+    setApiResponse(false);
+    try {
+      await addProposal(values, id);
+      setApiResponse(true);
+    } catch (err) {
+      setApiError(true);
+    }
+  };
   useEffect(() => {
     const getJobData = async () => {
       setLoading(true);
@@ -59,7 +71,27 @@ function Job() {
   return (
     <div className="container">
       <JobDetails job={jobState} client={client} />
-      <ProposalForm type="apply" />
+      <ProposalForm onSubmit={onSubmit} />
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={apiError}
+        onClose={() => setApiError(false)}
+        autoHideDuration={6000}
+      >
+        <Alert severity="error">
+          Something went Wrong, Try Again later!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={apiResponse}
+        onClose={() => setApiResponse(false)}
+        autoHideDuration={6000}
+      >
+        <Alert severity="success">
+          proposal submitted successfully!
+        </Alert>
+      </Snackbar>
     </div>
 
   );

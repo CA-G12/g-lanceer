@@ -6,10 +6,11 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   FreelancerInfoCard, NotFound, Tabs,
+  ProposalJob,
 } from '../../components';
-import ProposalJob from '../../components/proposalJob';
+
 import UserContext from '../../context';
-import { destroyProposal, getFreelancerData } from '../../helpers';
+import { destroyProposal, getFreelancerData, updateProposal } from '../../helpers';
 import {
   FreelancerActionsAlerts, FreelancerInfo, Proposal, ProposalProps,
 } from '../../interfaces';
@@ -25,33 +26,31 @@ function Freelancer() {
   const [freelancerActionsAlerts, setFreelancerAlerts] = useState<FreelancerActionsAlerts | null>(null);
   const authorize: boolean = user?.userID === Number(id);
 
-  const deleteProposal = async (proposalId: number) => {
+  const onDelete = async (proposalId: number) => {
     setFreelancerAlerts(null);
     try {
       await destroyProposal(proposalId);
-      setPendingProposal(pendingProposals.filter((p: Proposal) => p.id !== proposalId));
+      setPendingProposal((prevProposals) => prevProposals.filter((p: Proposal) => p.id !== proposalId));
       setFreelancerAlerts({ msg: 'Proposal Deleted Successfully', type: 'success' });
     } catch (err) {
       setFreelancerAlerts({ msg: 'Something went Wrong,Try Again later!', type: 'error' });
     }
   };
-  const updateProposal = async (proposal: ProposalProps) => {
-    setPendingProposal(pendingProposals.map((p: Proposal) => {
-      if (p.id === proposal.id) {
-        return { ...p, attachments: proposal.attachments, description: proposal.description };
-      }
-      return p;
-    }));
-    setFreelancerAlerts({ msg: 'Proposal Updated Successfully', type: 'success' });
-  };
-
-  function handleProposalsChanges(proposal: ProposalProps, type: 'delete' | 'update') {
-    if (type === 'delete') {
-      if (proposal.id) { deleteProposal(proposal.id); }
-    } else {
-      updateProposal(proposal);
+  const onUpdate = async (values: ProposalProps, proposalId: number) => {
+    setFreelancerAlerts(null);
+    try {
+      await updateProposal(values, proposalId);
+      setPendingProposal((prevProposals) => prevProposals.map((p) => {
+        if (p.id === proposalId) {
+          return { ...p, attachments: values.attachments, description: values.description };
+        }
+        return p;
+      }));
+      setFreelancerAlerts({ msg: 'Proposal Updated Successfully', type: 'success' });
+    } catch {
+      setFreelancerAlerts({ msg: 'Something went Wrong,Try Again later!', type: 'error' });
     }
-  }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -115,12 +114,8 @@ function Freelancer() {
           <ProposalJob
             key={p.id}
             proposal={p}
-            handleProposalsChanges={
-              (
-                proposal: ProposalProps,
-                type: 'delete' | 'update',
-              ) => handleProposalsChanges(proposal, type)
-            }
+            onUpdate={(values: ProposalProps) => onUpdate(values, p.id)}
+            onDelete={() => onDelete(p.id)}
           />
         ))
         : <p style={{ color: 'gray' }}>No Pending proposals</p>,

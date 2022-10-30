@@ -23,7 +23,7 @@ const getFreelancer = async (req: Request, res: Response) => {
           required: false,
           include: [{ model: Job, attributes: ['title'] }],
         }],
-      where: { userId: paramsUserId },
+      where: { id: paramsUserId },
     },
   );
 
