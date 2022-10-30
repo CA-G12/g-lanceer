@@ -99,6 +99,14 @@ const freelancerValidate = yup.object().shape({
     .url(),
 });
 
+const signupUserValidation = yup.object().shape({
+  role: yup.string().oneOf(['client', 'freelancer'])
+    .required(),
+  name: yup.string().min(10).required(),
+  email: yup.string().required().email(),
+  password: yup.string().required().min(8),
+});
+
 export {
   queryValidation,
   queryJobValidation,
@@ -107,5 +115,6 @@ export {
   updateFreelancerValidation,
   editProposalValidation,
   loginValidation,
+  signupUserValidation,
   freelancerValidate,
 };
