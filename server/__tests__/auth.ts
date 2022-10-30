@@ -118,7 +118,7 @@ const AuthTests = () => {
         email: 'sham@gmail.com', password: '12345678', name: 'shammmghkdhgdd', role: 'client',
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.headers['set-cookie']).toBeTruthy();
   });
   test('sign up with used email', async () => {
