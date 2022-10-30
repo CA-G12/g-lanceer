@@ -78,7 +78,8 @@ const updateFreelancerValidation = yup.object().shape({
 });
 
 const signupUserValidation = yup.object().shape({
-  role: yup.string().required(),
+  role: yup.string().oneOf(['client', 'freelancer'])
+    .required(),
   name: yup.string().min(10).required(),
   email: yup.string().required().email(),
   password: yup.string().required().min(8),

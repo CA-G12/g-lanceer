@@ -42,7 +42,7 @@ const signupUser = async (req: Request, res: Response) => {
     const token = await generateToken({ name, role, userID: id });
     res.cookie('token', token);
   }
-  return { status: 200, data: 'signed up successfully ' };
+  return { status: 201, data: 'signed up successfully ' };
 };
 
 export { login, signupUser };
