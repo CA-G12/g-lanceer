@@ -49,7 +49,6 @@ const acceptProposal = async (req: Request, res: Response) => {
   if (!proposal) throw serverErrs.BAD_REQUEST('Proposal Not Found');
   const { jobId } = proposal;
   const job = await Job.findByPk(jobId);
-  console.log(job);
   if (job?.userId !== userID) throw serverErrs.UNAUTHORIZED('unauthorized');
 
   await sequelize.transaction(async (t) => {

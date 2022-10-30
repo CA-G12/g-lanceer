@@ -1,11 +1,12 @@
 import { useFormik } from 'formik';
 import {
-  TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button, Modal,
+  TextField, InputLabel, FormControl, Select, MenuItem, FormHelperText, Button, Modal, Stack, Snackbar, Alert,
 } from '@mui/material';
 import './style.css';
 import axios from 'axios';
+import { useState } from 'react';
 import data from '../../categoris';
-import { JobProps } from '../../interfaces';
+import { JobProps, MessageAlert } from '../../interfaces';
 import { jobSchema } from '../../validation';
 
 interface ProposalProps {
@@ -15,6 +16,11 @@ interface ProposalProps {
 function JobForm({
   handelClose, showModel, jobsUnoccupied, setJobsUnoccupied,
 }: JobProps) {
+  const [error, setError] = useState<MessageAlert>({
+    type: 'error',
+    value: 'Something went Wrong, Try Again later!',
+    open: false,
+  });
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -28,14 +34,7 @@ function JobForm({
       try {
         const job = await axios.post(
           'api/v1/jobs',
-          {
-            title: values.title,
-            budget: values.budget,
-            time: values.time,
-            category: values.category,
-            description: values.description,
-
-          },
+          values,
         );
         const newJob = job.data.data;
         const proposals: ProposalProps | [] = [];
@@ -43,88 +42,102 @@ function JobForm({
         setJobsUnoccupied([...jobsUnoccupied, newJob]);
         formik.resetForm();
       } catch (err) {
-        console.log(err);
+        setError({ ...error, open: true });
       }
     },
   });
   return (
-    <Modal
-      open={showModel}
-      onClose={handelClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <form onSubmit={formik.handleSubmit} className="job-from">
-        <TextField
-          className="text-filed"
-          error={formik.touched.title && Boolean(formik.errors.title)}
-          helperText={formik.errors.title ? formik.errors.title : ' '}
-          label="Job Title"
-          name="title"
-          id="title"
-          value={formik.values.title}
-          onChange={formik.handleChange}
-        />
-        <TextField
-          className="text-filed"
-          error={formik.touched.budget && Boolean(formik.errors.budget)}
-          helperText={formik.errors.budget ? formik.errors.budget : ' '}
-          label="Budget"
-          type="number"
-          name="budget"
-          id="budget"
-          value={formik.values.budget}
-          onChange={formik.handleChange}
-        />
-        <TextField
-          className="text-filed"
-          error={formik.touched.time && Boolean(formik.errors.time)}
-          helperText={formik.errors.time ? formik.errors.time : ' '}
-          label="Time"
-          name="time"
-          id="time"
-          value={formik.values.time}
-          onChange={formik.handleChange}
-        />
-        <FormControl style={{ color: '#D32F2F' }}>
-          <InputLabel>Category</InputLabel>
-          <Select
-            className="text-select"
-            error={formik.touched.category && Boolean(formik.errors.category)}
-            label="Category"
-            name="category"
-            id="category"
-            value={formik.values.category}
+    <>
+      <Modal
+        open={showModel}
+        onClose={handelClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <form onSubmit={formik.handleSubmit} className="job-from">
+          <TextField
+            className="text-filed"
+            error={formik.touched.title && Boolean(formik.errors.title)}
+            helperText={formik.errors.title ? formik.errors.title : ' '}
+            label="Job Title"
+            name="title"
+            id="title"
+            value={formik.values.title}
             onChange={formik.handleChange}
+          />
+          <TextField
+            className="text-filed"
+            error={formik.touched.budget && Boolean(formik.errors.budget)}
+            helperText={formik.errors.budget ? formik.errors.budget : ' '}
+            label="Budget"
+            type="number"
+            name="budget"
+            id="budget"
+            value={formik.values.budget}
+            onChange={formik.handleChange}
+          />
+          <TextField
+            className="text-filed"
+            error={formik.touched.time && Boolean(formik.errors.time)}
+            helperText={formik.errors.time ? formik.errors.time : ' '}
+            label="Time"
+            name="time"
+            id="time"
+            value={formik.values.time}
+            onChange={formik.handleChange}
+          />
+          <FormControl style={{ color: '#D32F2F' }}>
+            <InputLabel>Category</InputLabel>
+            <Select
+              className="text-select"
+              error={formik.touched.category && Boolean(formik.errors.category)}
+              label="Category"
+              name="category"
+              id="category"
+              value={formik.values.category}
+              onChange={formik.handleChange}
+            >
+              {data.map((ele) => <MenuItem key={ele.name} value={ele.name}>{ele.name}</MenuItem>)}
+            </Select>
+            <FormHelperText style={{ color: '#D32F2F' }}>
+              {formik.errors.category ? formik.errors.category : ' '}
+            </FormHelperText>
+          </FormControl>
+          <TextField
+            className="text-area"
+            error={formik.touched.description && Boolean(formik.errors.description)}
+            name="description"
+            id="description"
+            helperText={formik.errors.description ? formik.errors.description : ' '}
+            label="Job Description"
+            multiline
+            rows={4}
+            maxRows={8}
+            value={formik.values.description}
+            onChange={formik.handleChange}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            style={{ width: '30%', margin: '0 auto', marginTop: '10px' }}
           >
-            {data.map((ele) => <MenuItem key={ele.name} value={ele.name}>{ele.name}</MenuItem>)}
-          </Select>
-          <FormHelperText style={{ color: '#D32F2F' }}>
-            {formik.errors.category ? formik.errors.category : ' '}
-          </FormHelperText>
-        </FormControl>
-        <TextField
-          className="text-area"
-          error={formik.touched.description && Boolean(formik.errors.description)}
-          name="description"
-          id="description"
-          helperText={formik.errors.description ? formik.errors.description : ' '}
-          label="Job Description"
-          multiline
-          rows={4}
-          maxRows={8}
-          value={formik.values.description}
-          onChange={formik.handleChange}
-        />
-        <Button
-          variant="contained"
-          type="submit"
-          style={{ width: '30%', margin: '0 auto', marginTop: '10px' }}
+            Submit
+          </Button>
+        </form>
+      </Modal>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={error.open}
+          onClose={() => setError({ ...error, open: false })}
+          autoHideDuration={6000}
         >
-          Submit
-        </Button>
-      </form>
-    </Modal>
+          <Alert severity={error.type}>
+            {error.value}
+          </Alert>
+        </Snackbar>
+      </Stack>
+    </>
   );
 }
 

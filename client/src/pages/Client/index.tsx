@@ -6,7 +6,7 @@ import axios from 'axios';
 import { JobCard, JobForm, Tabs } from '../../components';
 import ProposalJob from '../../components/proposalJob/index';
 import {
-  JobSearch, TabListInt,
+  JobSearch, TabListInt, MessageAlert,
 } from '../../interfaces';
 import './style.css';
 
@@ -14,10 +14,11 @@ function Client() {
   const [showModel, setShowModel] = useState(false);
   const handleOpen = () => setShowModel(true);
   const handleClose = () => setShowModel(false);
-  const [message, setMessage] = useState('');
-  const [accept, setAccept] = useState('');
-  const [openAlert, setOpenAlert] = useState(false);
-  const [openAlertProposal, setOpenAlertproposal] = useState(false);
+  const [message, setMessage] = useState<MessageAlert>({
+    type: 'success',
+    value: '',
+    open: false,
+  });
   const [loading, setLoading] = useState(false);
   const [jobsUnoccupied, setJobsUnoccupied] = useState<JobSearch[]>([]);
   const [jobsOccupied, setJobsOccupied] = useState<JobSearch[]>([]);
@@ -44,21 +45,26 @@ function Client() {
   const handleDelete = async (idItem: number) => {
     try {
       const dataItemDel = await axios.delete(`/api/v1/jobs/${idItem}`);
-      setMessage(dataItemDel.data.msg);
+
+      setMessage({ ...message, value: dataItemDel.data.msg, open: true });
+
       const filterJobsDelete = jobsUnoccupied.filter((job) => job.id !== idItem);
       setJobsUnoccupied(filterJobsDelete);
     } catch (err) {
       setLoading(false);
+
+      // handel error
+      setMessage({ type: 'error', value: 'Something went Wrong, Try Again later!', open: true });
     }
-    setOpenAlert(true);
   };
 
-  // fun Accipt proposal
-  const acceptPropsal = async (proposalID: number, jobID: number) => {
+  // fun Accept proposal
+  const acceptProposal = async (proposalID: number, jobID: number) => {
     try {
       const getProposalItem = await axios.patch(`/api/v1/proposals/${proposalID}`);
 
-      setAccept(getProposalItem.data.msg);
+      setMessage({ ...message, value: getProposalItem.data.msg, open: true });
+
       const jobAccepted = jobsUnoccupied.find((job) => job.id === jobID);
       if (jobAccepted) {
         const filterProposal = jobsUnoccupied.filter((job) => job.id !== jobID);
@@ -67,8 +73,10 @@ function Client() {
       }
     } catch (err) {
       setLoading(false);
+
+      // handel error
+      setMessage({ type: 'error', value: 'Something went Wrong, Try Again later!', open: true });
     }
-    setOpenAlertproposal(true);
   };
 
   // pending jobs for most jobs
@@ -114,7 +122,7 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptPropsal} />)}
+                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptProposal} />)}
 
               </AccordionDetails>
             </Accordion>
@@ -132,7 +140,7 @@ function Client() {
       // component while rendering data on accepted jobs
       <>
         {jobsOccupied.map((job) => (
-          <JobCard job={job} deleteItem={handleDelete} key={job.title}>
+          <JobCard job={job} key={job.title}>
             <Accordion disabled={false}>
               <AccordionSummary>
                 <div className="budget-proposal-section budget-proposal-client ">
@@ -152,7 +160,7 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptPropsal} />)}
+                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptProposal} />)}
               </AccordionDetails>
             </Accordion>
 
@@ -194,24 +202,12 @@ function Client() {
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          open={openAlert}
-          onClose={() => setOpenAlert(false)}
+          open={message.open}
+          onClose={() => setMessage({ ...message, open: false })}
           autoHideDuration={6000}
         >
-          <Alert severity="success">
-            {message}
-          </Alert>
-        </Snackbar>
-      </Stack>
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          open={openAlertProposal}
-          onClose={() => setOpenAlert(false)}
-          autoHideDuration={6000}
-        >
-          <Alert severity="success">
-            {accept}
+          <Alert severity={message.type}>
+            {message.value}
           </Alert>
         </Snackbar>
       </Stack>

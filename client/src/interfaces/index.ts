@@ -1,3 +1,4 @@
+import { AlertColor } from '@mui/lab';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
@@ -119,6 +120,11 @@ interface FreelancerInfo {
   brief: string
 }
 
+interface MessageAlert {
+  type: AlertColor | undefined
+  value: string
+  open: boolean
+}
 interface JobAboutPage {
   title: string
   category: string,
@@ -182,4 +188,5 @@ export type {
   FreelancerInfo,
   SignupProps,
   FirstStepProps,
+  MessageAlert,
 };
