@@ -1,15 +1,33 @@
 import { LoadingButton } from '@mui/lab';
+import axios from 'axios';
 import {
-  FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField,
+  FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Stack, Snackbar, Alert,
 } from '@mui/material';
+import { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useNavigate } from 'react-router-dom';
 import data from '../../categoris';
 import { thirdStepValidation } from '../../validation';
 import TextEditor from '../TextEditor';
 import './style.css';
+import UserContext from '../../context';
 
-function FreelancerSignUp() {
+interface FreelancerProps {
+  userId: number,
+  name: string,
+}
+
+interface SignFreelancer {
+  userInfo: FreelancerProps
+}
+
+function FreelancerSignUp({ userInfo }: SignFreelancer) {
+  const { userId, name } = userInfo;
+  const [freelancerError, setFreelancerError] = useState(false);
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -19,9 +37,27 @@ function FreelancerSignUp() {
       image: '',
     },
     validationSchema: thirdStepValidation,
-    onSubmit: (values) => {
-      console.log(values);
-      formik.resetForm();
+    onSubmit: async (values) => {
+      try {
+        await axios.post('/api/v1/auth/freelancer', {
+          title: values.title,
+          major: values.major,
+          portfolio: values.portfolio,
+          brief: values.brief,
+          image: values.image,
+          userId,
+        });
+        setFreelancerError(false);
+        if (setUser) {
+          setUser({
+            userID: userId, role: 'freelancer', name,
+          });
+        }
+        formik.resetForm();
+        navigate(`/freelancer/${userId}`);
+      } catch (err) {
+        setFreelancerError(true);
+      }
     },
   });
 
@@ -59,7 +95,6 @@ function FreelancerSignUp() {
               {formik.touched.major && formik.errors.major}
             </FormHelperText>
           </FormControl>
-
           <TextField
             id="portfolio"
             name="portfolio"
@@ -127,6 +162,18 @@ function FreelancerSignUp() {
           </LoadingButton>
         </div>
       </form>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={freelancerError}
+          onClose={() => setFreelancerError(false)}
+          autoHideDuration={6000}
+        >
+          <Alert severity="error">
+            Something went Wrong, Try Again later!
+          </Alert>
+        </Snackbar>
+      </Stack>
     </div>
   );
 }

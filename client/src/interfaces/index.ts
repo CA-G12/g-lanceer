@@ -125,7 +125,7 @@ interface JobAboutPage {
 }
 interface User {
   userID: number,
-  email: string,
+  // email: string,
   name: string,
   role: string
 }
@@ -149,7 +149,8 @@ interface Props {
 
 interface SignupProps {
   setActiveStep: Dispatch<SetStateAction<number>>,
-  userRole: string
+  userRole: string,
+  setUserInfo: Dispatch<SetStateAction<{ userId: number, name: string }>>
 }
 interface FirstStepProps {
   setUserRole: (role: string)=> void,

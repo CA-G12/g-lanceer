@@ -40,15 +40,23 @@ const signupUser = async (req: Request, res: Response) => {
   });
   if (client) throw serverErrs.BAD_REQUEST('email is already used');
   const hashedPassword = await hash(password, 12);
-  const user = await User.create({
-    role, name, email, password: hashedPassword,
-  });
+  const user = await User.create(
+    {
+      role, name, email, password: hashedPassword,
+    },
+    {
+      returning: true,
+    },
+  );
+  const userData = {
+    id: user.id, role: user.role, name: user.name,
+  };
   const { id } = user;
   if (role === 'client') {
     const token = await generateToken({ name, role, userID: id });
     res.cookie('token', token);
   }
-  return { status: 201, data: 'signed up successfully ' };
+  return { status: 201, data: userData, msg: 'signed up successfully ' };
 };
 
 const freelancerSignUp = async (req: Request, res: Response) => {
@@ -61,17 +69,22 @@ const freelancerSignUp = async (req: Request, res: Response) => {
   if (!user) throw serverErrs.BAD_REQUEST('Somthing went wrong');
   const { name, role } = user;
 
-  const freelancer = await Freelancer.create({
-    image,
-    title,
-    major,
-    brief,
-    userId,
-    portfolio,
-  });
+  const freelancer = await Freelancer.create(
+    {
+      image,
+      title,
+      major,
+      brief,
+      userId,
+      portfolio,
+    },
+    {
+      returning: true,
+    },
+  );
   const token = await generateToken({ userID: freelancer.id, role, name });
 
   res.cookie('token', token);
-  return { status: 201, data: freelancer, msg: 'successful login' };
+  return { status: 201, data: freelancer, msg: 'successful sign up' };
 };
 export { login, freelancerSignUp, signupUser };
