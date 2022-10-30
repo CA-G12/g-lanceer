@@ -43,6 +43,8 @@ function JobForm({
         formik.resetForm();
       } catch (err) {
         setError({ ...error, open: true });
+      } finally {
+        handelClose();
       }
     },
   });
