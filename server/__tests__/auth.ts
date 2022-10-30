@@ -98,7 +98,7 @@ const AuthTests = () => {
         email: 'jnekjfhejfk@gmail.com', password: '1234jfbef', name: 'shthaaaadsdswd', role: 'client',
       })
       .expect('Content-Type', /json/)
-      .expect(200);
+      .expect(201);
     expect(response.body.data).toBe('signed up successfully ');
   });
   test('sign up without role ', async () => {
