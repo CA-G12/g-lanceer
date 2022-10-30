@@ -21,7 +21,6 @@ function ProtectedRoute({ children, isAuthClient }: any) {
 function LoginProtectedRoute({ children }: any) {
   const { pathname, state } = useLocation(); // to redirect location
   const { user } = useContext(UserContext);
-  console.log(state, 'from login protected');
   if (user) {
     return <Navigate to={state?.currentLocation || '/'} replace state={{ currentLocation: pathname }} />;
   }
