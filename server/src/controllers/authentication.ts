@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { compare, hash } from 'bcrypt';
-import { User } from '../models';
-import { loginValidation, signupUserValidation } from '../validation';
+import { User, Freelancer } from '../models';
+import { loginValidation, signupUserValidation, freelancerValidate } from '../validation';
 import { generateToken, serverErrs } from '../helpers';
+import { UserInstance } from '../interfaces';
 
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -45,4 +46,27 @@ const signupUser = async (req: Request, res: Response) => {
   return { status: 201, data: 'signed up successfully ' };
 };
 
-export { login, signupUser };
+const freelancerSignUp = async (req: Request, res: Response) => {
+  const {
+    title, major, portfolio, brief, image, userId,
+  } = req.body;
+  await freelancerValidate.validate(req.body);
+
+  const user: UserInstance | null = await User.findOne({ where: { id: userId } });
+  if (!user) throw serverErrs.BAD_REQUEST('Somthing went wrong');
+  const { name, role } = user;
+
+  const freelancer = await Freelancer.create({
+    image,
+    title,
+    major,
+    brief,
+    userId,
+    portfolio,
+  });
+  const token = await generateToken({ userID: freelancer.id, role, name });
+
+  res.cookie('token', token);
+  return { status: 201, data: freelancer, msg: 'successful login' };
+};
+export { login, freelancerSignUp, signupUser };

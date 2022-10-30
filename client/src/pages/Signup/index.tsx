@@ -3,7 +3,7 @@ import {
   Box, Step, Stepper, StepLabel, Button,
 } from '@mui/material';
 import './style.css';
-import { FirstStep, Signup } from '../../components';
+import { FirstStep, Signup, FreelancerSignUp } from '../../components';
 
 function SignupPage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -26,7 +26,7 @@ function SignupPage() {
     },
     {
       label: 'major and experience',
-      component: (<h1>Step 3</h1>),
+      component: (<FreelancerSignUp />),
     },
   ];
 

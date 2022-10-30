@@ -18,3 +18,36 @@
       display: flex;
       padding-left: 12rem;
 }
+.formDivContainer{
+  width: 70%;
+  margin: auto;
+  height: 72vh;
+}
+.thirdStepForm{
+  height: 100%;
+  display: flex;
+  flex: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+}
+.firstPart{
+  width: 48%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.secondPart{
+  width: 48%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.UploadImageHolder{
+  min-height: 65px;
+   display: flex;
+  flex-direction: column; 
+    width: 80%;
+}
