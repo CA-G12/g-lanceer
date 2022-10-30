@@ -24,11 +24,11 @@ interface UserInstance
 // freelancer interFace
 interface FreelancerAttributes {
   id: number
-  image: string
+  image?: string
   title: string
   major: string
-  brief: string
-  portfolio: string
+  brief?: string
+  portfolio?: string
   userId: number
 }
 type FreelancerCreationAttributes = Optional<FreelancerAttributes, 'id'>;

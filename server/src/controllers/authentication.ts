@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { compare } from 'bcrypt';
-import { User } from '../models';
-import { loginValidation } from '../validation';
+import { User, Freelancer } from '../models';
+import { loginValidation, freelancerValidate } from '../validation';
 import { generateToken, serverErrs } from '../helpers';
+import { UserInstance } from '../interfaces';
 
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -19,4 +20,27 @@ const login = async (req: Request, res: Response) => {
   res.cookie('token', token);
   return { status: 200, msg: 'logged in successfully' };
 };
-export default login;
+const freelancerSignUp = async (req: Request, res: Response) => {
+  const {
+    title, major, portfolio, brief, image, userId,
+  } = req.body;
+  await freelancerValidate.validate(req.body);
+
+  const user: UserInstance | null = await User.findOne({ where: { id: userId } });
+  if (!user) throw serverErrs.BAD_REQUEST('Somthing went wrong');
+  const { name, role } = user;
+
+  const freelancer = await Freelancer.create({
+    image,
+    title,
+    major,
+    brief,
+    userId,
+    portfolio,
+  });
+  const token = await generateToken({ userID: freelancer.id, role, name });
+
+  res.cookie('token', token);
+  return { status: 201, data: freelancer, msg: 'successful login' };
+};
+export { login, freelancerSignUp };
