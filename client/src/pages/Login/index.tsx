@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
 import { Alert, InputLabel, Snackbar } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginSchema } from '../../validation';
 import formImg from '../../assets/4957136 1.png';
 import './style.css';
@@ -11,9 +11,7 @@ import { login } from '../../helpers';
 import UserContext from '../../context';
 
 function Login() {
-  const { state } = useLocation();
   const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
   const [error, setError] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -27,12 +25,10 @@ function Login() {
       try {
         const res = await login(values);
         formik.resetForm();
-        formik.setSubmitting(false);
         if (setUser) setUser(res.data.data);
-        console.log(state.currentLocation);
-        navigate(state.currentLocation || '/');
       } catch (err) {
         setError(true);
+      } finally {
         formik.setSubmitting(false);
       }
     },

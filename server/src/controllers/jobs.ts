@@ -50,7 +50,7 @@ const addJob = async (req: Request, res: Response) => {
   return { status: 201, data: job };
 };
 const searchJobs = async (req: Request) => {
-  const JOBS_PER_PAGE = 8;
+  const JOBS_PER_PAGE = 5;
   const {
     title, page = 1, budget, category,
   } = req.query;

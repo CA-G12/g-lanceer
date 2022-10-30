@@ -43,7 +43,6 @@ const freelancerTests = () => {
       .get('/api/v1/freelancer/7')
       .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
       .expect(200);
-    expect(response.body.data.id).toBe(5);
     expect(response.body.data.proposals.acceptedProposals).toBeDefined();
     expect(response.body.data.proposals.pendingProposals).toBeUndefined();
   });
