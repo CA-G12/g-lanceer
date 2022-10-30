@@ -42,17 +42,15 @@ function Client() {
   }, []);
 
   // fun delete item
-  const handleDelete = async (idItem: number) => {
+  const handlerDeleted = async (idItem: number) => {
     try {
-      const dataItemDel = await axios.delete(`/api/v1/jobs/${idItem}`);
+      const itemDeleted = await axios.delete(`/api/v1/jobs/${idItem}`);
 
-      setMessage({ ...message, value: dataItemDel.data.msg, open: true });
+      setMessage({ ...message, value: itemDeleted.data.msg, open: true });
 
       const filterJobsDelete = jobsUnoccupied.filter((job) => job.id !== idItem);
       setJobsUnoccupied(filterJobsDelete);
     } catch (err) {
-      setLoading(false);
-
       // handel error
       setMessage({ type: 'error', value: 'Something went Wrong, Try Again later!', open: true });
     }
@@ -72,8 +70,6 @@ function Client() {
         setJobsOccupied([...jobsOccupied, jobAccepted]);
       }
     } catch (err) {
-      setLoading(false);
-
       // handel error
       setMessage({ type: 'error', value: 'Something went Wrong, Try Again later!', open: true });
     }
@@ -102,7 +98,7 @@ function Client() {
       // component while rendering data on pending jobs
       <>
         {jobsUnoccupied.map((job) => (
-          <JobCard job={job} deleteItem={handleDelete} key={job.title}>
+          <JobCard job={job} handlerDeleted={handlerDeleted} key={job.title}>
             <Accordion disabled={false}>
               <AccordionSummary>
                 <div className="budget-proposal-section budget-proposal-client ">
@@ -122,7 +118,13 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptProposal} />)}
+                {job.proposals.map((proposal) => (
+                  <ProposalJob
+                    proposal={proposal}
+                    key={job.id}
+                    acceptProposal={acceptProposal}
+                  />
+                ))}
 
               </AccordionDetails>
             </Accordion>
@@ -160,7 +162,13 @@ function Client() {
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                {job.proposals.map((proposal) => <ProposalJob proposal={proposal} acceptProposal={acceptProposal} />)}
+                {job.proposals.map((proposal) => (
+                  <ProposalJob
+                    proposal={proposal}
+                    key={job.id}
+                    acceptProposal={acceptProposal}
+                  />
+                ))}
               </AccordionDetails>
             </Accordion>
 

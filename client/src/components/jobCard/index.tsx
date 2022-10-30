@@ -10,7 +10,7 @@ import { JobPropsCard } from '../../interfaces';
 import UserContext from '../../context';
 
 function JobCard({
-  job, children, deleteItem,
+  job, children, handlerDeleted,
 }: JobPropsCard) {
   const {
     title, description, id,
@@ -31,10 +31,10 @@ function JobCard({
               {title}
             </Typography>
           </Link>
-          {deleteItem && user?.userID === job.userId && job.isOccupied === false && (
+          {handlerDeleted && user?.userID === job.userId && job.isOccupied === false && (
           <IconButton
             aria-label="delete"
-            onClick={() => deleteItem(id)}
+            onClick={() => handlerDeleted(id)}
           >
             <DeleteIcon />
           </IconButton>

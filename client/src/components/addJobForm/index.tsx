@@ -41,10 +41,9 @@ function JobForm({
         newJob.proposals = proposals;
         setJobsUnoccupied([...jobsUnoccupied, newJob]);
         formik.resetForm();
+        handelClose();
       } catch (err) {
         setError({ ...error, open: true });
-      } finally {
-        handelClose();
       }
     },
   });

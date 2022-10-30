@@ -30,7 +30,7 @@ interface Job {
 interface JobPropsCard {
   job: Job,
   children: React.ReactElement,
-  deleteItem?: (idItem: number) => void,
+  handlerDeleted?: (idItem: number) => void,
 }
 
 interface JobDetails {
