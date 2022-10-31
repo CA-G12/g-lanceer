@@ -28,6 +28,14 @@ const updateProposal = async (
 ) => {
   await axios.put(`/api/v1/proposals/${proposalId}`, values);
 };
+const login = async (values: {
+  email: string
+  password: string
+}) => {
+  const res = await axios.post('api/v1/auth/login', values);
+  return res;
+};
+
 export {
-  getJobs, getFreelancerData, updateFreelancerData, destroyProposal, updateProposal, addProposal,
+  getJobs, getFreelancerData, updateFreelancerData, destroyProposal, updateProposal, addProposal, login,
 };
