@@ -79,7 +79,7 @@ function Login() {
             Sign In
           </LoadingButton>
           <span>
-            Already have an account?
+            Dont have an account?
             <Link to="/signup" className="link-signup"> Sign Up</Link>
           </span>
         </div>

@@ -74,4 +74,10 @@ const freelancerSignUp = async (req: Request, res: Response) => {
   res.cookie('token', token);
   return { status: 201, data: freelancer, msg: 'successful login' };
 };
-export { login, freelancerSignUp, signupUser };
+const logout = async (req: Request, res: Response) => {
+  res.clearCookie('token');
+  return { status: 200, msg: 'Logged Out' };
+};
+export {
+  login, freelancerSignUp, signupUser, logout,
+};
