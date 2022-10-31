@@ -13,17 +13,8 @@ import TextEditor from '../TextEditor';
 import './style.css';
 import UserContext from '../../context';
 import { imageUpload, readImage } from '../../helpers';
+import { HTMLInputEvent, SignFreelancer } from '../../interfaces';
 
-interface FreelancerProps {
-  userID: number,
-  name: string,
-}
-interface SignFreelancer {
-  userInfo: FreelancerProps
-}
-interface HTMLInputEvent {
-  target: HTMLInputElement & EventTarget;
-}
 function FreelancerSignUp({ userInfo }: SignFreelancer) {
   const { userID, name } = userInfo;
   const [freelancerError, setFreelancerError] = useState(false);

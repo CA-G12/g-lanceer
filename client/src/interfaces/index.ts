@@ -166,6 +166,16 @@ interface FirstStepProps {
   setUserRole: (role: string) => void,
   setActiveStep: Dispatch<SetStateAction<number>>
 }
+interface FreelanceProps {
+  userID: number,
+  name: string,
+}
+interface SignFreelancer {
+  userInfo: FreelanceProps
+}
+interface HTMLInputEvent {
+  target: HTMLInputElement & EventTarget;
+}
 export type {
   JobProps,
   FilterProps,
@@ -190,4 +200,6 @@ export type {
   SignupProps,
   FirstStepProps,
   MessageAlert,
+  SignFreelancer,
+  HTMLInputEvent,
 };
