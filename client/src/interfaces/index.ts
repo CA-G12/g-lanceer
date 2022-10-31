@@ -51,8 +51,9 @@ interface CategoryProps {
   alt: string
 }
 interface ProposalProps {
-  proposalText: string
-  proposalAttachment: string
+  description: string
+  attachments: string
+  id?: number
 }
 
 interface Proposal {
@@ -76,11 +77,16 @@ interface Proposal {
   },
 
 }
+interface FreelancerActionsAlerts {
+  msg: string,
+  type: AlertColor
+}
 interface PropsProposalCard {
   proposal: Proposal
-  acceptProposal: (idItem: number, jobId: number) => void,
+  onUpdate?: (values: ProposalProps) => Promise<void>
+  onDelete?: () => Promise<void>
+  acceptProposal?: (idItem: number, jobId: number) => void,
 }
-
 interface TabListInt {
   label: string;
   child: JSX.Element | JSX.Element[] | null;
@@ -89,6 +95,10 @@ interface PropsTabList {
   tablist: Array<TabListInt>,
 }
 
+interface ProposalFormProps {
+  initialValue?: ProposalProps
+  onSubmit: any
+}
 interface PropsTextEditor {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>
@@ -99,7 +109,7 @@ interface JobSearch {
   title: string,
   description: string,
   budget: number,
-  proposals: [];
+  proposals: Proposal[];
   category: string,
   userId: number,
   isOccupied: boolean
@@ -188,5 +198,7 @@ export type {
   FreelancerInfo,
   SignupProps,
   FirstStepProps,
+  FreelancerActionsAlerts,
+  ProposalFormProps,
   MessageAlert,
 };

@@ -2,21 +2,28 @@ import './style.css';
 import {
   Fab, Grid, TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
 import { FormikProps, useFormik } from 'formik';
 import avatar from '../../assets/Avatar.png';
-import { FreelancerInfo } from '../../interfaces';
+import { FreelancerActionsAlerts, FreelancerInfo } from '../../interfaces';
 import { userInfoSchema } from '../../validation';
+import { updateFreelancerData } from '../../helpers';
+import UserContext from '../../context';
 
 interface Props {
   initialValues: FreelancerInfo
+  authorize: boolean
+  setAlerts: React.Dispatch<React.SetStateAction<FreelancerActionsAlerts | null>>
 }
-function FreelancerInfoCard({ initialValues }: Props) {
+function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
   const [editable, setEditable] = useState(false);
+  const [updatedValues, setUpdatedValues] = useState(initialValues);
+  const { user, setUser } = useContext(UserContext);
+
   function switchSections() {
     setEditable(!editable);
   }
@@ -24,12 +31,20 @@ function FreelancerInfoCard({ initialValues }: Props) {
   const formik: FormikProps<FreelancerInfo> = useFormik<FreelancerInfo>({
     initialValues,
     validationSchema: userInfoSchema,
-    onSubmit: (values: FreelancerInfo) => {
-      console.log(values);
-      setTimeout(() => {
+    onSubmit: async (values: FreelancerInfo) => {
+      setAlerts(null);
+      try {
+        await updateFreelancerData(values);
+        if (user && setUser) setUser({ ...user, name: values.name });
+        setUpdatedValues(values);
+        setAlerts({ msg: ' Updated Successfully', type: 'success' });
+      } catch (err) {
+        setAlerts({ msg: 'Something went Wrong, Try Again later!', type: 'error' });
+        formik.setValues(updatedValues);
+      } finally {
         formik.setSubmitting(false);
         switchSections();
-      }, 3000);
+      }
     },
   });
 
@@ -53,7 +68,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
         </Grid>
         <Grid xs={10} sm={8} md={6} lg={4} item>
           <div className="freelancer-info-card-content">
-            {editable ? (
+            {editable && authorize ? (
               <form onSubmit={formik.handleSubmit}>
                 <TextField
                   disabled={formik.isSubmitting}
@@ -147,7 +162,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
                   className="freelancer-content-input"
                   placeholder="MultiLine with rows: 2 and rowsMax: 4"
                   multiline
-                  maxRows={8}
+                  rows={8}
                   fullWidth
                   inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
                   onChange={formik.handleChange}
@@ -168,6 +183,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
                   loadingPosition="end"
                   variant="contained"
                   id="card-edit-btn"
+                  disabled={JSON.stringify(formik.values) === JSON.stringify(updatedValues) || !formik.isValid}
                   style={{ backgroundColor: '#7B1FA2' }}
                 >
                   {formik.isSubmitting ? 'Saving' : 'Save'}
@@ -176,7 +192,7 @@ function FreelancerInfoCard({ initialValues }: Props) {
                   type="button"
                   endIcon={<CloseIcon />}
                   onClick={() => {
-                    formik.resetForm();
+                    formik.setValues(updatedValues);
                     switchSections();
                   }}
                   variant="contained"
@@ -190,15 +206,17 @@ function FreelancerInfoCard({ initialValues }: Props) {
             ) : (
 
               <div className="info">
-                <Fab
-                  color="secondary"
-                  id="card-edit-btn"
-                  aria-label="edit"
-                  onClick={() => switchSections()}
-                  style={{ transform: 'scale(.9)' }}
-                >
-                  <EditIcon />
-                </Fab>
+                {authorize && (
+                  <Fab
+                    color="secondary"
+                    id="card-edit-btn"
+                    aria-label="edit"
+                    onClick={() => switchSections()}
+                    style={{ transform: 'scale(.9)' }}
+                  >
+                    <EditIcon />
+                  </Fab>
+                )}
                 <h3 className="freelancer-name">{formik.values.name}</h3>
                 <p className="freelancer-major">
                   <span className="freelancer-title">{formik.values.title}</span>

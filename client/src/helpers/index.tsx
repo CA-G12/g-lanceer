@@ -1,7 +1,22 @@
-import { getJobs, login } from './fetchFunction';
+import {
+  getJobs,
+  getFreelancerData,
+  updateFreelancerData,
+  destroyProposal,
+  updateProposal,
+  addProposal,
+  login,
+} from './fetchFunction';
 import readImage from './readImage';
 import imageUpload from './uploadImage';
 
 export {
-  getJobs, imageUpload, readImage, login,
+  getJobs, getFreelancerData,
+  updateFreelancerData,
+  destroyProposal,
+  updateProposal,
+  addProposal,
+  imageUpload,
+  readImage,
+  login,
 };

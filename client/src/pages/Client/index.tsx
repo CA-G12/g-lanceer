@@ -60,11 +60,11 @@ function Client() {
   const acceptProposal = async (proposalID: number, jobID: number) => {
     try {
       const getProposalItem = await axios.patch(`/api/v1/proposals/${proposalID}`);
-
       setMessage({ ...message, value: getProposalItem.data.msg, open: true });
 
-      const jobAccepted = jobsUnoccupied.find((job) => job.id === jobID);
+      const jobAccepted: JobSearch | undefined = jobsUnoccupied.find((job) => job.id === jobID);
       if (jobAccepted) {
+        jobAccepted.proposals[0].isAccepted = true;
         const filterProposal = jobsUnoccupied.filter((job) => job.id !== jobID);
         setJobsUnoccupied(filterProposal);
         setJobsOccupied([...jobsOccupied, jobAccepted]);

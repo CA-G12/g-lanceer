@@ -10,7 +10,7 @@
 }
 .freelancer-info-card img{
   width: 100%;
-  max-width: 380px;
+  max-width: 300px;
   border-radius: 4px;
 }
 
@@ -34,6 +34,7 @@ font-size: 18px;
 color: #3F4444;
 margin-top: 2rem;
 font-weight: 400;
+width: 474px;
 }
 .freelancer-info-card-content p.freelancer-portfolio{
   font-size: 16px;
@@ -46,6 +47,9 @@ font-weight: 600;
   right: 150px;
   background-color: #1C3879;
   color: #fff;
+}
+#card-edit-btn:disabled{
+  background-color: #ccc !important;
 }
 .freelancer-title{
   margin-right: 10px;

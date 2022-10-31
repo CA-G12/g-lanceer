@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import ErrorNotFound from './components/notFound';
 import { ProtectedRoute, LoginProtectedRoute } from './components/protectedRoute';
 import {
   Client, Freelancer, Job, JobsSearch, Landing, Login,
 } from './pages';
+import PageNotFound from './pages/PageNotFound';
 import SignupPage from './pages/Signup';
 
 const router = createBrowserRouter([
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: '*', element: <ErrorNotFound /> },
+  { path: '*', element: <PageNotFound /> },
 ]);
 
 export default router;
