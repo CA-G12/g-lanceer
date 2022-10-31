@@ -13,7 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import {
+  Link, NavLink, useLocation,
+} from 'react-router-dom';
+import axios from 'axios';
 import logo from '../../assets/logo2.png';
 import UserContext from '../../context';
 import avatar from '../../assets/Avatar.png';
@@ -26,17 +29,21 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
-  console.log(pathname);
+  const Logout = async () => {
+    try {
+      await axios.get('/api/v1/auth/logout');
+    } finally {
+      if (setUser) setUser(null);
+    }
+  };
   const freelancerSettings = [
     { label: 'Profile', path: `/freelancer/${user?.userID}` },
     { label: 'Jobs', path: '/jobs-search' },
-    { label: 'Logout', path: '/' },
   ];
   const clientSettings = [
     { label: 'Profile', path: '/profile' },
-    { label: 'Logout', path: '/' },
   ];
   const noUserSettings = [
     { label: 'Login', path: '/login' },
@@ -183,9 +190,11 @@ function Navbar() {
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography className="menu-item" textAlign="center">{setting.label}</Typography>
                     </MenuItem>
-
                   </Link>
                 ))}
+                <MenuItem onClick={Logout}>
+                  <Typography className="menu-item" textAlign="center">Logout</Typography>
+                </MenuItem>
               </Menu>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }} className="user-nav-info">
                 <Tooltip title="Open settings">

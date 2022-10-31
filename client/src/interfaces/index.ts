@@ -141,7 +141,7 @@ interface PropsJobPage {
 }
 type UserContex = {
   user?: User | null,
-  setUser?: (user: User) => void,
+  setUser?: (user: User | null) => void,
 };
 interface Props {
   children: React.ReactNode;
@@ -152,7 +152,7 @@ interface SignupProps {
   userRole: string
 }
 interface FirstStepProps {
-  setUserRole: (role: string)=> void,
+  setUserRole: (role: string) => void,
   setActiveStep: Dispatch<SetStateAction<number>>
 }
 export type {
