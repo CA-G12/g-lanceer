@@ -1,3 +1,4 @@
 import getJobs from './fetchFunction';
+import imageUpload from './uploadImage';
 
-export default getJobs;
+export { getJobs, imageUpload };

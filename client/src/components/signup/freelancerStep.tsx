@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import {
   FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField,
@@ -8,8 +10,25 @@ import data from '../../categoris';
 import { thirdStepValidation } from '../../validation';
 import TextEditor from '../TextEditor';
 import './style.css';
+import { imageUpload } from '../../helpers';
 
+interface HTMLInputEvent {
+  target: HTMLInputElement & EventTarget;
+}
 function FreelancerSignUp() {
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+
+  const changeHandler = (e: HTMLInputEvent, cb: React.Dispatch<React.SetStateAction<string | null>>) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      cb(reader.result as string);
+    };
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -19,12 +38,20 @@ function FreelancerSignUp() {
       image: '',
     },
     validationSchema: thirdStepValidation,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      if (file) {
+        try {
+          const avatarURL = await imageUpload(file, 2);
+          console.log(avatarURL);
+        } catch (error) {
+          console.log(error);
+        }
+      }
       formik.resetForm();
+      setImgSrc(null);
     },
   });
-
   return (
     <div className="formDivContainer">
       <form
@@ -69,14 +96,12 @@ function FreelancerSignUp() {
             error={formik.touched.portfolio && Boolean(formik.errors.portfolio)}
             helperText={formik.touched.portfolio && formik.errors.portfolio}
             style={{ marginBottom: '20px' }}
-
           />
           <InputLabel htmlFor="Major">Description</InputLabel>
           <TextEditor
             error={false}
             value={formik.values.brief}
             setValue={(e) => formik.setFieldValue('brief', e)}
-
           />
         </div>
         <div className="secondPart">
@@ -105,24 +130,43 @@ function FreelancerSignUp() {
               >
                 <CloudUploadIcon />
                 Upload image
-                <input hidden accept="image/*" multiple type="file" />
+                <input
+                  hidden
+                  accept="image/*"
+                  multiple
+                  type="file"
+                  id="uploadeImage"
+                  onChange={(e) => changeHandler(e, setImgSrc)}
+                />
+                {
+
+                }
               </LoadingButton>
               <FormHelperText id="error-text" error>
                 {formik.touched.image && formik.errors.image}
               </FormHelperText>
             </label>
-            <div style={{
-              borderWidth: '1px', borderStyle: 'dashed', borderColor: '#757571', width: '80%', marginBottom: '20px',
-            }}
-            >
-              <img
-                src="https://i.pinimg.com/236x/3e/06/34/3e0634f6079385191c902548435c50ea.jpg"
-                alt=""
-                style={{ width: '150px', height: '150px', margin: '20px 0px' }}
-              />
-            </div>
+            {imgSrc && (
+
+              <div style={{
+                borderWidth: '1px', borderStyle: 'dashed', borderColor: '#757571', width: '80%', marginBottom: '20px',
+              }}
+              >
+                <img
+                  src={imgSrc}
+                  alt=""
+                  style={{ width: '150px', height: '150px', margin: '20px 0px' }}
+                  id="showImage"
+                />
+              </div>
+            )}
           </div>
-          <LoadingButton color="primary" variant="contained" type="submit" style={{ width: '80%', height: '40px' }}>
+          <LoadingButton
+            color="primary"
+            variant="contained"
+            type="submit"
+            style={{ width: '80%', height: '40px' }}
+          >
             Submit
           </LoadingButton>
         </div>
@@ -130,4 +174,5 @@ function FreelancerSignUp() {
     </div>
   );
 }
+
 export default FreelancerSignUp;
