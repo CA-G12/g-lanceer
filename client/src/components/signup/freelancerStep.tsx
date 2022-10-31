@@ -53,14 +53,15 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
           userId: userID,
         });
         setFreelancerError(false);
+        const freelancerId = freelancer.data.data.id;
         if (setUser) {
           setUser({
-            userID: freelancer.data.data.id, role: 'freelancer', name,
+            userID: freelancerId, role: 'freelancer', name,
           });
         }
         formik.resetForm();
         setImgSrc(null);
-        navigate(`/freelancer/${userID}`);
+        navigate(`/freelancer/${freelancerId}`);
       } catch (err) {
         setFreelancerError(true);
       }

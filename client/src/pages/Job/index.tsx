@@ -32,8 +32,12 @@ function Job() {
     try {
       await addProposal(values, id);
       setAlert({ type: 'success', msg: 'Proposal Added Successfully' });
-    } catch (err) {
-      setAlert({ type: 'error', msg: 'Something went wrong' });
+    } catch (err: any) {
+      if (err.response.data.message === 'already post a proposal') {
+        setAlert({ type: 'error', msg: 'already posted a proposal' });
+      } else {
+        setAlert({ type: 'error', msg: 'Something went wrong' });
+      }
     }
   };
   useEffect(() => {
