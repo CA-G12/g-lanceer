@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SignupProps } from '../../interfaces';
-import { signUpSchema } from '../../validation';
+// import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
 import UserContext from '../../context';

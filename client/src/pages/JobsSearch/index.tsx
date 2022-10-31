@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { Tabs, JobCard, Filter } from '../../components';
 import './style.css';
-import getJobs from '../../helpers';
+import { getJobs } from '../../helpers';
 import { JobSearch, ParamsT, TabListInt } from '../../interfaces';
 import UserContext from '../../context';
 

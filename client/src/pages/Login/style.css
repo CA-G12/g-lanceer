@@ -5,13 +5,16 @@
   width: 100%;
 }
 .form-img{
-  width: 50%;
+  width: 100%;
+  text-align: right;
+  padding-left: 4rem;
 }
 .form-img img{
   width: 95%;
 }
  .form-login{
-  width: 50%;
+  width: 100%;
+  margin-left: 100px;
 }
 .title-login{
   font-size: 25px;

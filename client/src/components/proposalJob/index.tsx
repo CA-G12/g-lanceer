@@ -8,7 +8,7 @@ import { UserContext } from '../../context/User';
 import { PropsProposalCard } from '../../interfaces';
 import './style.css';
 
-function ProposalJob({ proposal }: PropsProposalCard) {
+function ProposalJob({ proposal, acceptProposal }: PropsProposalCard) {
   const { user } = useContext(UserContext);
   return (
     <div className="wrapper-proposal ">
@@ -23,7 +23,7 @@ function ProposalJob({ proposal }: PropsProposalCard) {
           </h3>
         )}
         <div className="btn-proposal">
-          {user?.role === 'client' ? (
+          {(user?.role === 'client' && !proposal.isAccepted) ? (
             <Button
               style={{
                 fontSize: '10px',
@@ -33,6 +33,7 @@ function ProposalJob({ proposal }: PropsProposalCard) {
                 backgroundColor: '#1C7925',
                 color: '#fff',
               }}
+              onClick={() => acceptProposal(proposal.id, proposal.jobId)}
             >
               Accept
             </Button>

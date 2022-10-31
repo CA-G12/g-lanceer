@@ -12,22 +12,32 @@ import { thirdStepValidation } from '../../validation';
 import TextEditor from '../TextEditor';
 import './style.css';
 import UserContext from '../../context';
+import { imageUpload, readImage } from '../../helpers';
 
 interface FreelancerProps {
   userId: number,
   name: string,
 }
-
 interface SignFreelancer {
   userInfo: FreelancerProps
 }
-
+interface HTMLInputEvent {
+  target: HTMLInputElement & EventTarget;
+}
 function FreelancerSignUp({ userInfo }: SignFreelancer) {
   const { userId, name } = userInfo;
   const [freelancerError, setFreelancerError] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
+  const changeHandler = (e: HTMLInputEvent) => {
+    if (e.target.files) {
+      readImage(e.target.files[0], setImgSrc);
+      setFile(e.target.files[0]);
+    }
+  };
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -39,12 +49,16 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
     validationSchema: thirdStepValidation,
     onSubmit: async (values) => {
       try {
+        let avatarURL = null;
+        if (file) {
+          avatarURL = await imageUpload(file, 2);
+        }
         const freelancer = await axios.post('/api/v1/auth/freelancer', {
           title: values.title,
           major: values.major,
           portfolio: values.portfolio,
           brief: values.brief,
-          image: values.image,
+          image: avatarURL,
           userId,
         });
         setFreelancerError(false);
@@ -54,13 +68,13 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
           });
         }
         formik.resetForm();
+        setImgSrc(null);
         navigate(`/freelancer/${userId}`);
       } catch (err) {
         setFreelancerError(true);
       }
     },
   });
-
   return (
     <div className="formDivContainer">
       <form
@@ -104,14 +118,12 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
             error={formik.touched.portfolio && Boolean(formik.errors.portfolio)}
             helperText={formik.touched.portfolio && formik.errors.portfolio}
             style={{ marginBottom: '20px' }}
-
           />
           <InputLabel htmlFor="Major">Description</InputLabel>
           <TextEditor
             error={false}
             value={formik.values.brief}
             setValue={(e) => formik.setFieldValue('brief', e)}
-
           />
         </div>
         <div className="secondPart">
@@ -140,24 +152,42 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
               >
                 <CloudUploadIcon />
                 Upload image
-                <input hidden accept="image/*" multiple type="file" />
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  id="uploadeImage"
+                  onChange={(e) => changeHandler(e)}
+                />
+                {
+
+                }
               </LoadingButton>
               <FormHelperText id="error-text" error>
                 {formik.touched.image && formik.errors.image}
               </FormHelperText>
             </label>
-            <div style={{
-              borderWidth: '1px', borderStyle: 'dashed', borderColor: '#757571', width: '80%', marginBottom: '20px',
-            }}
-            >
-              <img
-                src="https://i.pinimg.com/236x/3e/06/34/3e0634f6079385191c902548435c50ea.jpg"
-                alt=""
-                style={{ width: '150px', height: '150px', margin: '20px 0px' }}
-              />
-            </div>
+            {imgSrc && (
+
+              <div style={{
+                borderWidth: '1px', borderStyle: 'dashed', borderColor: '#757571', width: '80%', marginBottom: '20px',
+              }}
+              >
+                <img
+                  src={imgSrc}
+                  alt=""
+                  style={{ width: '150px', height: '150px', margin: '20px 0px' }}
+                  id="showImage"
+                />
+              </div>
+            )}
           </div>
-          <LoadingButton color="primary" variant="contained" type="submit" style={{ width: '80%', height: '40px' }}>
+          <LoadingButton
+            color="primary"
+            variant="contained"
+            type="submit"
+            style={{ width: '80%', height: '40px' }}
+          >
             Submit
           </LoadingButton>
         </div>
