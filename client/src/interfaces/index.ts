@@ -85,6 +85,7 @@ interface PropsProposalCard {
   proposal: Proposal
   onUpdate?: (values: ProposalProps) => Promise<void>
   onDelete?: () => Promise<void>
+  acceptProposal?: (idItem: number, jobId: number) => void,
 }
 interface TabListInt {
   label: string;
@@ -108,7 +109,7 @@ interface JobSearch {
   title: string,
   description: string,
   budget: number,
-  proposals: [];
+  proposals: Proposal[];
   category: string,
   userId: number,
   isOccupied: boolean

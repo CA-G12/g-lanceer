@@ -17,6 +17,7 @@ function ProposalJob({
   proposal,
   onUpdate,
   onDelete,
+  acceptProposal,
 }: PropsProposalCard) {
   const { user } = useContext(UserContext);
   const [updateModal, setUpdateModal] = useState<boolean>(false);
@@ -35,7 +36,7 @@ function ProposalJob({
             </h3>
           )}
           <div className="btn-proposal">
-            {user?.role === 'client' ? (
+            {(user?.role === 'client' && !proposal.isAccepted) ? (
               <Button
                 style={{
                   fontSize: '10px',
@@ -44,6 +45,9 @@ function ProposalJob({
                   paddingRight: '15px',
                   backgroundColor: '#1C7925',
                   color: '#fff',
+                }}
+                onClick={() => {
+                  if (acceptProposal) acceptProposal(proposal.id, proposal.jobId);
                 }}
               >
                 Accept
