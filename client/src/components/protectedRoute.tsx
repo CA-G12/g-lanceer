@@ -19,11 +19,10 @@ function ProtectedRoute({ children, isAuthClient }: any) {
 }
 
 function LoginProtectedRoute({ children }: any) {
-  const { pathname } = useLocation(); // to redirect location
+  const { pathname, state } = useLocation(); // to redirect location
   const { user } = useContext(UserContext);
-
   if (user) {
-    return <Navigate to="/" replace state={{ currentLocation: pathname }} />;
+    return <Navigate to={state?.currentLocation || '/'} replace state={{ currentLocation: pathname }} />;
   }
   return children;
 }

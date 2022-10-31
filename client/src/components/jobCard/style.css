@@ -46,3 +46,6 @@
   justify-content: flex-start;
   gap: 2rem;
 }
+.link-description{
+  color: #1E1E1E;
+}

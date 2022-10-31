@@ -1,8 +1,11 @@
+import { AlertColor } from '@mui/lab';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface JobProps {
   handelClose: () => void,
-  showModel: boolean
+  showModel: boolean,
+  jobsUnoccupied: Job[],
+  setJobsUnoccupied: Dispatch<SetStateAction<JobSearch[]>>,
 }
 
 interface FilterProps {
@@ -26,7 +29,8 @@ interface Job {
 
 interface JobPropsCard {
   job: Job,
-  children: React.ReactElement
+  children: React.ReactElement,
+  handlerDeleted?: (idItem: number) => void,
 }
 
 interface JobDetails {
@@ -74,11 +78,12 @@ interface Proposal {
 }
 interface PropsProposalCard {
   proposal: Proposal
+  acceptProposal: (idItem: number, jobId: number) => void,
 }
 
 interface TabListInt {
   label: string;
-  child: JSX.Element | JSX.Element[];
+  child: JSX.Element | JSX.Element[] | null;
 }
 interface PropsTabList {
   tablist: Array<TabListInt>,
@@ -115,6 +120,11 @@ interface FreelancerInfo {
   brief: string
 }
 
+interface MessageAlert {
+  type: AlertColor | undefined
+  value: string
+  open: boolean
+}
 interface JobAboutPage {
   title: string
   category: string,
@@ -141,7 +151,7 @@ interface PropsJobPage {
 }
 type UserContex = {
   user?: User | null,
-  setUser?: (user: User) => void,
+  setUser?: (user: User | null) => void,
 };
 interface Props {
   children: React.ReactNode;
@@ -152,7 +162,7 @@ interface SignupProps {
   userRole: string
 }
 interface FirstStepProps {
-  setUserRole: (role: string)=> void,
+  setUserRole: (role: string) => void,
   setActiveStep: Dispatch<SetStateAction<number>>
 }
 export type {
@@ -178,4 +188,5 @@ export type {
   FreelancerInfo,
   SignupProps,
   FirstStepProps,
+  MessageAlert,
 };

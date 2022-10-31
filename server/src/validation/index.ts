@@ -76,6 +76,36 @@ const updateFreelancerValidation = yup.object().shape({
     .min(5, 'portfolio must be more than 5 characters long')
     .url('portfolio should be a valid URL'),
 });
+const freelancerValidate = yup.object().shape({
+  title: yup
+    .string()
+    .required('Title is required'),
+  major: yup
+    .string()
+    .required('Major is required'),
+  portfolio: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
+  brief: yup
+    .string()
+    .optional()
+    .default(''),
+  image: yup
+    .string()
+    .optional()
+    .nullable()
+    .url(),
+});
+
+const signupUserValidation = yup.object().shape({
+  role: yup.string().oneOf(['client', 'freelancer'])
+    .required(),
+  name: yup.string().min(10).required(),
+  email: yup.string().required().email(),
+  password: yup.string().required().min(8),
+});
 
 export {
   queryValidation,
@@ -85,4 +115,6 @@ export {
   updateFreelancerValidation,
   editProposalValidation,
   loginValidation,
+  signupUserValidation,
+  freelancerValidate,
 };
