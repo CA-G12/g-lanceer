@@ -50,7 +50,7 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
         setError(false);
         formik.resetForm();
         checkUser();
-      } catch (err:unknown) {
+      } catch (err: any) {
         formik.setErrors({ email: err.response.data.message });
         setError(true);
       }

@@ -39,7 +39,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
     validationSchema: thirdStepValidation,
     onSubmit: async (values) => {
       try {
-        await axios.post('/api/v1/auth/freelancer', {
+        const freelancer = await axios.post('/api/v1/auth/freelancer', {
           title: values.title,
           major: values.major,
           portfolio: values.portfolio,
@@ -50,7 +50,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
         setFreelancerError(false);
         if (setUser) {
           setUser({
-            userID: userId, role: 'freelancer', name,
+            userID: freelancer.data.data.id, role: 'freelancer', name,
           });
         }
         formik.resetForm();

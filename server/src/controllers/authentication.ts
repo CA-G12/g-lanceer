@@ -49,7 +49,7 @@ const signupUser = async (req: Request, res: Response) => {
     },
   );
   const userData = {
-    id: user.id, role: user.role, name: user.name,
+    userID: user.id, role: user.role, name: user.name,
   };
   const { id } = user;
   if (role === 'client') {
