@@ -26,7 +26,7 @@ function Freelancer() {
   const [freelancerActionsAlerts, setFreelancerAlerts] = useState<FreelancerActionsAlerts | null>(null);
   const authorize: boolean = user?.userID === Number(id);
 
-  const onDelete = async (proposalId: number) => {
+  const deleteProposal = async (proposalId: number) => {
     setFreelancerAlerts(null);
     try {
       await destroyProposal(proposalId);
@@ -36,7 +36,7 @@ function Freelancer() {
       setFreelancerAlerts({ msg: 'Something went Wrong,Try Again later!', type: 'error' });
     }
   };
-  const onUpdate = async (values: ProposalProps, proposalId: number) => {
+  const updateProposalHandler = async (values: ProposalProps, proposalId: number) => {
     setFreelancerAlerts(null);
     try {
       await updateProposal(values, proposalId);
@@ -114,8 +114,8 @@ function Freelancer() {
           <ProposalJob
             key={p.id}
             proposal={p}
-            onUpdate={(values: ProposalProps) => onUpdate(values, p.id)}
-            onDelete={() => onDelete(p.id)}
+            onUpdate={(values: ProposalProps) => updateProposalHandler(values, p.id)}
+            onDelete={() => deleteProposal(p.id)}
           />
         ))
         : <p style={{ color: 'gray' }}>No Pending proposals</p>,

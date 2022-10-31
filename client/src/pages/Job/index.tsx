@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Alert, CircularProgress, Snackbar } from '@mui/material';
 import './style.css';
-import { Client, JobAboutPage, ProposalProps } from '../../interfaces';
+import {
+  Client, FreelancerActionsAlerts, JobAboutPage, ProposalProps,
+} from '../../interfaces';
 import { JobDetails, ProposalForm } from '../../components';
 import { addProposal } from '../../helpers';
 
@@ -24,16 +26,14 @@ function Job() {
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [apiResponse, setApiResponse] = useState(false);
-  const [apiError, setApiError] = useState(false);
+  const [alert, setAlert] = useState<FreelancerActionsAlerts | null>(null);
   const onSubmit = async (values: ProposalProps) => {
-    setApiError(false);
-    setApiResponse(false);
+    setAlert(null);
     try {
       await addProposal(values, id);
-      setApiResponse(true);
+      setAlert({ type: 'success', msg: 'Proposal Added Successfully' });
     } catch (err) {
-      setApiError(true);
+      setAlert({ type: 'error', msg: 'Something went wrong' });
     }
   };
   useEffect(() => {
@@ -74,24 +74,15 @@ function Job() {
       <ProposalForm onSubmit={onSubmit} />
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={apiError}
-        onClose={() => setApiError(false)}
+        open={!!alert}
+        onClose={() => setAlert(null)}
         autoHideDuration={6000}
       >
-        <Alert severity="error">
-          Something went Wrong, Try Again later!
+        <Alert severity={alert?.type}>
+          {alert?.msg}
         </Alert>
       </Snackbar>
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={apiResponse}
-        onClose={() => setApiResponse(false)}
-        autoHideDuration={6000}
-      >
-        <Alert severity="success">
-          proposal submitted successfully!
-        </Alert>
-      </Snackbar>
+
     </div>
 
   );
