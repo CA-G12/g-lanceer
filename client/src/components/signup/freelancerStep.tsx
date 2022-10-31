@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import {
@@ -10,7 +9,7 @@ import data from '../../categoris';
 import { thirdStepValidation } from '../../validation';
 import TextEditor from '../TextEditor';
 import './style.css';
-import { imageUpload } from '../../helpers';
+import { imageUpload, readImage } from '../../helpers';
 
 interface HTMLInputEvent {
   target: HTMLInputElement & EventTarget;
@@ -19,14 +18,12 @@ function FreelancerSignUp() {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  const changeHandler = (e: HTMLInputEvent, cb: React.Dispatch<React.SetStateAction<string | null>>) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      cb(reader.result as string);
-    };
+  const changeHandler = (e: HTMLInputEvent) => {
     if (e.target.files) {
+      readImage(e.target.files[0], setImgSrc);
+      console.log('yyyyyyyyyyyyyyyyyyyyyyy', imgSrc);
+
       setFile(e.target.files[0]);
-      reader.readAsDataURL(e.target.files[0]);
     }
   };
   const formik = useFormik({
@@ -133,10 +130,9 @@ function FreelancerSignUp() {
                 <input
                   hidden
                   accept="image/*"
-                  multiple
                   type="file"
                   id="uploadeImage"
-                  onChange={(e) => changeHandler(e, setImgSrc)}
+                  onChange={(e) => changeHandler(e)}
                 />
                 {
 
@@ -174,5 +170,4 @@ function FreelancerSignUp() {
     </div>
   );
 }
-
 export default FreelancerSignUp;

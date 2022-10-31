@@ -4,7 +4,7 @@ import {
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SignupProps } from '../../interfaces';
-import { signUpSchema } from '../../validation';
+// import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
 
@@ -25,7 +25,7 @@ function Signup({ setActiveStep, userRole }: SignupProps) {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: signUpSchema,
+    // validationSchema: signUpSchema,
     onSubmit: (values) => {
       console.log(values, 'valuessss');
       checkUser();
