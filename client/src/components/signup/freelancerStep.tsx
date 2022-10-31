@@ -1,28 +1,31 @@
-import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
+import axios from 'axios';
 import {
-  FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField,
+  FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Stack, Snackbar, Alert,
 } from '@mui/material';
+import { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useNavigate } from 'react-router-dom';
 import data from '../../categoris';
 import { thirdStepValidation } from '../../validation';
 import TextEditor from '../TextEditor';
 import './style.css';
+import UserContext from '../../context';
 import { imageUpload, readImage } from '../../helpers';
+import { HTMLInputEvent, SignFreelancer } from '../../interfaces';
 
-interface HTMLInputEvent {
-  target: HTMLInputElement & EventTarget;
-}
-function FreelancerSignUp() {
+function FreelancerSignUp({ userInfo }: SignFreelancer) {
+  const { userID, name } = userInfo;
+  const [freelancerError, setFreelancerError] = useState(false);
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
   const changeHandler = (e: HTMLInputEvent) => {
     if (e.target.files) {
       readImage(e.target.files[0], setImgSrc);
-      console.log('yyyyyyyyyyyyyyyyyyyyyyy', imgSrc);
-
       setFile(e.target.files[0]);
     }
   };
@@ -36,17 +39,31 @@ function FreelancerSignUp() {
     },
     validationSchema: thirdStepValidation,
     onSubmit: async (values) => {
-      console.log(values);
-      if (file) {
-        try {
-          const avatarURL = await imageUpload(file, 2);
-          console.log(avatarURL);
-        } catch (error) {
-          console.log(error);
+      try {
+        let avatarURL = null;
+        if (file) {
+          avatarURL = await imageUpload(file, 2);
         }
+        const freelancer = await axios.post('/api/v1/auth/freelancer', {
+          title: values.title,
+          major: values.major,
+          portfolio: values.portfolio,
+          brief: values.brief,
+          image: avatarURL,
+          userId: userID,
+        });
+        setFreelancerError(false);
+        if (setUser) {
+          setUser({
+            userID: freelancer.data.data.id, role: 'freelancer', name,
+          });
+        }
+        formik.resetForm();
+        setImgSrc(null);
+        navigate(`/freelancer/${userID}`);
+      } catch (err) {
+        setFreelancerError(true);
       }
-      formik.resetForm();
-      setImgSrc(null);
     },
   });
   return (
@@ -83,7 +100,6 @@ function FreelancerSignUp() {
               {formik.touched.major && formik.errors.major}
             </FormHelperText>
           </FormControl>
-
           <TextField
             id="portfolio"
             name="portfolio"
@@ -167,6 +183,18 @@ function FreelancerSignUp() {
           </LoadingButton>
         </div>
       </form>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={freelancerError}
+          onClose={() => setFreelancerError(false)}
+          autoHideDuration={6000}
+        >
+          <Alert severity="error">
+            Something went Wrong, Try Again later!
+          </Alert>
+        </Snackbar>
+      </Stack>
     </div>
   );
 }

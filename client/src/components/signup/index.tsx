@@ -1,15 +1,20 @@
 import {
-  InputLabel, TextField, Button,
+  InputLabel, TextField, Button, Stack, Snackbar, Alert,
 } from '@mui/material';
+import { useState, useContext } from 'react';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SignupProps } from '../../interfaces';
-// import { signUpSchema } from '../../validation';
+import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
+import UserContext from '../../context';
 
-function Signup({ setActiveStep, userRole }: SignupProps) {
+function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const checkUser = () => {
     if (userRole === 'freelancer') {
@@ -25,17 +30,40 @@ function Signup({ setActiveStep, userRole }: SignupProps) {
       password: '',
       confirmPassword: '',
     },
-    // validationSchema: signUpSchema,
-    onSubmit: (values) => {
-      console.log(values, 'valuessss');
-      checkUser();
-      formik.resetForm();
+    validationSchema: signUpSchema,
+    onSubmit: async (values) => {
+      try {
+        const data = await axios.post('/api/v1/auth/signup', {
+          role: userRole,
+          name: values.userName,
+          email: values.email,
+          password: values.password,
+        });
+        const userData = data.data.data;
+        const { name, userID } = data.data.data;
+        setUserInfo({ userID, name });
+        if (userRole === 'client') {
+          if (setUser) {
+            setUser(userData);
+          }
+        }
+        setError(false);
+        formik.resetForm();
+        checkUser();
+      } catch (err: any) {
+        formik.setErrors({ email: err.response.data.message });
+        setError(true);
+      }
     },
   });
 
   return (
     <div className="s-u-form">
-      <h3 className="header-signup-1">Welcome to Sign Up</h3>
+      <h3 className="header-signup-1">
+        you are signing up as
+        {' '}
+        {userRole}
+      </h3>
       <form className="signup-form-1" onSubmit={formik.handleSubmit}>
         <div className="form-input">
           <InputLabel className="title-input">Username</InputLabel>
@@ -99,6 +127,19 @@ function Signup({ setActiveStep, userRole }: SignupProps) {
           Submit
         </Button>
       </form>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={error}
+          onClose={() => setError(false)}
+          autoHideDuration={6000}
+        >
+          <Alert severity="error">
+            Something went Wrong
+          </Alert>
+        </Snackbar>
+      </Stack>
+
     </div>
   );
 }

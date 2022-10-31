@@ -145,7 +145,7 @@ interface JobAboutPage {
 }
 interface User {
   userID: number,
-  email: string,
+  // email: string,
   name: string,
   role: string
 }
@@ -169,11 +169,22 @@ interface Props {
 
 interface SignupProps {
   setActiveStep: Dispatch<SetStateAction<number>>,
-  userRole: string
+  userRole: string,
+  setUserInfo: Dispatch<SetStateAction<{ userID: number, name: string }>>
 }
 interface FirstStepProps {
   setUserRole: (role: string) => void,
   setActiveStep: Dispatch<SetStateAction<number>>
+}
+interface FreelanceProps {
+  userID: number,
+  name: string,
+}
+interface SignFreelancer {
+  userInfo: FreelanceProps
+}
+interface HTMLInputEvent {
+  target: HTMLInputElement & EventTarget;
 }
 export type {
   JobProps,
@@ -201,4 +212,6 @@ export type {
   FreelancerActionsAlerts,
   ProposalFormProps,
   MessageAlert,
+  SignFreelancer,
+  HTMLInputEvent,
 };
