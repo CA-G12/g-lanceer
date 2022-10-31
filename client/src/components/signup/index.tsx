@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { SignupProps } from '../../interfaces';
-// import { signUpSchema } from '../../validation';
+import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
 import UserContext from '../../context';
@@ -40,8 +40,8 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
           password: values.password,
         });
         const userData = data.data.data;
-        const { name, id } = data.data.data;
-        setUserInfo({ userId: id, name });
+        const { name, userID } = data.data.data;
+        setUserInfo({ userID, name });
         if (userRole === 'client') {
           if (setUser) {
             setUser(userData);

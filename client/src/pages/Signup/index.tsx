@@ -8,7 +8,7 @@ import { FirstStep, Signup, FreelancerSignUp } from '../../components';
 function SignupPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [userRole, setUserRole] = useState('');
-  const [userInfo, setUserInfo] = useState({ userId: 0, name: '' });
+  const [userInfo, setUserInfo] = useState({ userID: 0, name: '' });
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);

@@ -160,7 +160,7 @@ interface Props {
 interface SignupProps {
   setActiveStep: Dispatch<SetStateAction<number>>,
   userRole: string,
-  setUserInfo: Dispatch<SetStateAction<{ userId: number, name: string }>>
+  setUserInfo: Dispatch<SetStateAction<{ userID: number, name: string }>>
 }
 interface FirstStepProps {
   setUserRole: (role: string) => void,

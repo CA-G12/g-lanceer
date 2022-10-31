@@ -15,7 +15,7 @@ import UserContext from '../../context';
 import { imageUpload, readImage } from '../../helpers';
 
 interface FreelancerProps {
-  userId: number,
+  userID: number,
   name: string,
 }
 interface SignFreelancer {
@@ -25,7 +25,7 @@ interface HTMLInputEvent {
   target: HTMLInputElement & EventTarget;
 }
 function FreelancerSignUp({ userInfo }: SignFreelancer) {
-  const { userId, name } = userInfo;
+  const { userID, name } = userInfo;
   const [freelancerError, setFreelancerError] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -59,7 +59,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
           portfolio: values.portfolio,
           brief: values.brief,
           image: avatarURL,
-          userId,
+          userId: userID,
         });
         setFreelancerError(false);
         if (setUser) {
@@ -69,7 +69,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
         }
         formik.resetForm();
         setImgSrc(null);
-        navigate(`/freelancer/${userId}`);
+        navigate(`/freelancer/${userID}`);
       } catch (err) {
         setFreelancerError(true);
       }
