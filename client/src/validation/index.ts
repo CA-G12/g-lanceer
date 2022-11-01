@@ -14,10 +14,10 @@ const loginSchema = yup.object({
 });
 
 const ProposalSchema = yup.object({
-  proposalText: yup.string()
+  description: yup.string()
     .min(15, 'Too Short!')
     .required('Proposal must not be Empty'),
-  proposalAttachment: yup.string()
+  attachments: yup.string()
     .nullable()
     .optional()
     .min(5, 'Attachments must be more than 5 characters long')

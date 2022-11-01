@@ -99,7 +99,7 @@ const AuthTests = () => {
       })
       .expect('Content-Type', /json/)
       .expect(201);
-    expect(response.body.data).toBe('signed up successfully ');
+    expect(response.body.msg).toBe('signed up successfully ');
   });
   test('sign up without role ', async () => {
     const response = await request(app)

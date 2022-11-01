@@ -15,7 +15,9 @@ import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
 import Footer from './footer';
+import NotFound from './notFound';
 import FirstStep from './firstStepSignup';
+import ProposalJob from './proposalJob';
 import { Signup, FreelancerSignUp } from './signup';
 
 export {
@@ -34,7 +36,9 @@ export {
   JobDetails,
   Navbar,
   Footer,
+  NotFound,
   FreelancerSignUp,
   FirstStep,
   Signup,
+  ProposalJob,
 };

@@ -5,7 +5,6 @@ import { UserContext } from '../context/User';
 function ProtectedRoute({ children, isAuthClient }: any) {
   const { pathname } = useLocation(); // to redirect location
   const { user } = useContext(UserContext);
-
   if (!user) {
     return <Navigate to="/login" replace state={{ currentLocation: pathname }} />;
   }

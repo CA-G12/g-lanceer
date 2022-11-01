@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress, Snackbar } from '@mui/material';
 import './style.css';
-import { Client, JobAboutPage } from '../../interfaces';
+import {
+  Client, FreelancerActionsAlerts, JobAboutPage, ProposalProps,
+} from '../../interfaces';
 import { JobDetails, ProposalForm } from '../../components';
+import { addProposal } from '../../helpers';
 
 function Job() {
   const { id } = useParams();
@@ -15,7 +18,7 @@ function Job() {
     category: '',
     budget: 0,
     user: {
-      name: '', email: '', userID: 0, role: '',
+      name: '', userID: 0, role: '',
     },
   });
   const [client, setClient] = useState<Client>({
@@ -23,7 +26,16 @@ function Job() {
   });
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [alert, setAlert] = useState<FreelancerActionsAlerts | null>(null);
+  const onSubmit = async (values: ProposalProps) => {
+    setAlert(null);
+    try {
+      await addProposal(values, id);
+      setAlert({ type: 'success', msg: 'Proposal Added Successfully' });
+    } catch (err) {
+      setAlert({ type: 'error', msg: 'Something went wrong' });
+    }
+  };
   useEffect(() => {
     const getJobData = async () => {
       setLoading(true);
@@ -59,7 +71,18 @@ function Job() {
   return (
     <div className="container">
       <JobDetails job={jobState} client={client} />
-      <ProposalForm />
+      <ProposalForm onSubmit={onSubmit} />
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={!!alert}
+        onClose={() => setAlert(null)}
+        autoHideDuration={6000}
+      >
+        <Alert severity={alert?.type}>
+          {alert?.msg}
+        </Alert>
+      </Snackbar>
+
     </div>
 
   );

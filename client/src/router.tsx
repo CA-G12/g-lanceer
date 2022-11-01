@@ -4,6 +4,7 @@ import { ProtectedRoute, LoginProtectedRoute } from './components/protectedRoute
 import {
   Client, Freelancer, Job, JobsSearch, Landing, Login,
 } from './pages';
+import PageNotFound from './pages/PageNotFound';
 import SignupPage from './pages/Signup';
 
 const router = createBrowserRouter([
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: '*', element: <h1>page not found</h1> },
+  { path: '*', element: <PageNotFound /> },
 ]);
 
 export default router;

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import generateToken from '../helpers/jwt';
 import { FreelancerWithProposalsInstance, ProposalInstance } from '../interfaces';
 import {
   Freelancer, Job, Proposal, User,
@@ -56,6 +57,9 @@ const updateFreelancerInfo = async (req: Request, res: Response) => {
       { name: req.body.name },
       { where: { id: userID } },
     );
+    const { user } = res.locals;
+    const newToken = await generateToken({ ...user, name: req.body.name });
+    res.cookie('token', newToken);
   }
   const UpdatedFreelancer = await Freelancer.update(
     req.body,

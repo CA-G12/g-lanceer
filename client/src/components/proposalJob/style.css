@@ -52,3 +52,12 @@
   font-size: 14px;
   color: #3f4444b6;
 }
+#edit-form-model{
+  width: 750px;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(.9);
+}
