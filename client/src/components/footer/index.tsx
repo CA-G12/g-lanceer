@@ -41,7 +41,7 @@ function Footer() {
             <ul>
               <li>
                 <FaCaretRight className="arrow__icon" />
-                Gaza - Palestine
+                Palestine - Gaza
               </li>
               <li>
                 <FaCaretRight className="arrow__icon" />
