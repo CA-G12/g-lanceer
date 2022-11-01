@@ -65,18 +65,20 @@ const acceptProposal = async (req: Request, res: Response) => {
     include: [
       {
         model: User,
-        attributes: ['email'],
+        attributes: ['email', 'name'],
       },
     ],
     where: { id: proposal.freelancerId },
     attributes: ['id'],
   });
   let userEmail = '';
+  let username = '';
   const jobTitle = job?.title as string;
   if (userInfo) {
     userEmail = userInfo['user.email'];
+    username = userInfo['user.name'];
   }
-  sendEmail(userEmail, jobTitle);
+  sendEmail(userEmail, username, jobTitle);
   return { status: 200, msg: 'Proposal Accepted' };
 };
 
