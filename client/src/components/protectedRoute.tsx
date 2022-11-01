@@ -18,10 +18,18 @@ function ProtectedRoute({ children, isAuthClient }: any) {
 }
 
 function LoginProtectedRoute({ children }: any) {
-  const { pathname, state } = useLocation(); // to redirect location
+  const { state } = useLocation(); // to redirect location
   const { user } = useContext(UserContext);
+  console.log(user);
+
   if (user) {
-    return <Navigate to={state?.currentLocation || '/'} replace state={{ currentLocation: pathname }} />;
+    let redirectPath = '/';
+    if (state?.currentLocation === '/profile' && user.role === 'freelancer') {
+      redirectPath = `/freelancer/${user?.userID}`;
+    } else if (state?.currentLocation) {
+      redirectPath = state?.currentLocation;
+    }
+    return <Navigate to={redirectPath} replace />;
   }
   return children;
 }

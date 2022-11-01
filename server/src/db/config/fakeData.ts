@@ -64,7 +64,7 @@ const freelancers: FreelancerCreationAttributes[] = [
     title: 'translator',
     major: 'Writing & Translation',
     brief:
-      "a German Translator.Words travel Worlds. Translators do the Driving. Your words represent you, your app, your website, your organization, your image - You couldn't risk ruining with false interpretation.",
+      "<b>a German Translator.Words travel Worlds. Translators do the Driving. Your words represent you, your app, your website, your organization, your image - You couldn't risk ruining with false interpretation.</b>",
     portfolio: 'https://github.com/',
   },
   {
@@ -73,7 +73,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior full-stack web developer',
     major: 'Web Development',
-    brief: '',
+    brief: '<b>I\'m experts in building Stunning User experiences. I deliver Full-stack web, mobile, and blockchain application development using React, Firebase, AngularJS, TypeScript, NodeJS, Solidity, and Flutter.</b>',
     portfolio: 'https://github.com/',
   },
   {
@@ -83,7 +83,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Graphics & Design',
     brief:
-      'a talented graphic designer. I have a wide experience in design. With +3 years of experience in Adobe Photoshop, Illustrator and Indesign, I can help you craft your idea in an eye-catching design.',
+      '<b>a talented graphic designer. I have a wide experience in design. With +3 years of experience in Adobe Photoshop, Illustrator and Indesign, I can help you craft your idea in an eye-catching design.</b>',
     portfolio: 'https://www.behance.net/tajkiaislam',
   },
   {
@@ -93,7 +93,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Graphics & Design',
     brief:
-      'I am an Art Director, Digital Artist, Illustrator & Designer and my studio is currently located in Groningen, The Netherlands.',
+      '<b>I am an Art Director, Digital Artist, Illustrator & Designer and my studio is currently located in Groningen, The Netherlands.</b>',
     portfolio:
       'https://www.behance.net/martbiemans/subscription?tracking_source=for_you&promoid=KCJMVKGL&mv=other',
   },
@@ -103,7 +103,7 @@ const freelancers: FreelancerCreationAttributes[] = [
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Digital Marketing',
-    brief: '',
+    brief: '<b>From growing my own brand online over the past 7 years to launching my own social media marketing agency I know just how difficult it can be to grow an authentic, engaged community online. I offer a no hacks, no gimmicks and no nonsense approach to social media helping you deliver your brands message clearly and effectively. Resulting in growth on social and leads through to the business. I’m a specialist in instagram, tiktok and pinterest but have a vast knowledge on all other social media platforms too.</b>',
     portfolio:
       'https://www.behance.net/rawan-b977c00?tracking_source=search_users%7CrawanBehance',
   },
@@ -113,7 +113,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior Mobile developer',
     major: 'Mobile Development',
-    brief: '',
+    brief: '<b>Alcax Solutions Ltd. is an ISO:9001 certified software and mobile app development company having a team of 150+ highly skilled web and mobile experts (iOS, Android, React Native, Flutter, MEAN, MERN, PHP, .NET, Magento, Wordpress etc.) and a strong portfolio of delivering 1500+ web and mobile apps to 500+ clients worldwide.</b>',
     portfolio: 'https://github.com/',
   },
 ];
@@ -122,7 +122,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'Back End Developer', // 1
     description:
-      'We are searching for a Back End Developer to join and support our growing team to develop a mobile application. The developer must be either available for full-time or can deliver the completed tasks on time.',
+      '<p>We are searching for a Back End Developer to join and support our growing team to develop a mobile application. The developer must be either available for full-time or can deliver the completed tasks on time.</p>',
     category: 'Programming & Tech',
     budget: 3000,
     time: '3 months',
@@ -132,7 +132,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'full stack engineer', // 2
     description:
-      'Creating a bespoke online booking system with React and Netlify',
+      '<p>Creating a bespoke online booking system with React and Netlify</p>',
     category: 'Programming & Tech',
     budget: 1500,
     time: '2 months',
@@ -142,7 +142,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'Live streaming app using nodejs', // 3
     description:
-      'I want a app which you can share video, screen and audio then other side users need to join and view the stream. Bare minimum just need functionality for streaming and viewing and multiple streams independently',
+      '<p>I want a app which you can share video, screen and audio then other side users need to join and view the stream. Bare minimum just need functionality for streaming and viewing and multiple streams independently</p>',
     category: 'Programming & Tech',
     budget: 1500,
     time: '5 months',
@@ -152,7 +152,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'UI Development for mobile app (React)', // 4
     description:
-      'Need UI to be developed for mobile application. UI design (HTML) is ready for the same UI is to be developed in core React & not web view.Please connect for design document.',
+      '<p>Need UI to be developed for mobile application. UI design (HTML) is ready for the same UI is to be developed in core React & not web view.Please connect for design document.</p>',
     category: 'Graphics & Design',
     budget: 500,
     time: '1 month',
@@ -162,7 +162,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'Digital Marketing/Marketing/Content Creator', // 5
     description:
-      'Our company has started manufacturing a new range of spray dried food ingredients. We need someone to improve market visibility of these products and attract new customers on different platforms.',
+      '<p>Our company has started manufacturing a new range of spray dried food ingredients. We need someone to improve market visibility of these products and attract new customers on different platforms.</p>',
     category: 'Digital Marketing',
     budget: 900,
     time: '6 months',
@@ -172,7 +172,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'I need a translator for my research', // 6
     description:
-      'I am working on an honors thesis discussing the influence of the American Revolution on Thaddius Kosciusko\'s political and military ideas. As I do not know Polish, I need a translated version of this document for my research. Is about 60 pages. First page is attached for reference. The document is "Can the Poles Win Independence"',
+      '<p>I am working on an honors thesis discussing the influence of the American Revolution on Thaddius Kosciusko\'s political and military ideas. As I do not know Polish, I need a translated version of this document for my research. Is about 60 pages. First page is attached for reference. The document is "Can the Poles Win Independence"</p>',
     category: 'Writing & Translation',
     budget: 600,
     time: '1 month',
@@ -182,7 +182,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'I need an animator', // 7
     description:
-      "Hello,I'm working on a feature documentary about a late Mexican painter, sculptor and muralist. The film tells the story of his birth registry in a sequence of drawings done by the artist himself. I like to animate these pencil drawings. There are about 15 original drawings that were scanned. The total duration of the sequence is about 65 sec. I envision some sort of paper cutout style, but I'm open to collaborative work. Thanks'",
+      "<p>Hello,I'm working on a feature documentary about a late Mexican painter, sculptor and muralist. The film tells the story of his birth registry in a sequence of drawings done by the artist himself. I like to animate these pencil drawings. There are about 15 original drawings that were scanned. The total duration of the sequence is about 65 sec. I envision some sort of paper cutout style, but I'm open to collaborative work. Thanks'</p>",
     category: 'Video & Animation',
     budget: 750,
     time: '2 months',
@@ -192,7 +192,7 @@ const jobs: JobCreationAttributes[] = [
   {
     title: 'Project Manager/Consultant', // 8
     description:
-      'We are looking for a Business Project Manager or Consultant with business planning experience to help build up a startup Website Development and Marketing Company.',
+      '<p>We are looking for a Business Project Manager or Consultant with business planning experience to help build up a startup Website Development and Marketing Company.</p>',
     category: 'Business',
     budget: 900,
     time: '3-6 months',
@@ -204,7 +204,7 @@ const jobs: JobCreationAttributes[] = [
     title:
       'I need someone clean up a voice recording from static noise and other background noises',
     description:
-      'I have voice recordings I can’t hear clearly sone words are clear I need someone boost up the voices remove static background noice so voices can clearly be herd',
+      '<p>I have voice recordings I can’t hear clearly sone words are clear I need someone boost up the voices remove static background noice so voices can clearly be herd</p>',
     category: 'Music & Audio',
     budget: 900,
     time: '2 months',
@@ -217,7 +217,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // translate job
     description:
-      'Hi there,We would like to translate your text from Polish to English and provide you with high quality professional translation service.We have worked on several similar projects in past. We are the leading translation agency of this website with 9 years of experience.',
+      '<p>Hi there,We would like to translate your text from Polish to English and provide you with high quality professional translation service.We have worked on several similar projects in past. We are the leading translation agency of this website with 9 years of experience.</p>',
     attachments: 'https://www.freelancer.com/u/eTranslators?w=f&ngsw-bypass=',
     freelancerId: 1,
     isAccepted: false,
@@ -226,7 +226,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // animation job
     description:
-      'Hello I have reviewed your job description and completely understand your requirement for I need a cartoon/animation artist. I can start working on your project immediately.I have expertise in area of After Effects, Graphic Design, Photoshop, Animation and Logo Design',
+      '<p>Hello I have reviewed your job description and completely understand your requirement for I need a cartoon/animation artist. I can start working on your project immediately.I have expertise in area of After Effects, Graphic Design, Photoshop, Animation and Logo Design</p>',
     attachments: 'https://www.freelancer.com/u/MetaDesignIndia',
     isAccepted: false,
     freelancerId: 5,
@@ -235,7 +235,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // back-end-deeveloper
     description:
-      'I have gone through with your job details and understood it. I am ready to join you as a Back End Developer on immediate basis .I am a professional android mobile application developer with 5+ year of experience and happy to let you know that we have right skills and experience to complete your project on time and with quality.',
+      '<p>I have gone through with your job details and understood it. I am ready to join you as a Back End Developer on immediate basis .I am a professional android mobile application developer with 5+ year of experience and happy to let you know that we have right skills and experience to complete your project on time and with quality.</p>',
     attachments: 'www.vita-wunderschoen.de',
     isAccepted: false,
     freelancerId: 3,
@@ -244,7 +244,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // full-stack job
     description:
-      'Hi sir, Could you let me know more details about project full stack engineer.We are highly interested to work for you',
+      '<p>Hi sir, Could you let me know more details about project full stack engineer.We are highly interested to work for you</p>',
     attachments:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
@@ -254,7 +254,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // full-stack job
     description:
-      "Hi Hope you are well. Here is a senior web developer who have enough experience in booking system, real estate, e-coomerce. If you hire me, I can provide the best result. If you have any figma design, it will be easy to develop but if not, it's ok. I can provide also. Hope to discuss soon. Thanks.",
+      "<p>Hi Hope you are well. Here is a senior web developer who have enough experience in booking system, real estate, e-coomerce. If you hire me, I can provide the best result. If you have any figma design, it will be easy to develop but if not, it's ok. I can provide also. Hope to discuss soon. Thanks.</p>",
     attachments:
       'https://prnt.sc/ramtyj https://prnt.sc/ra38bm https://prnt.sc/ra38mk',
     isAccepted: false,
@@ -264,7 +264,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // Live streaming app using nodejs
     description:
-      'I am Full Stack Developer. I went through your requirements and would like to discuss further regarding more specific details and requirements. I would like to inform you that me along with my team have around 5+ years of experience in Full Stack Developement and complete IT solution including Website, Ecommerce Platforms, ELearning Platforms, Single page application and Automation. We strictly follow the software development standard and and our work is client centric. We respect deadline and our work include back-end, front-end , customization website security and SEO.',
+      '<p>I am Full Stack Developer. I went through your requirements and would like to discuss further regarding more specific details and requirements. I would like to inform you that me along with my team have around 5+ years of experience in Full Stack Developement and complete IT solution including Website, Ecommerce Platforms, ELearning Platforms, Single page application and Automation. We strictly follow the software development standard and and our work is client centric. We respect deadline and our work include back-end, front-end , customization website security and SEO.</p>',
     attachments: 'https://caseace.in/',
     isAccepted: true,
     freelancerId: 2,
@@ -273,7 +273,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // UI Development for mobile app (React)
     description:
-      "Hello, hope you're well. I have reviewed your project description and I can design an eye-catching and user-friendly interface for your app using React.js as per your requirements. The final cost and timeline will be given after the complete analysis of requirements with you.",
+      "<p>Hello, hope you're well. I have reviewed your project description and I can design an eye-catching and user-friendly interface for your app using React.js as per your requirements. The final cost and timeline will be given after the complete analysis of requirements with you.</p>",
     attachments: 'https://www.freelancer.com/u/junkyfunky',
     isAccepted: false,
     freelancerId: 3,
@@ -282,7 +282,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // UI Development for mobile app (React)
     description:
-      "Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.",
+      "<p>Hello there,Good Day!As per project requirements I can develop the UI designs, do modification & new development in your project or be able to create the Website from scratch as well in React with using Redux/Material/Typescript/HTML5. As you know in Reactjs virtual DOM implementation and rendering optimizations. Migrating between React's versions is quite easy, too, you don't need to install updates one by one. I'm quite sure that I will provide you with app good performance & attractive UI/UX designs and debugging of code. Let's begin the glorious journey of working with you.I have integrated 3rd party libraries by myself in applications.</p>",
     attachments: 'Trica.co',
     isAccepted: false,
     freelancerId: 4,
@@ -291,7 +291,7 @@ const proposals: ProposalCreationAttributes[] = [
   {
     // Digital Marketing/Marketing/Content Creator
     description:
-      'Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion',
+      '<p>Hi Employer,I read your job posting requirements for managing your social media platforms,account,branding and promotion</p>',
     attachments: 'https://candyville.ca/',
     isAccepted: true,
     freelancerId: 5,

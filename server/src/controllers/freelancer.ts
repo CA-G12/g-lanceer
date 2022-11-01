@@ -50,7 +50,10 @@ const getFreelancer = async (req: Request, res: Response) => {
 
 const updateFreelancerInfo = async (req: Request, res: Response) => {
   const { userID } = res.locals.user;
+  console.log(userID);
+
   await updateFreelancerValidation.validate(req.body);
+  console.log(req.body);
 
   if (req.body.name) {
     await User.update(

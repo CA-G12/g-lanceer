@@ -6,6 +6,7 @@ import './style.css';
 import { useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import parse from 'html-react-parser';
 import { JobPropsCard } from '../../interfaces';
 import UserContext from '../../context';
 
@@ -32,16 +33,16 @@ function JobCard({
             </Typography>
           </Link>
           {handlerDeleted && user?.userID === job.userId && job.isOccupied === false && (
-          <IconButton
-            aria-label="delete"
-            onClick={() => handlerDeleted(id)}
-          >
-            <DeleteIcon />
-          </IconButton>
+            <IconButton
+              aria-label="delete"
+              onClick={() => handlerDeleted(id)}
+            >
+              <DeleteIcon />
+            </IconButton>
           )}
         </div>
         <div className="description">
-          {description}
+          <p>{parse(description)}</p>
         </div>
         <div className="second-section">
           {children}

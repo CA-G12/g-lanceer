@@ -5,6 +5,7 @@ import {
 import './style.css';
 import axios from 'axios';
 import { useState } from 'react';
+import TextEditor from '../TextEditor';
 import data from '../../categoris';
 import { JobProps, MessageAlert } from '../../interfaces';
 import { jobSchema } from '../../validation';
@@ -104,19 +105,22 @@ function JobForm({
               {formik.errors.category ? formik.errors.category : ' '}
             </FormHelperText>
           </FormControl>
-          <TextField
-            className="text-area"
-            error={formik.touched.description && Boolean(formik.errors.description)}
-            name="description"
-            id="description"
-            helperText={formik.errors.description ? formik.errors.description : ' '}
-            label="Job Description"
-            multiline
-            rows={4}
-            maxRows={8}
-            value={formik.values.description}
-            onChange={formik.handleChange}
-          />
+          <div>
+            <InputLabel>description</InputLabel>
+            <TextEditor
+              error={Boolean(formik.errors.description)}
+              // name="description"
+              // id="description"
+              // helperText={formik.errors.description ? formik.errors.description : ' '}
+              // label="Job Description"
+              // multiline
+              // rows={4}
+              // maxRows={8}
+              value={formik.values.description}
+              setValue={(e) => formik.setFieldValue('description', e)}
+            // onChange={formik.handleChange}
+            />
+          </div>
           <Button
             variant="contained"
             type="submit"

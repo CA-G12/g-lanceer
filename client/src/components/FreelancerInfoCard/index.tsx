@@ -8,10 +8,12 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
 import { FormikProps, useFormik } from 'formik';
+import parse from 'html-react-parser';
 import avatar from '../../assets/Avatar.png';
 import { FreelancerActionsAlerts, FreelancerInfo } from '../../interfaces';
 import { userInfoSchema } from '../../validation';
 import { updateFreelancerData } from '../../helpers';
+import TextEditor from '../TextEditor';
 import UserContext from '../../context';
 
 interface Props {
@@ -155,7 +157,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                     !!(formik.errors.portfolio)
                   }
                 />
-                <TextField
+                {/* <TextField
                   disabled={formik.isSubmitting}
                   name="brief"
                   label="brief"
@@ -175,6 +177,11 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   error={
                     !!(formik.errors.brief)
                   }
+                /> */}
+                <TextEditor
+                  value={formik.values.brief}
+                  setValue={(e) => formik.setFieldValue('brief', e)}
+                  error={Boolean(formik.errors.brief)}
                 />
                 <LoadingButton
                   type="submit"
@@ -223,7 +230,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   {formik.values.major}
                 </p>
                 <p className="freelancer-portfolio"><a href={formik.values.portfolio}>Portfolio</a></p>
-                <p className="freelancer-brief">{formik.values.brief}</p>
+                <p className="freelancer-brief">{parse(formik.values.brief)}</p>
               </div>
             )}
 

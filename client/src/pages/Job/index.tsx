@@ -69,7 +69,7 @@ function Job() {
   }
 
   return (
-    <div className="container">
+    <div className="container holders">
       <JobDetails job={jobState} client={client} />
       <ProposalForm onSubmit={onSubmit} />
       <Snackbar
