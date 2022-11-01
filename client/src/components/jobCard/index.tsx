@@ -42,7 +42,7 @@ function JobCard({
           )}
         </div>
         <div className="description">
-          <p>{parse(description)}</p>
+          <div>{parse(description)}</div>
         </div>
         <div className="second-section">
           {children}

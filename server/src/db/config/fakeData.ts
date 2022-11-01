@@ -64,7 +64,7 @@ const freelancers: FreelancerCreationAttributes[] = [
     title: 'translator',
     major: 'Writing & Translation',
     brief:
-      "<b>a German Translator.Words travel Worlds. Translators do the Driving. Your words represent you, your app, your website, your organization, your image - You couldn't risk ruining with false interpretation.</b>",
+      "<p>a German Translator.Words travel Worlds. Translators do the Driving. Your words represent you, your app, your website, your organization, your image - You couldn't risk ruining with false interpretation.</p>",
     portfolio: 'https://github.com/',
   },
   {
@@ -73,7 +73,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior full-stack web developer',
     major: 'Web Development',
-    brief: '<b>I\'m experts in building Stunning User experiences. I deliver Full-stack web, mobile, and blockchain application development using React, Firebase, AngularJS, TypeScript, NodeJS, Solidity, and Flutter.</b>',
+    brief: '<p>I\'m experts in building Stunning User experiences.I deliver<strong> Full- stack web < /strong>, <strong>mobile</strong >, and < strong > blockchain < /strong> application development using </p > <ul><li>React < /li><li> Firebase</li > <li>AngularJS < /li><li> TypeScript</li > <li>NodeJS, Solidity, and Flutter.< /li></ul >',
     portfolio: 'https://github.com/',
   },
   {
@@ -83,7 +83,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Graphics & Design',
     brief:
-      '<b>a talented graphic designer. I have a wide experience in design. With +3 years of experience in Adobe Photoshop, Illustrator and Indesign, I can help you craft your idea in an eye-catching design.</b>',
+      '<p>a talented graphic designer. I have a wide experience in design. With +3 years of experience in Adobe Photoshop, Illustrator and Indesign, I can help you craft your idea in an eye-catching design.</p>',
     portfolio: 'https://www.behance.net/tajkiaislam',
   },
   {
@@ -93,7 +93,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Graphics & Design',
     brief:
-      '<b>I am an Art Director, Digital Artist, Illustrator & Designer and my studio is currently located in Groningen, The Netherlands.</b>',
+      '<p>I am an Art Director, Digital Artist, Illustrator & Designer and my studio is currently located in Groningen, The Netherlands.</p>',
     portfolio:
       'https://www.behance.net/martbiemans/subscription?tracking_source=for_you&promoid=KCJMVKGL&mv=other',
   },
@@ -103,7 +103,7 @@ const freelancers: FreelancerCreationAttributes[] = [
     image:
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     major: 'Digital Marketing',
-    brief: '<b>From growing my own brand online over the past 7 years to launching my own social media marketing agency I know just how difficult it can be to grow an authentic, engaged community online. I offer a no hacks, no gimmicks and no nonsense approach to social media helping you deliver your brands message clearly and effectively. Resulting in growth on social and leads through to the business. I’m a specialist in instagram, tiktok and pinterest but have a vast knowledge on all other social media platforms too.</b>',
+    brief: '<p>From growing my own brand online over the past 7 years to launching my own social media marketing agency I know just how difficult it can be to grow an authentic, engaged community online. I offer a no hacks, no gimmicks and no nonsense approach to social media helping you deliver your brands message clearly and effectively. Resulting in growth on social and leads through to the business. I’m a specialist in instagram, tiktok and pinterest but have a vast knowledge on all other social media platforms too.</p>',
     portfolio:
       'https://www.behance.net/rawan-b977c00?tracking_source=search_users%7CrawanBehance',
   },
@@ -113,7 +113,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior Mobile developer',
     major: 'Mobile Development',
-    brief: '<b>Alcax Solutions Ltd. is an ISO:9001 certified software and mobile app development company having a team of 150+ highly skilled web and mobile experts (iOS, Android, React Native, Flutter, MEAN, MERN, PHP, .NET, Magento, Wordpress etc.) and a strong portfolio of delivering 1500+ web and mobile apps to 500+ clients worldwide.</b>',
+    brief: '<p>Alcax Solutions Ltd. is an ISO:9001 certified software and mobile app development company having a team of 150+ highly skilled web and mobile experts (iOS, Android, React Native, Flutter, MEAN, MERN, PHP, .NET, Magento, Wordpress etc.) and a strong portfolio of delivering 1500+ web and mobile apps to 500+ clients worldwide.</p>',
     portfolio: 'https://github.com/',
   },
 ];

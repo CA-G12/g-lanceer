@@ -230,7 +230,7 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                   {formik.values.major}
                 </p>
                 <p className="freelancer-portfolio"><a href={formik.values.portfolio}>Portfolio</a></p>
-                <p className="freelancer-brief">{parse(formik.values.brief)}</p>
+                <div className="freelancer-brief">{parse(formik.values.brief)}</div>
               </div>
             )}
 
