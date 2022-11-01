@@ -14,6 +14,7 @@ import JobForm from './addJobForm';
 import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
+import Footer from './footer';
 import FirstStep from './firstStepSignup';
 import { Signup, FreelancerSignUp } from './signup';
 
@@ -32,6 +33,7 @@ export {
   ProposalForm,
   JobDetails,
   Navbar,
+  Footer,
   FreelancerSignUp,
   FirstStep,
   Signup,

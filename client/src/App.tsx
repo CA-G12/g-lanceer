@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
 import UserMemo from './context/User';
-import { Navbar } from './components';
+import { Navbar, Footer } from './components';
 
 const theme = createTheme({
   palette: {
@@ -21,7 +21,7 @@ function App() {
         <UserMemo>
           <Navbar />
           <Outlet />
-          <footer>footer</footer>
+          <Footer />
         </UserMemo>
       </div>
     </ThemeProvider>
