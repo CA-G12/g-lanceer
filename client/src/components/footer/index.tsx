@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FaCaretRight } from 'react-icons/fa';
 import logo from '../../assets/logo2.png';
 import data from '../../categoris';
 import './style.css';
@@ -7,7 +8,7 @@ function Footer() {
   const handelCategoryItem = () => {
     const categoryItem = [];
     // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < 3; index++) {
       categoryItem.push(data[index].name);
     }
     return categoryItem;
@@ -23,9 +24,9 @@ function Footer() {
             <h4>Menu</h4>
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/">About</Link></li>
               <li><Link to="/jobs-search">Search</Link></li>
-              <li><Link to="/">Contact</Link></li>
+              {/* to send email */}
+              <li><a href="mailto:glancer@support.com">Help</a></li>
             </ul>
           </div>
           <div className="footer-category">
@@ -36,12 +37,20 @@ function Footer() {
             </ul>
           </div>
           <div className="footer-help">
-            <h4>Help</h4>
+            <h4>Contact Us</h4>
             <ul>
-              <li><Link to="/">Privcy Policy</Link></li>
-              <li><Link to="/">Terms</Link></li>
-              <li><Link to="/">Shipping</Link></li>
-              <li><Link to="/">Secure</Link></li>
+              <li>
+                <FaCaretRight className="arrow__icon" />
+                Gaza - Palestine
+              </li>
+              <li>
+                <FaCaretRight className="arrow__icon" />
+                glancer@support.com
+              </li>
+              <li>
+                <FaCaretRight className="arrow__icon" />
+                +972 - 592 - 100 - 223
+              </li>
             </ul>
           </div>
         </div>
