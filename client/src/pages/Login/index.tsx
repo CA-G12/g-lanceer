@@ -13,8 +13,6 @@ import UserContext from '../../context';
 function Login() {
   const { setUser } = useContext(UserContext);
   const [error, setError] = useState<boolean>(false);
-  // const navigate = useNavigate();
-  // const { state } = useLocation();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -26,8 +24,6 @@ function Login() {
       try {
         const { data } = await login(values);
         formik.resetForm();
-        console.log(data.data, 'from login');
-
         if (setUser) setUser(data.data);
       } catch (err) {
         setError(true);

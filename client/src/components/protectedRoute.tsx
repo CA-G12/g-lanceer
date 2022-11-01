@@ -20,7 +20,6 @@ function ProtectedRoute({ children, isAuthClient }: any) {
 function LoginProtectedRoute({ children }: any) {
   const { state } = useLocation(); // to redirect location
   const { user } = useContext(UserContext);
-  console.log(user);
 
   if (user) {
     let redirectPath = '/';

@@ -109,16 +109,8 @@ function JobForm({
             <InputLabel>description</InputLabel>
             <TextEditor
               error={Boolean(formik.errors.description)}
-              // name="description"
-              // id="description"
-              // helperText={formik.errors.description ? formik.errors.description : ' '}
-              // label="Job Description"
-              // multiline
-              // rows={4}
-              // maxRows={8}
               value={formik.values.description}
               setValue={(e) => formik.setFieldValue('description', e)}
-            // onChange={formik.handleChange}
             />
           </div>
           <Button

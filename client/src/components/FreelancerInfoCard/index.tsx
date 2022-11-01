@@ -157,27 +157,6 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
                     !!(formik.errors.portfolio)
                   }
                 />
-                {/* <TextField
-                  disabled={formik.isSubmitting}
-                  name="brief"
-                  label="brief"
-                  className="freelancer-content-input"
-                  placeholder="MultiLine with rows: 2 and rowsMax: 4"
-                  multiline
-                  rows={8}
-                  fullWidth
-                  inputProps={{ style: { fontSize: '16px', color: '#565b5b' } }}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.brief}
-                  helperText={
-                    !!formik.errors.brief
-                    && formik.errors.brief
-                  }
-                  error={
-                    !!(formik.errors.brief)
-                  }
-                /> */}
                 <TextEditor
                   value={formik.values.brief}
                   setValue={(e) => formik.setFieldValue('brief', e)}

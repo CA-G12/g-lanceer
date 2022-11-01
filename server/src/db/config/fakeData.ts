@@ -73,7 +73,7 @@ const freelancers: FreelancerCreationAttributes[] = [
       'https://i.pinimg.com/564x/fb/93/42/fb934271045db664e380178ed0517f1a.jpg',
     title: 'senior full-stack web developer',
     major: 'Web Development',
-    brief: '<p>I\'m experts in building Stunning User experiences.I deliver<strong> Full- stack web < /strong>, <strong>mobile</strong >, and < strong > blockchain < /strong> application development using </p > <ul><li>React < /li><li> Firebase</li > <li>AngularJS < /li><li> TypeScript</li > <li>NodeJS, Solidity, and Flutter.< /li></ul >',
+    brief: '<p>I\'m experts in building Stunning User experiences.I deliver <strong> Full- stack web </strong>, <strong>mobile</strong >, and <strong> blockchain </strong> application development using </p > <ul><li>React </li><li> Firebase</li > <li>AngularJS </li><li> TypeScript</li > <li>NodeJS, Solidity, and Flutter.</li></ul >',
     portfolio: 'https://github.com/',
   },
   {
