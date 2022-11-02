@@ -72,7 +72,7 @@ function ProposalJob({
             )}
           </div>
         </div>
-        <p>{parse(proposal.description)}</p>
+        <div>{parse(proposal.description)}</div>
         {proposal.attachments && (
           <div>
             <a className="link-attach" href={proposal.attachments}>
