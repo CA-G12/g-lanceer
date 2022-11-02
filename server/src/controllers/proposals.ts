@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { ProposalInstance } from '../interfaces';
-import { Proposal, Job } from '../models';
+import { FreelancerInstance, ProposalInstance } from '../interfaces';
+import {
+  Proposal, Job, User, Freelancer,
+} from '../models';
 import { editProposalValidation, postProposalValidation } from '../validation';
-
 import { serverErrs } from '../helpers';
 import sequelize from '../db/config/connection';
+import sendEmail from '../helpers/sendEmail';
 
 const addProposal = async (req: Request, res: Response) => {
   const {
@@ -18,6 +20,13 @@ const addProposal = async (req: Request, res: Response) => {
     description,
     attachments,
   });
+  const proposalFind = await Proposal.findOne({
+    where: {
+      id: freelancerId,
+      jobId,
+    },
+  });
+  if (proposalFind) throw serverErrs.BAD_REQUEST('already post a proposal');
   const proposal: ProposalInstance = await Proposal.create({
     jobId,
     freelancerId,
@@ -26,6 +35,7 @@ const addProposal = async (req: Request, res: Response) => {
   });
   return { status: 201, data: proposal };
 };
+
 const deletePropsal = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { userID } = res.locals.user;
@@ -42,6 +52,7 @@ const deletePropsal = async (req: Request, res: Response) => {
   await proposal.destroy();
   return { status: 200, msg: 'deleted successfully' };
 };
+
 const acceptProposal = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { userID } = res.locals.user;
@@ -56,8 +67,30 @@ const acceptProposal = async (req: Request, res: Response) => {
     await Proposal.destroy({ where: { isAccepted: false, jobId }, transaction: t });
     await job?.update({ isOccupied: true }, { transaction: t });
   });
+  interface FreelancerUser extends FreelancerInstance {
+    user?:{
+      name: string,
+      email: string,
+    }
+  }
+  const userInfo: FreelancerUser | null = await Freelancer.findOne({
+    include: [
+      {
+        model: User,
+        attributes: ['email', 'name'],
+      },
+    ],
+    where: { id: proposal.freelancerId },
+    attributes: ['id'],
+  });
+
+  const jobTitle = job?.title as string;
+  if (userInfo?.user) {
+    sendEmail(userInfo.user.email, userInfo.user.name, jobTitle);
+  }
   return { status: 200, msg: 'Proposal Accepted' };
 };
+
 const editProposal = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { userID } = res.locals.user;

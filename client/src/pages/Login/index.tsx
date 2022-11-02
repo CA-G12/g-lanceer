@@ -13,7 +13,6 @@ import UserContext from '../../context';
 function Login() {
   const { setUser } = useContext(UserContext);
   const [error, setError] = useState<boolean>(false);
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -23,9 +22,9 @@ function Login() {
     onSubmit: async (values) => {
       setError(false);
       try {
-        const res = await login(values);
+        const { data } = await login(values);
         formik.resetForm();
-        if (setUser) setUser(res.data.data);
+        if (setUser) setUser(data.data);
       } catch (err) {
         setError(true);
       } finally {
