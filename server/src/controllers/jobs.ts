@@ -98,6 +98,7 @@ const searchJobs = async (req: Request) => {
         attributes: { include: ['jobId'] },
       },
     ],
+    order: [['id', 'DESC']],
     distinct: true,
     limit: JOBS_PER_PAGE,
     offset: (Number(page) - 1) * JOBS_PER_PAGE,
