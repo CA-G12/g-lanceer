@@ -27,7 +27,7 @@ function JobsSearch() {
     setCategory(e.target.value);
   };
   const priceChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPrice(Number(e.target.value));
+    if (Number(e.target.value) >= 0) { setPrice(Number(e.target.value)); }
   };
   const valueChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setTitle(e.target.value);
@@ -101,7 +101,7 @@ function JobsSearch() {
                 budget:
                 <span>
                   $
-                  {budget}
+                  {job.budget}
                 </span>
               </div>
               {user?.role !== 'client' && (
