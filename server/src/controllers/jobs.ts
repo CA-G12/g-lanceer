@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Sequelize, { WhereOptions } from 'sequelize';
+import { Op, WhereOptions } from 'sequelize';
 import { serverErrs } from '../helpers';
 import { JobInstance } from '../interfaces';
 import { Job, Proposal, User } from '../models';
@@ -58,13 +58,22 @@ const searchJobs = async (req: Request) => {
   await queryValidation.validate(req.query);
   const where: WhereOptions<any> | undefined = { isOccupied: false };
   if (title) {
-    where.title = {
-      [Sequelize.Op.iLike]: `%${title}%`,
-    };
+    where[Op.or as any] = [
+      {
+        title: {
+          [Op.iLike]: `%${title}%`,
+        },
+      },
+      {
+        description: {
+          [Op.iLike]: `%${title}%`,
+        },
+      },
+    ];
   }
   if (budget) {
     where.budget = {
-      [Sequelize.Op.gte]: budget,
+      [Op.gte]: budget,
     };
   }
 
@@ -89,6 +98,7 @@ const searchJobs = async (req: Request) => {
         attributes: { include: ['jobId'] },
       },
     ],
+    order: [['id', 'DESC']],
     distinct: true,
     limit: JOBS_PER_PAGE,
     offset: (Number(page) - 1) * JOBS_PER_PAGE,
