@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ProposalInstance } from '../interfaces';
+import { FreelancerInstance, ProposalInstance } from '../interfaces';
 import {
   Proposal, Job, User, Freelancer,
 } from '../models';
@@ -20,6 +20,13 @@ const addProposal = async (req: Request, res: Response) => {
     description,
     attachments,
   });
+  const proposalFind = await Proposal.findOne({
+    where: {
+      id: freelancerId,
+      jobId,
+    },
+  });
+  if (proposalFind) throw serverErrs.BAD_REQUEST('already post a proposal');
   const proposal: ProposalInstance = await Proposal.create({
     jobId,
     freelancerId,
@@ -60,8 +67,13 @@ const acceptProposal = async (req: Request, res: Response) => {
     await Proposal.destroy({ where: { isAccepted: false, jobId }, transaction: t });
     await job?.update({ isOccupied: true }, { transaction: t });
   });
-  const userInfo: any = await Freelancer.findOne({
-    raw: true,
+  interface FreelancerUser extends FreelancerInstance {
+    user?:{
+      name: string,
+      email: string,
+    }
+  }
+  const userInfo: FreelancerUser | null = await Freelancer.findOne({
     include: [
       {
         model: User,
@@ -71,14 +83,11 @@ const acceptProposal = async (req: Request, res: Response) => {
     where: { id: proposal.freelancerId },
     attributes: ['id'],
   });
-  let userEmail = '';
-  let username = '';
+
   const jobTitle = job?.title as string;
-  if (userInfo) {
-    userEmail = userInfo['user.email'];
-    username = userInfo['user.name'];
+  if (userInfo?.user) {
+    sendEmail(userInfo.user.email, userInfo.user.name, jobTitle);
   }
-  sendEmail(userEmail, username, jobTitle);
   return { status: 200, msg: 'Proposal Accepted' };
 };
 

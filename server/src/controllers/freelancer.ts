@@ -49,22 +49,25 @@ const getFreelancer = async (req: Request, res: Response) => {
 };
 
 const updateFreelancerInfo = async (req: Request, res: Response) => {
-  const { userID } = res.locals.user;
-  await updateFreelancerValidation.validate(req.body);
+  const { userID: freelancerID } = res.locals.user;
 
+  await updateFreelancerValidation.validate(req.body);
+  const freelancer = await Freelancer.findByPk(freelancerID);
+  const UpdatedFreelancer = await Freelancer.update(
+    req.body,
+    { where: { id: freelancerID }, returning: true },
+
+  );
   if (req.body.name) {
     await User.update(
       { name: req.body.name },
-      { where: { id: userID } },
+      { where: { id: freelancer?.userId } },
     );
     const { user } = res.locals;
     const newToken = await generateToken({ ...user, name: req.body.name });
     res.cookie('token', newToken);
   }
-  const UpdatedFreelancer = await Freelancer.update(
-    req.body,
-    { where: { userId: userID } },
-  );
+
   return { status: 200, msg: UpdatedFreelancer[0] ? 'Freelancer Updated successfully' : 'No updated records' };
 };
 
