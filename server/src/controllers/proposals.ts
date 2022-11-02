@@ -18,6 +18,13 @@ const addProposal = async (req: Request, res: Response) => {
     description,
     attachments,
   });
+  const proposalFind = await Proposal.findOne({
+    where: {
+      id: freelancerId,
+      jobId,
+    },
+  });
+  if (proposalFind) throw serverErrs.BAD_REQUEST('already post a proposal');
   const proposal: ProposalInstance = await Proposal.create({
     jobId,
     freelancerId,
