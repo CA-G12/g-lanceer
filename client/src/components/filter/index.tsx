@@ -19,7 +19,7 @@ function Filter({
           <label htmlFor="price" className="label">Minimum budget</label>
           <Input
             name="price"
-            type="search"
+            type="number"
             onChange={priceChange}
             value={price}
             id="price"
