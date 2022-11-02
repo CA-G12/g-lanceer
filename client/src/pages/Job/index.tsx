@@ -34,7 +34,7 @@ function Job() {
       setAlert({ type: 'success', msg: 'Proposal Added Successfully' });
     } catch (err: any) {
       if (err.response.data.message === 'already post a proposal') {
-        setAlert({ type: 'error', msg: 'already posted a proposal' });
+        setAlert({ type: 'error', msg: 'you already add a proposal, go to your profile to edit it' });
       } else {
         setAlert({ type: 'error', msg: 'Something went wrong' });
       }
