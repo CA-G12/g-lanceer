@@ -32,15 +32,16 @@ function SignupPage() {
   ];
 
   return (
-    <Box>
-      <Stepper activeStep={activeStep}>
-        {steps.map(({ label }) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      {/* {activeStep === 3 ? (
+    <div className="signup-page">
+      <Box>
+        <Stepper activeStep={activeStep}>
+          {steps.map(({ label }) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        {/* {activeStep === 3 ? (
         <>
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed
@@ -50,22 +51,23 @@ function SignupPage() {
           </Box>
         </>
       ) : ( */}
-      <>
-        <div className="steps">
-          {steps[activeStep].component}
-        </div>
-        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-          <Button
-            color="inherit"
-            disabled={activeStep === 0}
-            onClick={handleBack}
-          >
-            Back
-          </Button>
-        </Box>
-      </>
-      {/* )} */}
-    </Box>
+        <>
+          <div className="steps">
+            {steps[activeStep].component}
+          </div>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+          </Box>
+        </>
+        {/* )} */}
+      </Box>
+    </div>
   );
 }
 

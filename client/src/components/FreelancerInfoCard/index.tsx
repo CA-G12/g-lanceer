@@ -1,18 +1,20 @@
 import './style.css';
 import {
+  Button,
   Fab, Grid, TextField,
 } from '@mui/material';
 import { useState, useContext } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { LoadingButton } from '@mui/lab';
 import { FormikProps, useFormik } from 'formik';
 import parse from 'html-react-parser';
 import avatar from '../../assets/Avatar.png';
-import { FreelancerActionsAlerts, FreelancerInfo } from '../../interfaces';
+import { FreelancerActionsAlerts, FreelancerInfo, HTMLInputEvent } from '../../interfaces';
 import { userInfoSchema } from '../../validation';
-import { updateFreelancerData } from '../../helpers';
+import { imageUpload, readImage, updateFreelancerData } from '../../helpers';
 import TextEditor from '../TextEditor';
 import UserContext from '../../context';
 
@@ -24,6 +26,7 @@ interface Props {
 function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
   const [editable, setEditable] = useState(false);
   const [updatedValues, setUpdatedValues] = useState(initialValues);
+  const [file, setFile] = useState<File | null>(null);
   const { user, setUser } = useContext(UserContext);
 
   function switchSections() {
@@ -36,6 +39,10 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
     onSubmit: async (values: FreelancerInfo) => {
       setAlerts(null);
       try {
+        if (file) {
+          formik.values.image = await imageUpload(file, user?.userID as number);
+          setFile(null);
+        }
         await updateFreelancerData(values);
         if (user && setUser) setUser({ ...user, name: values.name });
         setUpdatedValues(values);
@@ -49,7 +56,15 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
       }
     },
   });
-
+  const formikImageHandler = (s: string) => {
+    formik.setFieldValue('image', s);
+  };
+  const changeHandler = (e: HTMLInputEvent) => {
+    if (e.target.files) {
+      readImage(e.target.files[0], formikImageHandler);
+      setFile(e.target.files[0]);
+    }
+  };
   return (
     <div className="freelancer-info-card ">
       <Grid
@@ -65,7 +80,43 @@ function FreelancerInfoCard({ initialValues, authorize, setAlerts }: Props) {
       >
         <Grid xs={10} sm={8} md={6} lg={4} item>
           <div className="freelancer-info-card-img">
-            <img src={initialValues.image || avatar} alt="freelancer img" />
+            <img src={formik.values.image || avatar} alt="freelancer img" />
+            {editable && (
+              <div style={{
+                width: '50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                margin: '0 auto',
+              }}
+              >
+                <label
+                  htmlFor="imageUploder"
+                  className="UploadImageHolder"
+                  onChange={formik.handleChange}
+                >
+                  <Button
+                    variant="contained"
+                    component="label"
+                    id="upload-new-img-btn"
+                    disabled={!!formik.isSubmitting}
+                  >
+                    <CloudUploadIcon />
+                    Upload new image
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      id="uploadeImage"
+                      onChange={(e) => changeHandler(e)}
+                    />
+                    {
+
+                    }
+                  </Button>
+                </label>
+              </div>
+            )}
           </div>
         </Grid>
         <Grid xs={10} sm={8} md={6} lg={4} item>
