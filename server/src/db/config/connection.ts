@@ -7,7 +7,7 @@ const {
 } = process.env;
 
 let url: string | undefined;
-let ssl : boolean | object = false;
+let ssl: boolean | object = false;
 switch (NODE_ENV) {
   case 'development':
     url = DEV_DATABASE_URL;
