@@ -17,7 +17,11 @@ function Footer() {
     <footer>
       <div className="footer">
         <div className="logo">
-          <img src={logo} alt="" />
+          <Link to="/">
+            {' '}
+            <img src={logo} alt="logo footer" />
+          </Link>
+
         </div>
         <div className="footer-bar">
           <div className="footer-menu">
@@ -32,7 +36,13 @@ function Footer() {
           <div className="footer-category">
             <h4>Category</h4>
             <ul>
-              {handelCategoryItem().map((el) => <li><Link to={`/jobs-search/?category=${el}`}>{el}</Link></li>)}
+              {handelCategoryItem().map((el) => (
+                <li>
+                  <Link to="/jobs-search" state={{ category: el }}>
+                    {el}
+                  </Link>
+                </li>
+              ))}
 
             </ul>
           </div>
