@@ -15,7 +15,7 @@
 }
 
 .freelancer-info-card-content{
-  padding: 0 1rem;  
+  padding: 2px 1rem;  
   height: 100%;
 }
 .freelancer-info-card-content h3{
@@ -47,6 +47,15 @@ font-weight: 600;
   right: 150px;
   background-color: #1C3879;
   color: #fff;
+}
+#upload-new-img-btn{
+  background-color: #eee;
+  color: #313879;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 #card-edit-btn:disabled{
   background-color: #ccc !important;
