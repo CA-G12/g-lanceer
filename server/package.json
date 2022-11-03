@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=production node ./dist/src/index.js",
+    "start": "cross-env NODE_ENV=production tsc && node ./dist/src/index.js",
     "test": "cross-env NODE_ENV=test jest -- index.test.ts",
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
-    "build": "tsc",
     "lint": "eslint --ext .ts ./",
     "fix:lint": "npm run lint --fix",
     "db:seed": "cross-env SEED=true NODE_ENV=development ts-node src/db/config/build.ts",
