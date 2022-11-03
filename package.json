@@ -4,11 +4,11 @@
   "description": "A platform that combine clients with professional freelancers",
   "main": "index.js",
   "scripts": {
+    "start": "cd server && npm start",
     "client": "cd client && npm run start",
     "init": " cd server && npm i && cd ../client && npm i",
     "install": "npm run init",
     "dev": "cd server && npm run dev",
-    "start": "cd server && npm start",
     "prepare": "is-ci || npx husky install",
     "test": "cd server && npm run test",
     "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
