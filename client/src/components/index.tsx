@@ -15,6 +15,7 @@ import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
 import NotFound from './notFound';
+import GoogleLoginBtn from './GoogleLogin';
 import FirstStep from './firstStepSignup';
 import ProposalJob from './proposalJob';
 import { Signup, FreelancerSignUp } from './signup';
@@ -39,4 +40,5 @@ export {
   FirstStep,
   Signup,
   ProposalJob,
+  GoogleLoginBtn,
 };

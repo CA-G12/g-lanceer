@@ -16,11 +16,11 @@ import { imageUpload, readImage } from '../../helpers';
 import { HTMLInputEvent, SignFreelancer } from '../../interfaces';
 
 function FreelancerSignUp({ userInfo }: SignFreelancer) {
-  const { userID, name } = userInfo;
+  const { userID, name, photoURL } = userInfo;
   const [freelancerError, setFreelancerError] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [imgSrc, setImgSrc] = useState<string | null>(photoURL);
   const [file, setFile] = useState<File | null>(null);
 
   const changeHandler = (e: HTMLInputEvent) => {
@@ -35,7 +35,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
       major: '',
       portfolio: '',
       brief: '',
-      image: '',
+      image: photoURL,
     },
     validationSchema: thirdStepValidation,
     onSubmit: async (values) => {
@@ -49,7 +49,7 @@ function FreelancerSignUp({ userInfo }: SignFreelancer) {
           major: values.major,
           portfolio: values.portfolio,
           brief: values.brief,
-          image: avatarURL,
+          image: avatarURL || values.image,
           userId: userID,
         });
         setFreelancerError(false);
