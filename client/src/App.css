@@ -11,6 +11,8 @@
 }
 body{
     padding-top: 75px;
+    min-height: 100vh !important;
+    position: relative;
 }
 @media screen and (min-width: 1800px) {
     .container {
