@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A platform that combine clients with professional freelancers",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "cd server && npm start",
     "client": "cd client && npm run start",
