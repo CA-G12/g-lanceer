@@ -9,5 +9,7 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./",
-  },                           
+  },
+  "include": ["src","__tests__/**.ts"],
+  "exclude": ["__tests__/**.ts"]                         
 }
