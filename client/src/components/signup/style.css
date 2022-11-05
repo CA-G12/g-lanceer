@@ -50,3 +50,15 @@
   flex-direction: column; 
     width: 80%;
 }
+.oAuth-btns{
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  margin: 2rem auto;
+  gap: 1.5rem;
+  width: 546px;
+}
+.oAuth-btns button{
+  margin: 0 !important;
+  width: 100% !important;
+}

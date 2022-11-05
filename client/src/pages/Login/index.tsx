@@ -5,14 +5,14 @@ import { Alert, InputLabel, Snackbar } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 import {
-  getAuth, GoogleAuthProvider, signInWithPopup,
+  getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
 import { loginSchema } from '../../validation';
 import formImg from '../../assets/4957136 1.png';
 import './style.css';
 import { login } from '../../helpers';
 import UserContext from '../../context';
-import { GoogleLoginBtn } from '../../components';
+import { OauthLoginBtn } from '../../components';
 
 function Login() {
   const { setUser } = useContext(UserContext);
@@ -50,6 +50,20 @@ function Login() {
       setError(true);
     }
   };
+  const LoginWithGithub = async () => {
+    const auth = getAuth();
+    try {
+      const res = await signInWithPopup(auth, new GithubAuthProvider());
+      const { uid, providerData } = res.user;
+      const { email } = providerData[0];
+      if (email && uid) {
+        const { data } = await login({ email, password: uid });
+        if (setUser) setUser(data.data);
+      }
+    } catch (err: any) {
+      setError(true);
+    }
+  };
   return (
     <div className="login">
       <div className="form-img">
@@ -57,7 +71,10 @@ function Login() {
       </div>
       <form className="form-login" onSubmit={formik.handleSubmit}>
         <h2 className="title-login">Welcome to Glancer</h2>
-        <GoogleLoginBtn label="Login" onClick={logInWithGoogle} />
+        <div className="oauth-login-btns">
+          <OauthLoginBtn label="Login" type="google" onClick={logInWithGoogle} />
+          <OauthLoginBtn label="Login" type="github" onClick={LoginWithGithub} />
+        </div>
         <div className="form-email">
           <InputLabel className="title-input">Email</InputLabel>
           <TextField

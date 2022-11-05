@@ -25,7 +25,7 @@
 }
 .input-login{
   width: 60%;
-
+  
 }
 .css-nfagch-MuiInputBase-root-MuiOutlinedInput-root{
   background-color: #EFF0F2;
@@ -65,4 +65,10 @@
 .login .form-login .google-btn{
   width: 415px !important;
   height: 50px;
+}
+.oauth-login-btns button{
+ margin: 8px 0 ;
+}
+.oauth-login-btns button:nth-child(2){
+ margin-bottom: 20px;
 }
