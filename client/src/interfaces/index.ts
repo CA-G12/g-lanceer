@@ -147,7 +147,12 @@ interface User {
   userID: number,
   // email: string,
   name: string,
-  role: string
+  role: string,
+  major?: Major | null
+}
+
+interface Major {
+  major: string
 }
 interface Client {
   email: string,

@@ -14,6 +14,7 @@ import JobForm from './addJobForm';
 import ProposalForm from './ProposalForm';
 import JobDetails from './jobDetails';
 import Navbar from './Navbar';
+import Footer from './footer';
 import NotFound from './notFound';
 import OauthLoginBtn from './OauthLogin';
 import FirstStep from './firstStepSignup';
@@ -35,6 +36,7 @@ export {
   ProposalForm,
   JobDetails,
   Navbar,
+  Footer,
   NotFound,
   FreelancerSignUp,
   FirstStep,
