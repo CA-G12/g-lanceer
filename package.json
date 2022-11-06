@@ -13,7 +13,8 @@
     "test": "cd server && npm run test",
     "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
     "db:seed": "cd server && npm run db:seed",
-    "heroku-postbuild": "cd client && npm run build"
+    "heroku-postbuild": "cd client && npm run build",
+    "heroku-prebuild": "npm run init"
   },
   "repository": {
     "type": "git",
