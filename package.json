@@ -2,7 +2,7 @@
   "name": "g-lanceer",
   "version": "1.0.0",
   "description": "A platform that combine clients with professional freelancers",
-  "main": "commitlint.config.js",
+  "main": "index.js",
   "scripts": {
     "start": "cd server && npm start",
     "client": "cd client && npm run start",
