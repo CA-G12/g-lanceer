@@ -94,6 +94,8 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
         await signupWithOuth({
           email, displayName, photoURL, password: uid,
         });
+      } else {
+        throw new Error();
       }
     } catch (err: any) {
       setError(true);
@@ -109,6 +111,8 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
         await signupWithOuth({
           email, displayName, photoURL, password: uid,
         });
+      } else {
+        throw new Error();
       }
     } catch (err: any) {
       setError(true);

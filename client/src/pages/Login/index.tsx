@@ -45,6 +45,8 @@ function Login() {
       if (email && uid) {
         const { data } = await login({ email, password: uid });
         if (setUser) setUser(data.data);
+      } else {
+        throw new Error();
       }
     } catch (err) {
       setError(true);
@@ -59,6 +61,8 @@ function Login() {
       if (email && uid) {
         const { data } = await login({ email, password: uid });
         if (setUser) setUser(data.data);
+      } else {
+        throw new Error();
       }
     } catch (err: any) {
       setError(true);
