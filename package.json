@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd server && npm start",
     "client": "cd client && npm run start",
-    "init": " cd server && npm i && cd ../client && npm i",
+    "init": "cd client && npm i && cd ../server && npm i",
     "install": "npm run init",
     "dev": "cd server && npm run dev",
     "prepare": "is-ci || npx husky install",
