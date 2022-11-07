@@ -13,6 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
 import {
   Link, NavLink, useLocation,
 } from 'react-router-dom';
@@ -29,8 +30,20 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, socket } = useContext(UserContext);
   const { pathname } = useLocation();
+  const [notification, setNotification] = useState<any>([]);
+  const [stateSnackbar, setStateSnackbar] = useState<any>({
+    open: true,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal } = stateSnackbar;
+
+  const handleClose = () => {
+    setStateSnackbar({ ...stateSnackbar, open: false });
+  };
+
   const Logout = async () => {
     try {
       await axios.get('/api/v1/auth/logout');
@@ -83,6 +96,12 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    socket.on('sendNotification', (data) => {
+      setNotification((prev: any) => [...prev, data]);
+    });
+  }, [socket]);
+
   return (
     <AppBar
       position="absolute"
@@ -90,6 +109,14 @@ function Navbar() {
       color="secondary"
       elevation={scroll ? 5 : 0}
     >
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={notification.length > 0}
+        onClose={handleClose}
+        message={notification.map((e: any) => (`${e.clientName} accept your proposal in ${e.jobTitle}`
+        ))}
+        key={vertical + horizontal}
+      />
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box

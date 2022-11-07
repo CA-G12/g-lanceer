@@ -73,22 +73,21 @@ const acceptProposal = async (req: Request, res: Response) => {
       email: string,
     }
   }
-  const userInfo: FreelancerUser | null = await Freelancer.findOne({
+  const userInfo: FreelancerUser | null | any = await Freelancer.findOne({
     include: [
       {
         model: User,
-        attributes: ['email', 'name'],
+        attributes: ['email', 'name', 'id'],
       },
     ],
     where: { id: proposal.freelancerId },
-    attributes: ['id'],
   });
-
+  console.log(userInfo);
   const jobTitle = job?.title as string;
   if (userInfo?.user) {
     sendEmail(userInfo.user.email, userInfo.user.name, jobTitle);
   }
-  return { status: 200, msg: 'Proposal Accepted' };
+  return { status: 200, msg: 'Proposal Accepted', data: userInfo };
 };
 
 const editProposal = async (req: Request, res: Response) => {

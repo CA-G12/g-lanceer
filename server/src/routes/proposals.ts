@@ -6,9 +6,12 @@ import ExpressWrapper from '../ExpressWrapper';
 import { checkUserAuth, passportAuthenticate } from '../middlewares/auth';
 
 const proposalsRouter = express.Router();
+proposalsRouter.use(passportAuthenticate);
+proposalsRouter.patch('/:id', checkUserAuth('client'), ExpressWrapper(acceptProposal));
 
-proposalsRouter.post('/', passportAuthenticate, checkUserAuth('freelancer'), ExpressWrapper(addProposal));
-proposalsRouter.delete('/:id', passportAuthenticate, checkUserAuth('freelancer'), ExpressWrapper(deletePropsal));
-proposalsRouter.put('/:id', passportAuthenticate, checkUserAuth('freelancer'), ExpressWrapper(editProposal));
-proposalsRouter.patch('/:id', passportAuthenticate, checkUserAuth('client'), ExpressWrapper(acceptProposal));
+proposalsRouter.use(checkUserAuth('freelancer'));
+proposalsRouter.post('/', ExpressWrapper(addProposal));
+proposalsRouter.delete('/:id', ExpressWrapper(deletePropsal));
+proposalsRouter.put('/:id', ExpressWrapper(editProposal));
+
 export default proposalsRouter;

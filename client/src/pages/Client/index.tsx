@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
   Button, Accordion, AccordionSummary, AccordionDetails, CircularProgress, Snackbar, Alert, Stack,
 } from '@mui/material';
@@ -8,12 +8,14 @@ import ProposalJob from '../../components/proposalJob/index';
 import {
   JobSearch, TabListInt, MessageAlert,
 } from '../../interfaces';
+import { UserContext } from '../../context/User';
 import './style.css';
 
 function Client() {
   const [showModel, setShowModel] = useState(false);
   const handleOpen = () => setShowModel(true);
   const handleClose = () => setShowModel(false);
+  const { user, socket } = useContext(UserContext);
   const [message, setMessage] = useState<MessageAlert>({
     type: 'success',
     value: '',
@@ -61,7 +63,6 @@ function Client() {
     try {
       const getProposalItem = await axios.patch(`/api/v1/proposals/${proposalID}`);
       setMessage({ ...message, value: getProposalItem.data.msg, open: true });
-
       const jobAccepted: JobSearch | undefined = jobsUnoccupied.find((job) => job.id === jobID);
       if (jobAccepted) {
         jobAccepted.proposals[0].isAccepted = true;
@@ -69,8 +70,14 @@ function Client() {
         setJobsUnoccupied(filterProposal);
         setJobsOccupied([...jobsOccupied, jobAccepted]);
       }
+
+      socket.emit('acceptProposal', {
+        clientName: user?.name,
+        receiverId: getProposalItem.data.data.id,
+        jobTitle: jobAccepted?.title,
+        jobId: jobAccepted?.id,
+      });
     } catch (err) {
-      // handel error
       setMessage({ type: 'error', value: 'Something went Wrong, Try Again later!', open: true });
     }
   };
@@ -125,10 +132,8 @@ function Client() {
                     acceptProposal={acceptProposal}
                   />
                 ))}
-
               </AccordionDetails>
             </Accordion>
-
           </JobCard>
         ))}
       </>
