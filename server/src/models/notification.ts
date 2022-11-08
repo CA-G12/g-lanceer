@@ -15,10 +15,12 @@ const Notification = sequelize.define<NotificationInstance>('notification', {
   seen: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
   },
   freelancerId: {
-    allowNull: false,
     type: DataTypes.INTEGER,
+    allowNull: false,
+
   },
 
 });

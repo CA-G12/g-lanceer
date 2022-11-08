@@ -45,7 +45,7 @@ interface NotificationAttributes {
   seen: boolean,
   freelancerId: number
 }
-type NotificationCreationAttributes = Optional<NotificationAttributes, 'id'>;
+type NotificationCreationAttributes = Optional<NotificationAttributes, 'id' | 'seen'>;
 interface NotificationInstance
   extends Model<NotificationAttributes, NotificationCreationAttributes>
   , NotificationAttributes {
