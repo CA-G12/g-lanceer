@@ -177,18 +177,19 @@ interface Props {
 interface SignupProps {
   setActiveStep: Dispatch<SetStateAction<number>>,
   userRole: string,
-  setUserInfo: Dispatch<SetStateAction<{ userID: number, name: string }>>
+  setUserInfo: Dispatch<SetStateAction<{ userID: number, name: string, photoURL: string | null }>>
 }
 interface FirstStepProps {
   setUserRole: (role: string) => void,
   setActiveStep: Dispatch<SetStateAction<number>>
 }
-interface FreelanceProps {
-  userID: number,
-  name: string,
-}
+
 interface SignFreelancer {
-  userInfo: FreelanceProps
+  userInfo: {
+    userID: number,
+    name: string,
+    photoURL: string | null
+  }
 }
 interface HTMLInputEvent {
   target: HTMLInputElement & EventTarget;

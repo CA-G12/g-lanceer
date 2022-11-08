@@ -62,3 +62,7 @@
 .link-signup{
   color: #1C3879;
 }
+.login .form-login .google-btn{
+  width: 415px !important;
+  height: 50px;
+}

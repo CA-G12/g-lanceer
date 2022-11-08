@@ -26,5 +26,5 @@ module.exports = {
         "linebreak-style": 0,
         "consistent-return": "off"
     },
-    "ignorePatterns": ["__test__/*", "dist/*"]
+    "ignorePatterns": ["__tests__/*", "dist/*"]
 }

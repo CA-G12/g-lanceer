@@ -4,15 +4,16 @@
   "description": "A platform that combine clients with professional freelancers",
   "main": "index.js",
   "scripts": {
+    "start": "cd server && npm start",
     "client": "cd client && npm run start",
-    "init": " cd server && npm i && cd ../client && npm i",
+    "init": "cd client && npm i && cd ../server && npm i",
     "install": "npm run init",
     "dev": "cd server && npm run dev",
-    "start": "node ./dist",
     "prepare": "is-ci || npx husky install",
     "test": "cd server && npm run test",
     "fix:lint": "cd server && npm run fix:lint && cd ../client && npm run fix:lint",
-    "db:seed": "cd server && npm run db:seed"
+    "db:seed": "cd server && npm run db:seed",
+    "heroku-postbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",

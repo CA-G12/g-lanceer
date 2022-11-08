@@ -5,11 +5,15 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup,
+} from 'firebase/auth';
 import { SignupProps } from '../../interfaces';
 import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
 import UserContext from '../../context';
+import GoogleLoginBtn from '../GoogleLogin';
 
 function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
   const [error, setError] = useState(false);
@@ -41,7 +45,7 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
         });
         const userData = data.data.data;
         const { name, userID } = data.data.data;
-        setUserInfo({ userID, name });
+        setUserInfo({ userID, name, photoURL: null });
         if (userRole === 'client') {
           if (setUser) {
             setUser(userData);
@@ -56,9 +60,36 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
       }
     },
   });
-
+  const signInWithGoogle = async () => {
+    const auth = getAuth();
+    const res = await signInWithPopup(auth, new GoogleAuthProvider());
+    const {
+      email, displayName, uid, photoURL,
+    } = res.user;
+    try {
+      const data = await axios.post('/api/v1/auth/signup', {
+        role: userRole,
+        name: displayName,
+        email,
+        password: uid,
+      });
+      const userData = data.data.data;
+      const { name, userID } = data.data.data;
+      setUserInfo({ userID, name, photoURL });
+      if (userRole === 'client') {
+        if (setUser) {
+          setUser(userData);
+        }
+      }
+      setError(false);
+      checkUser();
+    } catch (err: any) {
+      setError(true);
+    }
+  };
   return (
     <div className="s-u-form">
+      <GoogleLoginBtn label="SignUp" onClick={signInWithGoogle} />
       <h3 className="header-signup-1">
         you are signing up as
         {' '}
