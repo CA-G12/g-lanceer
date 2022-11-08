@@ -98,7 +98,7 @@ function JoinClient() {
               Looking for a talent
               to hire?
             </h2>
-            <Link to="/client/userId">
+            <Link to="/profile">
               <Button
                 className="join-client-button"
                 variant="contained"

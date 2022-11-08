@@ -1,6 +1,7 @@
 import { Grid, Button } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { Link } from 'react-router-dom';
 import heroImg from '../../assets/hero.png';
 
 function Header() {
@@ -70,18 +71,21 @@ function Header() {
               <br />
               to Get Your New Job
             </h2>
-            <Button
-              className="header-content-button"
-              variant="contained"
-              style={{
-                backgroundColor: '#1C3879',
-                padding: '.8rem 3rem',
+            <Link to="/signup">
 
-              }}
-            >
-              Join Us Now
+              <Button
+                className="header-content-button"
+                variant="contained"
+                style={{
+                  backgroundColor: '#1C3879',
+                  padding: '.8rem 3rem',
 
-            </Button>
+                }}
+              >
+                Join Us Now
+              </Button>
+            </Link>
+
           </div>
         </Grid>
       </Grid>
