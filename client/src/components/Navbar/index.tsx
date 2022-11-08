@@ -33,16 +33,6 @@ function Navbar() {
   const { user, setUser, socket } = useContext(UserContext);
   const { pathname } = useLocation();
   const [notification, setNotification] = useState<any>([]);
-  const [stateSnackbar, setStateSnackbar] = useState<any>({
-    open: true,
-    vertical: 'top',
-    horizontal: 'center',
-  });
-  const { vertical, horizontal } = stateSnackbar;
-
-  const handleClose = () => {
-    setStateSnackbar({ ...stateSnackbar, open: false });
-  };
 
   const Logout = async () => {
     try {
@@ -110,12 +100,12 @@ function Navbar() {
       elevation={scroll ? 5 : 0}
     >
       <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={notification.length > 0}
-        onClose={handleClose}
+        autoHideDuration={5000}
+        onClose={() => setNotification([])}
         message={notification.map((e: any) => (`${e.clientName} accept your proposal in ${e.jobTitle}`
         ))}
-        key={vertical + horizontal}
       />
       <Container maxWidth="xl">
         <Toolbar disableGutters>
