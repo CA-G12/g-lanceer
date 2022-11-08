@@ -39,6 +39,19 @@ interface FreelancerInstance
   updatedAt?: Date;
 }
 
+interface NotificationAttributes {
+  id: number,
+  description: Text,
+  seen: boolean,
+  freelancerId: number
+}
+type NotificationCreationAttributes = Optional<NotificationAttributes, 'id' | 'seen'>;
+interface NotificationInstance
+  extends Model<NotificationAttributes, NotificationCreationAttributes>
+  , NotificationAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 // Job interface
 interface JobAttributes {
   id: number
@@ -121,4 +134,6 @@ export {
   FreelancerWithProposalsInstance,
   Payload,
   SocketProps,
+  NotificationInstance,
+
 };
