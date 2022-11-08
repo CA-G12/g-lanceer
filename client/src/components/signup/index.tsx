@@ -6,14 +6,14 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import {
-  getAuth, GoogleAuthProvider, signInWithPopup,
+  getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider,
 } from 'firebase/auth';
 import { SignupProps } from '../../interfaces';
 import { signUpSchema } from '../../validation';
 import './style.css';
 import FreelancerSignUp from './freelancerStep';
 import UserContext from '../../context';
-import GoogleLoginBtn from '../GoogleLogin';
+import OauthLoginBtn from '../OauthLogin';
 
 function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
   const [error, setError] = useState(false);
@@ -60,36 +60,70 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
       }
     },
   });
-  const signInWithGoogle = async () => {
-    const auth = getAuth();
-    const res = await signInWithPopup(auth, new GoogleAuthProvider());
+  const signupWithOuth = async (values: {
+    displayName: string, email: string, password: string, photoURL: string | null
+  }) => {
     const {
-      email, displayName, uid, photoURL,
-    } = res.user;
-    try {
-      const data = await axios.post('/api/v1/auth/signup', {
-        role: userRole,
-        name: displayName,
-        email,
-        password: uid,
-      });
-      const userData = data.data.data;
-      const { name, userID } = data.data.data;
-      setUserInfo({ userID, name, photoURL });
-      if (userRole === 'client') {
-        if (setUser) {
-          setUser(userData);
-        }
+      displayName, email, password, photoURL,
+    } = values;
+    const data = await axios.post('/api/v1/auth/signup', {
+      role: userRole,
+      name: displayName,
+      email,
+      password,
+    });
+    const userData = data.data.data;
+    const { name, userID } = data.data.data;
+    setUserInfo({ userID, name, photoURL });
+    if (userRole === 'client') {
+      if (setUser) {
+        setUser(userData);
       }
-      setError(false);
-      checkUser();
+    }
+    setError(false);
+    checkUser();
+  };
+  const signUpWithGoogle = async () => {
+    const auth = getAuth();
+    try {
+      const res = await signInWithPopup(auth, new GoogleAuthProvider());
+      const {
+        email, displayName, uid, photoURL,
+      } = res.user;
+      if (email && displayName && uid) {
+        await signupWithOuth({
+          email, displayName, photoURL, password: uid,
+        });
+      } else {
+        throw new Error();
+      }
+    } catch (err: any) {
+      setError(true);
+    }
+  };
+  const signUpWithGithub = async () => {
+    const auth = getAuth();
+    try {
+      const res = await signInWithPopup(auth, new GithubAuthProvider());
+      const { uid, providerData } = res.user;
+      const { email, displayName, photoURL } = providerData[0];
+      if (email && displayName && uid) {
+        await signupWithOuth({
+          email, displayName, photoURL, password: uid,
+        });
+      } else {
+        throw new Error();
+      }
     } catch (err: any) {
       setError(true);
     }
   };
   return (
     <div className="s-u-form">
-      <GoogleLoginBtn label="SignUp" onClick={signInWithGoogle} />
+      <div className="oAuth-btns">
+        <OauthLoginBtn label="SignUp" type="google" onClick={signUpWithGoogle} />
+        <OauthLoginBtn label="SignUp" type="github" onClick={signUpWithGithub} />
+      </div>
       <h3 className="header-signup-1">
         you are signing up as
         {' '}
