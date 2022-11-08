@@ -13,42 +13,42 @@ const data = [
   {
     name: 'Graphics & Design',
     url: graphicImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Thousands of pros ready to kick-start your creative overhaul from day one.',
   },
   {
     name: 'Digital Marketing',
     url: markitingImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Build some buzz around your business with professionals from the world’s work marketplace.',
   },
   {
     name: 'Writing & Translation',
     url: translationImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Thousands of pros are ready to finesse your language and help you go global.',
   },
   {
     name: 'Video & Animation',
     url: videoAnimationImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'unique video editing by a talented video editors with a creative touch.',
   },
   {
     name: 'Music & Audio',
     url: voiceWebpImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Excellent budget-friendly yet professional Audio editors and Music makers ',
   },
   {
     name: 'Programming & Tech',
     url: webDevImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Hire independent professionals to shorten development cycles, and drive product growth.',
   },
   {
     name: 'Business',
     url: businessImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Thousands of pros are ready to help with invoicing, tax returns, bookkeeping, and more.',
   },
   {
     name: 'Mobile Development',
     url: mobileDevImg,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntut lab.',
+    description: 'Find the right mobile developer to begin working on your project within minutes.',
   },
 
 ];
