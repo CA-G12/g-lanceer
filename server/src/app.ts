@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import { join } from 'path';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 

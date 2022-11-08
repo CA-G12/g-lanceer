@@ -13,6 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
 import {
   Link, NavLink, useLocation,
 } from 'react-router-dom';
@@ -20,6 +21,7 @@ import axios from 'axios';
 import logo from '../../assets/logo2.png';
 import UserContext from '../../context';
 import avatar from '../../assets/Avatar.png';
+import socket from '../../socketConfig';
 import './style.css';
 
 // initial nav settings
@@ -31,6 +33,8 @@ function Navbar() {
   const [scroll, setScroll] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
+  const [notification, setNotification] = useState<any>([]);
+
   const Logout = async () => {
     try {
       await axios.get('/api/v1/auth/logout');
@@ -83,6 +87,15 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    socket.on('sendNotification', (data) => {
+      setNotification((prev: any) => [...prev, data]);
+    });
+    return () => {
+      socket.off('sendNotification');
+    };
+  }, [socket]);
+
   return (
     <AppBar
       position="absolute"
@@ -90,6 +103,14 @@ function Navbar() {
       color="secondary"
       elevation={scroll ? 5 : 0}
     >
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={notification.length > 0}
+        autoHideDuration={5000}
+        onClose={() => setNotification([])}
+        message={notification.map((e: any) => (`${e.clientName} accept your proposal in ${e.jobTitle}`
+        ))}
+      />
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box

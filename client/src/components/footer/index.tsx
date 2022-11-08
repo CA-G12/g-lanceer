@@ -37,7 +37,7 @@ function Footer() {
             <h4>Category</h4>
             <ul>
               {handelCategoryItem().map((el) => (
-                <li>
+                <li key={el}>
                   <Link to="/jobs-search" state={{ category: el }}>
                     {el}
                   </Link>
