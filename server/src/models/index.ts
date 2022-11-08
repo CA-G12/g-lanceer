@@ -16,5 +16,5 @@ Freelancer.hasMany(Notification);
 Notification.belongsTo(Freelancer);
 
 export {
-  User, Proposal, Job, Freelancer,
+  User, Proposal, Job, Freelancer, Notification,
 };

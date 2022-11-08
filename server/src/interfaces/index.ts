@@ -41,7 +41,7 @@ interface FreelancerInstance
 
 interface NotificationAttributes {
   id: number,
-  description: Text,
+  description: string,
   seen: boolean,
   freelancerId: number
 }

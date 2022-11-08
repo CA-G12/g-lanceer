@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { FreelancerInstance, ProposalInstance } from '../interfaces';
 import {
-  Proposal, Job, User, Freelancer,
+  Proposal, Job, User, Freelancer, Notification,
 } from '../models';
 import { editProposalValidation, postProposalValidation } from '../validation';
 import { serverErrs } from '../helpers';
@@ -66,6 +66,8 @@ const acceptProposal = async (req: Request, res: Response) => {
     await proposal.update({ isAccepted: true }, { transaction: t });
     await Proposal.destroy({ where: { isAccepted: false, jobId }, transaction: t });
     await job?.update({ isOccupied: true }, { transaction: t });
+    const description = `Your proposal in ${job?.title} has been Accepted`;
+    await Notification.create({ freelancerId: proposal.freelancerId, description });
   });
   interface FreelancerUser extends FreelancerInstance {
     user?:{

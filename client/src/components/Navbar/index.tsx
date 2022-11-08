@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Snackbar from '@mui/material/Snackbar';
@@ -29,11 +30,13 @@ import './style.css';
 function Navbar() {
   const pages = [{ label: 'Jobs', path: '/jobs-search' }];
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [notificationElNav, setNotificationElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
-  const [notification, setNotification] = useState<any>([]);
+  const [notifications, setNotifications] = useState<any>([]);
+  const [socketAlert, setSocketAlert] = useState<any>(null);
 
   const Logout = async () => {
     try {
@@ -64,12 +67,18 @@ function Navbar() {
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+  const handleOpenNotificationMenu = (event: MouseEvent<HTMLElement>) => {
+    setNotificationElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleCloseNotificationMenu = () => {
+    setNotificationElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -86,10 +95,22 @@ function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  useEffect(() => {
+    const getNotif = async () => {
+      try {
+        const data = await axios.get('/api/v1/notifications');
+        setNotifications(data.data.data.rows);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (user && user.role === 'freelancer') { getNotif(); }
+  }, [user]);
 
   useEffect(() => {
     socket.on('sendNotification', (data) => {
-      setNotification((prev: any) => [...prev, data]);
+      setSocketAlert(data);
+      setNotifications((prev: any) => [...prev, data]);
     });
     return () => {
       socket.off('sendNotification');
@@ -103,14 +124,38 @@ function Navbar() {
       color="secondary"
       elevation={scroll ? 5 : 0}
     >
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={notification.length > 0}
-        autoHideDuration={5000}
-        onClose={() => setNotification([])}
-        message={notification.map((e: any) => (`${e.clientName} accept your proposal in ${e.jobTitle}`
-        ))}
-      />
+      {(user?.role === 'freelancer' && notifications.length) && (
+        <Menu
+          open={!!notificationElNav}
+          anchorEl={notificationElNav}
+          anchorOrigin={{
+            vertical: 50,
+            horizontal: 55,
+          }}
+          onClose={handleCloseNotificationMenu}
+          className="notification-list"
+        >
+          {notifications.map((n: any) => (
+            <Link to={`/freelancer/${user?.userID}`}>
+              <MenuItem className="notification" onClick={handleCloseNotificationMenu}>
+                <p>{n.description}</p>
+                <small> 12/5/2022</small>
+              </MenuItem>
+
+            </Link>
+          ))}
+
+        </Menu>
+      )}
+      {!!socketAlert && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open
+          autoHideDuration={5000}
+          onClose={() => setSocketAlert(null)}
+          message={`${socketAlert.clientName} accept your proposal in ${socketAlert.jobTitle}`}
+        />
+      )}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
@@ -226,6 +271,20 @@ function Navbar() {
                     <Avatar sx={{ width: 50, height: 50 }} alt={user?.name} src={avatar} />
                   </IconButton>
                 </Tooltip>
+                {user?.role === 'freelancer' && (
+                  <Tooltip title="Open settings">
+                    <IconButton
+                      size="large"
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleOpenNotificationMenu}
+                      color="inherit"
+                    >
+                      <NotificationsIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
               </Box>
             </Box>
           )
