@@ -14,10 +14,5 @@ jobsRouter.route('/')
 jobsRouter.route('/:id')
   .get(ExpressWrapper(getJob))
   .delete(passportAuthenticate, checkUserAuth('client'), ExpressWrapper(deleteJob));
-// jobsRouter.get('/:id', ExpressWrapper(getJob));
-//   jobsRouter.get('/', ExpressWrapper(searchJobs));
-// jobsRouter.post('/', passportAuthenticate, checkUserAuth('client'), ExpressWrapper(addJob));
-// jobsRouter.delete('/:id', passportAuthenticate,
-//  checkUserAuth('client'), ExpressWrapper(deleteJob));
 
 export default jobsRouter;

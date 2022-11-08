@@ -1,6 +1,5 @@
 import { AlertColor } from '@mui/lab';
 import React, { Dispatch, SetStateAction } from 'react';
-import { Socket } from 'socket.io-client';
 
 interface JobProps {
   handelClose: () => void,
@@ -168,7 +167,6 @@ interface PropsJobPage {
 type UserContex = {
   user?: User | null,
   setUser?: (user: User | null) => void,
-  socket: Socket
 };
 interface Props {
   children: React.ReactNode;

@@ -82,7 +82,6 @@ const acceptProposal = async (req: Request, res: Response) => {
     ],
     where: { id: proposal.freelancerId },
   });
-  console.log(userInfo);
   const jobTitle = job?.title as string;
   if (userInfo?.user) {
     sendEmail(userInfo.user.email, userInfo.user.name, jobTitle);

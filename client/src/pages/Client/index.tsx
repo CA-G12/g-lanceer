@@ -9,13 +9,14 @@ import {
   JobSearch, TabListInt, MessageAlert,
 } from '../../interfaces';
 import { UserContext } from '../../context/User';
+import socket from '../../socketConfig';
 import './style.css';
 
 function Client() {
   const [showModel, setShowModel] = useState(false);
   const handleOpen = () => setShowModel(true);
   const handleClose = () => setShowModel(false);
-  const { user, socket } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [message, setMessage] = useState<MessageAlert>({
     type: 'success',
     value: '',

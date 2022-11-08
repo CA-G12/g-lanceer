@@ -100,6 +100,12 @@ type ControllerReturn = {
 type ControllerFunction =
   (req: Request, res: Response, next: NextFunction) => Promise<ControllerReturn>;
 
+interface SocketProps {
+  clientName: string,
+  receiverId: number,
+  jobTitle: string,
+  jobId: number
+}
 export {
   ControllerFunction,
   ControllerReturn,
@@ -114,4 +120,5 @@ export {
   FreelancerAttributes,
   FreelancerWithProposalsInstance,
   Payload,
+  SocketProps,
 };

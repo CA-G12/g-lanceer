@@ -21,6 +21,7 @@ import axios from 'axios';
 import logo from '../../assets/logo2.png';
 import UserContext from '../../context';
 import avatar from '../../assets/Avatar.png';
+import socket from '../../socketConfig';
 import './style.css';
 
 // initial nav settings
@@ -30,7 +31,7 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
-  const { user, setUser, socket } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
   const [notification, setNotification] = useState<any>([]);
 
@@ -90,6 +91,9 @@ function Navbar() {
     socket.on('sendNotification', (data) => {
       setNotification((prev: any) => [...prev, data]);
     });
+    return () => {
+      socket.off('sendNotification');
+    };
   }, [socket]);
 
   return (

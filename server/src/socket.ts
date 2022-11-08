@@ -3,14 +3,17 @@ import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
 import passport from 'passport';
 import { Server } from 'socket.io';
+import dotenv from 'dotenv';
 import app from './app';
+import { SocketProps } from './interfaces';
 import { passportAuth } from './middlewares/auth';
 
+dotenv.config();
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_LINK,
     credentials: true,
 
   },
@@ -33,7 +36,7 @@ io.on('connection', (socket: any) => {
 
   socket.on('acceptProposal', async ({
     clientName, receiverId, jobTitle, jobId,
-  } : any) => {
+  } : SocketProps) => {
     io.to(users[`freelancer${receiverId}`]).emit('sendNotification', {
       clientName,
       jobTitle,
@@ -41,7 +44,7 @@ io.on('connection', (socket: any) => {
     });
   });
   socket.on('disconnect', () => {
-
+    delete users[`${user.role}${user.userID}`];
   });
 });
 

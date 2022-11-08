@@ -3,15 +3,11 @@ import {
 } from 'react';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
-import { io } from 'socket.io-client';
 import { User, UserContex, Props } from '../interfaces';
 
 export const UserContext = createContext<UserContex>({});
 
 function UserMemo({ children }: Props) {
-  const socket = io('http://localhost:3500', {
-    withCredentials: true,
-  });
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -28,7 +24,7 @@ function UserMemo({ children }: Props) {
     getUser();
   }, []);
   const memo = useMemo(() => ({
-    user, setUser, socket,
+    user, setUser,
   }), [user]);
   if (loading) {
     return (
