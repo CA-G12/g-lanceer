@@ -30,13 +30,13 @@ import './style.css';
 function Navbar() {
   const pages = [{ label: 'Jobs', path: '/jobs-search' }];
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [notificationElNav, setNotificationElNav] = useState<null | HTMLElement>(null);
+  const [notificationElNav, setNotificationElNav] = useState<boolean >(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
   const [notifications, setNotifications] = useState<any>([]);
-  const [socketAlert, setSocketAlert] = useState<any>(null);
+  const [socketAlert, setSocketAlert] = useState<string | null>(null);
 
   const Logout = async () => {
     try {
@@ -67,8 +67,11 @@ function Navbar() {
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenNotificationMenu = (event: MouseEvent<HTMLElement>) => {
-    setNotificationElNav(event.currentTarget);
+  const handleCloseNotificationMenu = () => {
+    setNotificationElNav(false);
+  };
+  const handleOpenNotificationMenu = () => {
+    setNotificationElNav(true);
   };
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -76,9 +79,6 @@ function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-  const handleCloseNotificationMenu = () => {
-    setNotificationElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -96,7 +96,7 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   useEffect(() => {
-    const getNotif = async () => {
+    const getNotification = async () => {
       try {
         const data = await axios.get('/api/v1/notifications');
         setNotifications(data.data.data.rows);
@@ -104,13 +104,12 @@ function Navbar() {
         console.log(err);
       }
     };
-    if (user && user.role === 'freelancer') { getNotif(); }
-  }, [user]);
+    if (user && user.role === 'freelancer') { getNotification(); }
+  }, [user, socketAlert]);
 
   useEffect(() => {
     socket.on('sendNotification', (data) => {
       setSocketAlert(data);
-      setNotifications((prev: any) => [...prev, data]);
     });
     return () => {
       socket.off('sendNotification');
@@ -124,26 +123,28 @@ function Navbar() {
       color="secondary"
       elevation={scroll ? 5 : 0}
     >
-      {(user?.role === 'freelancer' && notifications.length) && (
+      {(user?.role === 'freelancer') && (
         <Menu
-          open={!!notificationElNav}
-          anchorEl={notificationElNav}
+          open={notificationElNav}
           anchorOrigin={{
-            vertical: 50,
-            horizontal: 55,
+            vertical: 55,
+            horizontal: 1070,
           }}
           onClose={handleCloseNotificationMenu}
           className="notification-list"
         >
-          {notifications.map((n: any) => (
+          {notifications.length ? notifications.map((n: any) => (
             <Link to={`/freelancer/${user?.userID}`}>
               <MenuItem className="notification" onClick={handleCloseNotificationMenu}>
                 <p>{n.description}</p>
-                <small> 12/5/2022</small>
+                <small>{n.createdAt}</small>
               </MenuItem>
-
             </Link>
-          ))}
+          )) : (
+            <MenuItem className="notification" onClick={handleCloseNotificationMenu}>
+              <p>No Notifications</p>
+            </MenuItem>
+          ) }
 
         </Menu>
       )}
