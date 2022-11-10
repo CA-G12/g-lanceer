@@ -57,3 +57,30 @@
  border-bottom: 2px solid #132754;
  border-radius: 0 !important;
 }
+.notification-list{
+  border-radius: 4px;
+  max-height: 600px !important;
+}
+.notification-list .notification{
+  min-width: 400px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  transition: all .4s ease;
+
+}
+.notification-list .notification:hover{
+background-color: #eee;
+}
+.notification-list .notification p{
+width: 90%;
+white-space: normal;
+
+}
+.notification small{
+  color: rgb(141, 141, 141);
+}
