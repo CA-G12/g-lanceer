@@ -57,54 +57,57 @@ function JobForm({
         aria-describedby="modal-modal-description"
       >
         <form onSubmit={formik.handleSubmit} className="job-from">
-          <TextField
-            className="text-filed"
-            error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.errors.title ? formik.errors.title : ' '}
-            label="Job Title"
-            name="title"
-            id="title"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-          />
-          <TextField
-            className="text-filed"
-            error={formik.touched.budget && Boolean(formik.errors.budget)}
-            helperText={formik.errors.budget ? formik.errors.budget : ' '}
-            label="Budget"
-            type="number"
-            name="budget"
-            id="budget"
-            value={formik.values.budget}
-            onChange={formik.handleChange}
-          />
-          <TextField
-            className="text-filed"
-            error={formik.touched.time && Boolean(formik.errors.time)}
-            helperText={formik.errors.time ? formik.errors.time : ' '}
-            label="Time"
-            name="time"
-            id="time"
-            value={formik.values.time}
-            onChange={formik.handleChange}
-          />
-          <FormControl style={{ color: '#D32F2F' }}>
-            <InputLabel>Category</InputLabel>
-            <Select
-              className="text-select"
-              error={formik.touched.category && Boolean(formik.errors.category)}
-              label="Category"
-              name="category"
-              id="category"
-              value={formik.values.category}
+          <div className="text-fileds">
+            <TextField
+              className="text-filed"
+              error={formik.touched.title && Boolean(formik.errors.title)}
+              helperText={formik.errors.title ? formik.errors.title : ' '}
+              label="Job Title"
+              name="title"
+              id="title"
+              value={formik.values.title}
               onChange={formik.handleChange}
-            >
-              {data.map((ele) => <MenuItem key={ele.name} value={ele.name}>{ele.name}</MenuItem>)}
-            </Select>
-            <FormHelperText style={{ color: '#D32F2F' }}>
-              {formik.errors.category ? formik.errors.category : ' '}
-            </FormHelperText>
-          </FormControl>
+            />
+            <TextField
+              className="text-filed"
+              error={formik.touched.budget && Boolean(formik.errors.budget)}
+              helperText={formik.errors.budget ? formik.errors.budget : ' '}
+              label="Budget"
+              type="number"
+              name="budget"
+              id="budget"
+              value={formik.values.budget}
+              onChange={formik.handleChange}
+            />
+            <TextField
+              className="text-filed"
+              error={formik.touched.time && Boolean(formik.errors.time)}
+              helperText={formik.errors.time ? formik.errors.time : ' '}
+              label="Time"
+              name="time"
+              id="time"
+              value={formik.values.time}
+              onChange={formik.handleChange}
+            />
+            <FormControl style={{ color: '#D32F2F' }} className="text-filed">
+              <InputLabel>Category</InputLabel>
+              <Select
+                className="text-select"
+                error={formik.touched.category && Boolean(formik.errors.category)}
+                label="Category"
+                name="category"
+                id="category"
+                value={formik.values.category}
+                onChange={formik.handleChange}
+              >
+                {data.map((ele) => <MenuItem key={ele.name} value={ele.name}>{ele.name}</MenuItem>)}
+              </Select>
+              <FormHelperText style={{ color: '#D32F2F' }}>
+                {formik.errors.category ? formik.errors.category : ' '}
+              </FormHelperText>
+            </FormControl>
+
+          </div>
           <div>
             <InputLabel>description</InputLabel>
             <TextEditor
@@ -116,7 +119,7 @@ function JobForm({
           <Button
             variant="contained"
             type="submit"
-            style={{ width: '30%', margin: '0 auto', marginTop: '10px' }}
+            style={{ width: '30%', margin: '0 auto', marginTop: '20px' }}
           >
             Submit
           </Button>
