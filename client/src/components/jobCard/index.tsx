@@ -1,10 +1,10 @@
 import {
   Typography,
+  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { useContext } from 'react';
-import IconButton from '@mui/material/IconButton';
+import { useContext, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import parse from 'html-react-parser';
 import { JobPropsCard } from '../../interfaces';
@@ -18,6 +18,7 @@ function JobCard({
   } = job;
 
   const { user } = useContext(UserContext);
+  const [confirmDeleteModal, setConfirmDeleteModal] = useState<boolean>(false);
 
   return (
     <div className="content">
@@ -35,10 +36,41 @@ function JobCard({
           {handlerDeleted && user?.userID === job.userId && job.isOccupied === false && (
             <IconButton
               aria-label="delete"
-              onClick={() => handlerDeleted(id)}
+              onClick={() => setConfirmDeleteModal(true)}
             >
               <DeleteIcon />
             </IconButton>
+          )}
+          {confirmDeleteModal && (
+          <div className="confirm-delete-modal">
+            <Dialog open>
+              <DialogTitle id="alert-dialog-title">
+                Are You Sure?
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  You will not be able to restore this proposal!
+                  And it will be deleted from the client proposals list
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  aria-label="delete"
+                  color="warning"
+                  onClick={() => { if (handlerDeleted) handlerDeleted(id); }}
+                >
+                  Delete
+                </Button>
+                <Button
+                  aria-label="cancel"
+                  color="info"
+                  onClick={() => setConfirmDeleteModal(false)}
+                >
+                  Keep
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
           )}
         </div>
         <div className="description">
