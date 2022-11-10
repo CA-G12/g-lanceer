@@ -95,14 +95,6 @@ const freelancerTests = () => {
       .expect(400);
     expect(response.body.message[0]).toBe('title must not be Empty');
   });
-  test('respond with json containing Validation error /portfolio must be valid url/ with status of 400', async () => {
-    const response = await request(app)
-      .put('/api/v1/freelancer')
-      .set({ Cookie: [`token=${FREELANCER_TOKEN}`] })
-      .send({ portfolio: 'lorem lorem' })
-      .expect(400);
-    expect(response.body.message[0]).toBe('portfolio should be a valid URL');
-  });
   test('respond with json containing no updated record msg', async () => {
     const response = await request(app)
       .put('/api/v1/freelancer')
