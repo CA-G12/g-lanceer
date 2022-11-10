@@ -15,6 +15,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Snackbar from '@mui/material/Snackbar';
+import { Alert, Badge } from '@mui/material';
 import {
   Link, NavLink, useLocation,
 } from 'react-router-dom';
@@ -36,6 +37,7 @@ function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
   const [notifications, setNotifications] = useState<any>([]);
+  const [unSeenCount, setUnSeenCount] = useState<number>(0);
   const [socketAlert, setSocketAlert] = useState<any | null>(null);
 
   const Logout = async () => {
@@ -68,9 +70,19 @@ function Navbar() {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNotificationMenu = () => {
+    setNotifications((prev: any) => prev.map((n: any) => ({ ...n, seen: true })));
+    setUnSeenCount(0);
     setNotificationElNav(false);
   };
   const handleOpenNotificationMenu = () => {
+    const seeNotifications = async () => {
+      try {
+        await axios.put('/api/v1/notifications');
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    seeNotifications();
     setNotificationElNav(true);
   };
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -99,7 +111,8 @@ function Navbar() {
     const getNotification = async () => {
       try {
         const data = await axios.get('/api/v1/notifications');
-        setNotifications(data.data.data.rows);
+        setNotifications(data.data.data.notifications);
+        setUnSeenCount(data.data.data.unSeenCount);
       } catch (err) {
         console.log(err);
       }
@@ -128,7 +141,7 @@ function Navbar() {
           open={notificationElNav}
           anchorOrigin={{
             vertical: 55,
-            horizontal: 1070,
+            horizontal: 'right',
           }}
           onClose={handleCloseNotificationMenu}
           className="notification-list"
@@ -136,8 +149,8 @@ function Navbar() {
           {notifications.length ? notifications.map((n: any) => (
             <Link to={`/freelancer/${user?.userID}`}>
               <MenuItem className="notification" onClick={handleCloseNotificationMenu}>
-                <p>{n.description}</p>
-                <small>{n.createdAt}</small>
+                <p style={{ color: n.seen ? '#000' : 'blue' }}>{n.description}</p>
+                <small>{new Date(n.createdAt).toLocaleString()}</small>
               </MenuItem>
             </Link>
           )) : (
@@ -154,8 +167,11 @@ function Navbar() {
           open
           autoHideDuration={5000}
           onClose={() => setSocketAlert(null)}
-          message={`${socketAlert.clientName} accept your proposal in ${socketAlert.jobTitle}`}
-        />
+        >
+          <Alert severity="info">
+            {`${socketAlert.clientName} accept your proposal in ${socketAlert.jobTitle}`}
+          </Alert>
+        </Snackbar>
       )}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -282,7 +298,9 @@ function Navbar() {
                       onClick={handleOpenNotificationMenu}
                       color="inherit"
                     >
-                      <NotificationsIcon />
+                      <Badge badgeContent={unSeenCount} color="primary">
+                        <NotificationsIcon />
+                      </Badge>
                     </IconButton>
                   </Tooltip>
                 )}
