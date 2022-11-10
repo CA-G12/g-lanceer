@@ -72,9 +72,7 @@ const updateFreelancerValidation = yup.object().shape({
     .min(1, 'title must not be Empty'),
   portfolio: yup.string()
     .nullable()
-    .optional()
-    .min(5, 'portfolio must be more than 5 characters long')
-    .url('portfolio should be a valid URL'),
+    .optional(),
 });
 const freelancerValidate = yup.object().shape({
   title: yup
