@@ -22,7 +22,7 @@ const addProposal = async (req: Request, res: Response) => {
   });
   const proposalFind = await Proposal.findOne({
     where: {
-      id: freelancerId,
+      freelancerId,
       jobId,
     },
   });
@@ -68,7 +68,7 @@ const acceptProposal = async (req: Request, res: Response) => {
     await job?.update({ isOccupied: true }, { transaction: t });
   });
   interface FreelancerUser extends FreelancerInstance {
-    user?:{
+    user?: {
       name: string,
       email: string,
     }
