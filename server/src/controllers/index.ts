@@ -11,7 +11,7 @@ import {
 import {
   login, signupUser, freelancerSignUp, logout,
 } from './authentication';
-import getNotifications from './notifications';
+import { getNotifications, updateNotifications } from './notifications';
 
 export {
   searchJobs,
@@ -29,4 +29,5 @@ export {
   freelancerSignUp,
   logout,
   getNotifications,
+  updateNotifications,
 };

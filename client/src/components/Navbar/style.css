@@ -59,10 +59,15 @@
 }
 .notification-list{
   border-radius: 4px;
+  display: flex;
+  justify-content: flex-start;
   max-height: 600px !important;
 }
 .notification-list .notification{
   min-width: 400px !important;
+  max-width: 500px;
+  height: 120px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
