@@ -1,13 +1,10 @@
 
-<div align="center">
-  <a href="https://github.com/CA-G12/g-lancer">
-    <img src="https://i.imgur.com/mtlXQ9G.png
-" alt="Logo">
-  </a>
-    <p>
-    A platform that combine clients with professional freelancers
-</p>
-</div>
+
+![](https://i.imgur.com/7GjOtML.png)
+
+A platform that combine clients with professional freelancers
+
+## [View Demo](https://g-lancer.herokuapp.com/)
 
 
 ## Problem
