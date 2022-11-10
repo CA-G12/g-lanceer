@@ -18,10 +18,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom:0.3px solid #ccc
+  border-bottom:0.3px solid #ccc;
+  padding: 3rem 1.8rem;
 }
 .top h2{
-  padding: 27px;
   color:#1C3879;
   font-size: 20px;
 }

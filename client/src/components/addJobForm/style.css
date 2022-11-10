@@ -8,8 +8,9 @@
   background-color: #EEEEEE;
   margin:auto;
   position: relative;
-  margin-top: 1rem;
+  margin-top: 3rem;
   border-radius: 7px;
+  display: flex;
 }
 .close-icon{
   position: absolute;
@@ -24,4 +25,14 @@
 }
 .text-filed div input ,.text-area div , .text-select div{
   background-color: white;
+}
+.text-fileds{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+.text-filed{
+  width: 48%;  
 }

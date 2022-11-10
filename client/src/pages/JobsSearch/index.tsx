@@ -89,7 +89,7 @@ function JobsSearch() {
   }];
 
   return (
-    <div className="container">
+    <div className="container jobs-page">
       <div className="searrchInput">
         <TextField
           className="searchInputHomePage"

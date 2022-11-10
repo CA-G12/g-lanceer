@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import parse from 'html-react-parser';
 import { PropsJobPage } from '../../interfaces';
 import './style.css';
 
@@ -10,13 +11,12 @@ function JobDetails({ job, client }: PropsJobPage) {
         <p>
           Client:
           <span>
-            {' '}
             {client.name}
           </span>
         </p>
       </div>
       <div className="content">
-        <p>{job.description}</p>
+        <p>{parse(job.description)}</p>
         <div className="jobs-details">
           <p>
             category:

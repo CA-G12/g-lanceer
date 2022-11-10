@@ -1,10 +1,11 @@
 .sideBar{
   position: fixed;
   right: 90px;
-  top: 87px;
+  top: 215px;
   padding: 30px;
   border: 2px solid #eee;
   border-radius: 8px;
+  transform: scale(.9);
 }
 .label{
   font-family: 'Ubuntu';
