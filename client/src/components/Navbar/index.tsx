@@ -30,13 +30,13 @@ import './style.css';
 function Navbar() {
   const pages = [{ label: 'Jobs', path: '/jobs-search' }];
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [notificationElNav, setNotificationElNav] = useState<boolean >(false);
+  const [notificationElNav, setNotificationElNav] = useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [scroll, setScroll] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const { pathname } = useLocation();
   const [notifications, setNotifications] = useState<any>([]);
-  const [socketAlert, setSocketAlert] = useState<string | null>(null);
+  const [socketAlert, setSocketAlert] = useState<any | null>(null);
 
   const Logout = async () => {
     try {
@@ -144,7 +144,7 @@ function Navbar() {
             <MenuItem className="notification" onClick={handleCloseNotificationMenu}>
               <p>No Notifications</p>
             </MenuItem>
-          ) }
+          )}
 
         </Menu>
       )}
