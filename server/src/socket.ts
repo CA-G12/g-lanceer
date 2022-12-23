@@ -33,10 +33,9 @@ io.use(wrap(passport.authenticate('jwt', { session: false })));
 io.on('connection', (socket: any) => {
   const user = socket.request?.user;
   users[`${user.role}${user.userID}`] = socket.id;
-
   socket.on('acceptProposal', async ({
     clientName, receiverId, jobTitle, jobId,
-  } : SocketProps) => {
+  }: SocketProps) => {
     io.to(users[`freelancer${receiverId}`]).emit('sendNotification', {
       clientName,
       jobTitle,

@@ -1,17 +1,16 @@
-import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
+import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAXLr1H_ZH0O0aJjMYYy4_-pxikm-yk2gs',
-  authDomain: 'g-lancer-f20ff.firebaseapp.com',
-  projectId: 'g-lancer-f20ff',
-  storageBucket: 'g-lancer-f20ff.appspot.com',
-  messagingSenderId: '62493190521',
-  appId: '1:62493190521:web:2ab39cb50da572da4e67a8',
-  measurementId: 'G-SC019PBMBQ',
+  apiKey: 'AIzaSyAT8iZEyOFKJSaIOg4hg4b-KV7Rj6KXTaw',
+  authDomain: 'g-lancer1.firebaseapp.com',
+  projectId: 'g-lancer1',
+  storageBucket: 'g-lancer1.appspot.com',
+  messagingSenderId: '814334930947',
+  appId: '1:814334930947:web:3f72a591907839ae2e9e36',
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 const storage = getStorage(app);
 export default storage;

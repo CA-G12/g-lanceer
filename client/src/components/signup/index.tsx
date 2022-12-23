@@ -115,6 +115,8 @@ function Signup({ setActiveStep, userRole, setUserInfo }: SignupProps) {
         throw new Error();
       }
     } catch (err: any) {
+      console.log(err);
+
       setError(true);
     }
   };
